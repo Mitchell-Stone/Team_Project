@@ -150,9 +150,16 @@ public class LoginWindow extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_signInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_signInActionPerformed
-        System.out.println(tb_userName.getText());
-        System.out.println(tb_password.getText());
         
+        
+        //send the login details to be used for validation
+        LoginDetails login = new LoginDetails();
+        login.setUserName(tb_userName.getText());
+        login.setPassword(tb_password.getText());
+        
+        
+        System.out.println(login.getUserName());
+        System.out.println(login.getPassword());
         
     }//GEN-LAST:event_btn_signInActionPerformed
 
