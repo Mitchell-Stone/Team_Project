@@ -273,7 +273,6 @@ public class LoginWindow extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new LoginWindow().setVisible(true);
-                 this.    panel_register.setVisible(false);
             }
         });
     }
