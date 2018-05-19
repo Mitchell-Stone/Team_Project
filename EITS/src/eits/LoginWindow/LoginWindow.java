@@ -5,6 +5,9 @@
  */
 package eits.LoginWindow;
 
+import javax.swing.JFrame;
+import eits.caseWorker.CaseWorkerDashboard;
+
 /**
  *
  * @author mitch
@@ -231,6 +234,12 @@ public class LoginWindow extends javax.swing.JFrame {
         LoginWindowController login = new LoginWindowController();
         login.setUserName(tb_userName.getText());
         login.setPassword(tb_password.getText());
+        
+        this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        this.dispose();
+        CaseWorkerDashboard db = new CaseWorkerDashboard();
+        db.setVisible(true);
+        
 
         System.out.println(login.getUserName());
         System.out.println(login.getPassword());

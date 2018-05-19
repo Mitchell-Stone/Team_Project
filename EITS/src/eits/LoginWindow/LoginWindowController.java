@@ -29,4 +29,23 @@ public class LoginWindowController {
 
     private String userName;
     private String password;
+    
+    public void verifyUserLogin(String userName, String password){
+        
+        /*execute the sql query to verify users login details
+        
+        basic logic
+        
+        if (user == student) {
+            show student dashboar
+        }else if(user == caseworker){
+            show case worker dashboard
+        }else if(user == administrator{
+            show admin dashboard
+        }
+        
+        */
+    }
+    
+    
 }
