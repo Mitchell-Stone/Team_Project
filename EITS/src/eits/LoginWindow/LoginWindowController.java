@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eits;
+package eits.LoginWindow;
 
 /**
  *
  * @author mitch
  */
-public class LoginDetails {
+public class LoginWindowController {
 
     public String getUserName() {
         return userName;
