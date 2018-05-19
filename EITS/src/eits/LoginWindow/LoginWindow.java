@@ -3,12 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eits;
+package eits.LoginWindow;
+
+import javax.swing.JFrame;
+import eits.caseWorker.CaseWorkerDashboard;
 
 /**
  *
  * @author mitch
  */
+
 public class LoginWindow extends javax.swing.JFrame {
 
     /**
@@ -227,9 +231,15 @@ public class LoginWindow extends javax.swing.JFrame {
     private void btn_signInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_signInActionPerformed
 
         //send the login details to be used for validation
-        LoginDetails login = new LoginDetails();
+        LoginWindowController login = new LoginWindowController();
         login.setUserName(tb_userName.getText());
         login.setPassword(tb_password.getText());
+        
+        this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        this.dispose();
+        CaseWorkerDashboard db = new CaseWorkerDashboard();
+        db.setVisible(true);
+        
 
         System.out.println(login.getUserName());
         System.out.println(login.getPassword());
