@@ -10,8 +10,7 @@ package eits.LoginWindow;
  * @author mitch
  */
 public class LoginWindowController {
-
-    public String getUserName() {
+        public String getUserName() {
         return userName;
     }
 
@@ -46,6 +45,4 @@ public class LoginWindowController {
         
         */
     }
-    
-    
 }

@@ -7,8 +7,8 @@ package eits;
 
 /**
  *
- * @author Martin
+ * @author mitch
  */
-public class eits {
+public class MainWindowController {
     
 }
