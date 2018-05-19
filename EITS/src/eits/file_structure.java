@@ -16,8 +16,8 @@ public class file_structure {
     
     -eits.db
     
-        db_util.java //stores the connection methods
-        db_type.java //enumerator storing database types for quicck switch between database
+        dbUtil.java //stores the connection methods
+        dbType.java //enumerator storing database types for quicck switch between database
     
     -eits.login
     
