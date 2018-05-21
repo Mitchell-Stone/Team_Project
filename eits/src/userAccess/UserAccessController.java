@@ -5,6 +5,7 @@
  */
 package userAccess;
 
+import beans.Student;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -36,7 +37,7 @@ public class UserAccessController {
 
     @FXML
     private void loginAction(ActionEvent event) {
-        
+        Student login = new Student();
         
         
     }
