@@ -31,6 +31,7 @@ public class UserAccessController {
     @FXML
     private Label errorOutput;
 
+    //sets the student properties to be used to log in
     @FXML
     private void loginAction(ActionEvent event) {
         Student bean = new Student();
@@ -48,8 +49,14 @@ public class UserAccessController {
         
     }
 
+    //sets the student properties so a new student can be added
     @FXML
-    private void createStudent(ActionEvent event) {
+    private void registerAction(ActionEvent event) {
+        Student register = new Student();
+        register.setEmail(email.getText());
+        register.setFirstName(firstName.getText());
+        register.setLastName(lastName.getText());
+        register.setPassword(password.getText());
         
         
         
