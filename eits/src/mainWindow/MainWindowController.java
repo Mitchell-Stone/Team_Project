@@ -53,7 +53,7 @@ public class MainWindowController implements Initializable {
     private void showContactUs(MouseEvent event) {
     }
     
-    private void loadUI(String ui){
+    public void loadUI(String ui){
         Parent root = null;
         
         try{

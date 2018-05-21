@@ -5,10 +5,33 @@
  */
 package db;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 /**
  *
  * @author mitch
  */
 public class DbUtil {
+    
+    private static final String USERNAME = "root";
+    private static final String PASSWORD = "";
+    private static final String ADDRESS = "jdbc:mysql://localhost/eits_test";
+    
+    public static Connection getConn(DbType db_type) throws SQLException {
+    
+        switch(db_type) {
+        
+            case MYSQL:
+                
+                return DriverManager.getConnection(ADDRESS, USERNAME, PASSWORD);
+                
+            default:
+                return null;
+        
+        }
+    
+    }
     
 }

@@ -9,6 +9,8 @@ package db;
  *
  * @author mitch
  */
-public class DbType {
+public enum DbType {
+    
+    MYSQL;
     
 }
