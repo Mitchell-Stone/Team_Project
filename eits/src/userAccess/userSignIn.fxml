@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<<<<<<< HEAD
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -10,14 +11,34 @@
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userAccess.UserAccessController">
    <children>
       <Text layoutX="4.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login" wrappingWidth="592.13671875">
+=======
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="604.0" prefWidth="559.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TextField layoutX="188.0" layoutY="238.0" prefHeight="25.0" prefWidth="158.0" />
+      <Text layoutX="171.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign In">
+>>>>>>> 3501c090a5f053ba5e7f9c29900d7bde5d3ab450
          <font>
-            <Font size="58.0" />
+            <Font size="60.0" />
          </font>
       </Text>
+<<<<<<< HEAD
       <Label layoutX="151.0" layoutY="138.0" text="Username" />
       <Label layoutX="151.0" layoutY="171.0" text="Password" />
       <TextField fx:id="usernameField" layoutX="226.0" layoutY="134.0" />
       <TextField fx:id="passwordField" layoutX="226.0" layoutY="167.0" />
       <Button fx:id="loginbtn" layoutX="226.0" layoutY="200.0" mnemonicParsing="false" onAction="#loginAction" prefHeight="52.0" prefWidth="149.0" text="Login" />
+=======
+      <Text layoutX="188.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User Name" wrappingWidth="61.763671875" />
+      <Text layoutX="188.0" layoutY="312.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Password" />
+      <Button layoutX="212.0" layoutY="391.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="101.0" text="Sign In" />
+      <PasswordField layoutX="188.0" layoutY="324.0" prefHeight="25.0" prefWidth="158.0" />
+>>>>>>> 3501c090a5f053ba5e7f9c29900d7bde5d3ab450
    </children>
-</AnchorPane>
+</Pane>
