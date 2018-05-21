@@ -26,6 +26,10 @@ public class Student {
     public String getPassword() {
         return password;
     }
+    
+    public String getUserName() {
+        return userName;
+    }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -42,8 +46,13 @@ public class Student {
     public void setPassword(String password) {
         this.password = password;
     }
+    
+    public void setUserName(String userName){
+        this.userName = userName;
+    }
     private String firstName;
     private String lastName;
     private String email;
     private String password;
+    private String userName;
 }

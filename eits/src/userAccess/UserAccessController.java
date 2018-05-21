@@ -8,7 +8,6 @@ package userAccess;
 import beans.Student;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
@@ -18,8 +17,6 @@ import javafx.scene.control.TextField;
  */
 public class UserAccessController {
 
-    private TextField usernameField;
-    private TextField passwordField;
     @FXML
     private TextField firstName;
     @FXML
@@ -27,18 +24,20 @@ public class UserAccessController {
     @FXML
     private TextField email;
     @FXML
-    private TextField password1;
+    private TextField password;
     @FXML
-    private TextField password2;
-    @FXML
-    private Button createNewAccount;
+    private TextField userName;
     @FXML
     private Label errorOutput;
 
     @FXML
     private void loginAction(ActionEvent event) {
         Student login = new Student();
+        login.setUserName(userName.getText());
+        login.setPassword(password.getText());
         
+        System.out.println(login.getUserName());
+        System.out.println(login.getPassword());
         
     }
 
