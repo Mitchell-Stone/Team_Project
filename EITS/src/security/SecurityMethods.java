@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package seurity;
+package security;
 
 import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 import java.nio.charset.StandardCharsets;
