@@ -7,8 +7,17 @@ package eits.beans;
 
 /**
  *
- * @author Martin
+ * @author 0111005906
  */
-public class login {
+public class Login {
     
+    private String userName;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 }
