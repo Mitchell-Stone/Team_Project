@@ -3,8 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Martin/Desktop/TAFE/GUI/EITS/src/eits/LoginWindow/LoginWindowController.java</file>
-            <file>file:/C:/Users/Martin/Desktop/TAFE/GUI/EITS/src/eits/LoginWindow/LoginWindow.java</file>
+            <file>file:/C:/Users/mitch/OneDrive/Desktop/eits/src/views/main.fxml</file>
+            <file>file:/C:/Users/mitch/OneDrive/Desktop/eits/src/controllers/MainController.java</file>
+            <file>file:/C:/Users/mitch/OneDrive/Desktop/eits/src/eits/Eits.java</file>
+            <file>file:/C:/Users/mitch/OneDrive/Desktop/eits/src/views/register.fxml</file>
+            <file>file:/C:/Users/mitch/OneDrive/Desktop/eits/src/controllers/RegisterController.java</file>
+            <file>file:/C:/Users/mitch/OneDrive/Desktop/eits/src/views/login.fxml</file>
         </group>
     </open-files>
 </project-private>

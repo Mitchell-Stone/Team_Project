@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package eits.login;
+package controllers;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,9 +12,9 @@ import javafx.fxml.Initializable;
 /**
  * FXML Controller class
  *
- * @author 0111005906
+ * @author mitch
  */
-public class LoginWindowController implements Initializable {
+public class RegisterController implements Initializable {
 
     /**
      * Initializes the controller class.
