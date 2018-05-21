@@ -30,9 +30,7 @@ public class MainWindowController implements Initializable {
     @FXML
     private void loadLoginWindow(javafx.event.ActionEvent event) throws IOException {
         
-        FXMLLoader fxml = FXMLLoader.load(getClass().getResource("./LoginWindow.fxml"));
-        
-        AnchorPane pane = fxml.load();
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("login/LoginWindow.fxml"));
         
         rootPane.getChildren().setAll(pane);
     }
