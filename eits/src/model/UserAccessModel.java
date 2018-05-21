@@ -6,6 +6,7 @@
 package model;
 
 import beans.Login;
+import beans.Student;
 import db.DbType;
 import db.DbUtil;
 import java.sql.Connection;
@@ -17,11 +18,11 @@ import java.sql.ResultSet;
  * @author mitch
  */
 public class UserAccessModel {
-        public static boolean checkUserPass(Login bean) {
+        public static boolean checkUserPass(Student bean) {
     
         String sql = "SELECT * FROM $tablename WHERE email = ? AND password = ?";
         
-        String query = sql.replace("$tablename", bean.getTable());
+        String query = sql.replace("$tablename", "student");
         
         ResultSet rs;
         
@@ -30,7 +31,7 @@ public class UserAccessModel {
                 PreparedStatement stmt = conn.prepareStatement(query);
                 ) {
             
-            stmt.setString(1, bean.getEmail());
+            stmt.setString(1, bean.getUserName());
             stmt.setString(2, bean.getPassword());
             
             rs = stmt.executeQuery();
