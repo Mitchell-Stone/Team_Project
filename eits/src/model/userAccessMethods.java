@@ -1,5 +1,5 @@
 
-package userAccess;
+package model;
 
 import beans.Login;
 import db.DbType;
