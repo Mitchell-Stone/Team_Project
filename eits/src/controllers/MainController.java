@@ -27,9 +27,6 @@ public class MainController implements Initializable {
     @FXML
     private BorderPane mainpane;
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -38,13 +35,13 @@ public class MainController implements Initializable {
     @FXML
     private void showLogin(MouseEvent event) throws IOException {
         
-        loadUI("/views/login");
+        loadUI("/userAccess/userSignIn");
     }
     
     @FXML
     private void showRegisterNow(MouseEvent event) throws IOException {
         
-        loadUI("/views/register");
+        loadUI("/userAccess/userRegistration");
     }
     
     @FXML

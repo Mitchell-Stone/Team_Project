@@ -5,7 +5,7 @@
 <?import javafx.scene.text.Text?>
 
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9.0.1" fx:controller="userAccess.userAccessController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9.0.1" fx:controller="userAccess.UserAccessController">
    <children>
       <Text layoutX="194.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign In" wrappingWidth="212.13671875">
          <font>
