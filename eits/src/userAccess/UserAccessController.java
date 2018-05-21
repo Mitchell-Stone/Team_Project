@@ -41,6 +41,8 @@ public class UserAccessController {
         System.out.println(bean.getUserName());
         System.out.println(bean.getPassword());
         
+        UserAccessModel.checkUserPass(bean);
+        
         if (UserAccessModel.checkUserPass(bean)) {
             System.out.println("Y");
         } else {

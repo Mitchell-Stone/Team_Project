@@ -17,7 +17,7 @@ public class DbUtil {
     
     private static final String USERNAME = "root";
     private static final String PASSWORD = "";
-    private static final String ADDRESS = "jdbc:mysql://localhost/eits_test";
+    private static final String ADDRESS = "jdbc:mysql://localhost/eits";
     
     public static Connection getConn(DbType db_type) throws SQLException {
     
