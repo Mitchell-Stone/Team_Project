@@ -50,9 +50,5 @@ public class UserAccessController {
         register.setFirstName(firstName.getText());
         register.setLastName(lastName.getText());
         register.setPassword(password.getText());
-        
-        
-        
-    }
-    
+    } 
 }
