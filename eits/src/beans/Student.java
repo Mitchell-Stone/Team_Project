@@ -50,9 +50,19 @@ public class Student {
     public void setUserName(String userName){
         this.userName = userName;
     }
+    
     private String firstName;
     private String lastName;
     private String email;
     private String password;
     private String userName;
+    private String table;
+
+    public String getTable() {
+        return table;
+    }
+
+    public void setTable(String table) {
+        this.table = table;
+    }
 }

@@ -12,6 +12,8 @@ import db.DbUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 /**
  *
@@ -50,5 +52,44 @@ public class UserAccessModel {
             System.err.println(e);
             return false;
         }
+    }
+        
+         public static boolean add(Student bean) throws Exception {
+    
+        String sql = "INSERT INTO $tablename (email, password, firstName, lastName) VALUES (?, ?, ?, ?)";
+        
+        String query = sql.replace("$tablename", bean.getTable());
+        
+        ResultSet keys = null;
+        
+        try(
+                Connection conn = DbUtil.getConn(DbType.MYSQL);
+                PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+                ) {
+        
+            stmt.setString(1, bean.getEmail());
+            stmt.setString(2, bean.getPassword());
+            stmt.setString(3, bean.getFirstName());
+            stmt.setString(4, bean.getLastName());
+            
+            int affected = stmt.executeUpdate();
+            
+            if(affected == 1) {
+                return true;
+            } else {
+                return false;
+            }
+        
+        } catch (SQLException e) {
+            System.err.println(e);
+            return false;
+        } finally {
+            if(keys != null) {
+                keys.close();
+            }
+        }
+        
+        
+    
     }
 }

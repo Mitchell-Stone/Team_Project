@@ -6,11 +6,15 @@
 package userAccess;
 
 import beans.Student;
+import java.security.NoSuchAlgorithmException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import model.UserAccessModel;
+import security.SecurityMethods;
 
 /**
  *
@@ -24,15 +28,18 @@ public class UserAccessController {
     private TextField lastName;
     @FXML
     private TextField email;
-    @FXML
     private TextField password;
-    @FXML
     private TextField userName;
     @FXML
-    private Label errorOutput;
+    private Button btn_register;
+    @FXML
+    private PasswordField password1;
+    @FXML
+    private PasswordField password2;
+    @FXML
+    private Label errorOutput2;
 
     //sets the student properties to be used to log in
-    @FXML
     private void loginAction(ActionEvent event) {
         Student bean = new Student();
         bean.setUserName(userName.getText());
@@ -51,11 +58,35 @@ public class UserAccessController {
 
     //sets the student properties so a new student can be added
     @FXML
-    private void registerAction(ActionEvent event) {
+    private void registerAction(ActionEvent event) throws NoSuchAlgorithmException, Exception {
         Student register = new Student();
-        register.setEmail(email.getText());
+        
+        register.setTable("student");
+        
         register.setFirstName(firstName.getText());
         register.setLastName(lastName.getText());
-        register.setPassword(password.getText());
+        register.setEmail(email.getText());
+        
+        String pw1 = password1.getText();
+        String pw2 = password2.getText();
+        
+        //System.out.println(firstName.getText());
+        //System.out.println(lastName.getText());
+        //System.out.println(email.getText());
+        //System.out.println(password1.getText());
+        //System.out.println(password2.getText());
+        
+        if (pw1.equals(pw2)) {
+            
+            register.setPassword(SecurityMethods.getHash(pw1));
+            
+            UserAccessModel.add(register);
+            
+        } else {
+            
+            errorOutput2.setText("Sorry, the passwords entered didn't match.");
+            
+        }
+        
     } 
 }
