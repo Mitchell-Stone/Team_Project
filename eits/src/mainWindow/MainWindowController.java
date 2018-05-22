@@ -24,6 +24,16 @@ import javafx.scene.layout.BorderPane;
  */
 public class MainWindowController implements Initializable {
 
+    public String getNextWindow() {
+        return nextWindow;
+    }
+
+    public void setNextWindow(String nextWindow) {
+        this.nextWindow = nextWindow;
+    }
+
+    private String nextWindow;
+    
     @FXML
     private BorderPane mainpane;
 
@@ -37,12 +47,12 @@ public class MainWindowController implements Initializable {
 
     @FXML
     private void showLogin(MouseEvent event) {    
-        loadUI("/userAccess/userSignIn");
+        nextWindow = "/userAccess/userSignIn";
     }
 
     @FXML
     private void showRegisterNow(MouseEvent event) {
-        loadUI("/userAccess/userRegistration");
+        nextWindow = "/userAccess/userRegistration";
     }
 
     @FXML
@@ -53,16 +63,15 @@ public class MainWindowController implements Initializable {
     private void showContactUs(MouseEvent event) {
     }
     
-    public void loadUI(String ui){
+    public void loadUI(){
         Parent root = null;
-        
+
         try{
-            root = FXMLLoader.load(getClass().getResource(ui + ".fxml"));
-            
+            root = FXMLLoader.load(getClass().getResource(nextWindow));
+
         } catch(IOException ex) {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
         mainpane.setCenter(root);
     }
     

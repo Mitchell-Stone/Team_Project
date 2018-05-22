@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import mainWindow.MainWindowController;
 import model.UserAccessModel;
 import security.SecurityMethods;
 
@@ -78,6 +79,9 @@ public class UserAccessController {
             if (!UserAccessModel.checkUserPass(register)) {
                 if (UserAccessModel.add(register)) {
                     System.out.println("Y");
+                    
+                    MainWindowController nextWindow = new MainWindowController();
+                    nextWindow.setNextWindow("/student/studentDashboard.fxml");
                 } else {
                     System.out.println("N");
                 }
