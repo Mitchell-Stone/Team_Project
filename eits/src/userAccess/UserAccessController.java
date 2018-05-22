@@ -48,7 +48,7 @@ public class UserAccessController {
         
         bean.setTable("student");
                 
-        bean.setUserName(userNameLog.getText());
+        bean.setEmail(userNameLog.getText());
         bean.setPassword(SecurityMethods.getHash(passwordLog.getText()));
         
         //System.out.println(bean.getUserName());
