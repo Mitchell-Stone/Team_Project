@@ -46,20 +46,32 @@ public class UserAccessController {
     @FXML
     private void loginAction(ActionEvent event) throws NoSuchAlgorithmException {
         Student bean = new Student();
-        
         bean.setTable("student");
-                
         bean.setEmail(userNameLog.getText());
         bean.setPassword(SecurityMethods.getHash(passwordLog.getText()));
+        
+        String tier = null;
         
         //System.out.println(bean.getUserName());
         //System.out.println(bean.getPassword());
         
         if (UserAccessModel.checkUserPass(bean)) {
-            System.out.println("Y");
+            tier = "student";
         } else {
-            System.out.println("N");
+            bean.setTable("caseworker");
+            if (UserAccessModel.checkUserPass(bean)) {
+                tier = "caseworker";
+            } else {
+                bean.setTable("admin");
+                if(UserAccessModel.checkUserPass(bean)) {
+                    tier = "admin";
+                } else {
+                    System.out.println("N");
+                }
+            }
         }
+        
+        System.out.println(tier);
         
     }
 
