@@ -47,12 +47,12 @@ public class MainWindowController implements Initializable {
 
     @FXML
     private void showLogin(MouseEvent event) {    
-        nextWindow = "/userAccess/userSignIn";
+        loadUI("/userAccess/userSignIn");
     }
 
     @FXML
     private void showRegisterNow(MouseEvent event) {
-        nextWindow = "/userAccess/userRegistration";
+        loadUI("/userAccess/userRegistration");
     }
 
     @FXML
@@ -68,6 +68,18 @@ public class MainWindowController implements Initializable {
 
         try{
             root = FXMLLoader.load(getClass().getResource(nextWindow));
+
+        } catch(IOException ex) {
+            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        mainpane.setCenter(root);
+    }    
+    
+    public void loadUI(String ui){
+        Parent root = null;
+
+        try{
+            root = FXMLLoader.load(getClass().getResource(ui + ".fxml"));
 
         } catch(IOException ex) {
             Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
