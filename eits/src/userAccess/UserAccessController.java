@@ -84,7 +84,8 @@ public class UserAccessController {
                     System.out.println("Y");
                     
                     MainWindowController nextWindow = new MainWindowController();
-                    nextWindow.setNextWindow("/student/studentDashboard.fxml");
+                    //nextWindow.setNextWindow("/student/studentDashboard.fxml");
+                    nextWindow.loadUI("/student/studentDashboard");
                 } else {
                     System.out.println("N");
                 }
