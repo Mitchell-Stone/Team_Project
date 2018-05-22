@@ -13,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import mainWindow.MainWindowController;
 import model.UserAccessModel;
 import security.SecurityMethods;
 
@@ -70,17 +71,18 @@ public class UserAccessController {
         String pw1 = password1.getText();
         String pw2 = password2.getText();
         
-        //System.out.println(firstName.getText());
-        //System.out.println(lastName.getText());
-        //System.out.println(email.getText());
-        //System.out.println(password1.getText());
-        //System.out.println(password2.getText());
-        
         if (pw1.equals(pw2)) {
             
             register.setPassword(SecurityMethods.getHash(pw1));
             
-            UserAccessModel.add(register);
+            if (UserAccessModel.add(register)) {
+                
+                
+                
+            } else {
+                
+                
+            }
             
         } else {
             
