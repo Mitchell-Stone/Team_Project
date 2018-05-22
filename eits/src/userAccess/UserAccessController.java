@@ -38,6 +38,8 @@ public class UserAccessController {
     private TextField userNameLog;
     @FXML
     private PasswordField passwordLog;
+    @FXML
+    private Button btn_register;
 
     //sets the student properties to be used to log in
     @FXML
