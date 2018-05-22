@@ -45,6 +45,9 @@ public class UserAccessController {
     @FXML
     private void loginAction(ActionEvent event) throws NoSuchAlgorithmException {
         Student bean = new Student();
+        
+        bean.setTable("student");
+                
         bean.setUserName(userNameLog.getText());
         bean.setPassword(SecurityMethods.getHash(passwordLog.getText()));
         
