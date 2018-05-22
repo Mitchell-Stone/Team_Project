@@ -23,7 +23,7 @@ public class UserAccessModel {
     
         String sql = "SELECT * FROM $tablename WHERE email = ? AND password = ?";
         
-        String query = sql.replace("$tablename", "student");
+        String query = sql.replace("$tablename", bean.getTable());
         
         ResultSet rs;
         
