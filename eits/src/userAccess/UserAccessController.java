@@ -13,7 +13,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import mainWindow.MainWindowController;
 import model.UserAccessModel;
 import security.SecurityMethods;
 
@@ -29,25 +28,26 @@ public class UserAccessController {
     private TextField lastName;
     @FXML
     private TextField email;
-    private TextField password;
-    private TextField userName;
-    @FXML
-    private Button btn_register;
     @FXML
     private PasswordField password1;
     @FXML
     private PasswordField password2;
     @FXML
     private Label errorOutput2;
+    @FXML
+    private TextField userNameLog;
+    @FXML
+    private PasswordField passwordLog;
 
     //sets the student properties to be used to log in
-    private void loginAction(ActionEvent event) {
+    @FXML
+    private void loginAction(ActionEvent event) throws NoSuchAlgorithmException {
         Student bean = new Student();
-        bean.setUserName(userName.getText());
-        bean.setPassword(password.getText());
+        bean.setUserName(userNameLog.getText());
+        bean.setPassword(SecurityMethods.getHash(passwordLog.getText()));
         
-        System.out.println(bean.getUserName());
-        System.out.println(bean.getPassword());
+        //System.out.println(bean.getUserName());
+        //System.out.println(bean.getPassword());
         
         if (UserAccessModel.checkUserPass(bean)) {
             System.out.println("Y");
@@ -72,22 +72,18 @@ public class UserAccessController {
         String pw2 = password2.getText();
         
         if (pw1.equals(pw2)) {
-            
             register.setPassword(SecurityMethods.getHash(pw1));
-            
-            if (UserAccessModel.add(register)) {
-                
-                
-                
+            if (!UserAccessModel.checkUserPass(register)) {
+                if (UserAccessModel.add(register)) {
+                    System.out.println("Y");
+                } else {
+                    System.out.println("N");
+                }
             } else {
-                
-                
+                errorOutput2.setText("Sorry, a user is already registered under these credentials.");
             }
-            
         } else {
-            
             errorOutput2.setText("Sorry, the passwords entered didn't match.");
-            
         }
         
     } 

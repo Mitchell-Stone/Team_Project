@@ -5,7 +5,6 @@
  */
 package model;
 
-import beans.Login;
 import beans.Student;
 import db.DbType;
 import db.DbUtil;
@@ -33,17 +32,13 @@ public class UserAccessModel {
                 PreparedStatement stmt = conn.prepareStatement(query);
                 ) {
             
-            stmt.setString(1, bean.getUserName());
+            stmt.setString(1, bean.getEmail());
             stmt.setString(2, bean.getPassword());
             
             rs = stmt.executeQuery();
             
             if (rs.next()) {
-                
-                System.out.println(rs.getString("firstName") + " | " + rs.getString("lastName"));
-                
                 return true;
-                
             } else {
                 return false;
             }
@@ -54,7 +49,7 @@ public class UserAccessModel {
         }
     }
         
-         public static boolean add(Student bean) throws Exception {
+        public static boolean add(Student bean) throws Exception {
     
         String sql = "INSERT INTO $tablename (email, password, firstName, lastName) VALUES (?, ?, ?, ?)";
         
@@ -92,4 +87,5 @@ public class UserAccessModel {
         
     
     }
+
 }
