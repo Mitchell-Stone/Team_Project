@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.4
--- https://www.phpmyadmin.net/
+-- version 4.5.1
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 20, 2018 at 11:54 PM
--- Server version: 5.7.14
--- PHP Version: 5.6.25
+-- Generation Time: May 24, 2018 at 02:27 AM
+-- Server version: 10.1.9-MariaDB
+-- PHP Version: 5.5.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -159,7 +159,12 @@ CREATE TABLE `student` (
 INSERT INTO `student` (`studentID`, `courseID`, `employeeID`, `firstName`, `lastName`, `email`, `password`, `industryPreference`, `visitCount`, `averageGrade`, `assessmentsPassed`) VALUES
 (1, 1, 1, 'Jake', 'Smith', 'jakesmithlive.com', 'seasame', NULL, NULL, NULL, NULL),
 (2, 1, 1, 'Matteo', 'Baldini', 'Matteo@live.com', 'seasame', NULL, NULL, NULL, NULL),
-(3, 1, 1, 'Dion', 'Bird', 'DionBird@live.com', 'seasame', NULL, NULL, NULL, NULL);
+(3, 1, 1, 'Dion', 'Bird', 'DionBird@live.com', 'seasame', NULL, NULL, NULL, NULL),
+(4, NULL, NULL, 'ggg', 'ggg', 'ggg', 'Vpx/C0HOlklgKgIYzQLtCwo9kxMDKUUcx4K339p5znE=', NULL, NULL, NULL, NULL),
+(5, NULL, NULL, 'ooo', 'ooo', 'ooo', 'GtJdAAJpDcAuJwiil9jJ3x8WDTdvZjMJzCYcfJITZ+c=', NULL, NULL, NULL, NULL),
+(6, NULL, NULL, 'www', 'www', 'www', 'fC7NB/FVZIQx4PlLiSR9cTxXhuHnPpU/L+fso5U0zW0=', NULL, NULL, NULL, NULL),
+(7, NULL, NULL, 'qwe', 'qwe', 'qwe', 'SJzV28cIx+VB3k182Rzm0PFhNXO3/FtA05Qsy5VVzzU=', NULL, NULL, NULL, NULL),
+(9, NULL, NULL, 'aaa', 'aaa', 'aaa', 'mDSHbc+wXLFnpcJJU+uljErImxrfV/KPL50JrxB+6PA=', NULL, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -235,7 +240,7 @@ ALTER TABLE `courses`
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `studentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `studentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- Constraints for dumped tables
 --

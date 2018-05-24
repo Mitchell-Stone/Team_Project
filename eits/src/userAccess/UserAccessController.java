@@ -92,23 +92,26 @@ public class UserAccessController {
         String pw1 = password1.getText();
         String pw2 = password2.getText();
         
+        
+        
         if (pw1.equals(pw2)) {
             register.setPassword(SecurityMethods.getHash(pw1));
             if (!UserAccessModel.checkUserPass(register)) {
                 if (UserAccessModel.add(register)) {
                     System.out.println("Y");
                     
-                    //code that works for reasons
+                    //closes current window and opens new one
                     
-                    try {
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/userAccess/userSignIn.fxml"));
-                    Parent root1 = (Parent) fxmlLoader.load();
-                    Stage stage = new Stage();
-                    stage.setScene(new Scene(root1));  
-                    stage.show();
-                    } catch(Exception e) {
-                    e.printStackTrace();
+                    Stage stage = null;
+                    Parent root = null;
+
+                    if(event.getSource()==btn_register){
+                        stage = (Stage) btn_register.getScene().getWindow();
+                        root = FXMLLoader.load(getClass().getResource("/userAccess/userSignIn.fxml"));
                     }
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
                     
                 } else {
                     System.out.println("N");
