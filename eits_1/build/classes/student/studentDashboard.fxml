@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="752.0" prefWidth="972.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9.0.1">
+  <tabs>
+    <Tab text="Student Details">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TextField layoutX="412.0" layoutY="215.0" />
+                  <TextField layoutX="412.0" layoutY="257.0" />
+                  <TextField layoutX="412.0" layoutY="299.0" />
+                  <Label layoutX="412.0" layoutY="198.0" text="Fist Name" />
+                  <Label layoutX="412.0" layoutY="240.0" text="Last Name" />
+                  <Label layoutX="412.0" layoutY="282.0" text="Email" />
+                  <Label layoutX="397.0" layoutY="115.0" prefHeight="49.0" prefWidth="179.0" text="Student Name">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+    <Tab text="Avaliable Courses">
+      <content>
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView layoutX="45.0" layoutY="43.0" prefHeight="625.0" prefWidth="883.0">
+                    <columns>
+                      <TableColumn prefWidth="75.0" text="C1" />
+                      <TableColumn prefWidth="75.0" text="C2" />
+                        <TableColumn prefWidth="75.0" text="C3" />
+                        <TableColumn prefWidth="75.0" text="C4" />
+                        <TableColumn prefWidth="75.0" text="C5" />
+                        <TableColumn prefWidth="75.0" text="C6" />
+                        <TableColumn prefWidth="75.0" text="C7" />
+                        <TableColumn prefWidth="75.0" text="C8" />
+                        <TableColumn prefWidth="75.0" text="C9" />
+                        <TableColumn prefWidth="75.0" text="C10" />
+                    </columns>
+                  </TableView>
+               </children></AnchorPane>
+      </content>
+    </Tab>
+  </tabs>
+</TabPane>
