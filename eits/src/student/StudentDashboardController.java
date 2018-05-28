@@ -49,30 +49,5 @@ public class StudentDashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-  
-        List courses = new ArrayList();
-        //execute SQL statement to get all course for the student that logged in and add
-        //to the courses list
-        for (int i = 0; i < courses.size(); i++) {
-            
-        }
-        
-        
-        /*courseName.setCellValueFactory(new PropertyValueFactory<Courses, String>("name"));
-        industry.setCellValueFactory(new PropertyValueFactory<Courses, String>("industry"));
-        location.setCellValueFactory(new PropertyValueFactory<Courses, String>("location"));
-        
-        tableView.getItems().setAll(parseCoursesList());*/
-    }
-    
-    public void parseCoursesList(){
-        
-        
-        
-        for (int i = 0; i < 10; i++) {
-            
-        }
-
-    }
-    
+    }   
 }

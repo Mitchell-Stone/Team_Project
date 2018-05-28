@@ -11,6 +11,20 @@ package beans;
  */
 public class Courses {
 
+    public Courses(int id, String courseName, String locationName, int hours, int degree ){
+        courseID = id;
+        name = courseName;
+        location = locationName;
+        numberOfHours = hours;
+        finishingDegree = degree;
+    }
+    
+    private int courseID;
+    private String name;
+    private String location;
+    private int numberOfHours;
+    private int finishingDegree;
+    
     public int getCourseID() {
         return courseID;
     }
@@ -50,10 +64,6 @@ public class Courses {
     public void setFinishingDegree(int finishingDegree) {
         this.finishingDegree = finishingDegree;
     }
-    private int courseID;
-    private String name;
-    private String location;
-    private int numberOfHours;
-    private int finishingDegree;
+
     
 }
