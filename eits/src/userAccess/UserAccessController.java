@@ -1,6 +1,7 @@
 package userAccess;
 
 import beans.Student;
+import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -44,40 +45,62 @@ public class UserAccessController {
     private PasswordField passwordLog;
     @FXML
     private Button btn_register;
+    @FXML
+    private Button btn_signin;
+    @FXML
+    private Label errorOutputLog;
 
     //sets the student properties to be used to log in
     @FXML
-    private void loginAction(ActionEvent event) throws NoSuchAlgorithmException {
+    private void loginAction(ActionEvent event) throws NoSuchAlgorithmException, IOException {
         Student bean = new Student();
+        
         bean.setTable("student");
-        bean.setEmail(userNameLog.getText());
-        bean.setPassword(SecurityMethods.getHash(passwordLog.getText()));
         
-        String tier = null;
-        
-        //System.out.println(bean.getUserName());
-        //System.out.println(bean.getPassword());
-        
-        if (UserAccessModel.checkUserPass(bean)) {
-            tier = "student";
+        if (userNameLog.getText().equals("") || passwordLog.getText().equals("")) {
+            
+            errorOutputLog.setText("There are empty fields.");
+            
         } else {
-            bean.setTable("caseworker");
+            
+            bean.setEmail(userNameLog.getText());
+            bean.setPassword(SecurityMethods.getHash(passwordLog.getText()));
+
+            String tier = null;
+
+            //System.out.println(bean.getUserName());
+            //System.out.println(bean.getPassword());
+
             if (UserAccessModel.checkUserPass(bean)) {
-                tier = "caseworker";
+                
+                tier = "student";
+                
+                //closes current window and opens new one
+
+                        Stage stage = (Stage) btn_register.getScene().getWindow();
+                        Parent root = FXMLLoader.load(getClass().getResource("/student/studentDashboard.fxml"));
+
+                        Scene scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.show();
+                
             } else {
-                bean.setTable("admin");
-                if(UserAccessModel.checkUserPass(bean)) {
-                    tier = "admin";
+                bean.setTable("caseworker");
+                if (UserAccessModel.checkUserPass(bean)) {
+                    tier = "caseworker";
                 } else {
-                    System.out.println("N");
-                    signup.setVisible(true);
-                    signin.setVisible(false);
+                    bean.setTable("admin");
+                    if(UserAccessModel.checkUserPass(bean)) {
+                        tier = "admin";
+                    } else {
+                        errorOutputLog.setText("User not found.\n Try to create a new user.");
+                    }
                 }
             }
+            
+            System.out.println(tier);
+            
         }
-        
-        System.out.println(tier);
-        
     }
 
     //sets the student properties so a new student can be added
@@ -87,41 +110,57 @@ public class UserAccessController {
         
         register.setTable("student");
         
-        register.setFirstName(firstName.getText());
-        register.setLastName(lastName.getText());
-        register.setEmail(email.getText());
-        
-        String pw1 = password1.getText();
-        String pw2 = password2.getText();
-        
-        if (pw1.equals(pw2)) {
-            register.setPassword(SecurityMethods.getHash(pw1));
-            if (!UserAccessModel.checkUserPass(register)) {
-                if (UserAccessModel.add(register)) {
-                    System.out.println("Y");
-                    
-                    //closes current window and opens new one
-                    
-                    Stage stage = null;
-                    Parent root = null;
+        if (firstName.getText().equals("") || lastName.getText().equals("") || email.getText().equals("") ||
+                 password1.getText().equals("") || password2.getText().equals("")) {
+            
+            errorOutput2.setText("There are empty fields.");
+            
+        } else {
+            
+            register.setFirstName(firstName.getText());
+            register.setLastName(lastName.getText());
+            register.setEmail(email.getText());
 
-                    if(event.getSource()==btn_register){
-                        stage = (Stage) btn_register.getScene().getWindow();
-                        root = FXMLLoader.load(getClass().getResource("/userAccess/userSignIn.fxml"));
+            String pw1 = password1.getText();
+            String pw2 = password2.getText();
+
+            if (pw1.equals(pw2)) {
+                register.setPassword(SecurityMethods.getHash(pw1));
+                if (!UserAccessModel.checkUserPass(register)) {
+                    if (UserAccessModel.add(register)) {
+
+                        signup.setVisible(false);
+                        signin.setVisible(true);
+
+                    } else {
+                        errorOutput2.setText("There's been a mistake.");
                     }
-                    Scene scene = new Scene(root);
-                    stage.setScene(scene);
-                    stage.show();
-                    
                 } else {
-                    System.out.println("N");
+                    errorOutput2.setText("Sorry, a user is already\n registered under these credentials.");
                 }
             } else {
-                errorOutput2.setText("Sorry, a user is already registered under these credentials.");
+                errorOutput2.setText("Sorry, the passwords\n entered didn't match.");
             }
-        } else {
-            errorOutput2.setText("Sorry, the passwords entered didn't match.");
+            
         }
         
     } 
+
+    @FXML
+    private void showLogin(ActionEvent event) {
+        
+        signup.setVisible(false);
+        signin.setVisible(true);
+        
+    }
+
+    @FXML
+    private void showRegister(ActionEvent event) {
+        
+        signup.setVisible(true);
+        signin.setVisible(false);
+        
+    }
 }
+
+
