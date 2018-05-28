@@ -19,8 +19,7 @@ public class StudentModel {
     public ArrayList<Student> getStudents(){
         ArrayList<Student> studentList = new ArrayList<Student>();
         
-        
-        //execute the SQL query here to get all students
+        //execute query to get all students
         
         return studentList;
     }

@@ -14,12 +14,14 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javax.swing.table.DefaultTableModel;
 import model.StudentModel;
 
 /**
@@ -50,17 +52,9 @@ public class StudentDashboardController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        StudentModel model = new StudentModel();
-        //get the list of courses allocated to the student
-        Student student = new Student();
-        int studentID = 0; //need a way to get the student ID after the student logs in.
-        
-         model.getStudent(studentID);
-         
-         
-        //display the course list in the table
-        
-        
+        ArrayList<Courses> list = CoursesModel.getCourses("courses");
+        for (int i = 0; i < 10; i++) {
+            
+        }
     }   
 }

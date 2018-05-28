@@ -10,20 +10,26 @@ package beans;
  * @author 0111005906
  */
 public class Courses {
-
-    public Courses(int id, String courseName, String locationName, int hours, int degree ){
-        courseID = id;
-        name = courseName;
-        location = locationName;
-        numberOfHours = hours;
-        finishingDegree = degree;
-    }
-    
+ 
     private int courseID;
     private String name;
     private String location;
     private int numberOfHours;
     private int finishingDegree;
+    private String table;
+
+    public Courses(int coursID, String name, String location, String table, int numberOfHours, int finishingDegree) {
+        this.courseID = courseID;
+        this.name = name;
+        this.location = location;
+        this.numberOfHours = numberOfHours;
+        this.finishingDegree = finishingDegree;
+        this.table = table;
+    }
+
+    public Courses() {
+        
+    }
     
     public int getCourseID() {
         return courseID;
@@ -65,5 +71,12 @@ public class Courses {
         this.finishingDegree = finishingDegree;
     }
 
+    public String getTable() {
+        return table;
+    }
+
+    public void setTable(String table) {
+        this.table = table;
+    }
     
 }
