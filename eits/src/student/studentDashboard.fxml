@@ -9,15 +9,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="752.0" prefWidth="972.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9.0.1">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="752.0" prefWidth="972.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="student.StudentDashboardController">
   <tabs>
     <Tab text="Student Details">
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TextField layoutX="412.0" layoutY="215.0" />
-                  <TextField layoutX="412.0" layoutY="257.0" />
-                  <TextField layoutX="412.0" layoutY="299.0" />
+                  <TextField fx:id="firstName" layoutX="412.0" layoutY="215.0" />
+                  <TextField fx:id="lastName" layoutX="412.0" layoutY="257.0" />
+                  <TextField fx:id="email" layoutX="412.0" layoutY="299.0" />
                   <Label layoutX="412.0" layoutY="198.0" text="Fist Name" />
                   <Label layoutX="412.0" layoutY="240.0" text="Last Name" />
                   <Label layoutX="412.0" layoutY="282.0" text="Email" />
@@ -35,16 +35,9 @@
                <children>
                   <TableView layoutX="45.0" layoutY="43.0" prefHeight="625.0" prefWidth="883.0">
                     <columns>
-                      <TableColumn prefWidth="75.0" text="C1" />
-                      <TableColumn prefWidth="75.0" text="C2" />
-                        <TableColumn prefWidth="75.0" text="C3" />
-                        <TableColumn prefWidth="75.0" text="C4" />
-                        <TableColumn prefWidth="75.0" text="C5" />
-                        <TableColumn prefWidth="75.0" text="C6" />
-                        <TableColumn prefWidth="75.0" text="C7" />
-                        <TableColumn prefWidth="75.0" text="C8" />
-                        <TableColumn prefWidth="75.0" text="C9" />
-                        <TableColumn prefWidth="75.0" text="C10" />
+                      <TableColumn fx:id="courseName" prefWidth="333.0" text="Course Name" />
+                      <TableColumn fx:id="industry" prefWidth="312.0" text="Industry" />
+                        <TableColumn fx:id="location" prefWidth="237.0" text="Location" />
                     </columns>
                   </TableView>
                </children></AnchorPane>
