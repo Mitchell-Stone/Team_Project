@@ -18,7 +18,7 @@ public class Courses {
     private int finishingDegree;
     private String table;
 
-    public Courses(int coursID, String name, String location, String table, int numberOfHours, int finishingDegree) {
+    public Courses(int courseID, String name, String location, String table, int numberOfHours, int finishingDegree) {
         this.courseID = courseID;
         this.name = name;
         this.location = location;
@@ -78,5 +78,4 @@ public class Courses {
     public void setTable(String table) {
         this.table = table;
     }
-    
 }

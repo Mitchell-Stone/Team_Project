@@ -35,7 +35,7 @@ public class MainWindowController implements Initializable {
     private String nextWindow;
     
     @FXML
-    private BorderPane mainpane;
+    public BorderPane mainpane;
 
     /**
      * Initializes the controller class.

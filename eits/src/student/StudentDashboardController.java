@@ -7,22 +7,16 @@ package student;
 
 import beans.Courses;
 import model.CoursesModel;
-import beans.Student;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javax.swing.table.DefaultTableModel;
-import model.StudentModel;
 
 /**
  * FXML Controller class
@@ -52,7 +46,23 @@ public class StudentDashboardController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ArrayList<Courses> list = CoursesModel.getCourses("courses");
+        
+        Courses bean = new Courses();
+        CoursesModel model = new CoursesModel();
+        
+        bean.setTable("courses");
+        
+        try{
+            ObservableList<Courses> coursesList = (ObservableList<Courses>) model.getCourses(bean);
+            
+            tableView.setItems(coursesList);
+        }catch(Exception ex){
+            System.err.println(ex);
+        }
+        
+        ArrayList<Courses> list = new ArrayList<>();
+        
+        
         for (int i = 0; i < 10; i++) {
             
         }

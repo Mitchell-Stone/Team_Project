@@ -14,6 +14,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -22,9 +24,11 @@ import java.util.ArrayList;
 public class CoursesModel {
     
     //method to get all courses on the database
-    public static ArrayList<Courses> getCourses(Courses bean) throws Exception{
-        ArrayList<Courses> coursesList = new ArrayList<Courses>();
-
+    public ObservableList<Courses> getCourses(Courses bean) throws Exception{
+        ArrayList<Courses> coursesList = new ArrayList<>();
+        
+        ObservableList<Courses> obsList = FXCollections.observableList(coursesList);
+                
         String sql = "SELECT * FROM $tablename";
         String query = sql.replace("$tablename", bean.getTable());
 
@@ -47,12 +51,12 @@ public class CoursesModel {
                 return null;
         }
 
-    return coursesList;
+    return obsList;
     }
     
     //overloaded method to get course list by course ID in relation to student ID
     public ArrayList<Courses> getCourses(int studentID){
-        ArrayList<Courses> coursesList = new ArrayList<Courses>();
+        ArrayList<Courses> coursesList = new ArrayList<>();
 
 
         //execute the SQL query here

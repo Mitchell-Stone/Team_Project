@@ -6,7 +6,10 @@
 package userAccess;
 
 import beans.Student;
+import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,6 +20,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import mainWindow.MainWindowController;
 import model.UserAccessModel;
 import security.SecurityMethods;
 
@@ -60,6 +64,17 @@ public class UserAccessController {
         
         if (UserAccessModel.checkUserPass(bean)) {
             tier = "student";
+            Parent root = null;
+            try{
+                root = FXMLLoader.load(getClass().getResource("/student/studentDashboard.fxml"));
+
+            } catch(IOException ex) {
+                Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+            MainWindowController pane = new MainWindowController();
+            pane.mainpane.setCenter(root);
+        
         } else {
             bean.setTable("caseworker");
             if (UserAccessModel.checkUserPass(bean)) {
