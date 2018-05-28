@@ -6,6 +6,7 @@
 package student;
 
 import beans.Courses;
+import model.CoursesModel;
 import beans.Student;
 import java.net.URL;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import model.StudentModel;
 
 /**
  * FXML Controller class
@@ -48,6 +50,17 @@ public class StudentDashboardController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        StudentModel model = new StudentModel();
+        //get the list of courses allocated to the student
+        Student student = new Student();
+        int studentID = 0; //need a way to get the student ID after the student logs in.
+        
+         model.getStudent(studentID);
+         
+         
+        //display the course list in the table
+        
         
     }   
 }

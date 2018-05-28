@@ -10,7 +10,7 @@ package beans;
  * @author mitch
  */
 public class Student {
-
+    
     public String getFirstName() {
         return firstName;
     }

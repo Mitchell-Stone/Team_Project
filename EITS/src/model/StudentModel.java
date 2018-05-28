@@ -20,12 +20,15 @@ public class StudentModel {
         ArrayList<Student> studentList = new ArrayList<Student>();
         
         
-        //execute the SQL query here
-        
-        
+        //execute the SQL query here to get all students
         
         return studentList;
     }
     
-    
+    public Student getStudent(int studentID)
+    {
+        Student student = null;
+        //execute query to find student by id
+        return student;
+    }
 }
