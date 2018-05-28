@@ -8,8 +8,11 @@ package student;
 import beans.Courses;
 import beans.Student;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -38,27 +41,38 @@ public class StudentDashboardController implements Initializable {
     private TableColumn<Courses, String> industry;
     @FXML
     private TableColumn<Courses, String> location;
-
+    
+    private final ObservableList<Courses> data = FXCollections.observableArrayList();
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        courseName.setCellValueFactory(new PropertyValueFactory<Courses, String>("name"));
+        
+  
+        List courses = new ArrayList();
+        //execute SQL statement to get all course for the student that logged in and add
+        //to the courses list
+        for (int i = 0; i < courses.size(); i++) {
+            
+        }
+        
+        
+        /*courseName.setCellValueFactory(new PropertyValueFactory<Courses, String>("name"));
         industry.setCellValueFactory(new PropertyValueFactory<Courses, String>("industry"));
         location.setCellValueFactory(new PropertyValueFactory<Courses, String>("location"));
         
-        tableView.getItems().setAll(parseCoursesList());
+        tableView.getItems().setAll(parseCoursesList());*/
     }
     
-    public List<Courses> parseCoursesList(){
+    public void parseCoursesList(){
         
-        //execute SQL statement to get all course for the studen that logged in
         
-        //create a for loop to iterate through the courses to populate the list
         
-        //return courses;
-        
+        for (int i = 0; i < 10; i++) {
+            
+        }
+
     }
     
 }

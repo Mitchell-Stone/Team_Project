@@ -10,5 +10,50 @@ package beans;
  * @author 0111005906
  */
 public class Courses {
+
+    public int getCourseID() {
+        return courseID;
+    }
+
+    public void setCourseID(int courseID) {
+        this.courseID = courseID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public int getNumberOfHours() {
+        return numberOfHours;
+    }
+
+    public void setNumberOfHours(int numberOfHours) {
+        this.numberOfHours = numberOfHours;
+    }
+
+    public int getFinishingDegree() {
+        return finishingDegree;
+    }
+
+    public void setFinishingDegree(int finishingDegree) {
+        this.finishingDegree = finishingDegree;
+    }
+    private int courseID;
+    private String name;
+    private String location;
+    private int numberOfHours;
+    private int finishingDegree;
     
 }
