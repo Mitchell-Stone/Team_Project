@@ -21,7 +21,7 @@ public class Eits extends Application {
     
     @Override
     public void start(Stage stage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/mainWindow/mainWindow.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/userAccess/userSignIn.fxml"));
         
         Scene scene = new Scene(root);
         

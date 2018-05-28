@@ -1,15 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package userAccess;
 
 import beans.Student;
-import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,8 +11,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import mainWindow.MainWindowController;
 import model.UserAccessModel;
 import security.SecurityMethods;
 
@@ -29,7 +21,11 @@ import security.SecurityMethods;
  * @author mitch
  */
 public class UserAccessController {
-
+    
+    @FXML
+    private Pane signin;
+    @FXML
+    private Pane signup;
     @FXML
     private TextField firstName;
     @FXML
@@ -64,17 +60,6 @@ public class UserAccessController {
         
         if (UserAccessModel.checkUserPass(bean)) {
             tier = "student";
-            Parent root = null;
-            try{
-                root = FXMLLoader.load(getClass().getResource("/student/studentDashboard.fxml"));
-
-            } catch(IOException ex) {
-                Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        
-            MainWindowController pane = new MainWindowController();
-            pane.mainpane.setCenter(root);
-        
         } else {
             bean.setTable("caseworker");
             if (UserAccessModel.checkUserPass(bean)) {
@@ -85,6 +70,8 @@ public class UserAccessController {
                     tier = "admin";
                 } else {
                     System.out.println("N");
+                    signup.setVisible(true);
+                    signin.setVisible(false);
                 }
             }
         }
@@ -106,8 +93,6 @@ public class UserAccessController {
         
         String pw1 = password1.getText();
         String pw2 = password2.getText();
-        
-        
         
         if (pw1.equals(pw2)) {
             register.setPassword(SecurityMethods.getHash(pw1));
