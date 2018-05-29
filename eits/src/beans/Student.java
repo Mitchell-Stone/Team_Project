@@ -57,6 +57,8 @@ public class Student {
     private String password;
     private String userName;
     private String table;
+    private String column;
+    private int ID;
 
     public String getTable() {
         return table;
@@ -64,5 +66,21 @@ public class Student {
 
     public void setTable(String table) {
         this.table = table;
+    }
+
+    public String getColumn() {
+        return column;
+    }
+
+    public void setColumn(String column) {
+        this.column = column;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 }
