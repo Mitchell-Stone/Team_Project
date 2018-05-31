@@ -45,8 +45,7 @@ public class AdministratorDashboardController implements Initializable {
     @FXML
     private void showAllStudents(MouseEvent event) throws SQLException {
         //create the selection details pane for student
-        studentSelectionDetails();
-        
+        createStudentDetails();
         
         tbl_data.getColumns().clear();
 
@@ -74,7 +73,13 @@ public class AdministratorDashboardController implements Initializable {
         } 
     }
     
-    private void studentSelectionDetails(){
+    @FXML
+    private void selectItem(MouseEvent event) {
+        
+    }
+
+    
+    private void createStudentDetails(){
         
         Label lbl_id = new Label("Student ID");
         vb_selectionDetails.getChildren().add(lbl_id);
