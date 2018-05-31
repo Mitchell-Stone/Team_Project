@@ -32,7 +32,22 @@ public class AdministratorDashboardController implements Initializable {
     private TableView tbl_data;
     @FXML
     private VBox vb_selectionDetails;
-    
+    @FXML
+    Label lbl_id = new Label("Student ID");
+    @FXML
+    TextField tf_studentID = new TextField();
+    @FXML
+    Label lbl_fName = new Label("First Name");
+    @FXML
+    TextField tf_firstName = new TextField();
+    @FXML
+    Label lbl_lName = new Label("Last Name");
+    @FXML
+    TextField tf_lastName = new TextField();
+    @FXML
+    Label lbl_email = new Label("Email");
+    @FXML
+    TextField tf_email = new TextField();
     
     /**
      * Initializes the controller class.
@@ -75,37 +90,34 @@ public class AdministratorDashboardController implements Initializable {
     
     @FXML
     private void selectItem(MouseEvent event) {
+        Student student = (Student) tbl_data.getSelectionModel().getSelectedItem();
+        
+        tf_studentID.setText(Integer.toString(student.getStudentID()));      
+        tf_firstName.setText(student.getFirstName());
+        tf_lastName.setText(student.getLastName());
+        tf_email.setText(student.getEmail());
         
     }
-
-    
+  
     private void createStudentDetails(){
-        
-        Label lbl_id = new Label("Student ID");
+
         vb_selectionDetails.getChildren().add(lbl_id);
-        
-        TextField tf_studentID = new TextField();
+         
         tf_studentID.setId("tf_studentID");
         vb_selectionDetails.getChildren().add(tf_studentID);
         
-        Label lbl_fName = new Label("First Name");
         vb_selectionDetails.getChildren().add(lbl_fName);
         
-        TextField tf_firstName = new TextField();
         tf_studentID.setId("tf_firstName");
         vb_selectionDetails.getChildren().add(tf_firstName);
-        
-        Label lbl_lName = new Label("Last Name");
+       
         vb_selectionDetails.getChildren().add(lbl_lName);
         
-        TextField tf_lastName = new TextField();
         tf_studentID.setId("tf_lastName");
         vb_selectionDetails.getChildren().add(tf_lastName);
         
-        Label lbl_email = new Label("Email");
         vb_selectionDetails.getChildren().add(lbl_email);
         
-        TextField tf_email = new TextField();
         tf_studentID.setId("tf_email");
         vb_selectionDetails.getChildren().add(tf_email);
         
