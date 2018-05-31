@@ -5,6 +5,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="903.0" prefWidth="1308.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="administrator.AdministratorDashboardController">
@@ -23,6 +24,16 @@
             <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="130.0" text="Reports" />
          </children>
       </HBox>
-      <TableView fx:id="tbl_data" layoutX="14.0" layoutY="112.0" prefHeight="779.0" prefWidth="1281.0" />
+      <TableView fx:id="tbl_data" layoutX="14.0" layoutY="112.0" prefHeight="779.0" prefWidth="950.0" />
+      <VBox id="vb_selectionDetails" fx:id="vb_selectionDetails" layoutX="1017.0" layoutY="118.0" prefHeight="773.0" prefWidth="242.0">
+         <children>
+            <Label prefHeight="36.0" prefWidth="188.0" text="Selection Details" textAlignment="CENTER">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <VBox layoutX="1105.0" layoutY="402.0" prefHeight="200.0" prefWidth="100.0" />
    </children>
 </AnchorPane>

@@ -12,10 +12,12 @@ import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import model.MainModel;
 
 /**
@@ -27,7 +29,10 @@ public class AdministratorDashboardController implements Initializable {
 
     @FXML
     private TableView tbl_data;
-
+    @FXML
+    private VBox vb_selectionDetails;
+    
+    
     /**
      * Initializes the controller class.
      */
@@ -38,6 +43,9 @@ public class AdministratorDashboardController implements Initializable {
 
     @FXML
     private void showAllStudents(MouseEvent event) throws SQLException {
+        //create the selection details pane for student
+        studentSelectionDetails();
+        
         
         tbl_data.getColumns().clear();
 
@@ -63,5 +71,11 @@ public class AdministratorDashboardController implements Initializable {
         catch(NullPointerException ex){
             System.out.println("Null Pointer Exception");
         } 
+    }
+    
+    private void studentSelectionDetails(){
+        Label lbl_id = new Label("Student ID");
+        
+        vb_selectionDetails.getChildren().add(lbl_id);
     }
 }
