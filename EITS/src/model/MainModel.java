@@ -10,13 +10,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class MainModel {
     
-    public ArrayList<Student> getAllStudents() throws SQLException{
+    public ObservableList<Student> getAllStudents() throws SQLException{
         
-        ArrayList<Student> studentList = new ArrayList<Student>();
+        ObservableList<Student> studentList = FXCollections.observableArrayList();
         
         ResultSet rs = null;
 
