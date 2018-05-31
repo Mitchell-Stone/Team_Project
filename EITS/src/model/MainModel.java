@@ -33,7 +33,7 @@ public class MainModel {
             rs = stmt.executeQuery(query);
 
             while (rs.next()) {
-                student = new Student(rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"));
+                student = new Student(rs.getInt("studentID"),rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"));
                 studentList.add(student);
             }            
         } catch (SQLException e) {

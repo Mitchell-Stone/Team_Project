@@ -46,7 +46,7 @@ public class AdministratorDashboardController implements Initializable {
         TableColumn firstName = new TableColumn("First Name");
         TableColumn lastName = new TableColumn("Last Name");
         TableColumn email = new TableColumn("Email");
-        tbl_data.getColumns().addAll(firstName, lastName, email);
+        tbl_data.getColumns().addAll(studentID, firstName, lastName, email);
         
         //connect to the database and retrieve all students
         try{
