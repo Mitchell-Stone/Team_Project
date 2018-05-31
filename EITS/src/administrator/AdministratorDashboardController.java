@@ -5,7 +5,9 @@
  */
 package administrator;
 
+import beans.Student;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -33,6 +35,9 @@ public class AdministratorDashboardController implements Initializable {
     @FXML
     private void showAllStudents(MouseEvent event) {
         
+        MainModel model = new MainModel();
+        
+        List<Student> = model.getAllStudents("Students");
         
     }
     
