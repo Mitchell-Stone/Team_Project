@@ -42,11 +42,11 @@ public class AdministratorDashboardController implements Initializable {
         
         try{
             MainModel model = new MainModel();
-            ArrayList<Student> list = model.getAllStudents();
+            //ArrayList<Student> list = model.getAllStudents();
             
             
             
-            System.out.println(list);
+            //System.out.println(list);
         }
         catch(NullPointerException ex){
             System.out.println("Null Pointer Exception");
