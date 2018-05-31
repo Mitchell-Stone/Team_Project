@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -48,6 +49,8 @@ public class AdministratorDashboardController implements Initializable {
     Label lbl_email = new Label("Email");
     @FXML
     TextField tf_email = new TextField();
+    @FXML
+    Button update = new Button();
     
     /**
      * Initializes the controller class.
@@ -120,6 +123,9 @@ public class AdministratorDashboardController implements Initializable {
         
         tf_studentID.setId("tf_email");
         vb_selectionDetails.getChildren().add(tf_email);
+        
+        update.setText("Update");
+        vb_selectionDetails.getChildren().add(update);
         
     }
 }
