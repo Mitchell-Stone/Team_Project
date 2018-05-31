@@ -18,7 +18,7 @@
       <HBox layoutX="150.0" layoutY="67.0" prefHeight="35.0" prefWidth="626.0">
          <children>
             <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="125.0" text="My Profile" />
-            <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="125.0" text="Students" />
+            <Button mnemonicParsing="false" onMouseClicked="#showAllStudents" prefHeight="35.0" prefWidth="125.0" text="Students" />
             <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="125.0" text="Case Workers" />
             <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="125.0" text="Courses" />
             <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="125.0" text="Reports" />

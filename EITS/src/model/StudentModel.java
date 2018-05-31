@@ -12,16 +12,6 @@ import java.util.ArrayList;
 
 public class StudentModel extends MainModel {
     
-    
-    
-    public ArrayList<Student> getStudents(){
-        ArrayList<Student> studentList = new ArrayList<Student>();
-        
-        //execute query to get all students
-        
-        return studentList;
-    }
-    
     public Student getStudent(Student bean) throws SQLException {
     
         Student student = null;
