@@ -7,22 +7,22 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="676.0" prefWidth="926.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="administrator.AdministratorDashboardController">
+<AnchorPane id="AnchorPane" prefHeight="903.0" prefWidth="1308.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="administrator.AdministratorDashboardController">
    <children>
-      <Label layoutX="263.0" layoutY="14.0" text="Administrator Dashboard">
+      <Label layoutX="454.0" layoutY="14.0" text="Administrator Dashboard">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <HBox layoutX="150.0" layoutY="67.0" prefHeight="35.0" prefWidth="626.0">
+      <HBox layoutX="342.0" layoutY="67.0" prefHeight="35.0" prefWidth="626.0">
          <children>
             <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="125.0" text="My Profile" />
             <Button mnemonicParsing="false" onMouseClicked="#showAllStudents" prefHeight="35.0" prefWidth="125.0" text="Students" />
             <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="125.0" text="Case Workers" />
             <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="125.0" text="Courses" />
-            <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="125.0" text="Reports" />
+            <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="130.0" text="Reports" />
          </children>
       </HBox>
-      <TableView fx:id="tbl_data" layoutX="14.0" layoutY="112.0" prefHeight="554.0" prefWidth="901.0" />
+      <TableView fx:id="tbl_data" layoutX="14.0" layoutY="112.0" prefHeight="779.0" prefWidth="1281.0" />
    </children>
 </AnchorPane>
