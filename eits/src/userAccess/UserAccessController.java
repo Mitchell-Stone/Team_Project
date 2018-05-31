@@ -3,6 +3,8 @@ package userAccess;
 import beans.Student;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +24,10 @@ import security.SecurityMethods;
  * @author mitch
  */
 public class UserAccessController {
+    
+    String studentDboardPath = "/student/studentDashboard.fxml";
+    String caseWorkerDboardPath = "/caseWorker/caseWorkerDashboard.fxml";
+    String adminDboardPath = "/administrator/administratorDashboard.fxml";
     
     @FXML
     private Pane signin;
@@ -63,6 +69,7 @@ public class UserAccessController {
             
         } else {
             
+            //sets the email and password to be check
             bean.setEmail(userNameLog.getText());
             bean.setPassword(SecurityMethods.getHash(passwordLog.getText()));
 
@@ -71,27 +78,22 @@ public class UserAccessController {
             //System.out.println(bean.getUserName());
             //System.out.println(bean.getPassword());
 
-            if (UserAccessModel.checkUserPass(bean)) {
-                
+            if (UserAccessModel.checkUserPass(bean)) {              
                 tier = "student";
-                
-                //closes current window and opens new one
-
-                        Stage stage = (Stage) btn_register.getScene().getWindow();
-                        Parent root = FXMLLoader.load(getClass().getResource("/student/studentDashboard.fxml"));
-
-                        Scene scene = new Scene(root);
-                        stage.setScene(scene);
-                        stage.show();
-                
+                //if true open the student dashboard
+                openDashboard(studentDboardPath);  
             } else {
                 bean.setTable("caseworker");
                 if (UserAccessModel.checkUserPass(bean)) {
                     tier = "caseworker";
+                    //if true open the case worker dashboard
+                    openDashboard(caseWorkerDboardPath);
                 } else {
                     bean.setTable("admin");
                     if(UserAccessModel.checkUserPass(bean)) {
                         tier = "admin";
+                        //if true open the admin dashboard
+                        openDashboard(adminDboardPath);
                     } else {
                         errorOutputLog.setText("User not found.\n Try to create a new user.");
                     }
@@ -160,6 +162,21 @@ public class UserAccessController {
         signup.setVisible(true);
         signin.setVisible(false);
         
+    }
+    
+    private void openDashboard(String path){
+        try {
+            //closes current window and opens new one
+            
+            Stage stage = (Stage) btn_register.getScene().getWindow();
+            Parent root = FXMLLoader.load(getClass().getResource(path));
+            
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(UserAccessController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
 
