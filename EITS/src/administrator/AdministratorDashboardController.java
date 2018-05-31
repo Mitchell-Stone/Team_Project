@@ -15,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -74,8 +75,34 @@ public class AdministratorDashboardController implements Initializable {
     }
     
     private void studentSelectionDetails(){
-        Label lbl_id = new Label("Student ID");
         
+        Label lbl_id = new Label("Student ID");
         vb_selectionDetails.getChildren().add(lbl_id);
+        
+        TextField tf_studentID = new TextField();
+        tf_studentID.setId("tf_studentID");
+        vb_selectionDetails.getChildren().add(tf_studentID);
+        
+        Label lbl_fName = new Label("First Name");
+        vb_selectionDetails.getChildren().add(lbl_fName);
+        
+        TextField tf_firstName = new TextField();
+        tf_studentID.setId("tf_firstName");
+        vb_selectionDetails.getChildren().add(tf_firstName);
+        
+        Label lbl_lName = new Label("Last Name");
+        vb_selectionDetails.getChildren().add(lbl_lName);
+        
+        TextField tf_lastName = new TextField();
+        tf_studentID.setId("tf_lastName");
+        vb_selectionDetails.getChildren().add(tf_lastName);
+        
+        Label lbl_email = new Label("Email");
+        vb_selectionDetails.getChildren().add(lbl_email);
+        
+        TextField tf_email = new TextField();
+        tf_studentID.setId("tf_email");
+        vb_selectionDetails.getChildren().add(tf_email);
+        
     }
 }
