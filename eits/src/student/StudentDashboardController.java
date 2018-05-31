@@ -9,8 +9,11 @@ import beans.Courses;
 import beans.Student;
 import beans.User;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -41,6 +44,26 @@ public class StudentDashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
+        /*Courses bean = new Courses();
+        CoursesModel model = new CoursesModel();
+        
+        bean.setTable("courses");
+        
+        try{
+            ObservableList<Courses> coursesList = (ObservableList<Courses>) model.getCourses(bean);
+            
+            tableView.setItems(coursesList);
+        }catch(Exception ex){
+            System.err.println(ex);
+        }
+        
+        ArrayList<Courses> list = new ArrayList<>();
+        
+        
+        for (int i = 0; i < 10; i++) {
+            
+        }*/
+        
         Student student = new Student();
         
         int ID = student.getID();
@@ -55,11 +78,7 @@ public class StudentDashboardController implements Initializable {
         
         ArrayList <String> currentUser = MainModel.getUserByID(user);
         
-        for (int i = 0; i < currentUser.size(); i++) {
-        
-            System.out.println(currentUser.get(i));
-        
-        }
+        System.out.println(currentUser);
         
         studentID.setText(Integer.toString(ID));
         firstName.setText(currentUser.get(0));

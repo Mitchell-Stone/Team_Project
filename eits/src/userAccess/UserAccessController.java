@@ -99,6 +99,9 @@ public class UserAccessController {
                     }
                 }
             }
+            
+            System.out.println(tier);
+            
         }
     }
 
