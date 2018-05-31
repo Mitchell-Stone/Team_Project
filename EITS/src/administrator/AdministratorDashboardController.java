@@ -15,6 +15,9 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import model.MainModel;
 
@@ -26,7 +29,7 @@ import model.MainModel;
 public class AdministratorDashboardController implements Initializable {
 
     @FXML
-    private ListView<?> lv_data;
+    private TableView tbl_data;
 
     /**
      * Initializes the controller class.
@@ -38,15 +41,22 @@ public class AdministratorDashboardController implements Initializable {
 
     @FXML
     private void showAllStudents(MouseEvent event) throws SQLException {
-        System.out.println("You Clicked me dawg");
+        //create the columns needed in the table
+        TableColumn firstName = new TableColumn("First Name");
+        TableColumn lastName = new TableColumn("Last Name");
+        TableColumn email = new TableColumn("Email");
+        tbl_data.getColumns().addAll(firstName, lastName, email);
         
+        //connect to the database and retrieve all students
         try{
             MainModel model = new MainModel();
-            ArrayList<Student> list = model.getAllStudents();
+            ObservableList<Student> list = model.getAllStudents();
             
+            firstName.setCellValueFactory(new PropertyValueFactory<Student, String>("firstName"));
+            lastName.setCellValueFactory(new PropertyValueFactory<Student, String>("lastName"));
+            email.setCellValueFactory(new PropertyValueFactory<Student, String>("email"));
             
-            
-            System.out.println(list);
+            tbl_data.setItems(list);
         }
         catch(NullPointerException ex){
             System.out.println("Null Pointer Exception");
