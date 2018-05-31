@@ -40,8 +40,6 @@ public class UserAccessModel extends MainModel  {
             if (rs.next()) {
                 
                 bean.setID(rs.getInt(1));
-                bean.setFirstName(rs.getString("firstName"));
-                bean.setLastName(rs.getString("lastName"));
                 
                 return true;
             } else {

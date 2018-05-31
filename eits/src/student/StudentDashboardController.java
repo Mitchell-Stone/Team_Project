@@ -7,15 +7,19 @@ package student;
 
 import beans.Courses;
 import beans.Student;
+import beans.User;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import model.MainModel;
 
 /**
  * FXML Controller class
@@ -24,22 +28,16 @@ import javafx.scene.control.TextField;
  */
 public class StudentDashboardController implements Initializable {
 
+    
+    private final ObservableList<Courses> data = FXCollections.observableArrayList();
+    @FXML
+    private TextField studentID;
     @FXML
     private TextField firstName;
     @FXML
     private TextField lastName;
     @FXML
     private TextField email;
-    @FXML
-    private TableView<Courses> tableView;
-    @FXML
-    private TableColumn<Courses, String> courseName;
-    @FXML
-    private TableColumn<Courses, String> industry;
-    @FXML
-    private TableColumn<Courses, String> location;
-    
-    private final ObservableList<Courses> data = FXCollections.observableArrayList();
     /**
      * Initializes the controller class.
      */
@@ -68,11 +66,24 @@ public class StudentDashboardController implements Initializable {
         
         Student student = new Student();
         
-        System.out.println(student.getID());
-        System.out.println(student.getFirstName());
-        System.out.println(student.getLastName());
+        int ID = student.getID();
         
+        System.out.println(ID);
         
+        User user = new User();
+        
+        user.setTable("student");
+        user.setColumn("studentID");
+        user.setID(ID);
+        
+        ArrayList <String> currentUser = MainModel.getUserByID(user);
+        
+        System.out.println(currentUser);
+        
+        studentID.setText(Integer.toString(ID));
+        firstName.setText(currentUser.get(0));
+        lastName.setText(currentUser.get(1));
+        email.setText(currentUser.get(2));
         
     }   
 }
