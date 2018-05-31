@@ -6,9 +6,8 @@
 package student;
 
 import beans.Courses;
-import model.CoursesModel;
+import beans.Student;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -47,7 +46,7 @@ public class StudentDashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        Courses bean = new Courses();
+        /*Courses bean = new Courses();
         CoursesModel model = new CoursesModel();
         
         bean.setTable("courses");
@@ -65,6 +64,15 @@ public class StudentDashboardController implements Initializable {
         
         for (int i = 0; i < 10; i++) {
             
-        }
+        }*/
+        
+        Student student = new Student();
+        
+        System.out.println(student.getID());
+        System.out.println(student.getFirstName());
+        System.out.println(student.getLastName());
+        
+        
+        
     }   
 }

@@ -18,7 +18,7 @@ import java.sql.Statement;
  *
  * @author mitch
  */
-public class UserAccessModel {
+public class UserAccessModel extends MainModel  {
         public static boolean checkUserPass(Student bean) {
     
         String sql = "SELECT * FROM $tablename WHERE email = ? AND password = ?";
@@ -38,6 +38,11 @@ public class UserAccessModel {
             rs = stmt.executeQuery();
             
             if (rs.next()) {
+                
+                bean.setID(rs.getInt(1));
+                bean.setFirstName(rs.getString("firstName"));
+                bean.setLastName(rs.getString("lastName"));
+                
                 return true;
             } else {
                 return false;
@@ -84,8 +89,6 @@ public class UserAccessModel {
             }
         }
         
-        
-    
     }
 
 }

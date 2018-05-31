@@ -21,7 +21,7 @@ import javafx.collections.ObservableList;
  *
  * @author 0111005906
  */
-public class CoursesModel {
+public class CoursesModel extends MainModel {
     
     //method to get all courses on the database
     public ObservableList<Courses> getCourses(Courses bean) throws Exception{
