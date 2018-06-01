@@ -2,13 +2,13 @@
 package model;
 
 import beans.Student;
+import beans.User;
 import db.DbType;
 import db.DbUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class StudentModel extends MainModel {
     
@@ -54,5 +54,61 @@ public class StudentModel extends MainModel {
             }
         }
         
+    }
+    
+    public static boolean updateStudent(User bean) {
+    
+        String sql = "UPDATE student SET firstName = ?, lastName = ?, email = ? WHERE studentID = ?";
+        
+        try(
+                Connection conn = DbUtil.getConn(DbType.MYSQL);
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                ) {
+            
+            stmt.setString(1, bean.getFirstName());
+            stmt.setString(2, bean.getLastName());
+            stmt.setString(3, bean.getEmail());
+            stmt.setInt(4, bean.getID());
+            
+            int affected = stmt.executeUpdate();
+            
+            if (affected == 1) {
+                return true;
+            } else {
+                return false;
+            }
+            
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+    
+    }
+    
+    public static boolean updateStudentPassword(User bean) {
+    
+        String sql = "UPDATE student SET password = ? WHERE studentID = ?";
+        
+        try(
+                Connection conn = DbUtil.getConn(DbType.MYSQL);
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                ) {
+            
+            stmt.setString(1, bean.getPassword());
+            stmt.setInt(2, bean.getID());
+            
+            int affected = stmt.executeUpdate();
+            
+            if (affected == 1) {
+                return true;
+            } else {
+                return false;
+            }
+            
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+    
     }
 }

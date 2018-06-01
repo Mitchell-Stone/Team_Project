@@ -15,6 +15,16 @@ import javafx.collections.ObservableList;
 
 public class MainModel {
     
+    public static boolean openClose(boolean visible) {
+        boolean visibility;
+        if (visible) {
+            visibility = false;
+        } else {
+            visibility = true;
+        }
+        return visibility;
+    }
+    
     public ObservableList<Student> getAllStudents() throws SQLException{
         
         ObservableList<Student> studentList = FXCollections.observableArrayList();
@@ -45,27 +55,6 @@ public class MainModel {
             }
         }  
         return studentList;
-    }
-    
-    public void updateStudent(int studentID, String firstName, String lastName, String email){
-        String query = "UPDATE student SET firstName = ?, lastName = ?, email = ? WHERE studentID = ?";
-        
-        ResultSet keys = null;
-        
-        try{
-            java.sql.Connection conn = DbUtil.getConn(DbType.MYSQL);
-            PreparedStatement stmt = conn.prepareStatement(query);
-            
-            stmt.setString(1,firstName);
-            stmt.setString(2,lastName);
-            stmt.setString(3,email);
-            stmt.setString(4,Integer.toString(studentID));
-            
-            stmt.executeQuery();
-            
-        }catch(SQLException ex){
-            System.out.println(ex);
-        }
     }
     
     public static ArrayList<String> getUserByID(User user) {
