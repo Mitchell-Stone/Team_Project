@@ -6,6 +6,7 @@
 package administrator;
 
 import beans.Student;
+import beans.User;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -141,8 +142,15 @@ public class AdministratorDashboardController implements Initializable {
         vb_selectionDetails.getChildren().add(update);
         //create an on action event so the button knows what to do when pressed
         update.setOnAction((event) -> {
-            StudentModel.updateStudent(Integer.parseInt(tf_studentID.getText()), tf_firstName.getText(),
-                    tf_lastName.getText(), tf_email.getText());
+            
+            User user = new User();
+            
+            user.setFirstName(tf_firstName.getText());
+            user.setLastName(tf_lastName.getText());
+            user.setEmail(tf_email.getText());
+            user.setID(Integer.parseInt(tf_studentID.getText()));
+            
+            StudentModel.updateStudent(user);
             tbl_data.getColumns().clear();
             populateStudentTable();
             System.out.println("Student updated");
