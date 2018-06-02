@@ -10,6 +10,8 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -126,6 +128,15 @@ public class AdministratorDashboardController implements Initializable {
         
         update.setText("Update");
         vb_selectionDetails.getChildren().add(update);
+        Student student = new Student();
+        update.setOnAction((event) -> {
+            updateStudent(Integer.parseInt(tf_studentID.getText()));
+        });
         
     }
+
+    private void updateStudent(int studentID){
+        System.out.println(studentID);
+    }
+                
 }
