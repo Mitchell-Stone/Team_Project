@@ -34,27 +34,16 @@ public class AdministratorDashboardController implements Initializable {
     private TableView tbl_data;
     @FXML
     private VBox vb_selectionDetails;
-    @FXML
     Label lbl_studentID = new Label("Student ID");
-    @FXML
     Label lbl_EmployeeID = new Label("Employee ID");
-    @FXML
     TextField tf_studentID = new TextField();
-    @FXML
     Label lbl_fName = new Label("First Name");
-    @FXML
     TextField tf_firstName = new TextField();
-    @FXML
     Label lbl_lName = new Label("Last Name");
-    @FXML
     TextField tf_lastName = new TextField();
-    @FXML
     Label lbl_email = new Label("Email");
-    @FXML
     TextField tf_email = new TextField();
-    @FXML
     Label lbl_phNumber = new Label("Phone Number");
-    @FXML
     Button update = new Button();
     
     /**
@@ -63,9 +52,10 @@ public class AdministratorDashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        //Populate my profle when the window opens or make it so a seperate window opens
     }    
 
-    private void populateTable(){
+    private void populateStudentTable(){
         //create the columns needed in the table
         TableColumn studentID = new TableColumn("Student ID");
         TableColumn firstName = new TableColumn("First Name");
@@ -75,18 +65,22 @@ public class AdministratorDashboardController implements Initializable {
         
         //connect to the database and retrieve all students
         try{
+            //Insantiate the main model
             MainModel model = new MainModel();
+            //get all the students and put them in an observable list
             ObservableList<Student> list = model.getAllStudents();
             
+            //put the data in the appropriate columns
             studentID.setCellValueFactory(new PropertyValueFactory<Student, String>("studentID"));
             firstName.setCellValueFactory(new PropertyValueFactory<Student, String>("firstName"));
             lastName.setCellValueFactory(new PropertyValueFactory<Student, String>("lastName"));
             email.setCellValueFactory(new PropertyValueFactory<Student, String>("email"));
             
+            //get the table and list the data
             tbl_data.setItems(list);
         }
         catch(SQLException ex){
-            System.out.println("DATABASE ERROR");
+            System.out.println("DATABASE ERROR SQL EXCEPTION");
         } 
     }
     
@@ -95,15 +89,24 @@ public class AdministratorDashboardController implements Initializable {
         //create the selection details pane for student
         createStudentDetails();
         
+        //clear the table of any contents
         tbl_data.getColumns().clear();
         
-        populateTable();
+        //Show all the students
+        populateStudentTable();
+    }
+    
+        @FXML
+    private void showAllCaseWorkers(MouseEvent event) {
+        
     }
     
     @FXML
     private void selectItem(MouseEvent event) {
+        //When an item is selected in the table get all the data for that item
         Student student = (Student) tbl_data.getSelectionModel().getSelectedItem();
         
+        //set the text fields to show the selected item to allow for changes
         tf_studentID.setText(Integer.toString(student.getStudentID()));      
         tf_firstName.setText(student.getFirstName());
         tf_lastName.setText(student.getLastName());
@@ -113,6 +116,7 @@ public class AdministratorDashboardController implements Initializable {
   
     private void createStudentDetails(){
 
+        //creates the labels and text fields in the verticle box
         vb_selectionDetails.getChildren().add(lbl_studentID);
          
         tf_studentID.setId("tf_studentID");
@@ -135,14 +139,16 @@ public class AdministratorDashboardController implements Initializable {
         
         update.setText("Update");
         vb_selectionDetails.getChildren().add(update);
-        Student student = new Student();
+        //create an on action event so the button knows what to do when pressed
         update.setOnAction((event) -> {
             StudentModel.updateStudent(Integer.parseInt(tf_studentID.getText()), tf_firstName.getText(),
                     tf_lastName.getText(), tf_email.getText());
             tbl_data.getColumns().clear();
-            populateTable();
+            populateStudentTable();
             System.out.println("Student updated");
         });
         
     }               
+
+
 }
