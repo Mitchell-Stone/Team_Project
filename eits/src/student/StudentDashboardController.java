@@ -19,9 +19,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
+import model.CoursesModel;
 import model.MainModel;
 import model.StudentModel;
 import model.UserAccessModel;
@@ -77,6 +81,8 @@ public class StudentDashboardController implements Initializable {
     private Button confirmPassword;
     @FXML
     private TextField currentPassword;
+    @FXML
+    private TableView studentsTable;
     /**
      * Initializes the controller class.
      */
@@ -201,7 +207,38 @@ public class StudentDashboardController implements Initializable {
     }
 
     @FXML
-    private void openCourses(ActionEvent event) {
+    private void openCourses(ActionEvent event) throws Exception {
+        
+        studentsTable.getColumns().clear();
+        
+        TableColumn courseId = new TableColumn("ID");
+        TableColumn name = new TableColumn("Name");
+        TableColumn industry = new TableColumn("Industry");
+        TableColumn location = new TableColumn("Location");
+        TableColumn hours = new TableColumn("Hours");
+        TableColumn degree = new TableColumn("Degree");
+        
+        studentsTable.getColumns().addAll(courseId, name, industry, location, hours, degree);
+        
+        try {
+            
+            CoursesModel model = new CoursesModel();
+            
+            ObservableList<Courses> list = model.getAllCourses();
+           
+           courseId.setCellValueFactory(new PropertyValueFactory<Courses, String>("courseID"));
+           name.setCellValueFactory(new PropertyValueFactory<Courses, String>("name"));
+           industry.setCellValueFactory(new PropertyValueFactory<Courses, String>("industry")); 
+           location.setCellValueFactory(new PropertyValueFactory<Courses, String>("location")); 
+           hours.setCellValueFactory(new PropertyValueFactory<Courses, String>("numberOfHours")); 
+           degree.setCellValueFactory(new PropertyValueFactory<Courses, String>("finishingDegree")); 
+           
+           studentsTable.setItems(list);
+            
+        } catch(NullPointerException ex){
+            System.out.println("Null Pointer Exception");
+        } 
+        
     }
 
     @FXML

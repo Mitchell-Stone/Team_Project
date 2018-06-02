@@ -6,53 +6,13 @@
 package model;
 
 import beans.Courses;
-import db.DbType;
-import db.DbUtil;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 /**
  *
  * @author 0111005906
  */
 public class CoursesModel extends MainModel {
-    
-    //method to get all courses on the database
-    public ObservableList<Courses> getCourses(Courses bean) throws Exception{
-        ArrayList<Courses> coursesList = new ArrayList<>();
-        
-        ObservableList<Courses> obsList = FXCollections.observableList(coursesList);
-                
-        String sql = "SELECT * FROM $tablename";
-        String query = sql.replace("$tablename", bean.getTable());
-
-        ResultSet keys;
-
-        try(Connection conn = DbUtil.getConn(DbType.MYSQL);
-            PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            ){
-            keys = stmt.executeQuery();
-            
-            Courses course;
-            
-            while(keys.next()){
-                course = new Courses(keys.getInt("courseID"),keys.getString("name"),keys.getString("industry"),
-                                     keys.getString("location"), keys.getInt("numberOfHours"), keys.getInt("finishingDegree"));
-                coursesList.add(course);
-            }
-        }catch(SQLException ex) {
-                System.err.println(ex);
-                return null;
-        }
-
-    return obsList;
-    }
     
     //overloaded method to get course list by course ID in relation to student ID
     public ArrayList<Courses> getCourses(int studentID){
