@@ -5,6 +5,7 @@
  */
 package administrator;
 
+import beans.CaseWorker;
 import beans.Student;
 import beans.User;
 import java.net.URL;
@@ -59,33 +60,62 @@ public class AdministratorDashboardController implements Initializable {
         //Populate my profle when the window opens or make it so a seperate window opens
     }    
 
-    private void populateStudentTable(){
-        //create the columns needed in the table
-        TableColumn studentID = new TableColumn("Student ID");
-        TableColumn firstName = new TableColumn("First Name");
-        TableColumn lastName = new TableColumn("Last Name");
-        TableColumn email = new TableColumn("Email");
-        tbl_data.getColumns().addAll(studentID, firstName, lastName, email);
-        
-        //connect to the database and retrieve all students
-        try{
-            //Insantiate the main model
-            MainModel model = new MainModel();
-            //get all the students and put them in an observable list
-            ObservableList<Student> list = model.getAllStudents();
-            
-            //put the data in the appropriate columns
-            studentID.setCellValueFactory(new PropertyValueFactory<Student, String>("studentID"));
-            firstName.setCellValueFactory(new PropertyValueFactory<Student, String>("firstName"));
-            lastName.setCellValueFactory(new PropertyValueFactory<Student, String>("lastName"));
-            email.setCellValueFactory(new PropertyValueFactory<Student, String>("email"));
-            
-            //get the table and list the data
-            tbl_data.setItems(list);
+    private void populateTable(){
+        if (selectedTable == 1) {
+            //create the columns needed in the table
+            TableColumn studentID = new TableColumn("Student ID");
+            TableColumn firstName = new TableColumn("First Name");
+            TableColumn lastName = new TableColumn("Last Name");
+            TableColumn email = new TableColumn("Email");
+            tbl_data.getColumns().addAll(studentID, firstName, lastName, email);
+
+            //connect to the database and retrieve all students
+            try{
+                //Insantiate the main model
+                MainModel model = new MainModel();
+                //get all the students and put them in an observable list
+                ObservableList<Student> list = model.getAllStudents();
+
+                //put the data in the appropriate columns
+                studentID.setCellValueFactory(new PropertyValueFactory<Student, String>("studentID"));
+                firstName.setCellValueFactory(new PropertyValueFactory<Student, String>("firstName"));
+                lastName.setCellValueFactory(new PropertyValueFactory<Student, String>("lastName"));
+                email.setCellValueFactory(new PropertyValueFactory<Student, String>("email"));
+
+                //get the table and list the data
+                tbl_data.setItems(list);
+            }
+            catch(SQLException ex){
+                System.out.println("DATABASE ERROR SQL EXCEPTION");
+            }
+        } else if (selectedTable == 2) {
+            //create the columns needed in the table
+            TableColumn employeeID = new TableColumn("Employee ID");
+            TableColumn firstName = new TableColumn("First Name");
+            TableColumn lastName = new TableColumn("Last Name");
+            TableColumn email = new TableColumn("Email");
+            tbl_data.getColumns().addAll(employeeID, firstName, lastName, email);
+
+            //connect to the database and retrieve all students
+            try{
+                //Insantiate the main model
+                MainModel model = new MainModel();
+                //get all the students and put them in an observable list
+                ObservableList<CaseWorker> list = model.getAllCaseWorkers();
+
+                //put the data in the appropriate columns
+                employeeID.setCellValueFactory(new PropertyValueFactory<CaseWorker, String>("employeeID"));
+                firstName.setCellValueFactory(new PropertyValueFactory<CaseWorker, String>("firstName"));
+                lastName.setCellValueFactory(new PropertyValueFactory<CaseWorker, String>("lastName"));
+                email.setCellValueFactory(new PropertyValueFactory<CaseWorker, String>("email"));
+
+                //get the table and list the data
+                tbl_data.setItems(list);
+            }
+            catch(SQLException ex){
+                System.out.println("DATABASE ERROR SQL EXCEPTION");
+            }
         }
-        catch(SQLException ex){
-            System.out.println("DATABASE ERROR SQL EXCEPTION");
-        } 
     }
     
     @FXML
@@ -100,7 +130,7 @@ public class AdministratorDashboardController implements Initializable {
         tbl_data.getColumns().clear();
         
         //Show all the students
-        populateStudentTable();
+        populateTable();
     }
     
         @FXML

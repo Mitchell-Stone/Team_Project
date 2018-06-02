@@ -1,6 +1,7 @@
 
 package model;
 
+import beans.CaseWorker;
 import beans.Student;
 import beans.User;
 import db.DbType;
@@ -55,6 +56,11 @@ public class MainModel {
             }
         }  
         return studentList;
+    }
+    
+    public ObservableList<CaseWorker> getAllCaseWorkers() throws SQLException{
+        ObservableList<CaseWorker> caseWorkerList = FXCollections.observableArrayList();
+        return caseWorkerList;
     }
     
     public static ArrayList<String> getUserByID(User user) {
