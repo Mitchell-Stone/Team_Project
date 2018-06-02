@@ -61,17 +61,7 @@ public class AdministratorDashboardController implements Initializable {
         // TODO
     }    
 
-    private void addColumns(){
-        
-    }
-    
-    @FXML
-    private void showAllStudents(MouseEvent event) throws SQLException {
-        //create the selection details pane for student
-        createStudentDetails();
-        
-        tbl_data.getColumns().clear();
-
+    private void populateTable(){
         //create the columns needed in the table
         TableColumn studentID = new TableColumn("Student ID");
         TableColumn firstName = new TableColumn("First Name");
@@ -91,9 +81,19 @@ public class AdministratorDashboardController implements Initializable {
             
             tbl_data.setItems(list);
         }
-        catch(NullPointerException ex){
-            System.out.println("Null Pointer Exception");
+        catch(SQLException ex){
+            System.out.println("DATABASE ERROR");
         } 
+    }
+    
+    @FXML
+    private void showAllStudents(MouseEvent event) throws SQLException {
+        //create the selection details pane for student
+        createStudentDetails();
+        
+        tbl_data.getColumns().clear();
+        
+        populateTable();
     }
     
     @FXML
@@ -135,6 +135,8 @@ public class AdministratorDashboardController implements Initializable {
         update.setOnAction((event) -> {
             StudentModel.updateStudent(Integer.parseInt(tf_studentID.getText()), tf_firstName.getText(),
                     tf_lastName.getText(), tf_email.getText());
+            tbl_data.getColumns().clear();
+            populateTable();
             System.out.println("Student updated");
         });
         
