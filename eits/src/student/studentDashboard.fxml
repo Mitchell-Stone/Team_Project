@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="584.0" prefWidth="913.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="student.StudentDashboardController">
    <children>
@@ -65,5 +66,22 @@
          </children>
       </HBox>
       <TableView fx:id="studentsTable" layoutX="198.0" layoutY="83.0" prefHeight="449.0" prefWidth="571.0" />
+      <Pane fx:id="coursePane" layoutX="-1.0" layoutY="83.0" prefHeight="449.0" prefWidth="200.0" visible="false">
+         <children>
+            <Text layoutX="47.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course" wrappingWidth="105.00000056624413">
+               <font>
+                  <Font size="33.0" />
+               </font>
+            </Text>
+            <TextField fx:id="courseID" layoutX="25.0" layoutY="85.0" />
+            <TextField fx:id="courseName" layoutX="25.0" layoutY="121.0" />
+            <TextField fx:id="courseIndustry" layoutX="26.0" layoutY="154.0" />
+            <TextField fx:id="courseLocation" layoutX="26.0" layoutY="188.0" />
+            <TextField fx:id="courseHours" layoutX="25.0" layoutY="222.0" />
+            <TextField fx:id="courseDegree" layoutX="26.0" layoutY="259.0" />
+            <Button layoutX="26.0" layoutY="293.0" mnemonicParsing="false" onAction="#courseConfirm" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: red; -fx-text-fill: white;" text="Select" />
+            <Label layoutX="34.0" layoutY="333.0" prefHeight="60.0" prefWidth="132.0" textFill="#eb1414" />
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

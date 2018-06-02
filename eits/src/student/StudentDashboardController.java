@@ -23,6 +23,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import model.CoursesModel;
@@ -83,6 +84,18 @@ public class StudentDashboardController implements Initializable {
     private TextField currentPassword;
     @FXML
     private TableView studentsTable;
+    @FXML
+    private Pane coursePane;
+    @FXML
+    private TextField courseName;
+    @FXML
+    private TextField courseIndustry;
+    @FXML
+    private TextField courseLocation;
+    @FXML
+    private TextField courseHours;
+    @FXML
+    private TextField courseDegree;
     /**
      * Initializes the controller class.
      */
@@ -285,6 +298,10 @@ public class StudentDashboardController implements Initializable {
             
         }
         
+    }
+
+    @FXML
+    private void courseConfirm(ActionEvent event) {
     }
 
 }
