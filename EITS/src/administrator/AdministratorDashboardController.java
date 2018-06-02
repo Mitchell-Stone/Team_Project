@@ -6,6 +6,7 @@
 package administrator;
 
 import beans.Student;
+import beans.User;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -137,8 +138,15 @@ public class AdministratorDashboardController implements Initializable {
         vb_selectionDetails.getChildren().add(update);
         Student student = new Student();
         update.setOnAction((event) -> {
-            StudentModel.updateStudent(Integer.parseInt(tf_studentID.getText()), tf_firstName.getText(),
-                    tf_lastName.getText(), tf_email.getText());
+            
+            User user = new User();
+            
+            user.setFirstName(tf_firstName.getText());
+            user.setLastName(tf_lastName.getText());
+            user.setEmail(tf_email.getText());
+            user.setID(Integer.parseInt(tf_studentID.getText()));
+            
+            StudentModel.updateStudent(user);
             tbl_data.getColumns().clear();
             populateTable();
             System.out.println("Student updated");

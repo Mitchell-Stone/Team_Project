@@ -56,7 +56,7 @@ public class StudentModel extends MainModel {
         
     }
     
-    public static boolean updateStudent(int studentID, String firstName, String lastName, String email) {
+    public static boolean updateStudent(User bean) {
     
         String sql = "UPDATE student SET firstName = ?, lastName = ?, email = ? WHERE studentID = ?";
         
@@ -65,10 +65,10 @@ public class StudentModel extends MainModel {
                 PreparedStatement stmt = conn.prepareStatement(sql);
                 ) {
             
-            stmt.setString(1, firstName);
-            stmt.setString(2, lastName);
-            stmt.setString(3, email);
-            stmt.setInt(4, studentID);
+            stmt.setString(1, bean.getFirstName());
+            stmt.setString(2, bean.getLastName());
+            stmt.setString(3, bean.getEmail());
+            stmt.setInt(4, bean.getID());
             
             int affected = stmt.executeUpdate();
             
