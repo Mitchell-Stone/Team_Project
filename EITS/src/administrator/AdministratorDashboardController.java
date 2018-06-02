@@ -10,8 +10,6 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -23,6 +21,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import model.MainModel;
+import model.StudentModel;
 
 /**
  * FXML Controller class
@@ -62,6 +61,10 @@ public class AdministratorDashboardController implements Initializable {
         // TODO
     }    
 
+    private void addColumns(){
+        
+    }
+    
     @FXML
     private void showAllStudents(MouseEvent event) throws SQLException {
         //create the selection details pane for student
@@ -113,30 +116,27 @@ public class AdministratorDashboardController implements Initializable {
         
         vb_selectionDetails.getChildren().add(lbl_fName);
         
-        tf_studentID.setId("tf_firstName");
+        tf_firstName.setId("tf_firstName");
         vb_selectionDetails.getChildren().add(tf_firstName);
        
         vb_selectionDetails.getChildren().add(lbl_lName);
         
-        tf_studentID.setId("tf_lastName");
+        tf_lastName.setId("tf_lastName");
         vb_selectionDetails.getChildren().add(tf_lastName);
         
         vb_selectionDetails.getChildren().add(lbl_email);
         
-        tf_studentID.setId("tf_email");
+        tf_email.setId("tf_email");
         vb_selectionDetails.getChildren().add(tf_email);
         
         update.setText("Update");
         vb_selectionDetails.getChildren().add(update);
         Student student = new Student();
         update.setOnAction((event) -> {
-            updateStudent(Integer.parseInt(tf_studentID.getText()));
+            StudentModel.updateStudent(Integer.parseInt(tf_studentID.getText()), tf_firstName.getText(),
+                    tf_lastName.getText(), tf_email.getText());
+            System.out.println("Student updated");
         });
         
-    }
-
-    private void updateStudent(int studentID){
-        System.out.println(studentID);
-    }
-                
+    }               
 }
