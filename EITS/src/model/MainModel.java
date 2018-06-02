@@ -1,7 +1,6 @@
 
 package model;
 
-import beans.Courses;
 import beans.Student;
 import beans.User;
 import db.DbType;
@@ -46,38 +45,6 @@ public class MainModel {
             while (rs.next()) {
                 student = new Student(rs.getInt("studentID"),rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"));
                 studentList.add(student);
-            }            
-        } catch (SQLException e) {
-            System.out.println(e);
-            return null;
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-        }  
-        return studentList;
-    }
-    
-    public ObservableList<Courses> getAllCourses() throws SQLException{
-        
-        ObservableList<Courses> studentList = FXCollections.observableArrayList();
-        
-        ResultSet rs = null;
-
-        //execute query to get all students
-        String query = "SELECT * FROM courses";
-
-        try{
-            java.sql.Connection conn = DbUtil.getConn(DbType.MYSQL);
-            PreparedStatement stmt = conn.prepareStatement(query);           
-            
-            Courses course;
-            
-            rs = stmt.executeQuery(query);
-
-            while (rs.next()) {
-                course = new Courses(rs.getInt("courseID"),rs.getString("name"), rs.getString("industry"), rs.getString("location"), rs.getInt("numberOfHours"), rs.getInt("finishingDegree"));
-                studentList.add(course);
             }            
         } catch (SQLException e) {
             System.out.println(e);

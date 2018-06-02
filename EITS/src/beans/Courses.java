@@ -13,18 +13,19 @@ public class Courses {
  
     private int courseID;
     private String name;
+    private String industry;
     private String location;
     private int numberOfHours;
     private int finishingDegree;
     private String table;
 
-    public Courses(int courseID, String name, String location, String table, int numberOfHours, int finishingDegree) {
+    public Courses(int courseID, String name, String industry, String location, int numberOfHours, int finishingDegree) {
         this.courseID = courseID;
         this.name = name;
+        this.industry = industry;
         this.location = location;
         this.numberOfHours = numberOfHours;
         this.finishingDegree = finishingDegree;
-        this.table = table;
     }
 
     public Courses() {
@@ -77,5 +78,13 @@ public class Courses {
 
     public void setTable(String table) {
         this.table = table;
+    }
+
+    public String getIndustry() {
+        return industry;
+    }
+
+    public void setIndustry(String industry) {
+        this.industry = industry;
     }
 }
