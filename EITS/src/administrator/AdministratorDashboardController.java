@@ -36,7 +36,7 @@ public class AdministratorDashboardController implements Initializable {
     @FXML
     private VBox vb_selectionDetails;
     Label lbl_studentID = new Label("Student ID");
-    Label lbl_EmployeeID = new Label("Employee ID");
+    Label lbl_employeeID = new Label("Employee ID");
     TextField tf_studentID = new TextField();
     Label lbl_fName = new Label("First Name");
     TextField tf_firstName = new TextField();
@@ -46,6 +46,9 @@ public class AdministratorDashboardController implements Initializable {
     TextField tf_email = new TextField();
     Label lbl_phNumber = new Label("Phone Number");
     Button update = new Button();
+    
+    //selected values: Student = 1, case worker = 2, admin = 3
+    private int selectedTable = 0;
     
     /**
      * Initializes the controller class.
@@ -87,10 +90,13 @@ public class AdministratorDashboardController implements Initializable {
     
     @FXML
     private void showAllStudents(MouseEvent event) throws SQLException {
+        //set the selected table value to one for student
+        selectedTable = 1;
+        
         //create the selection details pane for student
         createStudentDetails();
         
-        //clear the table of any contents
+        //clear the table of its previous content
         tbl_data.getColumns().clear();
         
         //Show all the students
@@ -99,6 +105,16 @@ public class AdministratorDashboardController implements Initializable {
     
         @FXML
     private void showAllCaseWorkers(MouseEvent event) {
+        //set the selected table value to one for case worker
+        selectedTable = 2;
+        
+        //create the selection details pane for case worker
+        createCaseWorkerDetails();
+        
+        //clear the table of its previous content
+        tbl_data.getColumns().clear();
+        
+        //show all case workers
         
     }
     
@@ -154,9 +170,11 @@ public class AdministratorDashboardController implements Initializable {
             tbl_data.getColumns().clear();
             populateStudentTable();
             System.out.println("Student updated");
-        });
-        
+        });   
     }               
 
+    private void createCaseWorkerDetails(){
+        vb_selectionDetails.getChildren().add(lbl_employeeID);
+    }
 
 }
