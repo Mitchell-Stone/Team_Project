@@ -35,7 +35,9 @@ public class AdministratorDashboardController implements Initializable {
     @FXML
     private VBox vb_selectionDetails;
     @FXML
-    Label lbl_id = new Label("Student ID");
+    Label lbl_studentID = new Label("Student ID");
+    @FXML
+    Label lbl_EmployeeID = new Label("Employee ID");
     @FXML
     TextField tf_studentID = new TextField();
     @FXML
@@ -50,6 +52,8 @@ public class AdministratorDashboardController implements Initializable {
     Label lbl_email = new Label("Email");
     @FXML
     TextField tf_email = new TextField();
+    @FXML
+    Label lbl_phNumber = new Label("Phone Number");
     @FXML
     Button update = new Button();
     
@@ -109,7 +113,7 @@ public class AdministratorDashboardController implements Initializable {
   
     private void createStudentDetails(){
 
-        vb_selectionDetails.getChildren().add(lbl_id);
+        vb_selectionDetails.getChildren().add(lbl_studentID);
          
         tf_studentID.setId("tf_studentID");
         vb_selectionDetails.getChildren().add(tf_studentID);
