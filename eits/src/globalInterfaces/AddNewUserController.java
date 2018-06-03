@@ -77,12 +77,21 @@ public class AddNewUserController implements Initializable {
 
             MainModel.addNewUser(user);
 
-            Stage stage = (Stage) btn_addUser.getScene().getWindow();
+            openNewWindow(btn_addUser);
+        }
+    }  
+
+    @FXML
+    private void returnToDashboard(MouseEvent event) throws IOException {
+        openNewWindow(btn_returnToDashboard);
+    }
+    
+    private void openNewWindow(Button button) throws IOException{
+       Stage stage = (Stage) button.getScene().getWindow();
             Parent root = FXMLLoader.load(getClass().getResource(windowURL));
 
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-        }
-    }  
+    }
 }
