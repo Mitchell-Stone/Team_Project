@@ -123,6 +123,9 @@ public class AdministratorDashboardController implements Initializable {
         //set the selected table value to one for student
         selectedTable = 1;
         
+        //clear the vbox of its children ready for the new details
+        vb_selectionDetails.getChildren().clear();
+        
         //create the selection details pane for student
         createStudentDetails();
         
@@ -138,6 +141,9 @@ public class AdministratorDashboardController implements Initializable {
         //set the selected table value to one for case worker
         selectedTable = 2;
         
+        //clear the vbox of its children ready for the new details
+        vb_selectionDetails.getChildren().clear();
+        
         //create the selection details pane for case worker
         createCaseWorkerDetails();
         
@@ -145,7 +151,7 @@ public class AdministratorDashboardController implements Initializable {
         tbl_data.getColumns().clear();
         
         //show all case workers
-        
+        populateTable();
     }
     
     @FXML
@@ -198,7 +204,7 @@ public class AdministratorDashboardController implements Initializable {
             
             StudentModel.updateStudent(user);
             tbl_data.getColumns().clear();
-            populateStudentTable();
+            populateTable();
             System.out.println("Student updated");
         });   
     }               
