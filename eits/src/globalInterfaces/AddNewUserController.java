@@ -11,7 +11,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
@@ -22,6 +24,8 @@ public class AddNewUserController implements Initializable {
 
     @FXML
     private ComboBox cb_tableSelection;
+    @FXML
+    private Button btn_addUser;
 
     /**
      * Initializes the controller class.
@@ -38,5 +42,9 @@ public class AddNewUserController implements Initializable {
         cb_tableSelection.getItems().addAll(options);
          
     }    
+
+    @FXML
+    private void btn_addUser(MouseEvent event) {
+    }
     
 }

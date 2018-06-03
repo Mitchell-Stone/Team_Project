@@ -8,12 +8,16 @@ package administrator;
 import beans.CaseWorker;
 import beans.Student;
 import beans.User;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -22,6 +26,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import model.CaseWorkerModel;
 import model.MainModel;
 import model.StudentModel;
@@ -37,6 +42,9 @@ public class AdministratorDashboardController implements Initializable {
     private TableView tbl_data;
     @FXML
     private VBox vb_selectionDetails;
+    @FXML
+    private Button btn_addNewUser;
+    
     Label lbl_studentID = new Label("Student ID");
     Label lbl_employeeID = new Label("Employee ID");
     TextField tf_studentID = new TextField();
@@ -52,6 +60,8 @@ public class AdministratorDashboardController implements Initializable {
     
     //selected values: Student = 1, case worker = 2, admin = 3
     private int selectedTable = 0;
+    
+    private String windowURL = "/globalInterfaces/addNewUser.fxml";
     
     /**
      * Initializes the controller class.
@@ -272,4 +282,13 @@ public class AdministratorDashboardController implements Initializable {
         
     }
 
+    @FXML
+    private void addNewUser(MouseEvent event) throws IOException {
+        Stage stage = (Stage) btn_addNewUser.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource(windowURL));
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }
