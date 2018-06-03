@@ -15,10 +15,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -27,7 +24,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import model.CaseWorkerModel;
 import model.MainModel;
 import model.StudentModel;
@@ -45,6 +41,8 @@ public class AdministratorDashboardController implements Initializable {
     private VBox vb_selectionDetails;
     @FXML
     private Button btn_addNewUser;
+    @FXML
+    private Button btn_administrator;
     
     Label lbl_studentID = new Label("Student ID");
     Label lbl_employeeID = new Label("Employee ID");
@@ -282,7 +280,6 @@ public class AdministratorDashboardController implements Initializable {
             populateTable();
             System.out.println("Employee updated");
         });
-        
     }
 
     @FXML
