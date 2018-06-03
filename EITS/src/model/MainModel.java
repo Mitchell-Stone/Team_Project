@@ -59,6 +59,27 @@ public class MainModel {
         }
     }
     
+    public static boolean deleteSelection(User bean, String idType){
+        String sql = "DELETE * FROM $tablename WHERE $idType = ?";
+        
+        String query = sql.replace("$tablename", bean.getTable()).replace("$idType", idType);
+        
+        try(
+                Connection conn = DbUtil.getConn(DbType.MYSQL);
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                ) {
+            
+            stmt.setInt(1, bean.getID());
+            
+            int affected = stmt.executeUpdate();
+            
+            return affected == 1;
+            
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+    }
     
     public ObservableList<Student> getAllStudents() throws SQLException{
         
