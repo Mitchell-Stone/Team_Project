@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,6 +26,38 @@ public class MainModel {
         }
         return visibility;
     }
+    
+    public static boolean addNewUser(User bean) throws SQLException{
+    
+        String sql = "INSERT INTO $tablename (email, password, firstName, lastName) VALUES (?, ?, ?, ?)";
+        
+        String query = sql.replace("$tablename", bean.getTable());
+        
+        ResultSet keys = null;
+        
+        try{
+            Connection conn = DbUtil.getConn(DbType.MYSQL);
+            PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+        
+            stmt.setString(1, bean.getEmail());
+            stmt.setString(2, bean.getPassword());
+            stmt.setString(3, bean.getFirstName());
+            stmt.setString(4, bean.getLastName());
+            
+            int affected = stmt.executeUpdate();
+            
+            return affected == 1;
+        
+        } catch (SQLException e) {
+            System.err.println(e);
+            return false;
+        } finally {
+            if(keys != null) {
+                keys.close();
+            }
+        }
+    }
+    
     
     public ObservableList<Student> getAllStudents() throws SQLException{
         

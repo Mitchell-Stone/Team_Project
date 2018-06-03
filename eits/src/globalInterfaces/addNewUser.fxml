@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="701.0" prefWidth="508.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9.0.1" fx:controller="globalInterfaces.AddNewUserController">
+   <children>
+      <Label layoutX="136.0" layoutY="36.0" text="Add to Database">
+         <font>
+            <Font size="32.0" />
+         </font>
+      </Label>
+      <VBox layoutX="136.0" layoutY="146.0" prefHeight="307.0" prefWidth="237.0">
+         <children>
+            <Label text="Label" />
+            <ComboBox fx:id="cb_tableSelection" prefWidth="150.0" />
+            <Label text="id" />
+            <TextField />
+            <Label text="first name" />
+            <TextField />
+            <Label text="last name" />
+            <TextField />
+            <Label text="email" />
+            <TextField />
+            <Label text="password" />
+            <TextField />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

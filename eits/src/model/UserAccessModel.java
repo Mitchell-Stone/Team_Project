@@ -72,11 +72,7 @@ public class UserAccessModel extends MainModel  {
             
             int affected = stmt.executeUpdate();
             
-            if(affected == 1) {
-                return true;
-            } else {
-                return false;
-            }
+            return affected == 1;
         
         } catch (SQLException e) {
             System.err.println(e);

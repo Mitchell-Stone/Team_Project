@@ -212,7 +212,7 @@ public class AdministratorDashboardController implements Initializable {
         tf_email.setId("tf_email");
         vb_selectionDetails.getChildren().add(tf_email);
         
-        update.setText("Update");
+        update.setText("Update Student");
         vb_selectionDetails.getChildren().add(update);
         //create an on action event so the button knows what to do when pressed
         update.setOnAction((event) -> {
@@ -228,7 +228,7 @@ public class AdministratorDashboardController implements Initializable {
             tbl_data.getColumns().clear();
             populateTable();
             System.out.println("Student updated");
-        });   
+        });
     }               
 
     private void createCaseWorkerDetails(){
@@ -252,7 +252,7 @@ public class AdministratorDashboardController implements Initializable {
         tf_email.setId("tf_email");
         vb_selectionDetails.getChildren().add(tf_email);
         
-        update.setText("Update");
+        update.setText("Update Case Worker");
         vb_selectionDetails.getChildren().add(update);
         //create an on action event so the button knows what to do when pressed
         update.setOnAction((event) -> {
