@@ -78,6 +78,9 @@ public class AdministratorDashboardController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         //Populate my profle when the window opens or make it so a seperate window opens
+        tbl_data.setVisible(false);
+        vb_selectionDetails.setVisible(false);
+        
     }    
 
     private void populateTable(){
@@ -165,6 +168,10 @@ public class AdministratorDashboardController implements Initializable {
     
     @FXML
     private void showAllStudents(MouseEvent event) throws SQLException {
+        //show the table
+        tbl_data.setVisible(true);
+        vb_selectionDetails.setVisible(true);
+        
         //set the selected table value to one for student
         userType = "student";
         
@@ -188,6 +195,9 @@ public class AdministratorDashboardController implements Initializable {
     
     @FXML
     private void showAllCaseWorkers(MouseEvent event) {
+        //show the table
+        tbl_data.setVisible(true);
+        vb_selectionDetails.setVisible(true);
         //set the selected table value to 2 for case workers
         userType = "caseWorker";
         
@@ -211,6 +221,10 @@ public class AdministratorDashboardController implements Initializable {
     
     @FXML
     private void showAllAdministrators(MouseEvent event) {
+        //show the table
+        tbl_data.setVisible(true);
+        vb_selectionDetails.setVisible(true);
+        
         //set the selected table value to 3 for admins
         userType = "admin";
         
@@ -391,12 +405,18 @@ public class AdministratorDashboardController implements Initializable {
     @FXML
     private void addNewUser(MouseEvent event) throws IOException {
         MainController main = new MainController();
-        main.openNewWindow(windowURL, btn_addNewUser);
+        main.openNewWindow(windowURL);
     }
 
     @FXML
     private void returnToLogin(MouseEvent event) throws IOException {
         MainController main = new MainController();
         main.openNewWindow(loginURL, btn_returnToLogin);
+    }
+
+    @FXML
+    private void btn_myProfile(MouseEvent event) {
+        tbl_data.setVisible(false);
+        vb_selectionDetails.setVisible(false);
     }
 }

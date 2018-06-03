@@ -82,5 +82,15 @@ public class MainController implements Initializable {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-    }  
+    }
+    
+    public void openNewWindow(String path) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
+        
+        Scene scene = new Scene(loader.load());
+        
+        Stage inputStage = new Stage();
+        inputStage.setScene(scene);
+        inputStage.showAndWait();
+    }
 }
