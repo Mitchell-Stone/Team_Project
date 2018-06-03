@@ -44,6 +44,8 @@ public class AdministratorDashboardController implements Initializable {
     private Button btn_addNewUser;
     @FXML
     private Button btn_administrator;
+    @FXML
+    private Button btn_returnToLogin;
     
     Label lbl_studentID = new Label("Student ID");
     Label lbl_employeeID = new Label("Employee ID");
@@ -64,6 +66,8 @@ public class AdministratorDashboardController implements Initializable {
     private String userType = null;
     
     private final String windowURL = "/globalInterfaces/addNewUser.fxml";
+    private final String loginURL = "/userAccess/userSignIn.fxml";
+    
     
     /**
      * Initializes the controller class.
@@ -390,5 +394,9 @@ public class AdministratorDashboardController implements Initializable {
         main.openNewWindow(windowURL, btn_addNewUser);
     }
 
-
+    @FXML
+    private void returnToLogin(MouseEvent event) throws IOException {
+        MainController main = new MainController();
+        main.openNewWindow(loginURL, btn_returnToLogin);
+    }
 }

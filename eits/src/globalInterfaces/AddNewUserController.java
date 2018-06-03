@@ -9,6 +9,7 @@ import beans.User;
 import controllers.MainController;
 import java.io.IOException;
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -25,6 +26,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import mainWindow.MainWindowController;
 import model.MainModel;
+import security.SecurityMethods;
 
 /**
  * FXML Controller class
@@ -66,7 +68,7 @@ public class AddNewUserController implements Initializable {
     }    
 
     @FXML
-    private void btn_addUser(MouseEvent event) throws SQLException, IOException {
+    private void btn_addUser(MouseEvent event) throws SQLException, IOException, NoSuchAlgorithmException {
         
         String table = cb_tableSelection.getSelectionModel().getSelectedItem().toString();
         if (table != null) {
@@ -75,7 +77,7 @@ public class AddNewUserController implements Initializable {
             user.setFirstName(tf_firstName.getText());
             user.setLastName(tf_lastName.getText());
             user.setEmail(tf_email.getText());
-            user.setPassword(tf_password.getText());
+            user.setPassword(SecurityMethods.getHash(tf_password.getText()));
 
             MainModel.addNewUser(user);
             MainController main = new MainController(); 

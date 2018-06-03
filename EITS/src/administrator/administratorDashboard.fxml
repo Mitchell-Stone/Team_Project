@@ -36,5 +36,6 @@
             </Label>
          </children>
       </VBox>
+      <Button fx:id="btn_returnToLogin" layoutX="1179.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#returnToLogin" prefHeight="28.0" prefWidth="106.0" text="Return To Login" />
    </children>
 </AnchorPane>
