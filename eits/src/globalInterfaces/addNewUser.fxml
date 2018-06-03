@@ -28,7 +28,7 @@
             <Label text="password" />
             <TextField fx:id="tf_password" />
             <Button fx:id="btn_addUser" mnemonicParsing="false" onMouseClicked="#btn_addUser" prefHeight="36.0" prefWidth="145.0" text="Add User" />
-            <Button fx:id="btn_returnToDashboard" mnemonicParsing="false" onMouseClicked="#returnToDashboard" prefHeight="36.0" prefWidth="146.0" text="Return to Dashboard" />
+            <Button fx:id="btn_cancel" mnemonicParsing="false" onMouseClicked="#cancel" prefHeight="36.0" prefWidth="146.0" text="Cancel" />
          </children>
       </VBox>
    </children>

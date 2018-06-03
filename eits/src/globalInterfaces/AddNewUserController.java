@@ -17,6 +17,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -49,8 +50,9 @@ public class AddNewUserController implements Initializable {
     private TextField tf_password;
 
     private String windowURL = "/administrator/administratorDashboard.fxml";
-    @FXML
     private Button btn_returnToDashboard;
+    @FXML
+    private Button btn_cancel;
     
     /**
      * Initializes the controller class.
@@ -80,14 +82,13 @@ public class AddNewUserController implements Initializable {
             user.setPassword(SecurityMethods.getHash(tf_password.getText()));
 
             MainModel.addNewUser(user);
-            MainController main = new MainController(); 
-            main.openNewWindow(windowURL, btn_addUser);
+            ((Node)(event.getSource())).getScene().getWindow().hide();
         }
     }  
 
+
     @FXML
-    private void returnToDashboard(MouseEvent event) throws IOException {
-        MainController main = new MainController();
-        main.openNewWindow(windowURL, btn_returnToDashboard);
+    private void cancel(MouseEvent event) throws IOException {
+        ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 }
