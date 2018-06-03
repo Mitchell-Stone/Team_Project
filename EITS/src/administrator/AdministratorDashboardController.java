@@ -22,6 +22,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import model.CaseWorkerModel;
 import model.MainModel;
 import model.StudentModel;
 
@@ -39,6 +40,7 @@ public class AdministratorDashboardController implements Initializable {
     Label lbl_studentID = new Label("Student ID");
     Label lbl_employeeID = new Label("Employee ID");
     TextField tf_studentID = new TextField();
+    TextField tf_employeeID = new TextField();
     Label lbl_fName = new Label("First Name");
     TextField tf_firstName = new TextField();
     Label lbl_lName = new Label("Last Name");
@@ -123,8 +125,13 @@ public class AdministratorDashboardController implements Initializable {
         //set the selected table value to one for student
         selectedTable = 1;
         
-        //clear the vbox of its children ready for the new details
+        //clear the vbox of its children ready for the new details and set the
+        //text fields with the same name to be empty
         vb_selectionDetails.getChildren().clear();
+        tf_studentID.setText("");
+        tf_email.setText("");
+        tf_firstName.setText("");
+        tf_lastName.setText("");
         
         //create the selection details pane for student
         createStudentDetails();
@@ -136,13 +143,18 @@ public class AdministratorDashboardController implements Initializable {
         populateTable();
     }
     
-        @FXML
+    @FXML
     private void showAllCaseWorkers(MouseEvent event) {
         //set the selected table value to one for case worker
         selectedTable = 2;
         
-        //clear the vbox of its children ready for the new details
+        //clear the vbox of its children ready for the new details and set the
+        //text fields with the same name to be empty
         vb_selectionDetails.getChildren().clear();
+        tf_employeeID.setText("");
+        tf_email.setText("");
+        tf_firstName.setText("");
+        tf_lastName.setText("");
         
         //create the selection details pane for case worker
         createCaseWorkerDetails();
@@ -156,15 +168,25 @@ public class AdministratorDashboardController implements Initializable {
     
     @FXML
     private void selectItem(MouseEvent event) {
-        //When an item is selected in the table get all the data for that item
-        Student student = (Student) tbl_data.getSelectionModel().getSelectedItem();
-        
-        //set the text fields to show the selected item to allow for changes
-        tf_studentID.setText(Integer.toString(student.getStudentID()));      
-        tf_firstName.setText(student.getFirstName());
-        tf_lastName.setText(student.getLastName());
-        tf_email.setText(student.getEmail());
-        
+        if (selectedTable == 1) {
+            //When an item is selected in the table get all the data for that item
+            Student student = (Student) tbl_data.getSelectionModel().getSelectedItem();
+
+            //set the text fields to show the selected item to allow for changes
+            tf_studentID.setText(Integer.toString(student.getStudentID()));      
+            tf_firstName.setText(student.getFirstName());
+            tf_lastName.setText(student.getLastName());
+            tf_email.setText(student.getEmail());
+        } else if (selectedTable == 2) {
+            //When an item is selected in the table get all the data for that item
+            CaseWorker caseWorker = (CaseWorker) tbl_data.getSelectionModel().getSelectedItem();
+
+            //set the text fields to show the selected item to allow for changes
+            tf_employeeID.setText(Integer.toString(caseWorker.getEmployeeID()));      
+            tf_firstName.setText(caseWorker.getFirstName());
+            tf_lastName.setText(caseWorker.getLastName());
+            tf_email.setText(caseWorker.getEmail());
+        }  
     }
   
     private void createStudentDetails(){
@@ -211,6 +233,43 @@ public class AdministratorDashboardController implements Initializable {
 
     private void createCaseWorkerDetails(){
         vb_selectionDetails.getChildren().add(lbl_employeeID);
+        
+        tf_employeeID.setId("tf_employeeID");
+        vb_selectionDetails.getChildren().add(tf_employeeID);
+        
+        vb_selectionDetails.getChildren().add(lbl_fName);
+        
+        tf_firstName.setId("tf_firstName");
+        vb_selectionDetails.getChildren().add(tf_firstName);
+       
+        vb_selectionDetails.getChildren().add(lbl_lName);
+        
+        tf_lastName.setId("tf_lastName");
+        vb_selectionDetails.getChildren().add(tf_lastName);
+        
+        vb_selectionDetails.getChildren().add(lbl_email);
+        
+        tf_email.setId("tf_email");
+        vb_selectionDetails.getChildren().add(tf_email);
+        
+        update.setText("Update");
+        vb_selectionDetails.getChildren().add(update);
+        //create an on action event so the button knows what to do when pressed
+        update.setOnAction((event) -> {
+            
+            CaseWorker caseWorker = new CaseWorker();
+            
+            caseWorker.setFirstName(tf_firstName.getText());
+            caseWorker.setLastName(tf_lastName.getText());
+            caseWorker.setEmail(tf_email.getText());
+            caseWorker.setEmployeeID(Integer.parseInt(tf_employeeID.getText()));
+            
+            CaseWorkerModel.updateCaseWorker(caseWorker);
+            tbl_data.getColumns().clear();
+            populateTable();
+            System.out.println("Employee updated");
+        });
+        
     }
 
 }

@@ -149,8 +149,7 @@ public class StudentDashboardController implements Initializable {
         firstName.setDisable(false);
         lastName.setDisable(false);
         email.setDisable(false);
-        confirm.setVisible(true);
-        
+        confirm.setVisible(true);   
     }
     
     @FXML
@@ -188,8 +187,7 @@ public class StudentDashboardController implements Initializable {
             } else {
                 errorOutput1.setText("The current password appears to be wrong.");
             }
-        }
-        
+        }    
     }
 
     @FXML
@@ -216,7 +214,6 @@ public class StudentDashboardController implements Initializable {
             } else {
                 studentInfoPane.setVisible(false);
             }
-        
     }
 
     @FXML
@@ -250,8 +247,7 @@ public class StudentDashboardController implements Initializable {
             
         } catch(NullPointerException ex){
             System.out.println("Null Pointer Exception");
-        } 
-        
+        }  
     }
 
     @FXML
@@ -294,10 +290,8 @@ public class StudentDashboardController implements Initializable {
 
             } else {
                 errorOutput.setText("Error. Please try again.");
-            }
-            
-        }
-        
+            }         
+        } 
     }
 
     @FXML

@@ -72,11 +72,7 @@ public class StudentModel extends MainModel {
             
             int affected = stmt.executeUpdate();
             
-            if (affected == 1) {
-                return true;
-            } else {
-                return false;
-            }
+            return affected == 1;
             
         } catch (Exception e) {
             System.out.println(e);
