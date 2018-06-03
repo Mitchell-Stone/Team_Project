@@ -331,7 +331,7 @@ public class AdministratorDashboardController implements Initializable {
         
         btn_delete.setText("Delete Student");
         vb_selectionDetails.getChildren().add(btn_delete);
-        btn_update.setOnAction((event) ->{
+        btn_delete.setOnAction((event) ->{
         
             User user = new User();
             user.setTable("student");

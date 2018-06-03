@@ -66,7 +66,7 @@ public class MainModel {
         
         try(
                 Connection conn = DbUtil.getConn(DbType.MYSQL);
-                PreparedStatement stmt = conn.prepareStatement(sql);
+                PreparedStatement stmt = conn.prepareStatement(query);
                 ) {
             
             stmt.setInt(1, bean.getID());
