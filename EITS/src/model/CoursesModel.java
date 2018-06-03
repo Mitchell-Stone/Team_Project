@@ -8,9 +8,11 @@ package model;
 import beans.Courses;
 import db.DbType;
 import db.DbUtil;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -21,20 +23,38 @@ import javafx.collections.ObservableList;
  */
 public class CoursesModel extends MainModel {
     
-    //overloaded method to get course list by course ID in relation to student ID
-    public ArrayList<Courses> getCourses(int studentID){
-        ArrayList<Courses> coursesList = new ArrayList<>();
-
-
-        //execute the SQL query here
+    public static boolean assignCourse(int studentID, int courseID) throws SQLException {
+    
+        String sql = "UPDATE student SET courseID = ? WHERE studentID = ?";
         
-        //This will look at the joining table for student and courses as you can have many courses to one student.
+        ResultSet keys = null;
         
-
-
-
-        return coursesList;
-    }
+        try(
+                Connection conn = DbUtil.getConn(DbType.MYSQL);
+                PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                ) {
+        
+            stmt.setInt(1, courseID);
+            stmt.setInt(2, studentID);
+            
+            int affected = stmt.executeUpdate();
+            
+            if (affected == 1) {
+                return true;
+            } else {
+                return false;
+            }
+        
+        } catch (SQLException e) {
+            System.err.println(e);
+            return false;
+        } finally {
+            if(keys != null) {
+                keys.close();
+            }
+        }
+    
+    }  
     
     public ObservableList<Courses> getAllCourses() throws SQLException{
         

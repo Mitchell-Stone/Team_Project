@@ -10,6 +10,7 @@ import beans.Student;
 import beans.User;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -96,6 +97,10 @@ public class StudentDashboardController implements Initializable {
     private TextField courseHours;
     @FXML
     private TextField courseDegree;
+    @FXML
+    private Label courseError;
+    @FXML
+    private TextField courseId;
     /**
      * Initializes the controller class.
      */
@@ -126,8 +131,6 @@ public class StudentDashboardController implements Initializable {
         
         ID = student.getID();
         
-        System.out.println(ID);
-        
         user.setTable("student");
         user.setColumn("studentID");
         user.setID(ID);
@@ -136,10 +139,7 @@ public class StudentDashboardController implements Initializable {
 
         System.out.println(currentUser);
         
-        studentID.setText(Integer.toString(ID));
-        firstName.setText(currentUser.get(0));
-        lastName.setText(currentUser.get(1));
-        email.setText(currentUser.get(2));
+        
         
     }   
 
@@ -206,14 +206,17 @@ public class StudentDashboardController implements Initializable {
     private void openStudentInfo(ActionEvent event) {
         
         passwordPane.setVisible(false);
+        coursePane.setVisible(false);
+        studentInfoPane.setVisible(true);
         
-        visible = MainModel.openClose(visible);
-
-            if (visible) {
-                studentInfoPane.setVisible(true);
-            } else {
-                studentInfoPane.setVisible(false);
-            }
+        currentUser = MainModel.getUserByID(user);
+        
+        studentID.setText(currentUser.get(0));
+        firstName.setText(currentUser.get(3));
+        lastName.setText(currentUser.get(4));
+        email.setText(currentUser.get(5));
+        courseId.setText(currentUser.get(1));
+        
     }
 
     @FXML
@@ -252,15 +255,17 @@ public class StudentDashboardController implements Initializable {
 
     @FXML
     private void openAssessments(ActionEvent event) {
+        
+        passwordPane.setVisible(false);
+        coursePane.setVisible(false);
+        studentInfoPane.setVisible(false);
+        
+        studentsTable.getColumns().clear();
+        
+        
+        
     }
 
-    @FXML
-    private void openGrades(ActionEvent event) {
-    }
-
-    @FXML
-    private void openOther(ActionEvent event) {
-    }
 
     @FXML
     private void actionUpdateConfirm(ActionEvent event) {
@@ -295,7 +300,43 @@ public class StudentDashboardController implements Initializable {
     }
 
     @FXML
-    private void courseConfirm(ActionEvent event) {
+    private void courseConfirm(ActionEvent event) throws SQLException {
+        
+        boolean completed = CoursesModel.assignCourse(ID, Integer.parseInt(courseID.getText()));
+        
+        if (completed) {
+            courseError.setTextFill(Paint.valueOf("green"));
+            courseError.setText("Success!");
+        } else {
+            courseError.setText("There was a mistake");
+        }
+        
+    }
+
+    @FXML
+    private void selectTableItem(MouseEvent event) {
+        
+        studentInfoPane.setVisible(false);
+        passwordPane.setVisible(false);
+        coursePane.setVisible(true);
+        
+        Courses course = (Courses) studentsTable.getSelectionModel().getSelectedItem();
+        
+        courseID.setText(Integer.toString(course.getCourseID()));
+        courseName.setText(course.getName());
+        courseIndustry.setText(course.getIndustry());
+        courseLocation.setText(course.getLocation());
+        courseHours.setText(Integer.toString(course.getNumberOfHours()));
+        courseDegree.setText(Integer.toString(course.getFinishingDegree()));
+        
+    }
+
+    @FXML
+    private void openIndustry(ActionEvent event) {
+    }
+
+    @FXML
+    private void logout(ActionEvent event) {
     }
 
 }

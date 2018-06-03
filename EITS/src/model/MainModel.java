@@ -196,14 +196,17 @@ public class MainModel {
             
             if (rs.next()) {
                 
+                currentUser.add(Integer.toString(rs.getInt("studentID")));
+                currentUser.add(Integer.toString(rs.getInt("courseID")));
+                currentUser.add(Integer.toString(rs.getInt("employeeID")));
                 currentUser.add(rs.getString("firstName"));
                 currentUser.add(rs.getString("lastName"));
                 currentUser.add(rs.getString("email"));
                 currentUser.add(rs.getString("password"));
-                //currentUser.add(rs.getString("industryPreference"));
-                //currentUser.add(rs.getString("visitCount"));
-                //currentUser.add(rs.getString("averageGrade"));
-                //currentUser.add(rs.getString("assessmentsPassed"));
+                currentUser.add(rs.getString("industryPreference"));
+                currentUser.add(rs.getString("visitCount"));
+                currentUser.add(rs.getString("averageGrade"));
+                currentUser.add(rs.getString("assessmentsPassed"));
                 
                 return currentUser;
                 
