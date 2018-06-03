@@ -8,6 +8,7 @@ package administrator;
 import beans.CaseWorker;
 import beans.Student;
 import beans.User;
+import controllers.MainController;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -56,15 +57,17 @@ public class AdministratorDashboardController implements Initializable {
     Label lbl_email = new Label("Email");
     TextField tf_email = new TextField();
     Label lbl_phNumber = new Label("Phone Number");
-    Button update = new Button();
+    Button btn_update = new Button();
     
     //selected values: Student = 1, case worker = 2, admin = 3
     private int selectedTable = 0;
     
-    private String windowURL = "/globalInterfaces/addNewUser.fxml";
+    private final String windowURL = "/globalInterfaces/addNewUser.fxml";
     
     /**
      * Initializes the controller class.
+     * @param rb
+     * @param url
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -222,10 +225,10 @@ public class AdministratorDashboardController implements Initializable {
         tf_email.setId("tf_email");
         vb_selectionDetails.getChildren().add(tf_email);
         
-        update.setText("Update Student");
-        vb_selectionDetails.getChildren().add(update);
+        btn_update.setText("Update Student");
+        vb_selectionDetails.getChildren().add(btn_update);
         //create an on action event so the button knows what to do when pressed
-        update.setOnAction((event) -> {
+        btn_update.setOnAction((event) -> {
             
             User user = new User();
             
@@ -262,10 +265,10 @@ public class AdministratorDashboardController implements Initializable {
         tf_email.setId("tf_email");
         vb_selectionDetails.getChildren().add(tf_email);
         
-        update.setText("Update Case Worker");
-        vb_selectionDetails.getChildren().add(update);
+        btn_update.setText("Update Case Worker");
+        vb_selectionDetails.getChildren().add(btn_update);
         //create an on action event so the button knows what to do when pressed
-        update.setOnAction((event) -> {
+        btn_update.setOnAction((event) -> {
             
             CaseWorker caseWorker = new CaseWorker();
             
@@ -284,11 +287,7 @@ public class AdministratorDashboardController implements Initializable {
 
     @FXML
     private void addNewUser(MouseEvent event) throws IOException {
-        Stage stage = (Stage) btn_addNewUser.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource(windowURL));
-
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        MainController main = new MainController();
+        main.openNewWindow(windowURL, btn_addNewUser);
     }
 }

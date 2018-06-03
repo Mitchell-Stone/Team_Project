@@ -14,8 +14,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -67,9 +70,17 @@ public class MainController implements Initializable {
         }
         
         mainpane.setCenter(root);
-    
     }
     
+    // Look at getting this working to be a global open new window function
     
-    
+    public void openNewWindow(String path, Button button) throws IOException{
+        //closes current window and opens new one            
+        Stage stage = (Stage) button.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource(path));
+
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }  
 }

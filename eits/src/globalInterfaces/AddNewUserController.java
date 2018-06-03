@@ -6,6 +6,7 @@
 package globalInterfaces;
 
 import beans.User;
+import controllers.MainController;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -22,6 +23,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import mainWindow.MainWindowController;
 import model.MainModel;
 
 /**
@@ -76,22 +78,14 @@ public class AddNewUserController implements Initializable {
             user.setPassword(tf_password.getText());
 
             MainModel.addNewUser(user);
-
-            openNewWindow(btn_addUser);
+            MainController main = new MainController(); 
+            main.openNewWindow(windowURL, btn_addUser);
         }
     }  
 
     @FXML
     private void returnToDashboard(MouseEvent event) throws IOException {
-        openNewWindow(btn_returnToDashboard);
-    }
-    
-    private void openNewWindow(Button button) throws IOException{
-       Stage stage = (Stage) button.getScene().getWindow();
-            Parent root = FXMLLoader.load(getClass().getResource(windowURL));
-
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+        MainController main = new MainController();
+        main.openNewWindow(windowURL, btn_returnToDashboard);
     }
 }

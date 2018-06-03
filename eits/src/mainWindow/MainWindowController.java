@@ -90,21 +90,4 @@ public class MainWindowController implements Initializable {
         }
         mainpane.setCenter(root);
     }
-    
-   /* Look at getting this working to be a global open new window function
-    
-    public void openNewWindow(String path, Button button){
-    try {
-            //closes current window and opens new one
-            
-            Stage stage = (Stage) button.getScene().getWindow();
-            Parent root = FXMLLoader.load(getClass().getResource(path));
-            
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException ex) {
-            Logger.getLogger(UserAccessController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    } */
 }
