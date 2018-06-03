@@ -15,19 +15,20 @@
             <Font size="32.0" />
          </font>
       </Label>
-      <VBox layoutX="136.0" layoutY="146.0" prefHeight="361.0" prefWidth="237.0" spacing="10.0">
+      <VBox layoutX="136.0" layoutY="146.0" prefHeight="401.0" prefWidth="237.0" spacing="10.0">
          <children>
             <Label text="Label" />
-            <ComboBox fx:id="cb_tableSelection" prefWidth="150.0" />
+            <ComboBox fx:id="cb_tableSelection" prefWidth="150.0" promptText="Select User Type" />
             <Label text="first name" />
-            <TextField />
+            <TextField fx:id="tf_firstName" />
             <Label text="last name" />
-            <TextField />
+            <TextField fx:id="tf_lastName" />
             <Label text="email" />
-            <TextField />
+            <TextField fx:id="tf_email" />
             <Label text="password" />
-            <TextField />
-            <Button fx:id="btn_addUser" mnemonicParsing="false" onMouseClicked="#btn_addUser" prefHeight="36.0" prefWidth="111.0" text="Add User" />
+            <TextField fx:id="tf_password" />
+            <Button fx:id="btn_addUser" mnemonicParsing="false" onMouseClicked="#btn_addUser" prefHeight="36.0" prefWidth="145.0" text="Add User" />
+            <Button fx:id="btn_returnToDashboard" mnemonicParsing="false" prefHeight="36.0" prefWidth="146.0" text="Return to Dashboard" />
          </children>
       </VBox>
    </children>
