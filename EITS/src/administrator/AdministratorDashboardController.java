@@ -5,6 +5,7 @@
  */
 package administrator;
 
+import beans.Administrator;
 import beans.CaseWorker;
 import beans.Student;
 import beans.User;
@@ -46,8 +47,10 @@ public class AdministratorDashboardController implements Initializable {
     
     Label lbl_studentID = new Label("Student ID");
     Label lbl_employeeID = new Label("Employee ID");
+    Label lbl_adminID = new Label("Admin ID");
     TextField tf_studentID = new TextField();
     TextField tf_employeeID = new TextField();
+    TextField tf_adminID = new TextField();
     Label lbl_fName = new Label("First Name");
     TextField tf_firstName = new TextField();
     Label lbl_lName = new Label("Last Name");
@@ -58,7 +61,7 @@ public class AdministratorDashboardController implements Initializable {
     Button btn_update = new Button();
     
     //selected values: Student = 1, case worker = 2, admin = 3
-    private int selectedTable = 0;
+    private String userType = null;
     
     private final String windowURL = "/globalInterfaces/addNewUser.fxml";
     
@@ -74,7 +77,7 @@ public class AdministratorDashboardController implements Initializable {
     }    
 
     private void populateTable(){
-        if (selectedTable == 1) {
+        if (userType == "student") {
             //create the columns needed in the table
             TableColumn studentID = new TableColumn("Student ID");
             TableColumn firstName = new TableColumn("First Name");
@@ -101,7 +104,7 @@ public class AdministratorDashboardController implements Initializable {
             catch(SQLException ex){
                 System.out.println("DATABASE ERROR SQL EXCEPTION");
             }
-        } else if (selectedTable == 2) {
+        } else if (userType == "caseWorker") {
             //create the columns needed in the table
             TableColumn employeeID = new TableColumn("Employee ID");
             TableColumn firstName = new TableColumn("First Name");
@@ -124,8 +127,33 @@ public class AdministratorDashboardController implements Initializable {
 
                 //get the table and list the data
                 tbl_data.setItems(list);
+            }catch(SQLException ex){
+                System.out.println("DATABASE ERROR SQL EXCEPTION");
             }
-            catch(SQLException ex){
+        } else if (userType == "admin") {
+            //create the columns needed in the table
+            TableColumn adminID = new TableColumn("Administrator ID");
+            TableColumn firstName = new TableColumn("First Name");
+            TableColumn lastName = new TableColumn("Last Name");
+            TableColumn email = new TableColumn("Email");
+            tbl_data.getColumns().addAll(adminID, firstName, lastName, email);
+
+            //connect to the database and retrieve all students
+            try{
+                //Insantiate the main model
+                MainModel model = new MainModel();
+                //get all the students and put them in an observable list
+                ObservableList<Administrator> list = model.getAllAdministrators();
+
+                //put the data in the appropriate columns
+                adminID.setCellValueFactory(new PropertyValueFactory<Administrator, String>("adminID"));
+                firstName.setCellValueFactory(new PropertyValueFactory<Administrator, String>("firstName"));
+                lastName.setCellValueFactory(new PropertyValueFactory<Administrator, String>("lastName"));
+                email.setCellValueFactory(new PropertyValueFactory<Administrator, String>("email"));
+
+                //get the table and list the data
+                tbl_data.setItems(list);
+            }catch(SQLException ex){
                 System.out.println("DATABASE ERROR SQL EXCEPTION");
             }
         }
@@ -134,7 +162,7 @@ public class AdministratorDashboardController implements Initializable {
     @FXML
     private void showAllStudents(MouseEvent event) throws SQLException {
         //set the selected table value to one for student
-        selectedTable = 1;
+        userType = "student";
         
         //clear the vbox of its children ready for the new details and set the
         //text fields with the same name to be empty
@@ -156,8 +184,8 @@ public class AdministratorDashboardController implements Initializable {
     
     @FXML
     private void showAllCaseWorkers(MouseEvent event) {
-        //set the selected table value to one for case worker
-        selectedTable = 2;
+        //set the selected table value to 2 for case workers
+        userType = "caseWorker";
         
         //clear the vbox of its children ready for the new details and set the
         //text fields with the same name to be empty
@@ -178,26 +206,61 @@ public class AdministratorDashboardController implements Initializable {
     }
     
     @FXML
+    private void showAllAdministrators(MouseEvent event) {
+        //set the selected table value to 3 for admins
+        userType = "admin";
+        
+        //clear the vbox of its children ready for the new details and set the
+        //text fields with the same name to be empty
+        vb_selectionDetails.getChildren().clear();
+        tf_employeeID.setText("");
+        tf_email.setText("");
+        tf_firstName.setText("");
+        tf_lastName.setText("");
+        
+        //create the selection details pane for case worker
+        createAdministratorDetails();
+        
+        //clear the table of its previous content
+        tbl_data.getColumns().clear();
+        
+        //show all case workers
+        populateTable();
+    }
+    
+    @FXML
     private void selectItem(MouseEvent event) {
-        if (selectedTable == 1) {
-            //When an item is selected in the table get all the data for that item
-            Student student = (Student) tbl_data.getSelectionModel().getSelectedItem();
-
-            //set the text fields to show the selected item to allow for changes
-            tf_studentID.setText(Integer.toString(student.getStudentID()));      
-            tf_firstName.setText(student.getFirstName());
-            tf_lastName.setText(student.getLastName());
-            tf_email.setText(student.getEmail());
-        } else if (selectedTable == 2) {
-            //When an item is selected in the table get all the data for that item
-            CaseWorker caseWorker = (CaseWorker) tbl_data.getSelectionModel().getSelectedItem();
-
-            //set the text fields to show the selected item to allow for changes
-            tf_employeeID.setText(Integer.toString(caseWorker.getEmployeeID()));      
-            tf_firstName.setText(caseWorker.getFirstName());
-            tf_lastName.setText(caseWorker.getLastName());
-            tf_email.setText(caseWorker.getEmail());
-        }  
+        switch (userType) {
+            case "student":
+                //When an item is selected in the table get all the data for that item
+                Student student = (Student) tbl_data.getSelectionModel().getSelectedItem();
+                //set the text fields to show the selected item to allow for changes
+                tf_studentID.setText(Integer.toString(student.getStudentID()));
+                tf_firstName.setText(student.getFirstName());
+                tf_lastName.setText(student.getLastName());
+                tf_email.setText(student.getEmail());
+                break;
+            case "caseWorker":
+                //When an item is selected in the table get all the data for that item
+                CaseWorker caseWorker = (CaseWorker) tbl_data.getSelectionModel().getSelectedItem();
+                //set the text fields to show the selected item to allow for changes
+                tf_employeeID.setText(Integer.toString(caseWorker.getEmployeeID()));
+                tf_firstName.setText(caseWorker.getFirstName());
+                tf_lastName.setText(caseWorker.getLastName());
+                tf_email.setText(caseWorker.getEmail());
+                break;
+            case "admin":
+                //When an item is selected in the table get all the data for that item
+                Administrator admin = (Administrator) tbl_data.getSelectionModel().getSelectedItem();
+                //set the text fields to show the selected item to allow for changes
+                tf_employeeID.setText(Integer.toString(admin.getAdminID()));
+                tf_firstName.setText(admin.getFirstName());
+                tf_lastName.setText(admin.getLastName()); 
+                tf_email.setText(admin.getEmail());
+                break;
+            default:
+                break;
+        }
     }
   
     private void createStudentDetails(){
@@ -281,10 +344,51 @@ public class AdministratorDashboardController implements Initializable {
             System.out.println("Employee updated");
         });
     }
+    
+    private void createAdministratorDetails(){
+        vb_selectionDetails.getChildren().add(lbl_adminID);
+        
+        tf_employeeID.setId("tf_adminID");
+        vb_selectionDetails.getChildren().add(tf_employeeID);
+        
+        vb_selectionDetails.getChildren().add(lbl_fName);
+        
+        tf_firstName.setId("tf_firstName");
+        vb_selectionDetails.getChildren().add(tf_firstName);
+       
+        vb_selectionDetails.getChildren().add(lbl_lName);
+        
+        tf_lastName.setId("tf_lastName");
+        vb_selectionDetails.getChildren().add(tf_lastName);
+        
+        vb_selectionDetails.getChildren().add(lbl_email);
+        
+        tf_email.setId("tf_email");
+        vb_selectionDetails.getChildren().add(tf_email);
+        
+        btn_update.setText("Update Administrator");
+        vb_selectionDetails.getChildren().add(btn_update);
+        //create an on action event so the button knows what to do when pressed
+        btn_update.setOnAction((event) -> {          
+            CaseWorker caseWorker = new CaseWorker();
+            
+            caseWorker.setFirstName(tf_firstName.getText());
+            caseWorker.setLastName(tf_lastName.getText());
+            caseWorker.setEmail(tf_email.getText());
+            caseWorker.setEmployeeID(Integer.parseInt(tf_employeeID.getText()));
+            
+            CaseWorkerModel.updateCaseWorker(caseWorker);
+            tbl_data.getColumns().clear();
+            populateTable();
+            System.out.println("Administrator updated");
+        });
+    }
 
     @FXML
     private void addNewUser(MouseEvent event) throws IOException {
         MainController main = new MainController();
         main.openNewWindow(windowURL, btn_addNewUser);
     }
+
+
 }

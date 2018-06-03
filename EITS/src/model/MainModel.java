@@ -1,6 +1,7 @@
 
 package model;
 
+import beans.Administrator;
 import beans.CaseWorker;
 import beans.Student;
 import beans.User;
@@ -120,6 +121,37 @@ public class MainModel {
             }
         }  
         return caseWorkerList;
+    }
+    
+    public ObservableList<Administrator> getAllAdministrators() throws SQLException{
+        ObservableList<Administrator> administratorList = FXCollections.observableArrayList();
+        
+        ResultSet rs = null;
+
+        //execute query to get all case workers
+        String query = "SELECT * FROM admin";
+
+        try{
+            java.sql.Connection conn = DbUtil.getConn(DbType.MYSQL);
+            PreparedStatement stmt = conn.prepareStatement(query);           
+            
+            Administrator admin;
+            
+            rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                admin = new Administrator(rs.getInt("adminID"),rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"));
+                administratorList.add(admin);
+            }            
+        } catch (SQLException e) {
+            System.out.println(e);
+            return null;
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+        }  
+        return administratorList;
     }
     
     public static ArrayList<String> getUserByID(User user) {
