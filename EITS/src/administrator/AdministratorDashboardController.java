@@ -17,6 +17,7 @@ import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -84,8 +85,8 @@ public class AdministratorDashboardController implements Initializable {
         
     }    
 
-    private void populateTable(){
-        if (null != userType) switch (userType) {
+    public void populateTable(String user){
+            if (null != user)switch (user) {
             case "student":{
                 //create the columns needed in the table
                 TableColumn studentID = new TableColumn("Student ID");
@@ -111,8 +112,7 @@ public class AdministratorDashboardController implements Initializable {
                 }
                 catch(SQLException ex){
                     System.out.println("DATABASE ERROR SQL EXCEPTION");
-                }       
-                break;
+                }   break;
                 }
             case "caseWorker":{
                 //create the columns needed in the table
@@ -138,8 +138,7 @@ public class AdministratorDashboardController implements Initializable {
                     tbl_data.setItems(list);
                 }catch(SQLException ex){
                     System.out.println("DATABASE ERROR SQL EXCEPTION");
-                }       
-                break;
+                }   break;
                 }
             case "admin":{
                 //create the columns needed in the table
@@ -165,12 +164,13 @@ public class AdministratorDashboardController implements Initializable {
                     tbl_data.setItems(list);
                 }catch(SQLException ex){
                     System.out.println("DATABASE ERROR SQL EXCEPTION");
-                }       break;
+                }   break;
                 }
             default:
                 break;
         }
-    }
+        }
+    
     
     @FXML
     private void showAllStudents(MouseEvent event) throws SQLException {
@@ -184,10 +184,10 @@ public class AdministratorDashboardController implements Initializable {
         //clear the vbox of its children ready for the new details and set the
         //text fields with the same name to be empty
         vb_selectionDetails.getChildren().clear();
-        tf_studentID.setText("");
-        tf_email.setText("");
-        tf_firstName.setText("");
-        tf_lastName.setText("");
+        tf_studentID.clear();
+        tf_email.clear();
+        tf_firstName.clear();
+        tf_lastName.clear();
         
         //create the selection details pane for student
         createStudentDetails();
@@ -196,7 +196,7 @@ public class AdministratorDashboardController implements Initializable {
         tbl_data.getColumns().clear();
         
         //Show all the students
-        populateTable();
+        populateTable("student");
     }
     
     @FXML
@@ -210,10 +210,10 @@ public class AdministratorDashboardController implements Initializable {
         //clear the vbox of its children ready for the new details and set the
         //text fields with the same name to be empty
         vb_selectionDetails.getChildren().clear();
-        tf_employeeID.setText("");
-        tf_email.setText("");
-        tf_firstName.setText("");
-        tf_lastName.setText("");
+        tf_employeeID.clear();
+        tf_email.clear();
+        tf_firstName.clear();
+        tf_lastName.clear();
         
         //create the selection details pane for case worker
         createCaseWorkerDetails();
@@ -222,7 +222,7 @@ public class AdministratorDashboardController implements Initializable {
         tbl_data.getColumns().clear();
         
         //show all case workers
-        populateTable();
+        populateTable("caseWorker");
     }
     
     @FXML
@@ -237,10 +237,10 @@ public class AdministratorDashboardController implements Initializable {
         //clear the vbox of its children ready for the new details and set the
         //text fields with the same name to be empty
         vb_selectionDetails.getChildren().clear();
-        tf_employeeID.setText("");
-        tf_email.setText("");
-        tf_firstName.setText("");
-        tf_lastName.setText("");
+        tf_employeeID.clear();
+        tf_email.clear();
+        tf_firstName.clear();
+        tf_lastName.clear();
         
         //create the selection details pane for case worker
         createAdministratorDetails();
@@ -249,7 +249,7 @@ public class AdministratorDashboardController implements Initializable {
         tbl_data.getColumns().clear();
         
         //show all case workers
-        populateTable();
+        populateTable("admin");
     }
     
     @FXML
@@ -325,7 +325,7 @@ public class AdministratorDashboardController implements Initializable {
             
             StudentModel.updateStudent(user);
             tbl_data.getColumns().clear();
-            populateTable();
+            populateTable("student");
             System.out.println("Student updated");
         });
         
@@ -337,14 +337,17 @@ public class AdministratorDashboardController implements Initializable {
             user.setTable("student");
             user.setID(Integer.parseInt(tf_studentID.getText()));
             MainModel.deleteSelection(user, "studentID");
+            tbl_data.getColumns().clear();
+            populateTable("student");
+            tf_studentID.clear();
+            tf_email.clear();
+            tf_firstName.clear();
+            tf_lastName.clear();
+            System.out.println("Student deleted");
             
         });
     }               
-
-    private void deleteSelection(String table, int id){
-        
-    }
-    
+   
     private void createCaseWorkerDetails(){
         vb_selectionDetails.getChildren().add(lbl_employeeID);
         
@@ -380,7 +383,8 @@ public class AdministratorDashboardController implements Initializable {
             
             CaseWorkerModel.updateCaseWorker(caseWorker);
             tbl_data.getColumns().clear();
-            populateTable();
+            populateTable("caseWorker");
+            
             System.out.println("Employee updated");
         });
     }
@@ -419,7 +423,7 @@ public class AdministratorDashboardController implements Initializable {
             
             CaseWorkerModel.updateCaseWorker(caseWorker);
             tbl_data.getColumns().clear();
-            populateTable();
+            populateTable("admin");
             System.out.println("Administrator updated");
         });
     }

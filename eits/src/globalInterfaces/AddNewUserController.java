@@ -5,6 +5,7 @@
  */
 package globalInterfaces;
 
+import administrator.AdministratorDashboardController;
 import beans.User;
 import controllers.MainController;
 import java.io.IOException;
@@ -72,18 +73,22 @@ public class AddNewUserController implements Initializable {
     @FXML
     private void btn_addUser(MouseEvent event) throws SQLException, IOException, NoSuchAlgorithmException {
         
-        String table = cb_tableSelection.getSelectionModel().getSelectedItem().toString();
-        if (table != null) {
+        String userType = cb_tableSelection.getSelectionModel().getSelectedItem().toString();
+        if (userType != cb_tableSelection.getPromptText()) {
             User user = new User();
-            user.setTable(table);
+            user.setTable(userType);
             user.setFirstName(tf_firstName.getText());
             user.setLastName(tf_lastName.getText());
             user.setEmail(tf_email.getText());
             user.setPassword(SecurityMethods.getHash(tf_password.getText()));
 
             MainModel.addNewUser(user);
+            AdministratorDashboardController adc = new AdministratorDashboardController();
+            adc.populateTable(userType);
             ((Node)(event.getSource())).getScene().getWindow().hide();
         }
+        
+        
     }  
 
 

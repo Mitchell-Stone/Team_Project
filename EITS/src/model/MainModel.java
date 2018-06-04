@@ -60,14 +60,13 @@ public class MainModel {
     }
     
     public static boolean deleteSelection(User bean, String idType){
-        String sql = "DELETE * FROM $tablename WHERE $idType = ?";
+        String sql = "DELETE FROM $tablename WHERE $idType = ?";
         
         String query = sql.replace("$tablename", bean.getTable()).replace("$idType", idType);
         
-        try(
-                Connection conn = DbUtil.getConn(DbType.MYSQL);
-                PreparedStatement stmt = conn.prepareStatement(query);
-                ) {
+        try{
+            Connection conn = DbUtil.getConn(DbType.MYSQL);
+            PreparedStatement stmt = conn.prepareStatement(query);
             
             stmt.setInt(1, bean.getID());
             
