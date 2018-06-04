@@ -9,8 +9,42 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class StudentModel extends MainModel {
+    
+    public ObservableList<Student> getAllStudents() throws SQLException{
+        
+        ObservableList<Student> studentList = FXCollections.observableArrayList();
+        
+        ResultSet rs = null;
+
+        //execute query to get all students
+        String query = "SELECT * FROM student";
+
+        try{
+            java.sql.Connection conn = DbUtil.getConn(DbType.MYSQL);
+            PreparedStatement stmt = conn.prepareStatement(query);           
+            
+            Student student;
+            
+            rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                student = new Student(rs.getInt("studentID"),rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"));
+                studentList.add(student);
+            }            
+        } catch (SQLException e) {
+            System.out.println(e);
+            return null;
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+        }  
+        return studentList;
+    }
     
     public Student getStudent(Student bean) throws SQLException {
     

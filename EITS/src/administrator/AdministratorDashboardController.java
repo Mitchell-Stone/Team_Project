@@ -99,7 +99,7 @@ public class AdministratorDashboardController implements Initializable {
                 //connect to the database and retrieve all students
                 try{
                     //Insantiate the main model
-                    MainModel model = new MainModel();
+                    StudentModel model = new StudentModel();
                     //get all the students and put them in an observable list
                     ObservableList<Student> list = model.getAllStudents();
                     
@@ -126,7 +126,7 @@ public class AdministratorDashboardController implements Initializable {
                 //connect to the database and retrieve all students
                 try{
                     //Insantiate the main model
-                    MainModel model = new MainModel();
+                    CaseWorkerModel model = new CaseWorkerModel();
                     //get all the students and put them in an observable list
                     ObservableList<CaseWorker> list = model.getAllCaseWorkers();
                     
@@ -152,7 +152,7 @@ public class AdministratorDashboardController implements Initializable {
                 //connect to the database and retrieve all students
                 try{
                     //Insantiate the main model
-                    MainModel model = new MainModel();
+                    AdministratorModel model = new AdministratorModel();
                     //get all the students and put them in an observable list
                     ObservableList<Administrator> list = model.getAllAdministrators();
                     
