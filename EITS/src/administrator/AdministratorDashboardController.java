@@ -98,9 +98,13 @@ public class AdministratorDashboardController implements Initializable {
         tbl_data.setVisible(false);
         vb_selectionDetails.setVisible(false);
         
-    }    
+    } 
+    
+    private void myProfiel(){
+        
+    }
 
-    public void populateTable(String user){
+    private void populateTable(String user){
             if (null != user)switch (user) {
             case "student":{
                 //create the columns needed in the table
@@ -220,6 +224,8 @@ public class AdministratorDashboardController implements Initializable {
         tbl_data.setVisible(true);
         vb_selectionDetails.setVisible(true);
         
+        hideChangePassword();
+        
         //set the selected table value
         selectionType = student;
         
@@ -246,6 +252,9 @@ public class AdministratorDashboardController implements Initializable {
         //show the table
         tbl_data.setVisible(true);
         vb_selectionDetails.setVisible(true);
+        
+        hideChangePassword();
+        
         //set the selected table value
         selectionType = caseWorker;
         
@@ -272,6 +281,8 @@ public class AdministratorDashboardController implements Initializable {
         //show the table
         tbl_data.setVisible(true);
         vb_selectionDetails.setVisible(true);
+        
+        hideChangePassword();
         
         //set the selected table value
         selectionType = admin;
