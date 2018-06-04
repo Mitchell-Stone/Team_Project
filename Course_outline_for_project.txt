@@ -1,0 +1,108 @@
+ICT50715 - Diploma of Software Development (Release 1)
+
+
+ICTICT418 Contribute to copyright, ethics and privacy in an ICT environment
+
+
+ICTPRG418 Apply intermediate programming skills in another language
+
+
+ICTPRG501 Apply advanced object-oriented language skills
+
+
+ICTPRG502 Manage a project using software management tools
+
+
+ICTPRG503 Debug and monitor applications
+
+
+ICTPRG504 Deploy an application to a production environment
+
+
+ICTPRG520 Validate an application design against specifications
+
+
+ICTPRG523 Apply advanced programming skills in another language
+
+
+ICTPRG527 Apply intermediate object-oriented language skills
+
+
+ICTPRG529 Apply testing techniques for software development
+
+
+ICTICT403 Apply software development methodologies
+
+
+ICTICT503 Validate quality and completeness of system design specifications
+
+
+ICTICT509 Gather data to identify business requirements
+
+
+ICTICT511 Match ICT needs with the strategic direction of the enterprise
+
+
+ICTICT514 Identify and manage the implementation of current industry-specific technologies
+
+
+ICTNWK514 Model preferred system solutions
+
+ICTPMG501 Manage ICT projects
+
+
+ICTPRG505 Build advanced user interface
+
+
+ICTPRG506 Design application architecture
+
+
+ICTPRG507 Implement security for applications
+
+
+ICTPRG508 Create mashups
+
+
+ICTPRG509 Build using rapid application development
+
+
+ICTPRG510 Maintain custom software
+
+
+ICTPRG512 Prepare for the build phase of an ICT system
+
+
+ICTPRG513 Coordinate the build phase of an ICT system
+
+
+ICTPRG514 Prepare for software development using rapid application development
+
+
+ICTPRG515 Review developed software
+
+
+ICTPRG601 Develop advanced mobile multi-touch applications
+
+
+ICTPRG604 Create cloud computing services
+
+
+ICTSAD501 Model data objects
+
+
+ICTSAD502 Model data processes
+
+
+ICTSAD506 Produce a feasibility report
+
+
+ICTSAS502 Establish and maintain client user liaison
+
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+ICT50615 - Diploma of Website Development (Release 2)  
+
