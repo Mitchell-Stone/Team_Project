@@ -9,16 +9,16 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="523.0" prefWidth="743.0" style="-fx-background-color: #333333;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userAccess.UserAccessController">
+<Pane id="accessPane" fx:id="accessPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="523.0" prefWidth="743.0" stylesheets="@accessStyle.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userAccess.UserAccessController">
    <children>
       <Pane fx:id="signin" layoutX="485.0" layoutY="67.0" prefHeight="389.0" prefWidth="258.0">
          <children>
-            <Label layoutX="66.0" layoutY="21.0" prefHeight="59.0" prefWidth="127.0" style="-fx-text-alignment: center; -fx-text-fill: white;" text="Sign In" textAlignment="CENTER">
+            <Label fx:id="formLabel" layoutX="66.0" layoutY="21.0" prefHeight="59.0" prefWidth="127.0" text="Sign In" textAlignment="CENTER">
                <font>
                   <Font size="41.0" />
                </font>
             </Label>
-            <TextField fx:id="userNameLog" layoutX="55.0" layoutY="109.0" promptText="Email" />
+            <TextField id="genericField" fx:id="userNameLog" layoutX="55.0" layoutY="109.0" promptText="Email" />
             <PasswordField fx:id="passwordLog" layoutX="55.0" layoutY="147.0" promptText="Password" />
             <Button fx:id="btn_signin" layoutX="55.0" layoutY="182.0" mnemonicParsing="false" onAction="#loginAction" prefHeight="25.0" prefWidth="149.0" text="Sign In" />
             <Label fx:id="errorOutputLog" layoutX="55.0" layoutY="223.0" prefHeight="59.0" prefWidth="149.0" textFill="#e80c0c" />
@@ -44,7 +44,7 @@
             </Label>
          </children>
       </Pane>
-      <Pane layoutX="-7.0" prefHeight="67.0" prefWidth="750.0" style="-fx-background-color: #0099ff;" />
+      <Pane fx:id="banner" layoutX="-7.0" prefHeight="67.0" prefWidth="750.0" />
       <HBox layoutX="485.0" layoutY="456.0" prefHeight="67.0" prefWidth="258.0">
          <children>
             <Button mnemonicParsing="false" onAction="#showLogin" prefHeight="67.0" prefWidth="136.0" text="Login" />
