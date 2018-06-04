@@ -12,17 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class MainModel {
-    
-    public static boolean openClose(boolean visible) {
-        boolean visibility;
-        if (visible) {
-            visibility = false;
-        } else {
-            visibility = true;
-        }
-        return visibility;
-    }
-    
+   
     public static boolean addNewUser(User bean) throws SQLException{
     
         String sql = "INSERT INTO $tablename (email, password, firstName, lastName) VALUES (?, ?, ?, ?)";
