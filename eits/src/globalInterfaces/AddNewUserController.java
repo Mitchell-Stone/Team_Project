@@ -9,6 +9,7 @@ import administrator.AdministratorDashboardController;
 import beans.User;
 import controllers.MainController;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
@@ -74,20 +75,32 @@ public class AddNewUserController implements Initializable {
     private void btn_addUser(MouseEvent event) throws SQLException, IOException, NoSuchAlgorithmException {
         
         String userType = cb_tableSelection.getSelectionModel().getSelectedItem().toString();
-        if (userType != cb_tableSelection.getPromptText()) {
+        if (!userType.equals(cb_tableSelection.getPromptText())) {
+            switch (userType) {
+                case "Student":
+                    userType = "student";
+                    break;
+                case "Case Worker":
+                    userType = "caseworker";
+                    break;
+                case "Administrator":
+                    userType = "admin";
+                    break;
+                default:
+                    System.out.println("Select user type");
+                    break;
+            }
             User user = new User();
             user.setTable(userType);
             user.setFirstName(tf_firstName.getText());
             user.setLastName(tf_lastName.getText());
             user.setEmail(tf_email.getText());
-            user.setPassword(SecurityMethods.getHash(tf_password.getText()));
-
+            user.setPassword(SecurityMethods.getHash(tf_password.getText()));  
             MainModel.addNewUser(user);
-            AdministratorDashboardController adc = new AdministratorDashboardController();
-            adc.populateTable(userType);
             ((Node)(event.getSource())).getScene().getWindow().hide();
+        } else {
+            System.out.println("Please select user type.");
         }
-        
         
     }  
 

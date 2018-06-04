@@ -17,7 +17,6 @@ import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -26,6 +25,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import model.AdministratorModel;
 import model.CaseWorkerModel;
 import model.MainModel;
 import model.StudentModel;
@@ -237,7 +237,7 @@ public class AdministratorDashboardController implements Initializable {
         //clear the vbox of its children ready for the new details and set the
         //text fields with the same name to be empty
         vb_selectionDetails.getChildren().clear();
-        tf_employeeID.clear();
+        tf_adminID.clear();
         tf_email.clear();
         tf_firstName.clear();
         tf_lastName.clear();
@@ -277,7 +277,7 @@ public class AdministratorDashboardController implements Initializable {
                 //When an item is selected in the table get all the data for that item
                 Administrator admin = (Administrator) tbl_data.getSelectionModel().getSelectedItem();
                 //set the text fields to show the selected item to allow for changes
-                tf_employeeID.setText(Integer.toString(admin.getAdminID()));
+                tf_adminID.setText(Integer.toString(admin.getAdminID()));
                 tf_firstName.setText(admin.getFirstName());
                 tf_lastName.setText(admin.getLastName()); 
                 tf_email.setText(admin.getEmail());
@@ -387,13 +387,32 @@ public class AdministratorDashboardController implements Initializable {
             
             System.out.println("Employee updated");
         });
+        
+        /*
+        btn_delete.setText("Delete Student");
+        vb_selectionDetails.getChildren().add(btn_delete);
+        btn_delete.setOnAction((event) ->{
+        
+            User user = new User();
+            user.setTable("student");
+            user.setID(Integer.parseInt(tf_studentID.getText()));
+            MainModel.deleteSelection(user, "studentID");
+            tbl_data.getColumns().clear();
+            populateTable("student");
+            tf_studentID.clear();
+            tf_email.clear();
+            tf_firstName.clear();
+            tf_lastName.clear();
+            System.out.println("Student deleted");
+            
+        });*/
     }
     
     private void createAdministratorDetails(){
         vb_selectionDetails.getChildren().add(lbl_adminID);
         
-        tf_employeeID.setId("tf_adminID");
-        vb_selectionDetails.getChildren().add(tf_employeeID);
+        tf_adminID.setId("tf_adminID");
+        vb_selectionDetails.getChildren().add(tf_adminID);
         
         vb_selectionDetails.getChildren().add(lbl_fName);
         
@@ -414,17 +433,35 @@ public class AdministratorDashboardController implements Initializable {
         vb_selectionDetails.getChildren().add(btn_update);
         //create an on action event so the button knows what to do when pressed
         btn_update.setOnAction((event) -> {          
-            CaseWorker caseWorker = new CaseWorker();
+            Administrator admin = new Administrator();
             
-            caseWorker.setFirstName(tf_firstName.getText());
-            caseWorker.setLastName(tf_lastName.getText());
-            caseWorker.setEmail(tf_email.getText());
-            caseWorker.setEmployeeID(Integer.parseInt(tf_employeeID.getText()));
+            admin.setFirstName(tf_firstName.getText());
+            admin.setLastName(tf_lastName.getText());
+            admin.setEmail(tf_email.getText());
+            admin.setAdminID(Integer.parseInt(tf_adminID.getText()));
             
-            CaseWorkerModel.updateCaseWorker(caseWorker);
+            AdministratorModel.updateAdmin(admin);
             tbl_data.getColumns().clear();
             populateTable("admin");
             System.out.println("Administrator updated");
+        });
+        
+        btn_delete.setText("Delete Administrator");
+        vb_selectionDetails.getChildren().add(btn_delete);
+        btn_delete.setOnAction((event) ->{
+        
+            User user = new User();
+            user.setTable("admin");
+            user.setID(Integer.parseInt(tf_adminID.getText()));
+            MainModel.deleteSelection(user, "adminID");
+            tbl_data.getColumns().clear();
+            populateTable("admin");
+            tf_adminID.clear();
+            tf_email.clear();
+            tf_firstName.clear();
+            tf_lastName.clear();
+            System.out.println("Administrator deleted");
+            
         });
     }
 

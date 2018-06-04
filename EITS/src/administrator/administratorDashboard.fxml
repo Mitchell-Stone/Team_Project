@@ -3,6 +3,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -10,9 +12,14 @@
 
 <AnchorPane id="AnchorPane" prefHeight="903.0" prefWidth="1308.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="administrator.AdministratorDashboardController">
    <children>
-      <Label layoutX="454.0" layoutY="14.0" text="Administrator Dashboard">
+      <ImageView fitHeight="66.0" fitWidth="1314.0" layoutX="-2.0" layoutY="-5.0" pickOnBounds="true">
+         <image>
+            <Image url="@blueBanner.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="454.0" layoutY="23.0" prefWidth="404.0" text="Administrator Dashboard">
          <font>
-            <Font size="36.0" />
+            <Font name="Arial" size="32.0" />
          </font>
       </Label>
       <HBox layoutX="214.0" layoutY="67.0" prefHeight="35.0" prefWidth="881.0">
