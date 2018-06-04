@@ -42,8 +42,7 @@ public class AddNewUserController implements Initializable {
     private TextField tf_email;
     @FXML
     private TextField tf_password;
-
-    private String windowURL = "/administrator/administratorDashboard.fxml";
+    
     private Button btn_returnToDashboard;
     @FXML
     private Button btn_cancel;
@@ -94,7 +93,6 @@ public class AddNewUserController implements Initializable {
             System.out.println("Please select user type.");
         }  
     }  
-
 
     @FXML
     private void cancel(MouseEvent event) throws IOException {
