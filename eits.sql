@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 04, 2018 at 01:34 AM
+-- Generation Time: Jun 04, 2018 at 01:48 AM
 -- Server version: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -54,18 +54,15 @@ CREATE TABLE `assessment` (
   `courseID` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `description` text NOT NULL,
-  `grade` int(11) DEFAULT NULL,
-  `date` date NOT NULL,
-  `date submitted` date DEFAULT NULL,
-  `passorfail` tinyint(1) DEFAULT NULL
+  `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `assessment`
 --
 
-INSERT INTO `assessment` (`assessmentID`, `courseID`, `title`, `description`, `grade`, `date`, `date submitted`, `passorfail`) VALUES
-(1, 1, 'History Of Pepe', 'Research the history of the pepe meme.', NULL, '2018-05-31', NULL, NULL);
+INSERT INTO `assessment` (`assessmentID`, `courseID`, `title`, `description`, `date`) VALUES
+(1, 1, 'History Of Pepe', 'Research the history of the pepe meme.', '2018-05-31');
 
 -- --------------------------------------------------------
 
