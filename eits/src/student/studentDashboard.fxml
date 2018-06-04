@@ -53,7 +53,7 @@
             <Button mnemonicParsing="false" onAction="#openCourses" prefHeight="83.0" prefWidth="135.0" text="Courses" />
             <Button mnemonicParsing="false" onAction="#openAssessments" prefHeight="83.0" prefWidth="135.0" text="Assessments" />
             <Button mnemonicParsing="false" onAction="#openIndustry" prefHeight="83.0" prefWidth="135.0" text="Industry Preference" />
-            <Button mnemonicParsing="false" onAction="#logout" prefHeight="83.0" prefWidth="135.0" text="Logout" />
+            <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#logout" prefHeight="83.0" prefWidth="135.0" text="Logout" />
          </children>
       </VBox>
       <HBox alignment="TOP_CENTER" layoutX="-2.0" prefHeight="83.0" prefWidth="921.0">

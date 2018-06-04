@@ -8,6 +8,8 @@ package student;
 import beans.Courses;
 import beans.Student;
 import beans.User;
+import controllers.MainController;
+import java.io.IOException;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
@@ -101,31 +103,13 @@ public class StudentDashboardController implements Initializable {
     private Label courseError;
     @FXML
     private TextField courseId;
+    @FXML
+    private Button logoutBtn;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        /*Courses bean = new Courses();
-        CoursesModel model = new CoursesModel();
-        
-        bean.setTable("courses");
-        
-        try{
-            ObservableList<Courses> coursesList = (ObservableList<Courses>) model.getCourses(bean);
-            
-            tableView.setItems(coursesList);
-        }catch(Exception ex){
-            System.err.println(ex);
-        }
-        
-        ArrayList<Courses> list = new ArrayList<>();
-        
-        
-        for (int i = 0; i < 10; i++) {
-            
-        }*/
         
         Student student = new Student();
         
@@ -336,7 +320,13 @@ public class StudentDashboardController implements Initializable {
     }
 
     @FXML
-    private void logout(ActionEvent event) {
+    private void logout(ActionEvent event) throws IOException {
+        
+        String login = "/userAccess/userSignIn.fxml";
+        
+        MainController main = new MainController();
+        main.openNewWindow(login, logoutBtn);
+        
     }
 
 }
