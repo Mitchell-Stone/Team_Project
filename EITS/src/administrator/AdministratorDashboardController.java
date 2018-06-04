@@ -19,6 +19,7 @@ import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -26,6 +27,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import model.AdministratorModel;
 import model.CaseWorkerModel;
@@ -55,6 +57,8 @@ public class AdministratorDashboardController implements Initializable {
     private Button btn_administrator;
     @FXML
     private Button btn_returnToLogin;
+    @FXML
+    private AnchorPane ap_adminDashboard;    
     
     Label lbl_studentID = new Label("Student ID");
     Label lbl_employeeID = new Label("Employee ID");
@@ -76,6 +80,8 @@ public class AdministratorDashboardController implements Initializable {
     Button btn_confirmPassword = new Button();
     Button btn_cancel = new Button();
     TextField tf_changePassword = new TextField();
+    VBox vb_myProfile = new VBox();
+    Label title = new Label("Welcome");
     
     
     //selected values: Student = 1, case worker = 2, admin = 3
@@ -83,7 +89,6 @@ public class AdministratorDashboardController implements Initializable {
     
     private final String windowURL = "/globalInterfaces/addNewUser.fxml";
     private final String loginURL = "/userAccess/userSignIn.fxml";
-    
     
     /**
      * Initializes the controller class.
@@ -93,15 +98,31 @@ public class AdministratorDashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        //Populate my profle when the window opens or make it so a seperate window opens
+        //populates the my profile tab
+        myProfile();
+        
+        //hides everything until it is needed
         hideChangePassword();
         tbl_data.setVisible(false);
         vb_selectionDetails.setVisible(false);
         
     } 
     
-    private void myProfiel(){
+    private void myProfile(){        
+        /*vb_myProfile.setAlignment(Pos.CENTER);
+        vb_myProfile.setAlignment(Pos.BASELINE_CENTER);
+        vb_myProfile.setLayoutY(400); 
         
+        ap_adminDashboard.getChildren().add(vb_myProfile);
+        vb_myProfile.getChildren().addAll(title, tf_firstName);*/
+    }
+    
+    @FXML
+    private void btn_myProfile(MouseEvent event) {
+        tbl_data.setVisible(false);
+        vb_selectionDetails.setVisible(false);
+        
+        myProfile();
     }
 
     private void populateTable(String user){
@@ -223,7 +244,7 @@ public class AdministratorDashboardController implements Initializable {
         //show the table
         tbl_data.setVisible(true);
         vb_selectionDetails.setVisible(true);
-        
+        ap_adminDashboard.getChildren().remove(vb_myProfile);
         hideChangePassword();
         
         //set the selected table value
@@ -252,7 +273,7 @@ public class AdministratorDashboardController implements Initializable {
         //show the table
         tbl_data.setVisible(true);
         vb_selectionDetails.setVisible(true);
-        
+        ap_adminDashboard.getChildren().remove(vb_myProfile);
         hideChangePassword();
         
         //set the selected table value
@@ -281,7 +302,7 @@ public class AdministratorDashboardController implements Initializable {
         //show the table
         tbl_data.setVisible(true);
         vb_selectionDetails.setVisible(true);
-        
+        ap_adminDashboard.getChildren().remove(vb_myProfile);
         hideChangePassword();
         
         //set the selected table value
@@ -358,43 +379,31 @@ public class AdministratorDashboardController implements Initializable {
   
     private void createStudentDetails(){
         //creates the labels and text fields in the verticle box
-        vb_selectionDetails.getChildren().add(lbl_studentID);
-         
         tf_studentID.setId("tf_studentID");
         tf_firstName.setId("tf_firstName");
         tf_lastName.setId("tf_lastName");
         tf_email.setId("tf_email");
-        
-        vb_selectionDetails.getChildren().add(tf_studentID);    
-        vb_selectionDetails.getChildren().add(lbl_fName);
-        vb_selectionDetails.getChildren().add(tf_firstName);
-        vb_selectionDetails.getChildren().add(lbl_lName);
-        vb_selectionDetails.getChildren().add(tf_lastName); 
-        vb_selectionDetails.getChildren().add(lbl_email); 
-        vb_selectionDetails.getChildren().add(tf_email);
-        
         btn_update.setText("Update Student");
-        vb_selectionDetails.getChildren().add(btn_update);
+        btn_delete.setText("Delete Student");
+        btn_changePassword.setText("Change Password");
+        tf_changePassword.setId("tf_changePassword");
+        btn_confirmPassword.setText("Confirm Password");
+        btn_cancel.setText("Cancel");
+
+        vb_selectionDetails.getChildren().addAll(lbl_studentID, tf_studentID, lbl_fName, 
+                tf_firstName, lbl_lName, tf_lastName, lbl_email, tf_email, btn_update, 
+                btn_delete, btn_changePassword, lbl_newPassword, tf_changePassword,
+                btn_confirmPassword, btn_cancel);    
+
         //create an on action event so the button knows what to do when pressed
         btn_update.setOnAction((event) -> {
             updateUser(student, Integer.parseInt(tf_studentID.getText()), "studentID");
         });
         
-        btn_delete.setText("Delete Student");
-        vb_selectionDetails.getChildren().add(btn_delete);
         btn_delete.setOnAction((event) ->{
             deleteUser(student, "studentID", Integer.parseInt(tf_studentID.getText()));
         });
         
-        btn_changePassword.setText("Change Password");
-        vb_selectionDetails.getChildren().add(btn_changePassword);
-        vb_selectionDetails.getChildren().add(lbl_newPassword);
-        tf_changePassword.setId("tf_changePassword");
-        vb_selectionDetails.getChildren().add(tf_changePassword);
-        btn_confirmPassword.setText("Confirm Password");
-        vb_selectionDetails.getChildren().add(btn_confirmPassword);
-        btn_cancel.setText("Cancel");
-        vb_selectionDetails.getChildren().add(btn_cancel);
         btn_changePassword.setOnAction((event) ->{
             showChangePassword();
         });
@@ -409,43 +418,31 @@ public class AdministratorDashboardController implements Initializable {
     } 
    
     private void createCaseWorkerDetails(){
-        vb_selectionDetails.getChildren().add(lbl_employeeID);
-        
+               
         tf_employeeID.setId("tf_employeeID");
         tf_firstName.setId("tf_firstName");
         tf_lastName.setId("tf_lastName");
-        tf_email.setId("tf_email");
-        
-        vb_selectionDetails.getChildren().add(tf_employeeID);
-        vb_selectionDetails.getChildren().add(lbl_fName);      
-        vb_selectionDetails.getChildren().add(tf_firstName);     
-        vb_selectionDetails.getChildren().add(lbl_lName);
-        vb_selectionDetails.getChildren().add(tf_lastName);
-        vb_selectionDetails.getChildren().add(lbl_email);
-        vb_selectionDetails.getChildren().add(tf_email);
-        
+        tf_email.setId("tf_email");      
         btn_update.setText("Update Case Worker");
-        vb_selectionDetails.getChildren().add(btn_update);
+        btn_delete.setText("Delete Case Worker");
+        tf_changePassword.setId("tf_changePassword");
+        btn_confirmPassword.setText("Confirm Password");
+        btn_cancel.setText("Cancel");
+        
+        vb_selectionDetails.getChildren().addAll(lbl_employeeID, tf_employeeID, lbl_fName, 
+                tf_firstName, lbl_lName, tf_lastName, lbl_email, tf_email, btn_update, 
+                btn_delete, btn_changePassword, lbl_newPassword, tf_changePassword,
+                btn_confirmPassword, btn_cancel);        
+        
         //create an on action event so the button knows what to do when pressed
         btn_update.setOnAction((event) -> {
             updateUser(caseWorker, Integer.parseInt(tf_employeeID.getText()), "employeeID");
         });
         
-        btn_delete.setText("Delete Case Worker");
-        vb_selectionDetails.getChildren().add(btn_delete);
         btn_delete.setOnAction((event) ->{       
             deleteUser(caseWorker, "employeeID", Integer.parseInt(tf_employeeID.getText()));            
         });
         
-        btn_changePassword.setText("Change Password");
-        vb_selectionDetails.getChildren().add(btn_changePassword);
-        vb_selectionDetails.getChildren().add(lbl_newPassword);
-        tf_changePassword.setId("tf_changePassword");
-        vb_selectionDetails.getChildren().add(tf_changePassword);
-        btn_confirmPassword.setText("Confirm Password");
-        vb_selectionDetails.getChildren().add(btn_confirmPassword);
-        btn_cancel.setText("Cancel");
-        vb_selectionDetails.getChildren().add(btn_cancel);
         btn_changePassword.setOnAction((event) ->{
             showChangePassword();
         });
@@ -459,44 +456,32 @@ public class AdministratorDashboardController implements Initializable {
         });
     }
     
-    private void createAdministratorDetails(){
-        vb_selectionDetails.getChildren().add(lbl_adminID);
+    private void createAdministratorDetails(){     
         
         tf_adminID.setId("tf_adminID");
         tf_firstName.setId("tf_firstName");
         tf_lastName.setId("tf_lastName");
         tf_email.setId("tf_email");
-        
-        vb_selectionDetails.getChildren().add(tf_adminID);
-        vb_selectionDetails.getChildren().add(lbl_fName);   
-        vb_selectionDetails.getChildren().add(tf_firstName);    
-        vb_selectionDetails.getChildren().add(lbl_lName);     
-        vb_selectionDetails.getChildren().add(tf_lastName);   
-        vb_selectionDetails.getChildren().add(lbl_email);     
-        vb_selectionDetails.getChildren().add(tf_email);
-        
         btn_update.setText("Update Administrator");
-        vb_selectionDetails.getChildren().add(btn_update);
+        btn_delete.setText("Delete Administrator");
+        btn_changePassword.setText("Change Password");
+        tf_changePassword.setId("tf_changePassword");
+        btn_confirmPassword.setText("Confirm Password");
+        btn_cancel.setText("Cancel");
+        
+        vb_selectionDetails.getChildren().addAll(lbl_adminID, tf_adminID, lbl_fName, lbl_lName,
+                tf_lastName, lbl_email, tf_email, btn_update, btn_delete, btn_changePassword,
+                lbl_newPassword, tf_changePassword, btn_confirmPassword, btn_cancel);
+        
         //create an on action event so the button knows what to do when pressed
         btn_update.setOnAction((event) -> {
             updateUser(admin, Integer.parseInt(tf_adminID.getText()), "adminID");
         });
         
-        btn_delete.setText("Delete Administrator");
-        vb_selectionDetails.getChildren().add(btn_delete);
         btn_delete.setOnAction((event) ->{
             deleteUser(admin, "adminID", Integer.parseInt(tf_adminID.getText()));
         });
         
-        btn_changePassword.setText("Change Password");
-        vb_selectionDetails.getChildren().add(btn_changePassword);
-        vb_selectionDetails.getChildren().add(lbl_newPassword);
-        tf_changePassword.setId("tf_changePassword");
-        vb_selectionDetails.getChildren().add(tf_changePassword);
-        btn_confirmPassword.setText("Confirm Password");
-        vb_selectionDetails.getChildren().add(btn_confirmPassword);
-        btn_cancel.setText("Cancel");
-        vb_selectionDetails.getChildren().add(btn_cancel);
         btn_changePassword.setOnAction((event) ->{
             showChangePassword();
         });
@@ -583,11 +568,5 @@ public class AdministratorDashboardController implements Initializable {
     private void returnToLogin(MouseEvent event) throws IOException {
         MainController main = new MainController();
         main.openNewWindow(loginURL, btn_returnToLogin);
-    }
-
-    @FXML
-    private void btn_myProfile(MouseEvent event) {
-        tbl_data.setVisible(false);
-        vb_selectionDetails.setVisible(false);
     }
 }
