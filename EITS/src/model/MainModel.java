@@ -54,6 +54,32 @@ public class MainModel {
         }
     }
     
+    public static boolean updateUser (User bean) {
+    
+        String sql = "UPDATE $tablename SET firstName = ?, lastName = ?, email = ? WHERE $idType = ?";
+        
+        String query = sql.replace("$tablename", bean.getTable()).replace("$idType", bean.getIdType());
+        
+        try(
+                Connection conn = DbUtil.getConn(DbType.MYSQL);
+                PreparedStatement stmt = conn.prepareStatement(query);
+                ) {
+            
+            stmt.setString(1, bean.getFirstName());
+            stmt.setString(2, bean.getLastName());
+            stmt.setString(3, bean.getEmail());
+            stmt.setInt(4, bean.getID());
+            
+            int affected = stmt.executeUpdate();
+            
+            return affected == 1;
+            
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+    }
+    
     public static boolean deleteSelection(User bean, String idType){
         String sql = "DELETE FROM $tablename WHERE $idType = ?";
         

@@ -2,6 +2,14 @@
 package beans;
 
 public class User {
+
+    public String getIdType() {
+        return idType;
+    }
+
+    public void setIdType(String idType) {
+        this.idType = idType;
+    }
     
     public String getFirstName() {
         return firstName;
@@ -50,6 +58,7 @@ public class User {
     private String userName;
     private String table;
     private String column;
+    private String idType;
     private static int ID;
 
     public String getTable() {

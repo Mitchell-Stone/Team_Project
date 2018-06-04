@@ -16,8 +16,6 @@ import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -43,6 +41,10 @@ import security.SecurityMethods;
  */
 public class AdministratorDashboardController implements Initializable {
 
+    private final String student = "student";
+    private final String caseWorker = "caseWorker";
+    private final String admin = "admin";
+    
     @FXML
     private TableView tbl_data;
     @FXML
@@ -220,7 +222,7 @@ public class AdministratorDashboardController implements Initializable {
         vb_selectionDetails.setVisible(true);
         
         //set the selected table value
-        selectionType = "student";
+        selectionType = student;
         
         //clear the vbox of its children ready for the new details and set the
         //text fields with the same name to be empty
@@ -237,7 +239,7 @@ public class AdministratorDashboardController implements Initializable {
         tbl_data.getColumns().clear();
         
         //Show all the students
-        populateTable("student");
+        populateTable(student);
     }
     
     @FXML
@@ -246,7 +248,7 @@ public class AdministratorDashboardController implements Initializable {
         tbl_data.setVisible(true);
         vb_selectionDetails.setVisible(true);
         //set the selected table value
-        selectionType = "caseWorker";
+        selectionType = caseWorker;
         
         //clear the vbox of its children ready for the new details and set the
         //text fields with the same name to be empty
@@ -263,7 +265,7 @@ public class AdministratorDashboardController implements Initializable {
         tbl_data.getColumns().clear();
         
         //show all case workers
-        populateTable("caseWorker");
+        populateTable(caseWorker);
     }
     
     @FXML
@@ -273,7 +275,7 @@ public class AdministratorDashboardController implements Initializable {
         vb_selectionDetails.setVisible(true);
         
         //set the selected table value
-        selectionType = "admin";
+        selectionType = admin;
         
         //clear the vbox of its children ready for the new details and set the
         //text fields with the same name to be empty
@@ -290,7 +292,7 @@ public class AdministratorDashboardController implements Initializable {
         tbl_data.getColumns().clear();
         
         //show all case workers
-        populateTable("admin");
+        populateTable(admin);
     }
     
     @FXML
@@ -314,30 +316,30 @@ public class AdministratorDashboardController implements Initializable {
         switch (selectionType) {
             case "student":
                 //When an item is selected in the table get all the data for that item
-                Student student = (Student) tbl_data.getSelectionModel().getSelectedItem();
+                Student st = (Student) tbl_data.getSelectionModel().getSelectedItem();
                 //set the text fields to show the selected item to allow for changes
-                tf_studentID.setText(Integer.toString(student.getStudentID()));
-                tf_firstName.setText(student.getFirstName());
-                tf_lastName.setText(student.getLastName());
-                tf_email.setText(student.getEmail());
+                tf_studentID.setText(Integer.toString(st.getStudentID()));
+                tf_firstName.setText(st.getFirstName());
+                tf_lastName.setText(st.getLastName());
+                tf_email.setText(st.getEmail());
                 break;
             case "caseWorker":
                 //When an item is selected in the table get all the data for that item
-                CaseWorker caseWorker = (CaseWorker) tbl_data.getSelectionModel().getSelectedItem();
+                CaseWorker cw = (CaseWorker) tbl_data.getSelectionModel().getSelectedItem();
                 //set the text fields to show the selected item to allow for changes
-                tf_employeeID.setText(Integer.toString(caseWorker.getEmployeeID()));
-                tf_firstName.setText(caseWorker.getFirstName());
-                tf_lastName.setText(caseWorker.getLastName());
-                tf_email.setText(caseWorker.getEmail());
+                tf_employeeID.setText(Integer.toString(cw.getEmployeeID()));
+                tf_firstName.setText(cw.getFirstName());
+                tf_lastName.setText(cw.getLastName());
+                tf_email.setText(cw.getEmail());
                 break;
             case "admin":
                 //When an item is selected in the table get all the data for that item
-                Administrator admin = (Administrator) tbl_data.getSelectionModel().getSelectedItem();
+                Administrator ad = (Administrator) tbl_data.getSelectionModel().getSelectedItem();
                 //set the text fields to show the selected item to allow for changes
-                tf_adminID.setText(Integer.toString(admin.getAdminID()));
-                tf_firstName.setText(admin.getFirstName());
-                tf_lastName.setText(admin.getLastName()); 
-                tf_email.setText(admin.getEmail());
+                tf_adminID.setText(Integer.toString(ad.getAdminID()));
+                tf_firstName.setText(ad.getFirstName());
+                tf_lastName.setText(ad.getLastName()); 
+                tf_email.setText(ad.getEmail());
                 break;
             default:
                 break;
@@ -345,7 +347,6 @@ public class AdministratorDashboardController implements Initializable {
     }
   
     private void createStudentDetails(){
-
         //creates the labels and text fields in the verticle box
         vb_selectionDetails.getChildren().add(lbl_studentID);
          
@@ -371,37 +372,13 @@ public class AdministratorDashboardController implements Initializable {
         vb_selectionDetails.getChildren().add(btn_update);
         //create an on action event so the button knows what to do when pressed
         btn_update.setOnAction((event) -> {
-            
-            User user = new User();
-            
-            user.setTable("student");
-            user.setFirstName(tf_firstName.getText());
-            user.setLastName(tf_lastName.getText());
-            user.setEmail(tf_email.getText());
-            user.setID(Integer.parseInt(tf_studentID.getText()));
-            
-            StudentModel.updateStudent(user);
-            tbl_data.getColumns().clear();
-            populateTable("student");
-            System.out.println("Student updated");
+            updateUser(student, Integer.parseInt(tf_studentID.getText()), "studentID");
         });
         
         btn_delete.setText("Delete Student");
         vb_selectionDetails.getChildren().add(btn_delete);
         btn_delete.setOnAction((event) ->{
-        
-            User user = new User();
-            user.setTable("student");
-            user.setID(Integer.parseInt(tf_studentID.getText()));
-            MainModel.deleteSelection(user, "studentID");
-            tbl_data.getColumns().clear();
-            populateTable("student");
-            tf_studentID.clear();
-            tf_email.clear();
-            tf_firstName.clear();
-            tf_lastName.clear();
-            System.out.println("Student deleted");
-            
+            deleteUser(student, "studentID", Integer.parseInt(tf_studentID.getText()));
         });
         
         btn_changePassword.setText("Change Password");
@@ -418,40 +395,13 @@ public class AdministratorDashboardController implements Initializable {
         });
         
         btn_confirmPassword.setOnAction((event) ->{
-            Student student = new Student();
-            student.setID(Integer.parseInt(tf_studentID.getText()));
-            try {
-                student.setPassword(SecurityMethods.getHash(tf_changePassword.getText()));
-            } catch (NoSuchAlgorithmException ex) {
-                System.out.println("Error with encoding password.");
-            }
-            StudentModel.updateStudentPassword(student);
-            
-            tf_changePassword.clear();
-            hideChangePassword();
-            
+            confirmPassword(student, Integer.parseInt(tf_studentID.getText()), tf_changePassword.getText());         
         });
         
         btn_cancel.setOnAction((event) ->{
             hideChangePassword();
         });  
     } 
-    
-    private void showChangePassword(){
-        btn_changePassword.setVisible(false);
-        btn_cancel.setVisible(true);
-        tf_changePassword.setVisible(true);
-        btn_confirmPassword.setVisible(true);
-        lbl_newPassword.setVisible(true);
-    }
-    
-    private void hideChangePassword(){
-        btn_changePassword.setVisible(true);
-        btn_cancel.setVisible(false);
-        tf_changePassword.setVisible(false);
-        btn_confirmPassword.setVisible(false);
-        lbl_newPassword.setVisible(false);
-    }
    
     private void createCaseWorkerDetails(){
         vb_selectionDetails.getChildren().add(lbl_employeeID);
@@ -478,37 +428,13 @@ public class AdministratorDashboardController implements Initializable {
         vb_selectionDetails.getChildren().add(btn_update);
         //create an on action event so the button knows what to do when pressed
         btn_update.setOnAction((event) -> {
-            
-            CaseWorker caseWorker = new CaseWorker();
-            
-            caseWorker.setFirstName(tf_firstName.getText());
-            caseWorker.setLastName(tf_lastName.getText());
-            caseWorker.setEmail(tf_email.getText());
-            caseWorker.setEmployeeID(Integer.parseInt(tf_employeeID.getText()));
-            
-            CaseWorkerModel.updateCaseWorker(caseWorker);
-            tbl_data.getColumns().clear();
-            populateTable("caseWorker");
-            
-            System.out.println("Employee updated");
+            updateUser(caseWorker, Integer.parseInt(tf_employeeID.getText()), "caseworker");
         });
         
         btn_delete.setText("Delete Case Worker");
         vb_selectionDetails.getChildren().add(btn_delete);
-        btn_delete.setOnAction((event) ->{
-        
-            User user = new User();
-            user.setTable("caseworker");
-            user.setID(Integer.parseInt(tf_employeeID.getText()));
-            MainModel.deleteSelection(user, "employeeID");
-            tbl_data.getColumns().clear();
-            populateTable("caseWorker");
-            tf_employeeID.clear();
-            tf_email.clear();
-            tf_firstName.clear();
-            tf_lastName.clear();
-            System.out.println("Case Worker deleted");
-            
+        btn_delete.setOnAction((event) ->{       
+            deleteUser(caseWorker, "employeeID", Integer.parseInt(tf_employeeID.getText()));            
         });
     }
     
@@ -536,39 +462,79 @@ public class AdministratorDashboardController implements Initializable {
         btn_update.setText("Update Administrator");
         vb_selectionDetails.getChildren().add(btn_update);
         //create an on action event so the button knows what to do when pressed
-        btn_update.setOnAction((event) -> {          
-            Administrator admin = new Administrator();
-            
-            admin.setFirstName(tf_firstName.getText());
-            admin.setLastName(tf_lastName.getText());
-            admin.setEmail(tf_email.getText());
-            admin.setAdminID(Integer.parseInt(tf_adminID.getText()));
-            
-            AdministratorModel.updateAdmin(admin);
-            tbl_data.getColumns().clear();
-            populateTable("admin");
-            System.out.println("Administrator updated");
+        btn_update.setOnAction((event) -> {
+            updateUser(admin, Integer.parseInt(tf_adminID.getText()), "adminID");
         });
         
         btn_delete.setText("Delete Administrator");
         vb_selectionDetails.getChildren().add(btn_delete);
         btn_delete.setOnAction((event) ->{
-        
-            User user = new User();
-            user.setTable("admin");
-            user.setID(Integer.parseInt(tf_adminID.getText()));
-            MainModel.deleteSelection(user, "adminID");
-            tbl_data.getColumns().clear();
-            populateTable("admin");
-            tf_adminID.clear();
-            tf_email.clear();
-            tf_firstName.clear();
-            tf_lastName.clear();
-            System.out.println("Administrator deleted");
-            
+            deleteUser(admin, "adminID", Integer.parseInt(tf_adminID.getText()));
         });
     }
-   
+    
+    private void deleteUser(String userType, String idType, int userID){
+        User user = new User();
+        user.setTable(userType);
+        user.setID(userID);     
+ 
+        MainModel.deleteSelection(user, idType);
+        
+        tbl_data.getColumns().clear();
+        populateTable(userType);
+        
+        tf_email.clear();
+        tf_firstName.clear();
+        tf_lastName.clear();
+        System.out.println(userType + " deleted");
+    }
+    
+    private void updateUser(String userType, int userID, String idType){
+        User user = new User();
+
+        user.setTable(userType);
+        user.setIdType(idType);
+        user.setFirstName(tf_firstName.getText());
+        user.setLastName(tf_lastName.getText());
+        user.setEmail(tf_email.getText());
+        user.setID(userID);
+
+        MainModel.updateUser(user);
+        tbl_data.getColumns().clear();
+        populateTable(userType);
+        System.out.println(userType + " updated");       
+    }
+    
+    public void confirmPassword(String userType, int userID, String password){
+        User user = new User();
+        user.setTable(userType);
+        user.setID(userID);
+        try {
+            user.setPassword(SecurityMethods.getHash(password));
+        } catch (NoSuchAlgorithmException ex) {
+            System.out.println("Error with encoding password.");
+        }
+        StudentModel.updateStudentPassword(user);
+
+        tf_changePassword.clear();
+        hideChangePassword();
+    }
+    
+    private void showChangePassword(){
+        btn_changePassword.setVisible(false);
+        btn_cancel.setVisible(true);
+        tf_changePassword.setVisible(true);
+        btn_confirmPassword.setVisible(true);
+        lbl_newPassword.setVisible(true);
+    }
+    
+    private void hideChangePassword(){
+        btn_changePassword.setVisible(true);
+        btn_cancel.setVisible(false);
+        tf_changePassword.setVisible(false);
+        btn_confirmPassword.setVisible(false);
+        lbl_newPassword.setVisible(false);
+    }
 
     @FXML
     private void addNewUser(MouseEvent event) throws IOException {
@@ -587,6 +553,4 @@ public class AdministratorDashboardController implements Initializable {
         tbl_data.setVisible(false);
         vb_selectionDetails.setVisible(false);
     }
-
-
 }

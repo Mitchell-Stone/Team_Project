@@ -112,7 +112,6 @@ public class StudentModel extends MainModel {
             System.out.println(e);
             return false;
         }
-    
     }
     
     public static boolean updateStudentPassword(User bean) {
