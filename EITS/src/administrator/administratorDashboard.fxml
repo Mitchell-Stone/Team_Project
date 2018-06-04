@@ -29,7 +29,7 @@
             <Button mnemonicParsing="false" onMouseClicked="#showAllStudents" prefHeight="35.0" prefWidth="125.0" text="Students" />
             <Button mnemonicParsing="false" onMouseClicked="#showAllCaseWorkers" prefHeight="35.0" prefWidth="125.0" text="Case Workers" />
             <Button fx:id="btn_administrator" mnemonicParsing="false" onMouseClicked="#showAllAdministrators" prefHeight="35.0" prefWidth="125.0" text="Administrators" />
-            <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="125.0" text="Courses" />
+            <Button mnemonicParsing="false" onMouseClicked="#showAllCourses" prefHeight="35.0" prefWidth="125.0" text="Courses" />
             <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="125.0" text="Reports" />
          </children>
       </HBox>

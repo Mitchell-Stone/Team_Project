@@ -7,6 +7,7 @@ package administrator;
 
 import beans.Administrator;
 import beans.CaseWorker;
+import beans.Courses;
 import beans.Student;
 import beans.User;
 import controllers.MainController;
@@ -27,6 +28,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import model.AdministratorModel;
 import model.CaseWorkerModel;
+import model.CoursesModel;
 import model.MainModel;
 import model.StudentModel;
 
@@ -65,7 +67,7 @@ public class AdministratorDashboardController implements Initializable {
     Button btn_delete = new Button();
     
     //selected values: Student = 1, case worker = 2, admin = 3
-    private String userType = null;
+    private String selectionType = null;
     
     private final String windowURL = "/globalInterfaces/addNewUser.fxml";
     private final String loginURL = "/userAccess/userSignIn.fxml";
@@ -166,9 +168,37 @@ public class AdministratorDashboardController implements Initializable {
                     System.out.println("DATABASE ERROR SQL EXCEPTION");
                 }   break;
                 }
+            case "courses":{
+                //create the columns needed in the table
+                TableColumn courseID = new TableColumn("Course ID");
+                TableColumn courseName = new TableColumn("Course Name");
+                TableColumn courseIndustry = new TableColumn("Course Industry");
+                TableColumn courseLocation = new TableColumn("Location");
+                TableColumn courseLengthInHours = new TableColumn("Course Length (hrs)");
+                tbl_data.getColumns().addAll(courseID, courseName, courseIndustry, courseLocation, courseLengthInHours);
+                //connect to the database and retrieve all courses
+                try{
+                    //Insantiate the main model
+                    CoursesModel model = new CoursesModel();
+                    //get all the students and put them in an observable list
+                    ObservableList<Courses> list = model.getAllCourses();
+                    
+                    //put the data in the appropriate columns
+                    courseID.setCellValueFactory(new PropertyValueFactory<Courses, String>("courseID"));
+                    courseName.setCellValueFactory(new PropertyValueFactory<Courses, String>("name"));
+                    courseIndustry.setCellValueFactory(new PropertyValueFactory<Courses, String>("industry"));
+                    courseLocation.setCellValueFactory(new PropertyValueFactory<Courses, String>("location"));
+                    courseLengthInHours.setCellValueFactory(new PropertyValueFactory<Courses, String>("numberOfHours"));
+                    
+                    //get the table and list the data
+                    tbl_data.setItems(list);
+                }catch(SQLException ex){
+                    System.out.println("DATABASE ERROR SQL EXCEPTION");
+                }   break;
+                }
             default:
                 break;
-        }
+            }
         }
     
     
@@ -178,8 +208,8 @@ public class AdministratorDashboardController implements Initializable {
         tbl_data.setVisible(true);
         vb_selectionDetails.setVisible(true);
         
-        //set the selected table value to one for student
-        userType = "student";
+        //set the selected table value
+        selectionType = "student";
         
         //clear the vbox of its children ready for the new details and set the
         //text fields with the same name to be empty
@@ -204,8 +234,8 @@ public class AdministratorDashboardController implements Initializable {
         //show the table
         tbl_data.setVisible(true);
         vb_selectionDetails.setVisible(true);
-        //set the selected table value to 2 for case workers
-        userType = "caseWorker";
+        //set the selected table value
+        selectionType = "caseWorker";
         
         //clear the vbox of its children ready for the new details and set the
         //text fields with the same name to be empty
@@ -231,8 +261,8 @@ public class AdministratorDashboardController implements Initializable {
         tbl_data.setVisible(true);
         vb_selectionDetails.setVisible(true);
         
-        //set the selected table value to 3 for admins
-        userType = "admin";
+        //set the selected table value
+        selectionType = "admin";
         
         //clear the vbox of its children ready for the new details and set the
         //text fields with the same name to be empty
@@ -253,8 +283,24 @@ public class AdministratorDashboardController implements Initializable {
     }
     
     @FXML
+    private void showAllCourses(MouseEvent event) {
+                //show the table
+        tbl_data.setVisible(true);
+        vb_selectionDetails.setVisible(false);
+        
+        //set the selected table value
+        selectionType = "courses";
+             
+        //clear the table of its previous content
+        tbl_data.getColumns().clear();
+        
+        //show all case workers
+        populateTable("courses");
+    }
+    
+    @FXML
     private void selectItem(MouseEvent event) {
-        switch (userType) {
+        switch (selectionType) {
             case "student":
                 //When an item is selected in the table get all the data for that item
                 Student student = (Student) tbl_data.getSelectionModel().getSelectedItem();
@@ -463,6 +509,7 @@ public class AdministratorDashboardController implements Initializable {
             
         });
     }
+   
 
     @FXML
     private void addNewUser(MouseEvent event) throws IOException {
@@ -481,4 +528,6 @@ public class AdministratorDashboardController implements Initializable {
         tbl_data.setVisible(false);
         vb_selectionDetails.setVisible(false);
     }
+
+
 }
