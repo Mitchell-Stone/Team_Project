@@ -214,7 +214,6 @@ public class AdministratorDashboardController implements Initializable {
             }
         }
     
-    
     @FXML
     private void showAllStudents(MouseEvent event) throws SQLException {
         //show the table
@@ -297,7 +296,7 @@ public class AdministratorDashboardController implements Initializable {
     
     @FXML
     private void showAllCourses(MouseEvent event) {
-                //show the table
+        //show the table
         tbl_data.setVisible(true);
         vb_selectionDetails.setVisible(false);
         
@@ -418,13 +417,34 @@ public class AdministratorDashboardController implements Initializable {
         vb_selectionDetails.getChildren().add(btn_update);
         //create an on action event so the button knows what to do when pressed
         btn_update.setOnAction((event) -> {
-            updateUser(caseWorker, Integer.parseInt(tf_employeeID.getText()), "caseworker");
+            updateUser(caseWorker, Integer.parseInt(tf_employeeID.getText()), "employeeID");
         });
         
         btn_delete.setText("Delete Case Worker");
         vb_selectionDetails.getChildren().add(btn_delete);
         btn_delete.setOnAction((event) ->{       
             deleteUser(caseWorker, "employeeID", Integer.parseInt(tf_employeeID.getText()));            
+        });
+        
+        btn_changePassword.setText("Change Password");
+        vb_selectionDetails.getChildren().add(btn_changePassword);
+        vb_selectionDetails.getChildren().add(lbl_newPassword);
+        tf_changePassword.setId("tf_changePassword");
+        vb_selectionDetails.getChildren().add(tf_changePassword);
+        btn_confirmPassword.setText("Confirm Password");
+        vb_selectionDetails.getChildren().add(btn_confirmPassword);
+        btn_cancel.setText("Cancel");
+        vb_selectionDetails.getChildren().add(btn_cancel);
+        btn_changePassword.setOnAction((event) ->{
+            showChangePassword();
+        });
+        
+        btn_confirmPassword.setOnAction((event) ->{
+            confirmPassword(caseWorker, Integer.parseInt(tf_employeeID.getText()), tf_changePassword.getText());         
+        });
+        
+        btn_cancel.setOnAction((event) ->{
+            hideChangePassword();
         });
     }
     
@@ -455,6 +475,27 @@ public class AdministratorDashboardController implements Initializable {
         vb_selectionDetails.getChildren().add(btn_delete);
         btn_delete.setOnAction((event) ->{
             deleteUser(admin, "adminID", Integer.parseInt(tf_adminID.getText()));
+        });
+        
+        btn_changePassword.setText("Change Password");
+        vb_selectionDetails.getChildren().add(btn_changePassword);
+        vb_selectionDetails.getChildren().add(lbl_newPassword);
+        tf_changePassword.setId("tf_changePassword");
+        vb_selectionDetails.getChildren().add(tf_changePassword);
+        btn_confirmPassword.setText("Confirm Password");
+        vb_selectionDetails.getChildren().add(btn_confirmPassword);
+        btn_cancel.setText("Cancel");
+        vb_selectionDetails.getChildren().add(btn_cancel);
+        btn_changePassword.setOnAction((event) ->{
+            showChangePassword();
+        });
+        
+        btn_confirmPassword.setOnAction((event) ->{
+            confirmPassword(admin, Integer.parseInt(tf_adminID.getText()), tf_changePassword.getText());         
+        });
+        
+        btn_cancel.setOnAction((event) ->{
+            hideChangePassword();
         });
     }
     
