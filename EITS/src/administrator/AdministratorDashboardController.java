@@ -13,8 +13,11 @@ import beans.User;
 import controllers.MainController;
 import java.io.IOException;
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -31,6 +34,7 @@ import model.CaseWorkerModel;
 import model.CoursesModel;
 import model.MainModel;
 import model.StudentModel;
+import security.SecurityMethods;
 
 /**
  * FXML Controller class
@@ -65,6 +69,12 @@ public class AdministratorDashboardController implements Initializable {
     Label lbl_phNumber = new Label("Phone Number");
     Button btn_update = new Button();
     Button btn_delete = new Button();
+    Label lbl_newPassword = new Label("Enter New Password");
+    Button btn_changePassword = new Button();
+    Button btn_confirmPassword = new Button();
+    Button btn_cancel = new Button();
+    TextField tf_changePassword = new TextField();
+    
     
     //selected values: Student = 1, case worker = 2, admin = 3
     private String selectionType = null;
@@ -82,6 +92,7 @@ public class AdministratorDashboardController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         //Populate my profle when the window opens or make it so a seperate window opens
+        hideChangePassword();
         tbl_data.setVisible(false);
         vb_selectionDetails.setVisible(false);
         
@@ -392,7 +403,55 @@ public class AdministratorDashboardController implements Initializable {
             System.out.println("Student deleted");
             
         });
-    }               
+        
+        btn_changePassword.setText("Change Password");
+        vb_selectionDetails.getChildren().add(btn_changePassword);
+        vb_selectionDetails.getChildren().add(lbl_newPassword);
+        tf_changePassword.setId("tf_changePassword");
+        vb_selectionDetails.getChildren().add(tf_changePassword);
+        btn_confirmPassword.setText("Confirm Password");
+        vb_selectionDetails.getChildren().add(btn_confirmPassword);
+        btn_cancel.setText("Cancel");
+        vb_selectionDetails.getChildren().add(btn_cancel);
+        btn_changePassword.setOnAction((event) ->{
+            showChangePassword();
+        });
+        
+        btn_confirmPassword.setOnAction((event) ->{
+            Student student = new Student();
+            student.setID(Integer.parseInt(tf_studentID.getText()));
+            try {
+                student.setPassword(SecurityMethods.getHash(tf_changePassword.getText()));
+            } catch (NoSuchAlgorithmException ex) {
+                System.out.println("Error with encoding password.");
+            }
+            StudentModel.updateStudentPassword(student);
+            
+            tf_changePassword.clear();
+            hideChangePassword();
+            
+        });
+        
+        btn_cancel.setOnAction((event) ->{
+            hideChangePassword();
+        });  
+    } 
+    
+    private void showChangePassword(){
+        btn_changePassword.setVisible(false);
+        btn_cancel.setVisible(true);
+        tf_changePassword.setVisible(true);
+        btn_confirmPassword.setVisible(true);
+        lbl_newPassword.setVisible(true);
+    }
+    
+    private void hideChangePassword(){
+        btn_changePassword.setVisible(true);
+        btn_cancel.setVisible(false);
+        tf_changePassword.setVisible(false);
+        btn_confirmPassword.setVisible(false);
+        lbl_newPassword.setVisible(false);
+    }
    
     private void createCaseWorkerDetails(){
         vb_selectionDetails.getChildren().add(lbl_employeeID);
