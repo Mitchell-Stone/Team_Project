@@ -425,6 +425,7 @@ public class AdministratorDashboardController implements Initializable {
         tf_email.setId("tf_email");      
         btn_update.setText("Update Case Worker");
         btn_delete.setText("Delete Case Worker");
+        btn_changePassword.setText("Change Password");
         tf_changePassword.setId("tf_changePassword");
         btn_confirmPassword.setText("Confirm Password");
         btn_cancel.setText("Cancel");
@@ -469,9 +470,10 @@ public class AdministratorDashboardController implements Initializable {
         btn_confirmPassword.setText("Confirm Password");
         btn_cancel.setText("Cancel");
         
-        vb_selectionDetails.getChildren().addAll(lbl_adminID, tf_adminID, lbl_fName, lbl_lName,
-                tf_lastName, lbl_email, tf_email, btn_update, btn_delete, btn_changePassword,
-                lbl_newPassword, tf_changePassword, btn_confirmPassword, btn_cancel);
+        vb_selectionDetails.getChildren().addAll(lbl_adminID, tf_adminID, lbl_fName, 
+                tf_firstName, lbl_lName, tf_lastName, lbl_email, tf_email, btn_update, 
+                btn_delete, btn_changePassword, lbl_newPassword, tf_changePassword, 
+                btn_confirmPassword, btn_cancel);
         
         //create an on action event so the button knows what to do when pressed
         btn_update.setOnAction((event) -> {
