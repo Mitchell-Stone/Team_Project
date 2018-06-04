@@ -314,7 +314,7 @@ public class AdministratorDashboardController implements Initializable {
     @FXML
     private void selectItem(MouseEvent event) {
         switch (selectionType) {
-            case "student":
+            case student:
                 //When an item is selected in the table get all the data for that item
                 Student st = (Student) tbl_data.getSelectionModel().getSelectedItem();
                 //set the text fields to show the selected item to allow for changes
@@ -323,7 +323,7 @@ public class AdministratorDashboardController implements Initializable {
                 tf_lastName.setText(st.getLastName());
                 tf_email.setText(st.getEmail());
                 break;
-            case "caseWorker":
+            case caseWorker:
                 //When an item is selected in the table get all the data for that item
                 CaseWorker cw = (CaseWorker) tbl_data.getSelectionModel().getSelectedItem();
                 //set the text fields to show the selected item to allow for changes
@@ -332,7 +332,7 @@ public class AdministratorDashboardController implements Initializable {
                 tf_lastName.setText(cw.getLastName());
                 tf_email.setText(cw.getEmail());
                 break;
-            case "admin":
+            case admin:
                 //When an item is selected in the table get all the data for that item
                 Administrator ad = (Administrator) tbl_data.getSelectionModel().getSelectedItem();
                 //set the text fields to show the selected item to allow for changes
@@ -351,21 +351,16 @@ public class AdministratorDashboardController implements Initializable {
         vb_selectionDetails.getChildren().add(lbl_studentID);
          
         tf_studentID.setId("tf_studentID");
-        vb_selectionDetails.getChildren().add(tf_studentID);
-        
-        vb_selectionDetails.getChildren().add(lbl_fName);
-        
         tf_firstName.setId("tf_firstName");
-        vb_selectionDetails.getChildren().add(tf_firstName);
-       
-        vb_selectionDetails.getChildren().add(lbl_lName);
-        
         tf_lastName.setId("tf_lastName");
-        vb_selectionDetails.getChildren().add(tf_lastName);
-        
-        vb_selectionDetails.getChildren().add(lbl_email);
-        
         tf_email.setId("tf_email");
+        
+        vb_selectionDetails.getChildren().add(tf_studentID);    
+        vb_selectionDetails.getChildren().add(lbl_fName);
+        vb_selectionDetails.getChildren().add(tf_firstName);
+        vb_selectionDetails.getChildren().add(lbl_lName);
+        vb_selectionDetails.getChildren().add(tf_lastName); 
+        vb_selectionDetails.getChildren().add(lbl_email); 
         vb_selectionDetails.getChildren().add(tf_email);
         
         btn_update.setText("Update Student");
@@ -407,21 +402,16 @@ public class AdministratorDashboardController implements Initializable {
         vb_selectionDetails.getChildren().add(lbl_employeeID);
         
         tf_employeeID.setId("tf_employeeID");
-        vb_selectionDetails.getChildren().add(tf_employeeID);
-        
-        vb_selectionDetails.getChildren().add(lbl_fName);
-        
         tf_firstName.setId("tf_firstName");
-        vb_selectionDetails.getChildren().add(tf_firstName);
-       
-        vb_selectionDetails.getChildren().add(lbl_lName);
-        
         tf_lastName.setId("tf_lastName");
-        vb_selectionDetails.getChildren().add(tf_lastName);
-        
-        vb_selectionDetails.getChildren().add(lbl_email);
-        
         tf_email.setId("tf_email");
+        
+        vb_selectionDetails.getChildren().add(tf_employeeID);
+        vb_selectionDetails.getChildren().add(lbl_fName);      
+        vb_selectionDetails.getChildren().add(tf_firstName);     
+        vb_selectionDetails.getChildren().add(lbl_lName);
+        vb_selectionDetails.getChildren().add(tf_lastName);
+        vb_selectionDetails.getChildren().add(lbl_email);
         vb_selectionDetails.getChildren().add(tf_email);
         
         btn_update.setText("Update Case Worker");
@@ -442,21 +432,16 @@ public class AdministratorDashboardController implements Initializable {
         vb_selectionDetails.getChildren().add(lbl_adminID);
         
         tf_adminID.setId("tf_adminID");
-        vb_selectionDetails.getChildren().add(tf_adminID);
-        
-        vb_selectionDetails.getChildren().add(lbl_fName);
-        
         tf_firstName.setId("tf_firstName");
-        vb_selectionDetails.getChildren().add(tf_firstName);
-       
-        vb_selectionDetails.getChildren().add(lbl_lName);
-        
         tf_lastName.setId("tf_lastName");
-        vb_selectionDetails.getChildren().add(tf_lastName);
-        
-        vb_selectionDetails.getChildren().add(lbl_email);
-        
         tf_email.setId("tf_email");
+        
+        vb_selectionDetails.getChildren().add(tf_adminID);
+        vb_selectionDetails.getChildren().add(lbl_fName);   
+        vb_selectionDetails.getChildren().add(tf_firstName);    
+        vb_selectionDetails.getChildren().add(lbl_lName);     
+        vb_selectionDetails.getChildren().add(tf_lastName);   
+        vb_selectionDetails.getChildren().add(lbl_email);     
         vb_selectionDetails.getChildren().add(tf_email);
         
         btn_update.setText("Update Administrator");
