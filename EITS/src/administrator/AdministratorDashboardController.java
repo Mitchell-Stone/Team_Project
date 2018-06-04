@@ -388,24 +388,23 @@ public class AdministratorDashboardController implements Initializable {
             System.out.println("Employee updated");
         });
         
-        /*
-        btn_delete.setText("Delete Student");
+        btn_delete.setText("Delete Case Worker");
         vb_selectionDetails.getChildren().add(btn_delete);
         btn_delete.setOnAction((event) ->{
         
             User user = new User();
-            user.setTable("student");
-            user.setID(Integer.parseInt(tf_studentID.getText()));
-            MainModel.deleteSelection(user, "studentID");
+            user.setTable("caseworker");
+            user.setID(Integer.parseInt(tf_employeeID.getText()));
+            MainModel.deleteSelection(user, "employeeID");
             tbl_data.getColumns().clear();
-            populateTable("student");
-            tf_studentID.clear();
+            populateTable("caseWorker");
+            tf_employeeID.clear();
             tf_email.clear();
             tf_firstName.clear();
             tf_lastName.clear();
-            System.out.println("Student deleted");
+            System.out.println("Case Worker deleted");
             
-        });*/
+        });
     }
     
     private void createAdministratorDetails(){

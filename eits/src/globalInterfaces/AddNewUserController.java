@@ -100,8 +100,7 @@ public class AddNewUserController implements Initializable {
             ((Node)(event.getSource())).getScene().getWindow().hide();
         } else {
             System.out.println("Please select user type.");
-        }
-        
+        }  
     }  
 
 
