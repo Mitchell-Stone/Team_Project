@@ -9,7 +9,7 @@ package beans;
  *
  * @author mitch
  */
-public class CaseWorker {
+public class CaseWorker extends User{
     
     public CaseWorker(){
         

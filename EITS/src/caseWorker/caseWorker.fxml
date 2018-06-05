@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1178.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1178.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="caseWorker.CaseWorkerController">
   <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="955.0" minWidth="10.0" prefWidth="46.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="955.0" minWidth="10.0" prefWidth="249.0" />
@@ -21,15 +20,15 @@
   </columnConstraints>
   <rowConstraints>
     <RowConstraints maxHeight="249.0" minHeight="2.0" prefHeight="70.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="500.0" minHeight="10.0" percentHeight="0.0" prefHeight="320.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="500.0" minHeight="0.0" percentHeight="0.0" prefHeight="280.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="500.0" minHeight="10.0" percentHeight="0.0" prefHeight="364.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="500.0" minHeight="0.0" percentHeight="0.0" prefHeight="236.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="156.0" minHeight="10.0" prefHeight="90.0" vgrow="SOMETIMES" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <TableView prefHeight="291.0" prefWidth="616.0" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.rowSpan="2" />
-      <TableView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-      <TableView prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+      <TableView fx:id="allStudentsTable" prefHeight="291.0" prefWidth="616.0" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.rowSpan="2" />
+      <TableView fx:id="secondaryTable" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+      <TableView fx:id="myStudentsTable" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
       <Label alignment="CENTER" prefHeight="138.0" prefWidth="637.0" text="CaseWorker" GridPane.columnIndex="2">
          <font>
             <Font size="70.0" />
@@ -37,10 +36,11 @@
       </Label>
       <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.rowSpan="2">
          <children>
-            <Button mnemonicParsing="false" prefHeight="74.0" prefWidth="300.0" text="My Students" />
-            <Button mnemonicParsing="false" prefHeight="74.0" prefWidth="300.0" text="All Students" />
+            <Button fx:id="myStudentsButton" mnemonicParsing="false" prefHeight="74.0" prefWidth="300.0" text="My Students" />
+            <Button fx:id="allStudentsButton" mnemonicParsing="false" onAction="#allStudentsButton" prefHeight="74.0" prefWidth="300.0" text="All Students" />
             <Button mnemonicParsing="false" prefHeight="74.0" prefWidth="300.0" text="Assessments" />
             <Button mnemonicParsing="false" prefHeight="74.0" prefWidth="300.0" text="Attendance" />
+            <Button mnemonicParsing="false" prefHeight="74.0" prefWidth="300.0" text="Update Information" />
             <Button mnemonicParsing="false" prefHeight="74.0" prefWidth="300.0" text="Log-Out" />
          </children>
       </VBox>
@@ -51,6 +51,12 @@
                   <Font size="26.0" />
                </font>
             </Label>
+            <Label text="ID:">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <TextField />
             <Label text="First Name:">
                <font>
                   <Font size="15.0" />
