@@ -29,7 +29,7 @@
          <children>
             <Button mnemonicParsing="false" onAction="#myprofile" prefHeight="71.0" prefWidth="156.0" text="Details" />
             <Button mnemonicParsing="false" onAction="#diploma" prefHeight="71.0" prefWidth="156.0" text="Diploma" />
-            <Button mnemonicParsing="false" onAction="#assessments" prefHeight="71.0" prefWidth="156.0" text="Assessments" />
+            <Button mnemonicParsing="false" onAction="#assignments" prefHeight="71.0" prefWidth="156.0" text="Assessments" />
             <Button mnemonicParsing="false" onAction="#industry" prefHeight="71.0" prefWidth="156.0" text="Industry" />
             <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#logout" prefHeight="71.0" prefWidth="156.0" text="Logout" />
          </children>

@@ -5,6 +5,7 @@
  */
 package student;
 
+import beans.Attendance;
 import beans.Courses;
 import beans.Student;
 import beans.User;
@@ -12,9 +13,15 @@ import controllers.MainController;
 import java.io.IOException;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,15 +29,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
+import static model.AssessmentModel.getCoursesByDiplomaID;
+import model.AttendanceModel;
 import model.CoursesModel;
 import model.MainModel;
 import model.StudentModel;
@@ -128,6 +132,12 @@ public class StudentDashboardController implements Initializable {
 
         System.out.println(currentUser);
         
+        try {
+            AttendanceModel.logAttendance(ID);
+        } catch (SQLException ex) {
+            Logger.getLogger(StudentDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }   
 
     @FXML
@@ -145,11 +155,21 @@ public class StudentDashboardController implements Initializable {
     }
 
     @FXML
-    private void assessments(ActionEvent event) {
+    private void assignments(ActionEvent event) throws SQLException {
+        
+        displayAssignments();
+        
+        Attendance log = new Attendance();
+        
+        log.setStudentID(ID);
+        
+        
+        
     }
 
     @FXML
     private void industry(ActionEvent event) {
+        
     }
 
     @FXML
@@ -425,6 +445,22 @@ public class StudentDashboardController implements Initializable {
         text4.setEditable(false);
         text5.setText(currentDiploma.get(4));
         text5.setEditable(false);
+    
+    }
+    
+    private void displayAssignments() {
+        
+        user.setID(Integer.parseInt(currentUser.get(1)));
+        user.setTable("diploma");
+        user.setColumn("diplomaID");
+        
+        currentDiploma = CoursesModel.getDiplomaByID(user);
+    
+        System.out.println(currentDiploma.get(0));
+        
+        ArrayList ggg = getCoursesByDiplomaID(Integer.parseInt(currentDiploma.get(0)));
+        
+        System.out.println(ggg);
     
     }
 
