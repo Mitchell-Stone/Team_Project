@@ -19,6 +19,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import model.CoursesModel;
 import model.StudentModel;
 
 /**
@@ -27,7 +28,6 @@ import model.StudentModel;
  * @author Jake
  */
 public class CaseWorkerController implements Initializable {
-    
 
     @FXML
     private TableView allStudentsTable;
@@ -50,9 +50,12 @@ public class CaseWorkerController implements Initializable {
     }
 
     @FXML
-    private void allStudentsButton(ActionEvent event) throws SQLException {
+    private void getAllStudents(ActionEvent event) throws SQLException {
         allStudentsTable.getColumns().clear();
-
+        myStudentsTable.setVisible(false);
+        secondaryTable.setVisible(false);
+        allStudentsTable.setVisible(true);
+        // show all students in table
         TableColumn studentID = new TableColumn("ID");
         TableColumn firstName = new TableColumn("First Name");
         TableColumn lastName = new TableColumn("Last Name");
@@ -78,5 +81,58 @@ public class CaseWorkerController implements Initializable {
         }
     }
 
+    @FXML
+    private void getMyStudents(ActionEvent event) throws SQLException {
+        myStudentsTable.getColumns().clear();
+        myStudentsTable.setVisible(true);
+        secondaryTable.setVisible(true);
+        allStudentsTable.setVisible(false);
+        //Show My students in table
+        TableColumn studentID = new TableColumn("ID");
+        TableColumn firstName = new TableColumn("First Name");
+        TableColumn lastName = new TableColumn("Last Name");
+        TableColumn email = new TableColumn("email");
+
+        myStudentsTable.getColumns().addAll(studentID, firstName, lastName, email);
+
+        try {
+
+            StudentModel model = new StudentModel();
+
+            ObservableList<Student> list = model.getAllStudents();
+
+            studentID.setCellValueFactory(new PropertyValueFactory<Student, String>("studentID"));
+            firstName.setCellValueFactory(new PropertyValueFactory<Student, String>("firstName"));
+            lastName.setCellValueFactory(new PropertyValueFactory<Student, String>("lastName"));
+            email.setCellValueFactory(new PropertyValueFactory<Student, String>("email"));
+
+            myStudentsTable.setItems(list);
+
+        } catch (NullPointerException ex) {
+            System.out.println("No Pointer Exception");
+        }
+        //Show Course in Secondary Table
+        secondaryTable.getColumns().clear();
+        TableColumn courseID = new TableColumn("ID");
+        TableColumn courseName = new TableColumn("Course");
+        TableColumn courseIndustry = new TableColumn("Industry");
+        TableColumn courseLocation = new TableColumn("Location");
+        secondaryTable.getColumns().addAll(courseID, courseName, courseIndustry, courseLocation);
+        try {
+
+            CoursesModel model = new CoursesModel();
+
+            ObservableList<Courses> list = model.getAllCourses();
+
+            courseID.setCellValueFactory(new PropertyValueFactory<Courses, String>("courseID"));
+            courseName.setCellValueFactory(new PropertyValueFactory<Courses, String>("name"));
+            courseIndustry.setCellValueFactory(new PropertyValueFactory<Courses, String>("industry"));
+            courseLocation.setCellValueFactory(new PropertyValueFactory<Courses, String>("location"));
+            secondaryTable.setItems(list);
+        } catch (NullPointerException ex) {
+            System.out.println("No Pointer Exception");
+        }
+
+    }
+
 }
- 
