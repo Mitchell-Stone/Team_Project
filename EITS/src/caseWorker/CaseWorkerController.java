@@ -46,6 +46,7 @@ public class CaseWorkerController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        System.out.println("Loading....");
     }
 
     @FXML

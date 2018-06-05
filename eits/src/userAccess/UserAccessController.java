@@ -26,7 +26,7 @@ import security.SecurityMethods;
 public class UserAccessController {
     
     String studentDboardPath = "/student/studentDashboard.fxml";
-    String caseWorkerDboardPath = "/caseWorker/caseWorkerDashboard.fxml";
+    String caseWorkerDboardPath = "/caseWorker/caseWorker.fxml";
     String adminDboardPath = "/administrator/administratorDashboard.fxml";
     
     @FXML
