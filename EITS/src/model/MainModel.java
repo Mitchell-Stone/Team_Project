@@ -12,9 +12,13 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 public class MainModel {
+<<<<<<< HEAD
     
     
     
+=======
+   
+>>>>>>> bf372000d78224dc2cef8bae9335703247464ccd
     public static boolean addNewUser(User bean) throws SQLException{
     
         String sql = "INSERT INTO $tablename (email, password, firstName, lastName) VALUES (?, ?, ?, ?)";
