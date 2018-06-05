@@ -41,7 +41,7 @@ public class CaseWorkerController implements Initializable {
     private Button allStudentsButton;
 
     /**
-     * Initializes the controller class.
+     * Initialises the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -65,10 +65,10 @@ public class CaseWorkerController implements Initializable {
 
             ObservableList<Student> list = model.getAllStudents();
 
-            studentID.setCellValueFactory(new PropertyValueFactory<Courses, String>("studentID"));
-            firstName.setCellValueFactory(new PropertyValueFactory<Courses, String>("firstName"));
-            lastName.setCellValueFactory(new PropertyValueFactory<Courses, String>("lastName"));
-            email.setCellValueFactory(new PropertyValueFactory<Courses, String>("email"));
+            studentID.setCellValueFactory(new PropertyValueFactory<Student, String>("studentID"));
+            firstName.setCellValueFactory(new PropertyValueFactory<Student, String>("firstName"));
+            lastName.setCellValueFactory(new PropertyValueFactory<Student, String>("lastName"));
+            email.setCellValueFactory(new PropertyValueFactory<Student, String>("email"));
 
             allStudentsTable.setItems(list);
 
