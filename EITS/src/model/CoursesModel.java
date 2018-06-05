@@ -6,6 +6,7 @@
 package model;
 
 import beans.Courses;
+import beans.User;
 import db.DbType;
 import db.DbUtil;
 import java.sql.Connection;
@@ -13,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -21,6 +23,47 @@ import javafx.collections.ObservableList;
  * @author 0111005906
  */
 public class CoursesModel extends MainModel {
+    
+    public static ArrayList<String> getDiplomaByID(User user) {
+        
+        ArrayList<String> currentDiploma = new ArrayList<>();
+    
+        String sql = "SELECT * FROM $tablename WHERE $column = ?";
+        
+        String query = sql.replace("$tablename", user.getTable()).replace("$column", user.getColumn());
+        
+        ResultSet rs;
+        
+        try(
+                Connection conn = DbUtil.getConn(DbType.MYSQL);
+                PreparedStatement stmt = conn.prepareStatement(query);
+                ) {
+            
+            stmt.setInt(1, user.getID());
+            
+            rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                
+                currentDiploma.add(Integer.toString(rs.getInt("diplomaID")));
+                currentDiploma.add(rs.getString("name"));
+                currentDiploma.add(rs.getString("industry"));
+                currentDiploma.add(rs.getString("location"));
+                currentDiploma.add(rs.getString("degree"));
+                
+                return currentDiploma;
+                
+            } else {
+                System.out.println("N");
+                return null;
+            }
+            
+        } catch (Exception e) {
+            System.err.println(e);
+            return null;
+        }
+    
+    }
     
     public static boolean assignCourse(int studentID, int courseID) throws SQLException {
     

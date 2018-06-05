@@ -27,7 +27,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import model.CoursesModel;
 import model.MainModel;
@@ -43,71 +45,74 @@ import security.SecurityMethods;
 public class StudentDashboardController implements Initializable {
 
     
-    private final ObservableList<Courses> data = FXCollections.observableArrayList();
-    
-    boolean visible = false;
-    
-    int ID = 0;
-    
-    User user = new User();
-    
-    ArrayList <String> currentUser;
-    
     @FXML
-    private TextField studentID;
+    private TableView<?> table1;
     @FXML
-    private TextField firstName;
+    private VBox leftVbox;
     @FXML
-    private TextField lastName;
+    private Label leftLabelMain;
     @FXML
-    private TextField email;
+    private Label label1;
     @FXML
-    private Pane studentInfoPane;
+    private TextField text1;
     @FXML
-    private TextField courseID;
+    private Label label2;
     @FXML
-    private TextField employeeID;
+    private TextField text2;
     @FXML
-    private TextField industryPreference;
+    private Label label3;
     @FXML
-    private Label errorOutput;
+    private TextField text3;
     @FXML
-    private TextField password1;
+    private Label label4;
     @FXML
-    private TextField password2;
+    private TextField text4;
     @FXML
-    private Label errorOutput1;
+    private Label label5;
     @FXML
-    private Pane passwordPane;
+    private TextField text5;
     @FXML
-    private Button confirm;
+    private Label label6;
     @FXML
-    private Button confirmPassword;
+    private TextField text6;
     @FXML
-    private TextField currentPassword;
+    private Label label7;
     @FXML
-    private TableView studentsTable;
+    private TextField text7;
     @FXML
-    private Pane coursePane;
+    private Label errorLabel;
     @FXML
-    private TextField courseName;
+    private Button btn1;
     @FXML
-    private TextField courseIndustry;
+    private Label uselesslabel;
     @FXML
-    private TextField courseLocation;
-    @FXML
-    private TextField courseHours;
-    @FXML
-    private TextField courseDegree;
-    @FXML
-    private Label courseError;
-    @FXML
-    private TextField courseId;
-    @FXML
-    private Button logoutBtn;
+    private Button btn2;
     /**
      * Initializes the controller class.
      */
+    
+    //VARIABLES
+    
+    private final ObservableList<Courses> data = FXCollections.observableArrayList();
+    
+    Student currentStudent = new Student();
+    
+    User user = new User();
+    
+    boolean visible = false;
+    String action1 = null;
+    String action2 = null;
+    
+    int ID = 0;
+    
+    ArrayList <String> currentUser;
+    
+    ArrayList<String> currentDiploma;
+    @FXML
+    private Button logoutBtn;
+    
+    //END OF VARIABLES
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
@@ -123,200 +128,28 @@ public class StudentDashboardController implements Initializable {
 
         System.out.println(currentUser);
         
-        
-        
     }   
 
     @FXML
-    private void actionUpdate(ActionEvent event) {
+    private void myprofile(ActionEvent event) {
         
-        firstName.setDisable(false);
-        lastName.setDisable(false);
-        email.setDisable(false);
-        confirm.setVisible(true);   
-    }
-    
-    @FXML
-    private void actionConfirmPassword(ActionEvent event) throws NoSuchAlgorithmException {
-        
-        Student access = new Student();
-        
-        access.setTable("student");
-        
-        access.setEmail(currentUser.get(2));
-        access.setPassword(SecurityMethods.getHash(currentPassword.getText()));
-        
-        String cp = currentPassword.getText();
-        String pw1 = password1.getText();
-        String pw2 = password2.getText();
-        
-        if ("".equals(cp) || "".equals(pw1) || "".equals(pw2)) {
-            errorOutput1.setText("There are empty fields.");
-        } else {
-            if (UserAccessModel.checkUserPass(access)) {
-                if (pw1.equals(pw2) && !cp.equals(pw1) && !cp.equals(pw2)) {
-                    user.setID(ID);
-                    user.setPassword(SecurityMethods.getHash(pw1));
-                    if (StudentModel.updateStudentPassword(user)) {
-                        errorOutput1.setTextFill(Paint.valueOf("green"));
-                        errorOutput1.setText("Success!");
-                    } else {
-                        errorOutput1.setText("There's been a mistake.");
-                    }
-                } else if(cp.equals(pw2) && pw2.equals(pw1)) {
-                    errorOutput1.setText("The current password is the same as the new one.");
-                } else {
-                    errorOutput1.setText("The passwords entered do not match.");
-                }
-            } else {
-                errorOutput1.setText("The current password appears to be wrong.");
-            }
-        }    
-    }
-
-    @FXML
-    private void actionUpdatePassword(ActionEvent event) {
-        
-        studentInfoPane.setVisible(false);
-        passwordPane.setVisible(true);
-        confirmPassword.setVisible(true);
-        currentPassword.setDisable(false);
-        password1.setDisable(false);
-        password2.setDisable(false);
+        showStudentProfile();
         
     }
 
     @FXML
-    private void openStudentInfo(ActionEvent event) {
+    private void diploma(ActionEvent event) {
         
-        passwordPane.setVisible(false);
-        coursePane.setVisible(false);
-        studentInfoPane.setVisible(true);
-        
-        currentUser = MainModel.getUserByID(user);
-        
-        studentID.setText(currentUser.get(0));
-        firstName.setText(currentUser.get(3));
-        lastName.setText(currentUser.get(4));
-        email.setText(currentUser.get(5));
-        courseId.setText(currentUser.get(1));
+        displayDiploma();
         
     }
 
     @FXML
-    private void openCourses(ActionEvent event) throws Exception {
-        
-        studentsTable.getColumns().clear();
-        
-        TableColumn courseId = new TableColumn("ID");
-        TableColumn name = new TableColumn("Name");
-        TableColumn industry = new TableColumn("Industry");
-        TableColumn location = new TableColumn("Location");
-        TableColumn hours = new TableColumn("Hours");
-        TableColumn degree = new TableColumn("Degree");
-        
-        studentsTable.getColumns().addAll(courseId, name, industry, location, hours, degree);
-        
-        try {
-            
-            CoursesModel model = new CoursesModel();
-            
-            ObservableList<Courses> list = model.getAllCourses();
-           
-           courseId.setCellValueFactory(new PropertyValueFactory<Courses, String>("courseID"));
-           name.setCellValueFactory(new PropertyValueFactory<Courses, String>("name"));
-           industry.setCellValueFactory(new PropertyValueFactory<Courses, String>("industry")); 
-           location.setCellValueFactory(new PropertyValueFactory<Courses, String>("location")); 
-           hours.setCellValueFactory(new PropertyValueFactory<Courses, String>("numberOfHours")); 
-           degree.setCellValueFactory(new PropertyValueFactory<Courses, String>("finishingDegree")); 
-           
-           studentsTable.setItems(list);
-            
-        } catch(NullPointerException ex){
-            System.out.println("Null Pointer Exception");
-        }  
+    private void assessments(ActionEvent event) {
     }
 
     @FXML
-    private void openAssessments(ActionEvent event) {
-        
-        passwordPane.setVisible(false);
-        coursePane.setVisible(false);
-        studentInfoPane.setVisible(false);
-        
-        studentsTable.getColumns().clear();
-        
-        
-        
-    }
-
-
-    @FXML
-    private void actionUpdateConfirm(ActionEvent event) {
-        
-        if ("".equals(firstName.getText()) || "".equals(lastName.getText()) || "".equals(email.getText())) {
-            errorOutput.setText("There are empty fields.");
-        } else {
-            
-            user.setFirstName(firstName.getText());
-            user.setLastName(lastName.getText());
-            user.setEmail(email.getText());
-            user.setID(ID);
-
-            if (StudentModel.updateStudent(user)) {
-
-                errorOutput.setTextFill(Paint.valueOf("green"));
-                errorOutput.setText("Success!");
-
-                currentUser = MainModel.getUserByID(user);
-
-                System.out.println(currentUser);
-
-                studentID.setText(Integer.toString(ID));
-                firstName.setText(currentUser.get(0));
-                lastName.setText(currentUser.get(1));
-                email.setText(currentUser.get(2));
-
-            } else {
-                errorOutput.setText("Error. Please try again.");
-            }         
-        } 
-    }
-
-    @FXML
-    private void courseConfirm(ActionEvent event) throws SQLException {
-        
-        boolean completed = CoursesModel.assignCourse(ID, Integer.parseInt(courseID.getText()));
-        
-        if (completed) {
-            courseError.setTextFill(Paint.valueOf("green"));
-            courseError.setText("Success!");
-        } else {
-            courseError.setText("There was a mistake");
-        }
-        
-    }
-
-    @FXML
-    private void selectTableItem(MouseEvent event) {
-        
-        studentInfoPane.setVisible(false);
-        passwordPane.setVisible(false);
-        coursePane.setVisible(true);
-        
-        Courses course = (Courses) studentsTable.getSelectionModel().getSelectedItem();
-        
-        courseID.setText(Integer.toString(course.getCourseID()));
-        courseName.setText(course.getName());
-        courseIndustry.setText(course.getIndustry());
-        courseLocation.setText(course.getLocation());
-        courseHours.setText(Integer.toString(course.getNumberOfHours()));
-        courseDegree.setText(Integer.toString(course.getFinishingDegree()));
-        
-    }
-
-    @FXML
-    private void openIndustry(ActionEvent event) {
+    private void industry(ActionEvent event) {
     }
 
     @FXML
@@ -329,4 +162,317 @@ public class StudentDashboardController implements Initializable {
         
     }
 
+    @FXML
+    private void btn1(ActionEvent event) throws NoSuchAlgorithmException {
+        
+        switch(action1) {
+        
+            case "update_user_details":
+                
+                updateUserDetails();
+                
+                break;
+                
+            case "update_user_details_confirm":
+                
+                updateUserdetailsConfirm();
+                
+                break;
+                
+            case "update_password_confirm":
+                
+                updatePasswordConfirm();
+                
+                break;
+                
+            case "reset_user_details":
+                
+                resetTextAndLabels();
+                
+                resetToUserDetails();
+                
+                showStudentProfile();
+                
+                break;
+                
+            default:
+                System.out.println("Error in event handler 1.");
+        
+        }
+        
+    }
+
+    @FXML
+    private void btn2(ActionEvent event) {
+        
+        switch(action2) {
+        
+            case "update_password":
+                
+                updatePassword();
+                
+                break;
+                
+            default:
+                System.out.println("Error in event handler 2.");
+        
+        }
+        
+    }
+    
+    private void showStudentProfile() {
+    
+        resetTextAndLabels();
+        
+        leftLabelMain.setText("Student details");
+        
+        label1.setText("Student ID:");
+        text1.setEditable(false);
+        label2.setText("Diploma ID:");
+        text2.setEditable(false);
+        label3.setText("Employee ID:");
+        text3.setEditable(false);
+        label4.setText("First Name:");
+        text4.setEditable(false);
+        label5.setText("Last Name:");
+        text5.setEditable(false);
+        label6.setText("Email:");
+        text6.setEditable(false);
+        
+        label7.setVisible(false);
+        text7.setVisible(false);
+        
+        text1.setText(currentUser.get(0));
+        text2.setText(currentUser.get(1));
+        text3.setText(currentUser.get(2));
+        text4.setText(currentUser.get(3));
+        text5.setText(currentUser.get(4));
+        text6.setText(currentUser.get(5));
+        
+        btn1.setVisible(true);
+        btn2.setVisible(true);
+        
+        btn1.setText("Update Details");
+        btn2.setText("Update Password");
+        
+        action1 = "update_user_details";
+        action2 = "update_password";
+        
+    }
+    
+    private void updateUserDetails() {
+    
+        text1.setDisable(true);
+        text2.setDisable(true);
+        text3.setDisable(true);
+        text4.setEditable(true);
+        text5.setEditable(true);
+        text6.setEditable(true);
+        
+        btn1.setText("Confirm Updates");
+        btn2.setVisible(false);
+        
+        action1 = "update_user_details_confirm";
+        
+    }
+    
+    private void updateUserdetailsConfirm() {
+    
+        if ("".equals(text4.getText()) || "".equals(text5.getText()) || "".equals(text6.getText())) {
+            errorLabel.setText("There are empty fields.");
+        } else {
+            
+            user.setID(ID);
+            user.setFirstName(text4.getText());
+            user.setLastName(text5.getText());
+            user.setEmail(text6.getText());
+
+            if (StudentModel.updateStudent(user)) {
+
+                errorLabel.setTextFill(Paint.valueOf("green"));
+                errorLabel.setText("Success!");
+
+                currentUser = MainModel.getUserByID(user);
+
+                System.out.println(currentUser);
+
+                text1.setText(currentUser.get(0));
+                text4.setText(currentUser.get(3));
+                text5.setText(currentUser.get(4));
+                text6.setText(currentUser.get(5));
+                
+                btn1.setText("Back");
+                action1 = "reset_user_details";
+
+            } else {
+                errorLabel.setText("Error. Please try again.");
+            }         
+        }
+    
+    }
+    
+    private void updatePassword() {
+    
+        leftLabelMain.setText("Password Update");
+        
+        label1.setText("Current password:");
+        text1.setEditable(true);
+        text1.setText("");
+        label2.setText("New password:");
+        text2.setText("");
+        text2.setEditable(true);
+        label3.setText("Repeat the new password:");
+        text3.setText("");
+        text3.setEditable(true);
+        
+        label4.setVisible(false);
+        text4.setVisible(false);
+        label5.setVisible(false);
+        text5.setVisible(false);
+        label6.setVisible(false);
+        text6.setVisible(false);
+        label7.setVisible(false);
+        text7.setVisible(false);
+        
+        btn2.setVisible(false);
+        
+        btn1.setText("Confirm Updates");
+        
+        action1 = "update_password_confirm";
+    
+    }
+    
+    private void updatePasswordConfirm() throws NoSuchAlgorithmException {
+    
+        Student access = new Student();
+        
+        access.setTable("student");
+        
+        access.setEmail(currentUser.get(5));
+        access.setPassword(SecurityMethods.getHash(text1.getText()));
+        
+        String cp = text1.getText();
+        String pw1 = text2.getText();
+        String pw2 = text3.getText();
+        
+        if ("".equals(cp) || "".equals(pw1) || "".equals(pw2)) {
+            errorLabel.setText("There are empty fields.");
+        } else {
+            if (UserAccessModel.checkUserPass(access)) {
+                if (pw1.equals(pw2) && !cp.equals(pw1) && !cp.equals(pw2)) {
+                    user.setID(ID);
+                    user.setPassword(SecurityMethods.getHash(pw1));
+                    if (StudentModel.updateStudentPassword(user)) {
+                        errorLabel.setTextFill(Paint.valueOf("green"));
+                        errorLabel.setText("Success!");
+                        
+                        btn1.setText("Back");
+                        
+                        action1 = "reset_user_details";
+                        
+                    } else {
+                        errorLabel.setText("There's been a mistake.");
+                    }
+                } else if(cp.equals(pw2) && pw2.equals(pw1)) {
+                    errorLabel.setText("The current password is the same as the new one.");
+                } else {
+                    errorLabel.setText("The passwords entered do not match.");
+                }
+            } else {
+                errorLabel.setText("The current password appears to be wrong.");
+            }
+        }
+    
+    }
+    
+    private void displayDiploma() {
+    
+        leftLabelMain.setText("Diploma");
+        
+        label1.setText("Diploma ID");
+        
+        label2.setText("Name");
+        
+        label3.setText("Industry");
+        
+        label4.setText("Location");
+        
+        label5.setText("Degree");
+        
+        label6.setVisible(false);
+        text6.setVisible(false);
+        label7.setVisible(false);
+        text7.setVisible(false);
+        
+        btn1.setVisible(false);
+        btn2.setVisible(false);
+        
+        user.setID(Integer.parseInt(currentUser.get(1)));
+        user.setTable("diploma");
+        user.setColumn("diplomaID");
+        
+        currentDiploma = CoursesModel.getDiplomaByID(user);
+        
+        System.out.println(currentDiploma);
+        
+        text1.setText(currentDiploma.get(0));
+        text1.setEditable(false);
+        text2.setText(currentDiploma.get(1));
+        text2.setEditable(false);
+        text3.setText(currentDiploma.get(2));
+        text3.setEditable(false);
+        text4.setText(currentDiploma.get(3));
+        text4.setEditable(false);
+        text5.setText(currentDiploma.get(4));
+        text5.setEditable(false);
+    
+    }
+
+    private void resetToUserDetails() {
+    
+        leftLabelMain.setText("Student details");
+        
+        label1.setText("Student ID:");
+        text1.setEditable(false);
+        label2.setText("Diploma ID:");
+        text2.setEditable(false);
+        label3.setText("Employee ID:");
+        text3.setEditable(false);
+        label4.setText("First Name:");
+        text4.setEditable(false);
+        label5.setText("Last Name:");
+        text5.setEditable(false);
+        label6.setText("Email:");
+        text6.setEditable(false);
+        
+        label7.setVisible(false);
+        text7.setVisible(false);
+        
+        errorLabel.setText("");
+    
+    }
+    
+    private void resetTextAndLabels() {
+    
+        label1.setVisible(true);
+        text1.setDisable(false);
+        text1.setVisible(true);
+        label2.setVisible(true);
+        text2.setDisable(false);
+        text2.setVisible(true);
+        label3.setVisible(true);
+        text3.setDisable(false);
+        text3.setVisible(true);
+        label4.setVisible(true);
+        text4.setDisable(false);
+        text4.setVisible(true);
+        label5.setVisible(true);
+        text5.setDisable(false);
+        text5.setVisible(true);
+        label6.setVisible(true);
+        text6.setDisable(false);
+        text6.setVisible(true);
+    
+    }
+    
 }

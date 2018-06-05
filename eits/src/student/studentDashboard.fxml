@@ -4,84 +4,63 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="584.0" prefWidth="913.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="student.StudentDashboardController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="866.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="student.StudentDashboardController">
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="5.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="25.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="5.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="45.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="5.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="15.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" percentHeight="80.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
    <children>
-      <Pane fx:id="studentInfoPane" layoutY="83.0" prefHeight="500.0" prefWidth="198.0" style="-fx-border-color: grey;" visible="false">
+      <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="5" GridPane.rowIndex="1">
          <children>
-            <Label layoutX="34.0" layoutY="14.0" prefHeight="32.0" prefWidth="132.0" text="Account Info">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Label>
-            <TextField fx:id="studentID" disable="true" layoutX="26.0" layoutY="78.0" />
-            <TextField fx:id="courseId" disable="true" layoutX="26.0" layoutY="111.0" promptText="Course ID" />
-            <TextField fx:id="employeeID" disable="true" layoutX="26.0" layoutY="143.0" promptText="Case Worker Assigned" />
-            <TextField fx:id="firstName" disable="true" layoutX="26.0" layoutY="176.0" />
-            <TextField fx:id="lastName" disable="true" layoutX="25.0" layoutY="210.0" />
-            <TextField fx:id="email" disable="true" layoutX="25.0" layoutY="243.0" />
-            <TextField fx:id="industryPreference" disable="true" layoutX="25.0" layoutY="275.0" promptText="Preferred Industry" />
-            <Button layoutX="26.0" layoutY="312.0" mnemonicParsing="false" onAction="#actionUpdate" prefHeight="25.0" prefWidth="149.0" text="Update Info" />
-            <Button layoutX="26.0" layoutY="343.0" mnemonicParsing="false" onAction="#actionUpdatePassword" prefHeight="25.0" prefWidth="149.0" text="Update Password" />
-            <Label fx:id="errorOutput" layoutX="25.0" layoutY="379.0" prefHeight="52.0" prefWidth="149.0" textAlignment="CENTER" textFill="#e10909" wrapText="true" />
-            <Button fx:id="confirm" layoutX="26.0" layoutY="438.0" mnemonicParsing="false" onAction="#actionUpdateConfirm" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: red; -fx-text-fill: white;" text="Confirm Update" visible="false" />
-         </children>
-      </Pane>
-      <Pane fx:id="passwordPane" layoutX="-1.0" layoutY="84.0" prefHeight="500.0" prefWidth="198.0" style="-fx-border-color: GREY;" visible="false">
-         <children>
-            <Label layoutX="51.0" layoutY="14.0" prefHeight="32.0" prefWidth="97.0" style="-fx-text-alignment: center;" text="Password" textAlignment="CENTER">
-               <font>
-                  <Font size="22.0" />
-               </font>
-            </Label>
-            <TextField fx:id="password1" disable="true" layoutX="25.0" layoutY="108.0" promptText="Insert New Password" />
-            <TextField fx:id="password2" disable="true" layoutX="25.0" layoutY="142.0" promptText="Repeat New Password" />
-            <Label fx:id="errorOutput1" layoutX="25.0" layoutY="214.0" prefHeight="52.0" prefWidth="149.0" textAlignment="CENTER" textFill="#e10909" wrapText="true" />
-            <TextField fx:id="currentPassword" disable="true" layoutX="25.0" layoutY="75.0" promptText="Insert Current Password" />
-            <Button fx:id="confirmPassword" layoutX="25.0" layoutY="175.0" mnemonicParsing="false" onAction="#actionConfirmPassword" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: red; -fx-text-fill: white;" text="Confirm Update" />
-         </children>
-      </Pane>
-      <VBox layoutX="781.0" layoutY="83.0" prefHeight="500.0" prefWidth="132.0">
-         <children>
-            <Button mnemonicParsing="false" onAction="#openStudentInfo" prefHeight="83.0" prefWidth="135.0" text="Student Info" />
-            <Button mnemonicParsing="false" onAction="#openCourses" prefHeight="83.0" prefWidth="135.0" text="Courses" />
-            <Button mnemonicParsing="false" onAction="#openAssessments" prefHeight="83.0" prefWidth="135.0" text="Assessments" />
-            <Button mnemonicParsing="false" onAction="#openIndustry" prefHeight="83.0" prefWidth="135.0" text="Industry Preference" />
-            <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#logout" prefHeight="83.0" prefWidth="135.0" text="Logout" />
+            <Button mnemonicParsing="false" onAction="#myprofile" prefHeight="71.0" prefWidth="156.0" text="Details" />
+            <Button mnemonicParsing="false" onAction="#diploma" prefHeight="71.0" prefWidth="156.0" text="Diploma" />
+            <Button mnemonicParsing="false" onAction="#assessments" prefHeight="71.0" prefWidth="156.0" text="Assessments" />
+            <Button mnemonicParsing="false" onAction="#industry" prefHeight="71.0" prefWidth="156.0" text="Industry" />
+            <Button fx:id="logoutBtn" mnemonicParsing="false" onAction="#logout" prefHeight="71.0" prefWidth="156.0" text="Logout" />
          </children>
       </VBox>
-      <HBox alignment="TOP_CENTER" layoutX="-2.0" prefHeight="83.0" prefWidth="921.0">
+      <TableView fx:id="table1" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+      <VBox fx:id="leftVbox" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <children>
-            <Label prefHeight="83.0" prefWidth="864.0" text="Student">
+            <Label fx:id="leftLabelMain" alignment="CENTER" prefHeight="64.0" prefWidth="241.0" text="ContextLabel" textAlignment="CENTER">
                <font>
-                  <Font size="46.0" />
+                  <Font size="25.0" />
                </font>
             </Label>
+            <Label fx:id="label1" prefHeight="17.0" prefWidth="267.0" text="Label" />
+            <TextField fx:id="text1" />
+            <Label fx:id="label2" prefHeight="17.0" prefWidth="267.0" text="Label" />
+            <TextField fx:id="text2" />
+            <Label fx:id="label3" prefHeight="17.0" prefWidth="267.0" text="Label" />
+            <TextField fx:id="text3" />
+            <Label fx:id="label4" prefHeight="17.0" prefWidth="267.0" text="Label" />
+            <TextField fx:id="text4" />
+            <Label fx:id="label5" prefHeight="17.0" prefWidth="267.0" text="Label" />
+            <TextField fx:id="text5" />
+            <Label fx:id="label6" prefHeight="17.0" prefWidth="267.0" text="Label" />
+            <TextField fx:id="text6" />
+            <Label fx:id="label7" prefHeight="17.0" prefWidth="267.0" text="Label" />
+            <TextField fx:id="text7" />
+            <Label fx:id="errorLabel" prefHeight="39.0" prefWidth="217.0" />
+            <Button fx:id="btn1" mnemonicParsing="false" onAction="#btn1" prefHeight="17.0" prefWidth="273.0" text="Button" />
+            <Label fx:id="uselesslabel" prefHeight="11.0" prefWidth="217.0" />
+            <Button fx:id="btn2" mnemonicParsing="false" onAction="#btn2" prefHeight="17.0" prefWidth="273.0" text="Button" />
          </children>
-      </HBox>
-      <TableView fx:id="studentsTable" layoutX="198.0" layoutY="83.0" onMouseClicked="#selectTableItem" prefHeight="449.0" prefWidth="571.0" />
-      <Pane fx:id="coursePane" layoutX="-1.0" layoutY="83.0" prefHeight="449.0" prefWidth="200.0" visible="false">
-         <children>
-            <Text layoutX="47.0" layoutY="50.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Course" wrappingWidth="105.00000056624413">
-               <font>
-                  <Font size="33.0" />
-               </font>
-            </Text>
-            <TextField fx:id="courseID" editable="false" layoutX="25.0" layoutY="85.0" />
-            <TextField fx:id="courseName" editable="false" layoutX="25.0" layoutY="121.0" />
-            <TextField fx:id="courseIndustry" editable="false" layoutX="26.0" layoutY="154.0" />
-            <TextField fx:id="courseLocation" editable="false" layoutX="26.0" layoutY="188.0" />
-            <TextField fx:id="courseHours" editable="false" layoutX="25.0" layoutY="222.0" />
-            <TextField fx:id="courseDegree" editable="false" layoutX="26.0" layoutY="259.0" />
-            <Button layoutX="26.0" layoutY="293.0" mnemonicParsing="false" onAction="#courseConfirm" prefHeight="25.0" prefWidth="149.0" style="-fx-background-color: red; -fx-text-fill: white;" text="Select" />
-            <Label fx:id="courseError" layoutX="34.0" layoutY="333.0" prefHeight="60.0" prefWidth="132.0" textFill="#eb1414" />
-         </children>
-      </Pane>
+      </VBox>
    </children>
-</AnchorPane>
+</GridPane>

@@ -2,6 +2,25 @@
 package beans;
 
 public class Student extends User {
+    
+    public Student(int id, String fName, String lName, String email){
+        studentID = id;
+        firstName = fName;
+        lastName = lName;
+        this.email = email;
+    }
+    
+    private int studentID;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private int employeeID;
+    private int diplomaID;
+    
+    
+    public Student() {
+    
+    }
 
     public int getStudentID() {
         return studentID;
@@ -34,21 +53,21 @@ public class Student extends User {
     public void setEmail(String email) {
         this.email = email;
     }
-    
-    private int studentID;
-    private String firstName;
-    private String lastName;
-    private String email;
-    
-    
-    public Student() {
-    
+
+    public int getEmployeeID() {
+        return employeeID;
+    }
+
+    public void setEmployeeID(int employeeID) {
+        this.employeeID = employeeID;
+    }
+
+    public int getDiplomaID() {
+        return diplomaID;
+    }
+
+    public void setDiplomaID(int diplomaID) {
+        this.diplomaID = diplomaID;
     }
     
-    public Student(int id, String fName, String lName, String email){
-        studentID = id;
-        firstName = fName;
-        lastName = lName;
-        this.email = email;
-    }    
 }

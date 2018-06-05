@@ -2,6 +2,16 @@
 package beans;
 
 public class User {
+    
+    private static String firstName;
+    private static String lastName;
+    private String email;
+    private String password;
+    private String userName;
+    private String table;
+    private String column;
+    private String idType;
+    private static int ID;
 
     public String getIdType() {
         return idType;
@@ -51,16 +61,6 @@ public class User {
         this.userName = userName;
     }
     
-    private static String firstName;
-    private static String lastName;
-    private String email;
-    private String password;
-    private String userName;
-    private String table;
-    private String column;
-    private String idType;
-    private static int ID;
-
     public String getTable() {
         return table;
     }

@@ -13,15 +13,7 @@ import java.util.ArrayList;
 
 public class MainModel {
     
-    public static boolean openClose(boolean visible) {
-        boolean visibility;
-        if (visible) {
-            visibility = false;
-        } else {
-            visibility = true;
-        }
-        return visibility;
-    }
+    
     
     public static boolean addNewUser(User bean) throws SQLException{
     
@@ -107,7 +99,7 @@ public class MainModel {
     
         String sql = "SELECT * FROM $tablename WHERE $column = ?";
         
-        String query = sql.replace("$tablename", "student").replace("$column", "studentID");
+        String query = sql.replace("$tablename", user.getTable()).replace("$column", user.getColumn());
         
         ResultSet rs;
         
@@ -123,7 +115,7 @@ public class MainModel {
             if (rs.next()) {
                 
                 currentUser.add(Integer.toString(rs.getInt("studentID")));
-                currentUser.add(Integer.toString(rs.getInt("courseID")));
+                currentUser.add(Integer.toString(rs.getInt("diplomaID")));
                 currentUser.add(Integer.toString(rs.getInt("employeeID")));
                 currentUser.add(rs.getString("firstName"));
                 currentUser.add(rs.getString("lastName"));
