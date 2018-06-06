@@ -45,7 +45,7 @@ public class CoursesModel extends MainModel {
             
             if (rs.next()) {
                 
-                currentDiploma.add(Integer.toString(rs.getInt("diplomaID")));
+                currentDiploma.add(Integer.toString(rs.getInt("courseID")));
                 currentDiploma.add(rs.getString("name"));
                 currentDiploma.add(rs.getString("industry"));
                 currentDiploma.add(rs.getString("location"));
