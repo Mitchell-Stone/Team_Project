@@ -13,12 +13,8 @@ import controllers.MainController;
 import java.io.IOException;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -428,6 +424,7 @@ public class StudentDashboardController implements Initializable {
         btn2.setVisible(false);
         
         user.setID(Integer.parseInt(currentUser.get(1)));
+        System.out.println(currentUser.get(1));
         user.setTable("diploma");
         user.setColumn("diplomaID");
         
