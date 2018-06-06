@@ -41,7 +41,7 @@
             <Button mnemonicParsing="false" prefHeight="74.0" prefWidth="300.0" text="Assessments" />
             <Button mnemonicParsing="false" prefHeight="74.0" prefWidth="300.0" text="Attendance" />
             <Button mnemonicParsing="false" prefHeight="74.0" prefWidth="300.0" text="Update Information" />
-            <Button mnemonicParsing="false" prefHeight="74.0" prefWidth="300.0" text="Log-Out" />
+            <Button fx:id="logOutButton" mnemonicParsing="false" onAction="#logOut" prefHeight="74.0" prefWidth="300.0" text="Log-Out" />
          </children>
       </VBox>
       <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="2">

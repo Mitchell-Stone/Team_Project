@@ -7,6 +7,8 @@ package caseWorker;
 
 import beans.Courses;
 import beans.Student;
+import controllers.MainController;
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
@@ -39,6 +41,8 @@ public class CaseWorkerController implements Initializable {
     private Button myStudentsButton;
     @FXML
     private Button allStudentsButton;
+    @FXML
+    private Button logOutButton;
 
     /**
      * Initialises the controller class.
@@ -133,6 +137,16 @@ public class CaseWorkerController implements Initializable {
             System.out.println("No Pointer Exception");
         }
 
+    }
+
+    @FXML
+    private void logOut(ActionEvent event) throws IOException {
+        
+        String login = "/userAccess/userSignIn.fxml";
+        
+        MainController main = new MainController();
+        main.openNewWindow(login, logOutButton);
+        
     }
 
 }
