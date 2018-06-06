@@ -19,6 +19,7 @@ import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -28,6 +29,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import model.AdministratorModel;
 import model.CaseWorkerModel;
@@ -82,6 +85,7 @@ public class AdministratorDashboardController implements Initializable {
     TextField tf_changePassword = new TextField();
     VBox vb_myProfile = new VBox();
     Label title = new Label("Welcome");
+    GridPane grid = new GridPane();
     
     
     //selected values: Student = 1, case worker = 2, admin = 3
@@ -108,13 +112,18 @@ public class AdministratorDashboardController implements Initializable {
         
     } 
     
-    private void myProfile(){        
-        /*vb_myProfile.setAlignment(Pos.CENTER);
-        vb_myProfile.setAlignment(Pos.BASELINE_CENTER);
+    private void myProfile(){    
+        
+        grid.setAlignment(Pos.CENTER);
+        grid.setHgap(10);
+        
+        ColumnConstraints col1 = new ColumnConstraints();
+        col1.setHalignment(HPos.RIGHT);
+        grid.getColumnConstraints().add(col1);
         vb_myProfile.setLayoutY(400); 
         
-        ap_adminDashboard.getChildren().add(vb_myProfile);
-        vb_myProfile.getChildren().addAll(title, tf_firstName);*/
+        ap_adminDashboard.getChildren().add(grid);
+        grid.getChildren().addAll(title, tf_firstName);
     }
     
     @FXML
@@ -535,6 +544,7 @@ public class AdministratorDashboardController implements Initializable {
         user.setID(userID);
         try {
             user.setPassword(SecurityMethods.getHash(password));
+            System.out.println("Password changed");
         } catch (NoSuchAlgorithmException ex) {
             System.out.println("Error with encoding password.");
         }
