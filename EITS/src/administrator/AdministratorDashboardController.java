@@ -419,7 +419,7 @@ public class AdministratorDashboardController implements Initializable {
         lbl_header.setStyle("-fx-font: 24 arial;");
         btn_submitSearch.setText("Submit");
         
-        
+        //put the radio buttons into a toggle group
         rbtn_id.setToggleGroup(rbtn_group);
         rbtn_id.setSelected(true);
         rbtn_fname.setToggleGroup(rbtn_group);
@@ -437,12 +437,18 @@ public class AdministratorDashboardController implements Initializable {
                 lbl_fName, tf_firstName, lbl_lName, tf_lastName, lbl_email, tf_email, btn_update, btn_delete, 
                 btn_changePassword, lbl_newPassword, tf_changePassword, btn_confirmPassword, btn_cancel);
         
-        rbtn_group.selectedToggleProperty().addListener((observable, oldVal, newVal) -> System.out.println(newVal + " was selected"));
+        
         
         
         //create an on action event so the button knows what to do when pressed
         btn_submitSearch.setOnAction((event) -> {
             //put in logic for what column to search
+            rbtn_group.selectedToggleProperty().addListener((observable, oldVal, newVal) -> System.out.println(newVal));
+            
+            if (rbtn_group.getSelectedToggle() != null) {
+                RadioButton btn = (RadioButton) rbtn_group.getSelectedToggle();
+                System.out.println(btn.getText());
+            }
             //execute search query
         });
         
