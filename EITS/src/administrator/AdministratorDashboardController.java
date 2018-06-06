@@ -23,14 +23,17 @@ import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import model.AdministratorModel;
 import model.CaseWorkerModel;
@@ -63,6 +66,18 @@ public class AdministratorDashboardController implements Initializable {
     @FXML
     private AnchorPane ap_adminDashboard;    
     
+    Label lbl_searchHeader = new Label();
+    HBox hb_searchType = new HBox();
+    RadioButton rbtn_id = new RadioButton();
+    RadioButton rbtn_fname = new RadioButton();
+    RadioButton rbtn_lname = new RadioButton();
+    RadioButton rbtn_email = new RadioButton();
+    ToggleGroup rbtn_group = new ToggleGroup();
+    
+    
+    Label lbl_header = new Label();
+    Label lbl_search = new Label();
+    TextField tf_search = new TextField();
     Label lbl_studentID = new Label("Student ID");
     Label lbl_employeeID = new Label("Employee ID");
     Label lbl_adminID = new Label("Admin ID");
@@ -388,6 +403,28 @@ public class AdministratorDashboardController implements Initializable {
   
     private void createStudentDetails(){
         //creates the labels and text fields in the verticle box
+        //Search
+        lbl_searchHeader.setText("Searh for Student");
+        lbl_searchHeader.setStyle("-fx-font: 24 arial;");
+        rbtn_id.setId("rbtn_id");
+        rbtn_id.setText("Student ID");
+        rbtn_fname.setText("First Name");
+        rbtn_fname.setId("rbtn_fname");
+        rbtn_lname.setText("Last Name");
+        rbtn_lname.setId("rbtn_lname");
+        rbtn_email.setText("Email");
+        rbtn_email.setId("rbtn_email");   
+        lbl_search.setText("Enter Search Value");
+        tf_search.setId("tf_searchString");
+        lbl_header.setText("Selection Details");
+        lbl_header.setStyle("-fx-font: 24 arial;");
+        
+        rbtn_id.setToggleGroup(rbtn_group);
+        rbtn_id.setSelected(true);
+        rbtn_fname.setToggleGroup(rbtn_group);
+        rbtn_lname.setToggleGroup(rbtn_group);
+        rbtn_email.setToggleGroup(rbtn_group);
+        //Selection Details
         tf_studentID.setId("tf_studentID");
         tf_firstName.setId("tf_firstName");
         tf_lastName.setId("tf_lastName");
@@ -399,10 +436,10 @@ public class AdministratorDashboardController implements Initializable {
         btn_confirmPassword.setText("Confirm Password");
         btn_cancel.setText("Cancel");
 
-        vb_selectionDetails.getChildren().addAll(lbl_studentID, tf_studentID, lbl_fName, 
-                tf_firstName, lbl_lName, tf_lastName, lbl_email, tf_email, btn_update, 
-                btn_delete, btn_changePassword, lbl_newPassword, tf_changePassword,
-                btn_confirmPassword, btn_cancel);    
+        vb_selectionDetails.getChildren().addAll(lbl_searchHeader, rbtn_id, rbtn_fname, rbtn_lname, 
+                rbtn_email, lbl_search, tf_search, lbl_header, lbl_studentID, tf_studentID,
+                lbl_fName, tf_firstName, lbl_lName, tf_lastName, lbl_email, tf_email, btn_update, btn_delete, 
+                btn_changePassword, lbl_newPassword, tf_changePassword, btn_confirmPassword, btn_cancel);    
 
         //create an on action event so the button knows what to do when pressed
         btn_update.setOnAction((event) -> {
