@@ -20,7 +20,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import model.CoursesModel;
 import model.StudentModel;
 
@@ -43,6 +46,30 @@ public class CaseWorkerController implements Initializable {
     private Button allStudentsButton;
     @FXML
     private Button logOutButton;
+    @FXML
+    private TextField idTextField;
+    @FXML
+    private TextField textFname;
+    @FXML
+    private TextField textLname;
+    @FXML
+    private TextField textEmail;
+    @FXML
+    private TextField textDiploma;
+    @FXML
+    private TextField textWorker;
+    @FXML
+    private VBox secondaryVbox;
+    @FXML
+    private Button addCourse;
+    @FXML
+    private TextField textCourseID;
+    @FXML
+    private TextField textCourseName;
+    @FXML
+    private TextField textIndustry;
+    @FXML
+    private TextField textLocation;
 
     /**
      * Initialises the controller class.
@@ -50,7 +77,8 @@ public class CaseWorkerController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        System.out.println("Loading....");
+        uneditable();
+
     }
 
     @FXML
@@ -59,6 +87,7 @@ public class CaseWorkerController implements Initializable {
         myStudentsTable.setVisible(false);
         secondaryTable.setVisible(false);
         allStudentsTable.setVisible(true);
+        secondaryVbox.setVisible(false);
         // show all students in table
         TableColumn studentID = new TableColumn("ID");
         TableColumn firstName = new TableColumn("First Name");
@@ -91,6 +120,7 @@ public class CaseWorkerController implements Initializable {
         myStudentsTable.setVisible(true);
         secondaryTable.setVisible(true);
         allStudentsTable.setVisible(false);
+        secondaryVbox.setVisible(true);
         //Show My students in table
         TableColumn studentID = new TableColumn("ID");
         TableColumn firstName = new TableColumn("First Name");
@@ -140,13 +170,63 @@ public class CaseWorkerController implements Initializable {
     }
 
     @FXML
+    private void selectStudent(MouseEvent event) {
+        Student st = (Student) allStudentsTable.getSelectionModel().getSelectedItem();
+        editable();
+        idTextField.setText(Integer.toString(st.getStudentID()));
+        textFname.setText(st.getFirstName());
+        textLname.setText(st.getLastName());
+        textEmail.setText(st.getEmail());
+        uneditable();
+    }
+
+    @FXML
+    private void MyStudentSelect(MouseEvent event) {
+        Student st = (Student) myStudentsTable.getSelectionModel().getSelectedItem();
+        editable();
+        idTextField.setText(Integer.toString(st.getStudentID()));
+        textFname.setText(st.getFirstName());
+        textLname.setText(st.getLastName());
+        textEmail.setText(st.getEmail());
+        uneditable();
+    }
+
+    @FXML
+    private void selectCourse(MouseEvent event) {
+        Courses co = (Courses) secondaryTable.getSelectionModel().getSelectedItem();
+        editable();
+        textCourseID.setText(Integer.toString(co.getDiplomaID()));
+        textCourseName.setText(co.getName());
+        textIndustry.setText(co.getIndustry());
+        textLocation.setText(co.getLocation());
+        uneditable();
+    }
+
+    private void editable() {
+        idTextField.setEditable(true);
+        textFname.setEditable(true);
+        textLname.setEditable(true);
+        textEmail.setEditable(true);
+        textDiploma.setEditable(true);
+        textWorker.setEditable(true);
+    }
+
+    private void uneditable() {
+        idTextField.setEditable(false);
+        textFname.setEditable(false);
+        textLname.setEditable(false);
+        textEmail.setEditable(false);
+        textDiploma.setEditable(false);
+        textWorker.setEditable(false);
+    }
+
+    @FXML
     private void logOut(ActionEvent event) throws IOException {
-        
+
         String login = "/userAccess/userSignIn.fxml";
-        
         MainController main = new MainController();
         main.openNewWindow(login, logOutButton);
-        
+
     }
 
 }
