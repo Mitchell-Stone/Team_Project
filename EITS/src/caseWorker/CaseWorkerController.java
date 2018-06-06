@@ -7,12 +7,12 @@ package caseWorker;
 
 import beans.Courses;
 import beans.Student;
+import beans.User;
 import controllers.MainController;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -195,7 +195,7 @@ public class CaseWorkerController implements Initializable {
     private void selectCourse(MouseEvent event) {
         Courses co = (Courses) secondaryTable.getSelectionModel().getSelectedItem();
         editable();
-        textCourseID.setText(Integer.toString(co.getDiplomaID()));
+        textCourseID.setText(Integer.toString(co.getCourseID()));
         textCourseName.setText(co.getName());
         textIndustry.setText(co.getIndustry());
         textLocation.setText(co.getLocation());
@@ -228,5 +228,12 @@ public class CaseWorkerController implements Initializable {
         main.openNewWindow(login, logOutButton);
 
     }
+
+    @FXML
+    private void addStudentToCourse(ActionEvent event) {
+  
+    }
+    
+    
 
 }

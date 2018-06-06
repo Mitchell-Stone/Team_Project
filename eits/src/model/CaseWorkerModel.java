@@ -6,6 +6,7 @@
 package model;
 
 import beans.CaseWorker;
+import beans.Student;
 import db.DbType;
 import db.DbUtil;
 import java.sql.Connection;
@@ -74,7 +75,7 @@ public class CaseWorkerModel {
             System.out.println(e);
             return false;
         }
-    
         
     }
 }
+  

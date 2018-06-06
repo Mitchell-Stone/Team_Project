@@ -122,7 +122,7 @@
                </font>
             </Label>
             <TextField fx:id="textLocation" />
-            <Button fx:id="addCourse" mnemonicParsing="false" prefHeight="26.0" prefWidth="232.0" text="Add Student to Diploma / Course" />
+            <Button fx:id="addCourse" mnemonicParsing="false" onAction="#addStudentToCourse" prefHeight="26.0" prefWidth="232.0" text="Add Student to Diploma / Course" />
          </children>
       </VBox>
    </children>

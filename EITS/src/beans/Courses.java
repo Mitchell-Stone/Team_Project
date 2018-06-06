@@ -11,7 +11,7 @@ package beans;
  */
 public class Courses {
  
-    private int diplomaID;
+    private int courseID;
     private String name;
     private String industry;
     private String location;
@@ -19,8 +19,8 @@ public class Courses {
     private int finishingDegree;
     private String table;
 
-    public Courses(int diplomaID, String name, String industry, String location, int numberOfHours, int finishingDegree) {
-        this.diplomaID = diplomaID;
+    public Courses(int courseID, String name, String industry, String location, int numberOfHours, int finishingDegree) {
+        this.courseID = courseID;
         this.name = name;
         this.industry = industry;
         this.location = location;
@@ -82,11 +82,11 @@ public class Courses {
         this.industry = industry;
     }
 
-    public int getDiplomaID() {
-        return diplomaID;
+    public int getCourseID() {
+        return courseID;
     }
 
-    public void setDiplomaID(int diplomaID) {
-        this.diplomaID = diplomaID;
+    public void setCourseID(int courseID) {
+        this.courseID = courseID;
     }
 }
