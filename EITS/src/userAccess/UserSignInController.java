@@ -44,6 +44,7 @@ public class UserSignInController implements Initializable {
     private String adminDboardPath = "/administrator/administratorDashboard.fxml";
     
     private Pane signin;
+    @FXML
     private Pane signup;
     @FXML
     private TextField firstName;
@@ -75,6 +76,8 @@ public class UserSignInController implements Initializable {
     private GridPane gp_login;
     @FXML
     private Label formLabel;
+    @FXML
+    private Button btn_cancel;
 
     /**
      * Initializes the controller class.
@@ -213,6 +216,21 @@ public class UserSignInController implements Initializable {
             }
             System.out.println(tier);     
         }
+    }
+    
+    public void cancelRegistration(ActionEvent event) throws IOException{
+        Stage stage = null;
+        Parent root= null;
+        
+        if (event.getSource() == btn_cancel) {
+            stage = (Stage) btn_cancel.getScene().getWindow();
+                    
+            root = FXMLLoader.load(getClass().getResource("userSignIn.fxml"));
+        }
+        
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }
 

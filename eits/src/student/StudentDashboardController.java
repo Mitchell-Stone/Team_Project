@@ -26,12 +26,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import model.AssessmentModel;
-import static model.AssessmentModel.getCoursesByDiplomaID;
 import model.AttendanceModel;
 import model.CoursesModel;
 import model.MainModel;
@@ -48,7 +49,7 @@ public class StudentDashboardController implements Initializable {
 
     
     @FXML
-    private TableView<?> table1;
+    private TableView table1;
     @FXML
     private VBox leftVbox;
     @FXML
@@ -457,11 +458,34 @@ public class StudentDashboardController implements Initializable {
     
         System.out.println("Current diplomaID " + currentDiploma.get(0));
         
-        ObservableList<Assessment> ggg = AssessmentModel.getCoursesByDiplomaIDTest(1);
-        
-        System.out.println(ggg);
-        
-        
+                //create the columns needed in the table
+                //TableColumn diplomaid = new TableColumn("Diploma ID");
+                //TableColumn courseid = new TableColumn("Course ID");
+                TableColumn assessmentid = new TableColumn("Assessment ID");
+                TableColumn title = new TableColumn("Title");
+                TableColumn description = new TableColumn("Description");
+                TableColumn date = new TableColumn("Date");
+                table1.getColumns().addAll(assessmentid, title, description, date);
+                //connect to the database and retrieve all students
+                try{
+                    //Insantiate the main model
+                    StudentModel model = new StudentModel();
+                    //get all the students and put them in an observable list
+                    ObservableList<Assessment> aaa = AssessmentModel.getAssessmentsByDiplomaID(Integer.parseInt(currentDiploma.get(0)));
+                    //put the data in the appropriate columns
+                    //diplomaid.setCellValueFactory(new PropertyValueFactory<Student, String>("diplomaID"));
+                    //courseid.setCellValueFactory(new PropertyValueFactory<Student, String>("courseID"));
+                    assessmentid.setCellValueFactory(new PropertyValueFactory<Student, String>("assessmentID"));
+                    title.setCellValueFactory(new PropertyValueFactory<Student, String>("title"));
+                    description.setCellValueFactory(new PropertyValueFactory<Student, String>("description"));
+                    date.setCellValueFactory(new PropertyValueFactory<Student, String>("date"));
+                    
+                    //get the table and list the data
+                    table1.setItems(aaa);
+                }
+                catch(SQLException ex){
+                    System.out.println("DATABASE ERROR SQL EXCEPTION");
+                }
     
     }
 

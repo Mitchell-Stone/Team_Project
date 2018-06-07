@@ -16,8 +16,8 @@ import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -29,7 +29,6 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
@@ -47,7 +46,8 @@ import security.SecurityMethods;
 /**
  * FXML Controller class
  *
- * @author 0111005906
+ * @author 0111005906 - Mitchell Stone
+ *
  */
 public class AdministratorDashboardController implements Initializable {
 
@@ -426,11 +426,28 @@ public class AdministratorDashboardController implements Initializable {
         rbtn_email.setToggleGroup(rbtn_group);
     }
   
+    private void createStudentTable(ObservableList list){
+        //create the columns needed in the table
+        TableColumn studentID = new TableColumn("Student ID");
+        TableColumn firstName = new TableColumn("First Name");
+        TableColumn lastName = new TableColumn("Last Name");
+        TableColumn email = new TableColumn("Email");
+        tbl_data.getColumns().addAll(studentID, firstName, lastName, email);
+          
+        //put the data in the appropriate columns
+        studentID.setCellValueFactory(new PropertyValueFactory<Student, String>("studentID"));
+        firstName.setCellValueFactory(new PropertyValueFactory<Student, String>("firstName"));
+        lastName.setCellValueFactory(new PropertyValueFactory<Student, String>("lastName"));
+        email.setCellValueFactory(new PropertyValueFactory<Student, String>("email"));
+        
+        tbl_data.setItems(list);
+        
+    }
+    
     private void createStudentDetails(){
         //create search options
         searchOptions("Student");
-        
-                
+                    
         //Selection Details
         btn_update.setText("Update Student");
         btn_delete.setText("Delete Student");
@@ -445,10 +462,39 @@ public class AdministratorDashboardController implements Initializable {
         
         //create an on action event so the button knows what to do when pressed
         btn_submitSearch.setOnAction((event) -> { 
+            tbl_data.getColumns().clear();
             if (rbtn_group.getSelectedToggle() != null) {
-                RadioButton btn = (RadioButton) rbtn_group.getSelectedToggle();
-                System.out.println(btn.getText());
-            } 
+                RadioButton rbtn = (RadioButton) rbtn_group.getSelectedToggle();
+                System.out.println(rbtn.getText());
+                try { 
+                    StudentModel model = new StudentModel();
+                    if ("Student ID".equals(rbtn.getText())) {                   
+                        //get all the students and put them in an observable list
+                        ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "studentID");
+
+                        createStudentTable(list);
+                    }else if ("First Name".equals(rbtn.getText())) {
+                        //get all the students and put them in an observable list
+                        ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "firstName");
+
+                        createStudentTable(list);
+                    }else if ("Last Name".equals(rbtn.getText())) {
+                        //get all the students and put them in an observable list
+                        ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "lastName");
+
+                        createStudentTable(list);
+                    }else if ("Email".equals(rbtn.getText())) {
+                        //get all the students and put them in an observable list
+                        ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "email");
+
+                        createStudentTable(list);
+                    }
+    
+                } catch (SQLException ex) {
+                    System.out.println("SQL Database Error");
+                    System.out.println(ex);
+                }
+                }
         });
             
         btn_update.setOnAction((event) -> {
