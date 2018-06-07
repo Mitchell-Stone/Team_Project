@@ -459,28 +459,22 @@ public class StudentDashboardController implements Initializable {
         System.out.println("Current diplomaID " + currentDiploma.get(0));
         
                 //create the columns needed in the table
-                TableColumn diplomaid = new TableColumn("Diploma ID");
-                TableColumn courseid = new TableColumn("Course ID");
+                //TableColumn diplomaid = new TableColumn("Diploma ID");
+                //TableColumn courseid = new TableColumn("Course ID");
                 TableColumn assessmentid = new TableColumn("Assessment ID");
                 TableColumn title = new TableColumn("Title");
                 TableColumn description = new TableColumn("Description");
                 TableColumn date = new TableColumn("Date");
-                table1.getColumns().addAll(diplomaid, courseid, assessmentid, title, description, date);
+                table1.getColumns().addAll(assessmentid, title, description, date);
                 //connect to the database and retrieve all students
                 try{
                     //Insantiate the main model
                     StudentModel model = new StudentModel();
                     //get all the students and put them in an observable list
-                    
-                    Assessment listofassessments = new Assessment();
-                    
-                    listofassessments.setDiplomaID(Integer.parseInt(currentDiploma.get(0)));
-                    
-                    ObservableList<Assessment> aaa = AssessmentModel.getAssessmentsByDiplomaID(listofassessments);
-                    
+                    ObservableList<Assessment> aaa = AssessmentModel.getAssessmentsByDiplomaID(Integer.parseInt(currentDiploma.get(0)));
                     //put the data in the appropriate columns
-                    diplomaid.setCellValueFactory(new PropertyValueFactory<Student, String>("diplomaID"));
-                    courseid.setCellValueFactory(new PropertyValueFactory<Student, String>("courseID"));
+                    //diplomaid.setCellValueFactory(new PropertyValueFactory<Student, String>("diplomaID"));
+                    //courseid.setCellValueFactory(new PropertyValueFactory<Student, String>("courseID"));
                     assessmentid.setCellValueFactory(new PropertyValueFactory<Student, String>("assessmentID"));
                     title.setCellValueFactory(new PropertyValueFactory<Student, String>("title"));
                     description.setCellValueFactory(new PropertyValueFactory<Student, String>("description"));

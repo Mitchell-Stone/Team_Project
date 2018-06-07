@@ -26,7 +26,7 @@ import javafx.collections.ObservableList;
  */
 public class AssessmentModel {
     
-    public static ObservableList<Assessment> getAssessmentsByDiplomaID(Assessment bean) throws SQLException {
+    public static ObservableList<Assessment> getAssessmentsByDiplomaID(int id) throws SQLException {
         
         ObservableList<Assessment> assessmentList = FXCollections.observableArrayList();
         
@@ -40,7 +40,7 @@ public class AssessmentModel {
                 PreparedStatement stmt = conn.prepareStatement(query);
                 ) {
             
-            stmt.setInt(1, bean.getDiplomaID());
+            stmt.setInt(1, id);
             
             Assessment assessment;
             
