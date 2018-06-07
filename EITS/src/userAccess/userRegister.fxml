@@ -40,6 +40,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
+            <Button fx:id="btn_cancel" layoutX="49.0" layoutY="316.0" mnemonicParsing="false" onAction="#cancelRegistration" prefHeight="25.0" prefWidth="158.0" text="Cancel" />
          </children>
       </Pane>
       <Pane fx:id="banner" prefHeight="67.0" prefWidth="750.0" stylesheets="@accessStyle.css" GridPane.columnSpan="3" />
