@@ -86,7 +86,7 @@ public class AdministratorModel {
         ResultSet rs = null;
 
         //execute query to get all students
-        String sql = "SELECT * FROM admin WHERE $searchType = ?";
+        String sql = "SELECT * FROM admin WHERE $searchType LIKE ?";
         
         String query = sql.replace("$searchType", searchType);
 
@@ -94,7 +94,7 @@ public class AdministratorModel {
             java.sql.Connection conn = DbUtil.getConn(DbType.MYSQL);
             PreparedStatement stmt = conn.prepareStatement(query);           
             
-            stmt.setString(1, searchValue);
+            stmt.setString(1, "%" + searchValue + "%");
             
             rs = stmt.executeQuery();
 

@@ -149,16 +149,17 @@ public class StudentModel extends MainModel {
         ResultSet rs = null;
 
         //execute query to get all students
-        String sql = "SELECT * FROM student WHERE $searchType = ?";
+        String sql = "SELECT * FROM student WHERE $searchType LIKE ?";
         
         String query = sql.replace("$searchType", searchType);
+        
 
         try{
             java.sql.Connection conn = DbUtil.getConn(DbType.MYSQL);
             PreparedStatement stmt = conn.prepareStatement(query);           
             
-            stmt.setString(1, searchValue);
-            
+            stmt.setString(1, "%" + searchValue + "%");
+            System.out.println(stmt.toString());
             rs = stmt.executeQuery();
 
             while (rs.next()) {

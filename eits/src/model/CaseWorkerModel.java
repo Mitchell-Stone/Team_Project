@@ -121,7 +121,7 @@ public class CaseWorkerModel {
         ResultSet rs = null;
 
         //execute query to get all students
-        String sql = "SELECT * FROM caseworker WHERE $searchType = ?";
+        String sql = "SELECT * FROM caseworker WHERE $searchType LIKE ?";
         
         String query = sql.replace("$searchType", searchType);
 
@@ -129,7 +129,7 @@ public class CaseWorkerModel {
             java.sql.Connection conn = DbUtil.getConn(DbType.MYSQL);
             PreparedStatement stmt = conn.prepareStatement(query);           
             
-            stmt.setString(1, searchValue);
+            stmt.setString(1, "%" + searchValue + "%");
             
             rs = stmt.executeQuery();
 
