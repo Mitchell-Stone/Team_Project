@@ -19,7 +19,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import userAccess.UserAccessController;
+import userAccess.UserSignInController;
 
 /**
  * FXML Controller class
