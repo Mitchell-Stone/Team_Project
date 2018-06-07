@@ -149,7 +149,7 @@ public class StudentModel extends MainModel {
         ResultSet rs = null;
 
         //execute query to get all students
-        String query = "SELECT * FROM student WHERE studentID LIKE '%?%'";
+        String query = "SELECT * FROM student WHERE studentID = ?";
 
         try{
             java.sql.Connection conn = DbUtil.getConn(DbType.MYSQL);
@@ -157,7 +157,7 @@ public class StudentModel extends MainModel {
             
             stmt.setInt(1, studentID);
             
-            rs = stmt.executeQuery(query);
+            rs = stmt.executeQuery();
 
             while (rs.next()) {
                 student = new Student(rs.getInt("studentID"),rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"));

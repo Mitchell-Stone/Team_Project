@@ -1,7 +1,6 @@
 
 package model;
 
-import beans.Student;
 import beans.User;
 import db.DbType;
 import db.DbUtil;
@@ -11,8 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 
 public class MainModel {
 
@@ -92,40 +89,6 @@ public class MainModel {
             System.out.println(e);
             return false;
         }
-    }
-    
-    public ObservableList<Student> searchForStudentsByID(int studentID) throws SQLException{
-        
-        ObservableList<Student> studentList = FXCollections.observableArrayList();
-        
-        Student student = null;
-        
-        ResultSet rs = null;
-
-        //execute query to get all students
-        String query = "SELECT * FROM student WHERE studentID LIKE '%?%'";
-
-        try{
-            java.sql.Connection conn = DbUtil.getConn(DbType.MYSQL);
-            PreparedStatement stmt = conn.prepareStatement(query);           
-            
-            stmt.setInt(1, studentID);
-            
-            rs = stmt.executeQuery(query);
-
-            while (rs.next()) {
-                student = new Student(rs.getInt("studentID"),rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"));
-                studentList.add(student);
-            }            
-        } catch (SQLException e) {
-            System.out.println(e);
-            return null;
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-        }  
-        return studentList;
     }
     
     public static ArrayList<String> getUserByID(User user) {
