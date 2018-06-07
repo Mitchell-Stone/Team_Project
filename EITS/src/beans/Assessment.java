@@ -16,7 +16,7 @@ public class Assessment extends Courses {
     private int assessmentID;
     private int courseID;
     private String title;
-    private Text description; 
+    private String description; 
     private String date;
     
     private int diplomaID;
@@ -24,6 +24,17 @@ public class Assessment extends Courses {
     private String industry;
     private String location;
     private String degree;
+    
+    public Assessment(int diplomaid, int courseid, int assessmentid, String titleA, String descriptionA, String dateA) {
+    
+        diplomaID = diplomaid;
+        courseID = courseid;
+        assessmentID = assessmentid;
+        title = titleA;
+        description = descriptionA;
+        date = dateA;
+    
+    }
     
     public Assessment() {
     
@@ -57,11 +68,11 @@ public class Assessment extends Courses {
         this.title = title;
     }
 
-    public Text getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(Text description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
