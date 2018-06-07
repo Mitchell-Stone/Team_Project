@@ -110,6 +110,41 @@ public class CaseWorkerModel {
             System.err.println(e);
             return null;
         }
+    }
+    
+    public ObservableList<CaseWorker> searchForCaseWorker(String searchValue, String searchType) throws SQLException{
+        
+        ObservableList<CaseWorker> employeeList = FXCollections.observableArrayList();
+        
+        CaseWorker employee = null;
+        
+        ResultSet rs = null;
 
+        //execute query to get all students
+        String sql = "SELECT * FROM caseworker WHERE $searchType LIKE ?";
+        
+        String query = sql.replace("$searchType", searchType);
+
+        try{
+            java.sql.Connection conn = DbUtil.getConn(DbType.MYSQL);
+            PreparedStatement stmt = conn.prepareStatement(query);           
+            
+            stmt.setString(1, "%" + searchValue + "%");
+            
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                employee = new CaseWorker(rs.getInt("employeeID"),rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"));
+                employeeList.add(employee);
+            }            
+        } catch (SQLException e) {
+            System.out.println(e);
+            return null;
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+        }  
+        return employeeList;
     }
 }
