@@ -16,8 +16,6 @@ import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -413,7 +411,7 @@ public class AdministratorDashboardController implements Initializable {
         rbtn_fname.setText("First Name");
         rbtn_lname.setText("Last Name");
         rbtn_email.setText("Email");  
-        lbl_search.setText("Enter Search Value");;
+        lbl_search.setText("Enter Search Value");
         lbl_header.setText("Selection Details");
         lbl_header.setStyle("-fx-font: 24 arial;");
         btn_submitSearch.setText("Submit");
@@ -426,22 +424,21 @@ public class AdministratorDashboardController implements Initializable {
         rbtn_email.setToggleGroup(rbtn_group);
     }
   
-    private void createStudentTable(ObservableList list){
+    private void createTable(ObservableList list, TableColumn col, String idType){
         //create the columns needed in the table
-        TableColumn studentID = new TableColumn("Student ID");
+        col = new TableColumn(idType);
         TableColumn firstName = new TableColumn("First Name");
         TableColumn lastName = new TableColumn("Last Name");
         TableColumn email = new TableColumn("Email");
-        tbl_data.getColumns().addAll(studentID, firstName, lastName, email);
+        tbl_data.getColumns().addAll(col, firstName, lastName, email);
           
         //put the data in the appropriate columns
-        studentID.setCellValueFactory(new PropertyValueFactory<Student, String>("studentID"));
-        firstName.setCellValueFactory(new PropertyValueFactory<Student, String>("firstName"));
-        lastName.setCellValueFactory(new PropertyValueFactory<Student, String>("lastName"));
-        email.setCellValueFactory(new PropertyValueFactory<Student, String>("email"));
+        col.setCellValueFactory(new PropertyValueFactory<User, String>(idType));
+        firstName.setCellValueFactory(new PropertyValueFactory<User, String>("firstName"));
+        lastName.setCellValueFactory(new PropertyValueFactory<User, String>("lastName"));
+        email.setCellValueFactory(new PropertyValueFactory<User, String>("email"));
         
-        tbl_data.setItems(list);
-        
+        tbl_data.setItems(list); 
     }
     
     private void createStudentDetails(){
@@ -468,33 +465,42 @@ public class AdministratorDashboardController implements Initializable {
                 System.out.println(rbtn.getText());
                 try { 
                     StudentModel model = new StudentModel();
-                    if ("Student ID".equals(rbtn.getText())) {                   
-                        //get all the students and put them in an observable list
-                        ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "studentID");
-
-                        createStudentTable(list);
-                    }else if ("First Name".equals(rbtn.getText())) {
-                        //get all the students and put them in an observable list
-                        ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "firstName");
-
-                        createStudentTable(list);
-                    }else if ("Last Name".equals(rbtn.getText())) {
-                        //get all the students and put them in an observable list
-                        ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "lastName");
-
-                        createStudentTable(list);
-                    }else if ("Email".equals(rbtn.getText())) {
-                        //get all the students and put them in an observable list
-                        ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "email");
-
-                        createStudentTable(list);
+                    TableColumn studentId = null;
+                    
+                    
+                    if (null != rbtn.getText()) switch (rbtn.getText()) {
+                        case "Student ID":{
+                            //get all the students and put them in an observable list
+                            ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "studentID");
+                            createTable(list, studentId, "studentID");
+                                break;
+                            }
+                        case "First Name":{
+                            //get all the students and put them in an observable list
+                            ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "firstName");
+                            createTable(list, studentId, "studentID");
+                                break;
+                            }
+                        case "Last Name":{
+                            //get all the students and put them in an observable list
+                            ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "lastName");
+                            createTable(list, studentId, "studentID");
+                                break;
+                            }
+                        case "Email":{
+                            //get all the students and put them in an observable list
+                            ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "email");
+                            createTable(list, studentId, "studentID");
+                                break;
+                            }
+                        default:
+                            break;
                     }
-    
                 } catch (SQLException ex) {
                     System.out.println("SQL Database Error");
                     System.out.println(ex);
                 }
-                }
+            }
         });
             
         btn_update.setOnAction((event) -> {
@@ -539,6 +545,39 @@ public class AdministratorDashboardController implements Initializable {
                 btn_confirmPassword, btn_cancel);        
         
         //create an on action event so the button knows what to do when pressed
+        btn_submitSearch.setOnAction((event) -> { 
+            tbl_data.getColumns().clear();
+            if (rbtn_group.getSelectedToggle() != null) {
+                RadioButton rbtn = (RadioButton) rbtn_group.getSelectedToggle();
+                System.out.println(rbtn.getText());
+                try { 
+                    CaseWorkerModel model = new CaseWorkerModel();
+                    TableColumn employeeId = null;
+                    
+                    if ("Employee ID".equals(rbtn.getText())) {                   
+                        //get all the students and put them in an observable list
+                        ObservableList<CaseWorker> list = model.searchForCaseWorker(tf_search.getText(), "employeeID");
+                        createTable(list, employeeId, "employeeID");
+                    }else if ("First Name".equals(rbtn.getText())) {
+                        //get all the students and put them in an observable list
+                        ObservableList<CaseWorker> list = model.searchForCaseWorker(tf_search.getText(), "firstName");     
+                        createTable(list, employeeId, "employeeID");
+                    }else if ("Last Name".equals(rbtn.getText())) {
+                        //get all the students and put them in an observable list
+                        ObservableList<CaseWorker> list = model.searchForCaseWorker(tf_search.getText(), "lastName");
+                        createTable(list, employeeId, "employeeID");
+                    }else if ("Email".equals(rbtn.getText())) {
+                        //get all the students and put them in an observable list
+                        ObservableList<CaseWorker> list = model.searchForCaseWorker(tf_search.getText(), "email");
+                        createTable(list, employeeId, "employeeID");
+                    }
+                } catch (SQLException ex) {
+                    System.out.println("SQL Database Error");
+                    System.out.println(ex);
+                }
+            }
+        });
+        
         btn_update.setOnAction((event) -> {
             updateUser(caseWorker, Integer.parseInt(tf_employeeID.getText()), "employeeID");
         });
@@ -559,6 +598,8 @@ public class AdministratorDashboardController implements Initializable {
             hideChangePassword();
         });
     }
+    
+    
     
     private void createAdministratorDetails(){ 
         searchOptions("Administrator");
@@ -581,6 +622,39 @@ public class AdministratorDashboardController implements Initializable {
                 btn_confirmPassword, btn_cancel);
         
         //create an on action event so the button knows what to do when pressed
+        btn_submitSearch.setOnAction((event) -> { 
+            tbl_data.getColumns().clear();
+            if (rbtn_group.getSelectedToggle() != null) {
+                RadioButton rbtn = (RadioButton) rbtn_group.getSelectedToggle();
+                System.out.println(rbtn.getText());
+                try { 
+                    AdministratorModel model = new AdministratorModel();
+                    TableColumn adminId = null;
+                    
+                    if ("Administrator ID".equals(rbtn.getText())) {                   
+                        //get all the students and put them in an observable list
+                        ObservableList<Administrator> list = model.searchForAdmin(tf_search.getText(), "adminID");
+                        createTable(list, adminId, "adminID");
+                    }else if ("First Name".equals(rbtn.getText())) {
+                        //get all the students and put them in an observable list
+                        ObservableList<Administrator> list = model.searchForAdmin(tf_search.getText(), "firstName");     
+                        createTable(list, adminId, "adminID");
+                    }else if ("Last Name".equals(rbtn.getText())) {
+                        //get all the students and put them in an observable list
+                        ObservableList<Administrator> list = model.searchForAdmin(tf_search.getText(), "lastName");
+                        createTable(list, adminId, "adminID");
+                    }else if ("Email".equals(rbtn.getText())) {
+                        //get all the students and put them in an observable list
+                        ObservableList<Administrator> list = model.searchForAdmin(tf_search.getText(), "email");
+                        createTable(list, adminId, "adminID");
+                    }
+                } catch (SQLException ex) {
+                    System.out.println("SQL Database Error");
+                    System.out.println(ex);
+                }
+            }
+        });
+        
         btn_update.setOnAction((event) -> {
             updateUser(admin, Integer.parseInt(tf_adminID.getText()), "adminID");
         });
