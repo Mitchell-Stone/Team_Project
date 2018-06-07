@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -111,5 +112,38 @@ public class CaseWorkerModel {
             return null;
         }
 
+    }
+    
+    public static boolean assignCaseWorker(int studentID, int employeeID) throws SQLException {
+    
+        String sql = "UPDATE student SET employeeID = ? WHERE studentID = ?";
+        
+        ResultSet keys = null;
+        
+        try(
+                Connection conn = DbUtil.getConn(DbType.MYSQL);
+                PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                ) {
+        
+            stmt.setInt(1, employeeID);
+            stmt.setInt(2, studentID);
+            
+            int affected = stmt.executeUpdate();
+            
+            if (affected == 1) {
+                return true;
+            } else {
+                return false;
+            }
+        
+        } catch (SQLException e) {
+            System.err.println(e);
+            return false;
+        } finally {
+            if(keys != null) {
+                keys.close();
+            }
+        }
+    
     }
 }
