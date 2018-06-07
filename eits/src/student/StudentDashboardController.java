@@ -30,6 +30,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import model.AssessmentModel;
@@ -90,6 +91,12 @@ public class StudentDashboardController implements Initializable {
     private Label uselesslabel;
     @FXML
     private Button btn2;
+    @FXML
+    private Button logoutBtn;
+    @FXML
+    private Pane bottomPaneLeft;
+    @FXML
+    private Pane bottomPaneCenter;
     /**
      * Initializes the controller class.
      */
@@ -111,8 +118,7 @@ public class StudentDashboardController implements Initializable {
     ArrayList <String> currentUser;
     
     ArrayList<String> currentDiploma;
-    @FXML
-    private Button logoutBtn;
+    
     
     //END OF VARIABLES
     
@@ -136,6 +142,8 @@ public class StudentDashboardController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(StudentDashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        setStart();
         
     }   
 
@@ -298,6 +306,7 @@ public class StudentDashboardController implements Initializable {
     private void updateUserdetailsConfirm() {
     
         if ("".equals(text4.getText()) || "".equals(text5.getText()) || "".equals(text6.getText())) {
+            errorLabel.setTextFill(Paint.valueOf("red"));
             errorLabel.setText("There are empty fields.");
         } else {
             
@@ -310,6 +319,8 @@ public class StudentDashboardController implements Initializable {
 
                 errorLabel.setTextFill(Paint.valueOf("green"));
                 errorLabel.setText("Success!");
+                
+                user.setID(ID);
 
                 currentUser = MainModel.getUserByID(user);
 
@@ -324,6 +335,7 @@ public class StudentDashboardController implements Initializable {
                 action1 = "reset_user_details";
 
             } else {
+                errorLabel.setTextFill(Paint.valueOf("red"));
                 errorLabel.setText("Error. Please try again.");
             }         
         }
@@ -375,6 +387,7 @@ public class StudentDashboardController implements Initializable {
         String pw2 = text3.getText();
         
         if ("".equals(cp) || "".equals(pw1) || "".equals(pw2)) {
+            errorLabel.setTextFill(Paint.valueOf("red"));
             errorLabel.setText("There are empty fields.");
         } else {
             if (UserAccessModel.checkUserPass(access)) {
@@ -390,14 +403,18 @@ public class StudentDashboardController implements Initializable {
                         action1 = "reset_user_details";
                         
                     } else {
+                        errorLabel.setTextFill(Paint.valueOf("red"));
                         errorLabel.setText("There's been a mistake.");
                     }
                 } else if(cp.equals(pw2) && pw2.equals(pw1)) {
+                    errorLabel.setTextFill(Paint.valueOf("red"));
                     errorLabel.setText("The current password is the same as the new one.");
                 } else {
+                    errorLabel.setTextFill(Paint.valueOf("red"));
                     errorLabel.setText("The passwords entered do not match.");
                 }
             } else {
+                errorLabel.setTextFill(Paint.valueOf("red"));
                 errorLabel.setText("The current password appears to be wrong.");
             }
         }
@@ -405,6 +422,8 @@ public class StudentDashboardController implements Initializable {
     }
     
     private void displayDiploma() {
+        
+        resetTextAndLabels();
     
         leftLabelMain.setText("Diploma");
         
@@ -431,7 +450,19 @@ public class StudentDashboardController implements Initializable {
         user.setTable("diploma");
         user.setColumn("diplomaID");
         
-        currentDiploma = CoursesModel.getDiplomaByID(user);
+        
+        
+        if (CoursesModel.getDiplomaByID(user) == null) {
+            errorLabel.setTextFill(Paint.valueOf("white"));
+            errorLabel.setText("Diploma not selected,\n you can do so under the Industry tab.");
+            text1.setText("Not available");
+            text2.setText("Not available");
+            text3.setText("Not available");
+            text4.setText("Not available");
+            text5.setText("Not available");
+        } else {
+            currentDiploma = CoursesModel.getDiplomaByID(user);
+        }
         
         System.out.println("Current diploma information " + currentDiploma);
         
@@ -449,6 +480,8 @@ public class StudentDashboardController implements Initializable {
     }
     
     private void displayAssignments() throws SQLException {
+        
+        table1.setVisible(true);
         
         user.setID(Integer.parseInt(currentUser.get(1)));
         user.setTable("diploma");
@@ -491,6 +524,7 @@ public class StudentDashboardController implements Initializable {
 
     private void resetToUserDetails() {
     
+        leftLabelMain.setVisible(true);
         leftLabelMain.setText("Student details");
         
         label1.setText("Student ID:");
@@ -514,6 +548,8 @@ public class StudentDashboardController implements Initializable {
     }
     
     private void resetTextAndLabels() {
+        
+        leftLabelMain.setVisible(true);
     
         label1.setVisible(true);
         text1.setDisable(false);
@@ -533,6 +569,37 @@ public class StudentDashboardController implements Initializable {
         label6.setVisible(true);
         text6.setDisable(false);
         text6.setVisible(true);
+        
+        errorLabel.setText("");
+    
+    }
+    
+    private void setStart() {
+    
+        text1.setVisible(false);
+        text2.setVisible(false);
+        text3.setVisible(false);
+        text4.setVisible(false);
+        text5.setVisible(false);
+        text6.setVisible(false);
+        text7.setVisible(false);
+        
+        label1.setVisible(false);
+        label2.setVisible(false);
+        label3.setVisible(false);
+        label4.setVisible(false);
+        label5.setVisible(false);
+        label6.setVisible(false);
+        label7.setVisible(false);
+        
+        btn1.setVisible(false);
+        btn2.setVisible(false);
+        
+        table1.setVisible(false);
+        
+        leftLabelMain.setVisible(false);
+        
+        errorLabel.setText("");
     
     }
     

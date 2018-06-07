@@ -13,41 +13,48 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane fx:id="gp_login" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0"
-          prefWidth="450.0" stylesheets="@accessStyle.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userAccess.UserSignInController">
+<GridPane fx:id="gp_login" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="350.0" stylesheets="@accessStyle.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userAccess.UserSignInController">
   <columnConstraints>
-    <ColumnConstraints />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="138.0" minWidth="10.0" percentWidth="20.0" prefWidth="41.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="60.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="20.0" prefWidth="100.0" />
   </columnConstraints>
   <rowConstraints>
-      <RowConstraints maxHeight="306.0" minHeight="10.0" prefHeight="76.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="306.0" minHeight="10.0" prefHeight="263.0" vgrow="SOMETIMES" />
-    <RowConstraints maxHeight="194.0" minHeight="10.0" prefHeight="72.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="194.0" minHeight="10.0" prefHeight="109.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="306.0" minHeight="10.0" percentHeight="10.0" prefHeight="76.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="306.0" minHeight="10.0" percentHeight="65.0" prefHeight="263.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="194.0" minHeight="10.0" percentHeight="15.0" prefHeight="72.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="194.0" minHeight="10.0" percentHeight="10.0" prefHeight="109.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Pane fx:id="banner" prefHeight="67.0" prefWidth="750.0" GridPane.columnIndex="1" GridPane.columnSpan="3" />
-      <HBox prefHeight="75.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+      <Pane fx:id="banner" prefHeight="67.0" prefWidth="750.0" style="-fx-background-color: #0066ff;" GridPane.columnSpan="3" />
+      <HBox prefHeight="75.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <children>
-            <Button fx:id="btn_register" mnemonicParsing="false" onAction="#showRegister" prefHeight="53.0" prefWidth="148.0" text="Register" />
+            <Button fx:id="btn_register" mnemonicParsing="false" onAction="#showRegister" prefHeight="141.0" prefWidth="439.0" style="-fx-background-color: #404040; -fx-text-fill: white; -fx-border-color: #0066ff;" text="Register">
+               <font>
+                  <Font size="20.0" />
+               </font></Button>
          </children>
       </HBox>
-      <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0" stylesheets="@accessStyle.css" GridPane.columnIndex="2" GridPane.rowIndex="1">
+      <VBox prefHeight="293.0" prefWidth="351.0" spacing="15.0" stylesheets="@accessStyle.css" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <children>
-            <Label fx:id="formLabel" prefHeight="59.0" prefWidth="127.0" stylesheets="@accessStyle.css" text="Sign In" textAlignment="CENTER" textFill="WHITE">
+            <Label fx:id="formLabel" alignment="CENTER" prefHeight="59.0" prefWidth="401.0" stylesheets="@accessStyle.css" text="Sign In" textAlignment="CENTER" textFill="WHITE">
                <font>
-                  <Font size="41.0" />
+                  <Font size="40.0" />
                </font>
                <VBox.margin>
                   <Insets left="7.0" />
                </VBox.margin>
             </Label>
-            <TextField id="genericField" fx:id="userNameLog" promptText="Email" />
-            <PasswordField fx:id="passwordLog" promptText="Password" />
-            <Button fx:id="btn_signIn" mnemonicParsing="false" onAction="#signInAction" prefHeight="40.0" prefWidth="150.0" text="Sign In" />
-            <Label fx:id="errorOutputLog" prefHeight="59.0" prefWidth="149.0" stylesheets="@accessStyle.css" textFill="#e80c0c" />
+            <TextField id="genericField" fx:id="userNameLog" promptText="Email" style="-fx-background-color: white;" />
+            <PasswordField fx:id="passwordLog" promptText="Password" style="-fx-background-color: white;" />
+            <Button fx:id="btn_signIn" mnemonicParsing="false" onAction="#signInAction" prefHeight="40.0" prefWidth="406.0" style="-fx-background-color: #0066ff; -fx-text-fill: white;" text="Sign In">
+               <font>
+                  <Font size="15.0" />
+               </font></Button>
+            <Label fx:id="errorOutputLog" alignment="CENTER" prefHeight="59.0" prefWidth="396.0" stylesheets="@accessStyle.css" textFill="#e80c0c">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
          </children>
       </VBox>
    </children>

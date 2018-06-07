@@ -19,7 +19,8 @@ public class Eits extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/userAccess/userSignIn.fxml"));
         
         Scene scene = new Scene(root);
-        
+        stage.setResizable(false);
+        stage.setTitle("EITS");
         stage.setScene(scene);
         stage.show();
     }
