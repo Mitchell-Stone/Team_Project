@@ -29,8 +29,8 @@ public class Assessment extends Courses {
     
     }
     
-    public Assessment(int courseID) {
-        this.courseID = courseID;
+    public Assessment(int diplomaID) {
+        this.diplomaID = diplomaID;
     }
 
     public int getAssessmentID() {
