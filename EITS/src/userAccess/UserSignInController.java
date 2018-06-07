@@ -45,17 +45,22 @@ public class UserSignInController implements Initializable {
     
     private Pane signin;
     private Pane signup;
+    @FXML
     private TextField firstName;
+    @FXML
     private Button btn_register;
+    @FXML
     private TextField email;
+    @FXML
     private TextField lastName;
+    @FXML
     private PasswordField password1;
+    @FXML
     private PasswordField password2;
+    @FXML
     private Label errorOutput2;
     @FXML
     private Pane banner;
-    @FXML
-    private Label formLabel;
     @FXML
     private TextField userNameLog;
     @FXML
@@ -63,9 +68,13 @@ public class UserSignInController implements Initializable {
     @FXML
     private Label errorOutputLog;
     @FXML
+    private Button btn_signIn;
+    @FXML
+    private Button btn_submit;
+    @FXML
     private GridPane gp_login;
     @FXML
-    private Button btn_signIn;
+    private Label formLabel;
 
     /**
      * Initializes the controller class.
@@ -76,7 +85,20 @@ public class UserSignInController implements Initializable {
     }    
     
     //sets the student properties so a new student can be added
-    private void registerAction(ActionEvent event) throws NoSuchAlgorithmException, Exception {
+    public void registerAction(ActionEvent event) throws NoSuchAlgorithmException, Exception {
+        Stage stage = null;
+        Parent root = null;
+        
+        if (event.getSource() == btn_submit) {
+            stage = (Stage) btn_submit.getScene().getWindow();
+                    
+            root = FXMLLoader.load(getClass().getResource("userSignIn.fxml"));
+        }
+        
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show(); 
+        
         Student register = new Student();
         
         register.setTable("student");
@@ -114,16 +136,22 @@ public class UserSignInController implements Initializable {
             }     
         }
     } 
-
-    private void showLogin(ActionEvent event) {      
-        signup.setVisible(false);
-        signin.setVisible(true);    
-    }
-
+    
     @FXML
-    private void showRegister(ActionEvent event) {
-        signup.setVisible(true);
-        signin.setVisible(false);     
+    public void showRegister(ActionEvent event) throws IOException {      
+        Stage stage = null;
+        Parent root= null;
+        
+        if (event.getSource() == btn_register) {
+            stage = (Stage) btn_register.getScene().getWindow();
+                    
+            root = FXMLLoader.load(getClass().getResource("userRegister.fxml"));
+        }
+        
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    
     }
     
     private void openDashboard(String path){

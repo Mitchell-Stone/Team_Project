@@ -13,7 +13,8 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane fx:id="gp_login" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="450.0" stylesheets="@accessStyle.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userAccess.UserSignInController">
+<GridPane fx:id="gp_login" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0"
+          prefWidth="450.0" stylesheets="@accessStyle.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userAccess.UserSignInController">
   <columnConstraints>
     <ColumnConstraints />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -30,7 +31,7 @@
       <Pane fx:id="banner" prefHeight="67.0" prefWidth="750.0" GridPane.columnIndex="1" GridPane.columnSpan="3" />
       <HBox prefHeight="75.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
          <children>
-            <Button mnemonicParsing="false" onAction="#showRegister" prefHeight="53.0" prefWidth="148.0" text="Register" />
+            <Button fx:id="btn_register" mnemonicParsing="false" onAction="#showRegister" prefHeight="53.0" prefWidth="148.0" text="Register" />
          </children>
       </HBox>
       <VBox prefHeight="200.0" prefWidth="100.0" spacing="15.0" stylesheets="@accessStyle.css" GridPane.columnIndex="2" GridPane.rowIndex="1">

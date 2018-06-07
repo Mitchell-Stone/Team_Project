@@ -30,7 +30,7 @@
                   <Font size="41.0" />
                </font>
             </Text>
-            <Button fx:id="btn_register" layoutX="48.0" layoutY="279.0" mnemonicParsing="false" onAction="#registerAction" prefHeight="25.0" prefWidth="158.0" text="Register" />
+            <Button fx:id="btn_submit" layoutX="48.0" layoutY="279.0" mnemonicParsing="false" onAction="#registerAction" prefHeight="25.0" prefWidth="158.0" text="Register" />
             <TextField fx:id="email" layoutX="48.0" layoutY="162.0" prefHeight="25.0" prefWidth="158.0" promptText="Email" />
             <TextField fx:id="lastName" layoutX="48.0" layoutY="120.0" prefHeight="25.0" prefWidth="158.0" promptText="Last Name" />
             <PasswordField fx:id="password1" layoutX="48.0" layoutY="203.0" prefHeight="25.0" prefWidth="158.0" promptText="Password" />
