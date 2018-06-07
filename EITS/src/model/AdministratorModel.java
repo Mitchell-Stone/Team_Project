@@ -6,6 +6,7 @@
 package model;
 
 import beans.Administrator;
+import beans.CaseWorker;
 import db.DbType;
 import db.DbUtil;
 import java.sql.Connection;
@@ -74,6 +75,41 @@ public class AdministratorModel {
             System.out.println(e);
             return false;
         }
+    }
     
+    public ObservableList<Administrator> searchForAdmin(String searchValue, String searchType) throws SQLException{
+        
+        ObservableList<Administrator> adminList = FXCollections.observableArrayList();
+        
+        Administrator admin = null;
+        
+        ResultSet rs = null;
+
+        //execute query to get all students
+        String sql = "SELECT * FROM admin WHERE $searchType = ?";
+        
+        String query = sql.replace("$searchType", searchType);
+
+        try{
+            java.sql.Connection conn = DbUtil.getConn(DbType.MYSQL);
+            PreparedStatement stmt = conn.prepareStatement(query);           
+            
+            stmt.setString(1, searchValue);
+            
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                admin = new Administrator(rs.getInt("adminID"),rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"));
+                adminList.add(admin);
+            }            
+        } catch (SQLException e) {
+            System.out.println(e);
+            return null;
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+        }  
+        return adminList;
     }
 }
