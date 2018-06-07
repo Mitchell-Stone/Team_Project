@@ -173,4 +173,40 @@ public class StudentModel extends MainModel {
         }  
         return studentList;
     }
+    
+    public ObservableList<Student> searchForStudents(String searchValue, String searchType) throws SQLException{
+        
+        ObservableList<Student> studentList = FXCollections.observableArrayList();
+        
+        Student student = null;
+        
+        ResultSet rs = null;
+
+        //execute query to get all students
+        String sql = "SELECT * FROM student WHERE $searchType = ?";
+        
+        String query = sql.replace("$searchType", searchType);
+
+        try{
+            java.sql.Connection conn = DbUtil.getConn(DbType.MYSQL);
+            PreparedStatement stmt = conn.prepareStatement(query);           
+            
+            stmt.setString(1, searchValue);
+            
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                student = new Student(rs.getInt("studentID"),rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"));
+                studentList.add(student);
+            }            
+        } catch (SQLException e) {
+            System.out.println(e);
+            return null;
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+        }  
+        return studentList;
+    }
 }

@@ -426,6 +426,24 @@ public class AdministratorDashboardController implements Initializable {
         rbtn_email.setToggleGroup(rbtn_group);
     }
   
+    private void createStudentTable(ObservableList list){
+        //create the columns needed in the table
+        TableColumn studentID = new TableColumn("Student ID");
+        TableColumn firstName = new TableColumn("First Name");
+        TableColumn lastName = new TableColumn("Last Name");
+        TableColumn email = new TableColumn("Email");
+        tbl_data.getColumns().addAll(studentID, firstName, lastName, email);
+          
+        //put the data in the appropriate columns
+        studentID.setCellValueFactory(new PropertyValueFactory<Student, String>("studentID"));
+        firstName.setCellValueFactory(new PropertyValueFactory<Student, String>("firstName"));
+        lastName.setCellValueFactory(new PropertyValueFactory<Student, String>("lastName"));
+        email.setCellValueFactory(new PropertyValueFactory<Student, String>("email"));
+        
+        tbl_data.setItems(list);
+        
+    }
+    
     private void createStudentDetails(){
         //create search options
         searchOptions("Student");
@@ -444,40 +462,39 @@ public class AdministratorDashboardController implements Initializable {
         
         //create an on action event so the button knows what to do when pressed
         btn_submitSearch.setOnAction((event) -> { 
+            tbl_data.getColumns().clear();
             if (rbtn_group.getSelectedToggle() != null) {
                 RadioButton rbtn = (RadioButton) rbtn_group.getSelectedToggle();
                 System.out.println(rbtn.getText());
-                
-                if ("Student ID".equals(rbtn.getText())) {
+                try { 
                     StudentModel model = new StudentModel();
-                    try {                        
-                    //create the columns needed in the table
-                    TableColumn studentID = new TableColumn("Student ID");
-                    TableColumn firstName = new TableColumn("First Name");
-                    TableColumn lastName = new TableColumn("Last Name");
-                    TableColumn email = new TableColumn("Email");
-                    tbl_data.getColumns().addAll(studentID, firstName, lastName, email);
-                    //connect to the database and retrieve all students
+                    if ("Student ID".equals(rbtn.getText())) {                   
+                        //get all the students and put them in an observable list
+                        ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "studentID");
 
-                    //Insantiate the main model
-                    //get all the students and put them in an observable list
-                    ObservableList<Student> list = model.searchForStudentsByID(Integer.parseInt(tf_search.getText()));
-                            
-                    //put the data in the appropriate columns
-                    studentID.setCellValueFactory(new PropertyValueFactory<Student, String>("studentID"));
-                    firstName.setCellValueFactory(new PropertyValueFactory<Student, String>("firstName"));
-                    lastName.setCellValueFactory(new PropertyValueFactory<Student, String>("lastName"));
-                    email.setCellValueFactory(new PropertyValueFactory<Student, String>("email"));
-                    
-                    //get the table and list the data
-                    tbl_data.setItems(list);
+                        createStudentTable(list);
+                    }else if ("First Name".equals(rbtn.getText())) {
+                        //get all the students and put them in an observable list
+                        ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "firstName");
 
-                    } catch (SQLException ex) {
-                        System.out.println("SQL Database Error");
-                        System.out.println(ex);
+                        createStudentTable(list);
+                    }else if ("Last Name".equals(rbtn.getText())) {
+                        //get all the students and put them in an observable list
+                        ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "lastName");
+
+                        createStudentTable(list);
+                    }else if ("Email".equals(rbtn.getText())) {
+                        //get all the students and put them in an observable list
+                        ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "email");
+
+                        createStudentTable(list);
                     }
+    
+                } catch (SQLException ex) {
+                    System.out.println("SQL Database Error");
+                    System.out.println(ex);
                 }
-            } 
+                }
         });
             
         btn_update.setOnAction((event) -> {
