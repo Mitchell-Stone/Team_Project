@@ -29,8 +29,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.SplitMenuButton;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import static model.AssessmentModel.getCoursesByDiplomaID;
@@ -50,7 +54,7 @@ public class StudentDashboardController implements Initializable {
 
     
     @FXML
-    private TableView<?> table1;
+    private TableView table1;
     @FXML
     private VBox leftVbox;
     @FXML
@@ -114,6 +118,16 @@ public class StudentDashboardController implements Initializable {
     ArrayList<String> currentDiploma;
     @FXML
     private Button logoutBtn;
+    @FXML
+    private SplitMenuButton industrySelect;
+    @FXML
+    private MenuItem musicInd;
+    @FXML
+    private MenuItem itInd;
+    @FXML
+    private MenuItem memeInd;
+    @FXML
+    private MenuItem psychInd;
     
     //END OF VARIABLES
     
@@ -121,6 +135,7 @@ public class StudentDashboardController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
         Student student = new Student();
+        industrySelect.setVisible (false);
         
         ID = student.getID();
         
@@ -169,7 +184,8 @@ public class StudentDashboardController implements Initializable {
 
     @FXML
     private void industry(ActionEvent event) {
-        
+        table1.setVisible (false);
+        industrySelect.setVisible (true);
     }
 
     @FXML
@@ -277,7 +293,6 @@ public class StudentDashboardController implements Initializable {
         
         action1 = "update_user_details";
         action2 = "update_password";
-        
     }
     
     private void updateUserDetails() {
@@ -461,6 +476,10 @@ public class StudentDashboardController implements Initializable {
         ArrayList ggg = getCoursesByDiplomaID(Integer.parseInt(currentDiploma.get(0)));
         
         System.out.println(ggg);
+        
+        
+        
+        
     
     }
 
@@ -509,6 +528,134 @@ public class StudentDashboardController implements Initializable {
         text6.setDisable(false);
         text6.setVisible(true);
     
+    }
+
+    @FXML
+    private void music(ActionEvent event) {
+        table1.setVisible (true);
+        industrySelect.setVisible (false);
+        table1.getColumns().clear();
+        TableColumn courseID = new TableColumn("Course ID");
+                TableColumn courseName = new TableColumn("Course Name");
+                TableColumn courseIndustry = new TableColumn("Course Industry");
+                TableColumn courseLocation = new TableColumn("Location");
+                TableColumn courseLengthInHours = new TableColumn("Course Length (hrs)");
+                table1.getColumns().addAll(courseID, courseName, courseIndustry, courseLocation, courseLengthInHours);
+                //connect to the database and retrieve all courses
+                try{
+                    //Insantiate the main model
+                    CoursesModel model = new CoursesModel();
+                    //get all the courses and put them in an observable list
+                    ObservableList<Courses> list = model.getIndustryMusic();
+                    
+                    //put the data in the appropriate columns
+                    courseID.setCellValueFactory(new PropertyValueFactory<Courses, String>("courseID"));
+                    courseName.setCellValueFactory(new PropertyValueFactory<Courses, String>("name"));
+                    courseIndustry.setCellValueFactory(new PropertyValueFactory<Courses, String>("industry"));
+                    courseLocation.setCellValueFactory(new PropertyValueFactory<Courses, String>("location"));
+                    courseLengthInHours.setCellValueFactory(new PropertyValueFactory<Courses, String>("numberOfHours"));
+                    
+                    //get the table and list the data
+                    table1.setItems(list);
+                }catch(SQLException ex){
+                    System.out.println("DATABASE ERROR SQL EXCEPTION");
+                }
+    }
+
+    @FXML
+    private void it(ActionEvent event) {
+        table1.setVisible (true);
+        industrySelect.setVisible (false);
+        table1.getColumns().clear();
+        TableColumn courseID = new TableColumn("Course ID");
+                TableColumn courseName = new TableColumn("Course Name");
+                TableColumn courseIndustry = new TableColumn("Course Industry");
+                TableColumn courseLocation = new TableColumn("Location");
+                TableColumn courseLengthInHours = new TableColumn("Course Length (hrs)");
+                table1.getColumns().addAll(courseID, courseName, courseIndustry, courseLocation, courseLengthInHours);
+                //connect to the database and retrieve all courses
+                try{
+                    //Insantiate the main model
+                    CoursesModel model = new CoursesModel();
+                    //get all the courses and put them in an observable list
+                    ObservableList<Courses> list = model.getIndustryIt();
+                    
+                    //put the data in the appropriate columns
+                    courseID.setCellValueFactory(new PropertyValueFactory<Courses, String>("courseID"));
+                    courseName.setCellValueFactory(new PropertyValueFactory<Courses, String>("name"));
+                    courseIndustry.setCellValueFactory(new PropertyValueFactory<Courses, String>("industry"));
+                    courseLocation.setCellValueFactory(new PropertyValueFactory<Courses, String>("location"));
+                    courseLengthInHours.setCellValueFactory(new PropertyValueFactory<Courses, String>("numberOfHours"));
+                    
+                    //get the table and list the data
+                    table1.setItems(list);
+                }catch(SQLException ex){
+                    System.out.println("DATABASE ERROR SQL EXCEPTION");
+                }
+    }
+
+    @FXML
+    private void memes(ActionEvent event) {
+        table1.setVisible (true);
+        industrySelect.setVisible (false);
+        table1.getColumns().clear();
+        TableColumn courseID = new TableColumn("Course ID");
+                TableColumn courseName = new TableColumn("Course Name");
+                TableColumn courseIndustry = new TableColumn("Course Industry");
+                TableColumn courseLocation = new TableColumn("Location");
+                TableColumn courseLengthInHours = new TableColumn("Course Length (hrs)");
+                table1.getColumns().addAll(courseID, courseName, courseIndustry, courseLocation, courseLengthInHours);
+                //connect to the database and retrieve all courses
+                try{
+                    //Insantiate the main model
+                    CoursesModel model = new CoursesModel();
+                    //get all the courses and put them in an observable list
+                    ObservableList<Courses> list = model.getIndustryMemes();
+                    
+                    //put the data in the appropriate columns
+                    courseID.setCellValueFactory(new PropertyValueFactory<Courses, String>("courseID"));
+                    courseName.setCellValueFactory(new PropertyValueFactory<Courses, String>("name"));
+                    courseIndustry.setCellValueFactory(new PropertyValueFactory<Courses, String>("industry"));
+                    courseLocation.setCellValueFactory(new PropertyValueFactory<Courses, String>("location"));
+                    courseLengthInHours.setCellValueFactory(new PropertyValueFactory<Courses, String>("numberOfHours"));
+                    
+                    //get the table and list the data
+                    table1.setItems(list);
+                }catch(SQLException ex){
+                    System.out.println("DATABASE ERROR SQL EXCEPTION");
+                }
+    }
+
+    @FXML
+    private void psychSci(ActionEvent event) {
+        table1.setVisible (true);
+        industrySelect.setVisible (false);
+        table1.getColumns().clear();
+        TableColumn courseID = new TableColumn("Course ID");
+                TableColumn courseName = new TableColumn("Course Name");
+                TableColumn courseIndustry = new TableColumn("Course Industry");
+                TableColumn courseLocation = new TableColumn("Location");
+                TableColumn courseLengthInHours = new TableColumn("Course Length (hrs)");
+                table1.getColumns().addAll(courseID, courseName, courseIndustry, courseLocation, courseLengthInHours);
+                //connect to the database and retrieve all courses
+                try{
+                    //Insantiate the main model
+                    CoursesModel model = new CoursesModel();
+                    //get all the courses and put them in an observable list
+                    ObservableList<Courses> list = model.getIndustryPsi();
+                    
+                    //put the data in the appropriate columns
+                    courseID.setCellValueFactory(new PropertyValueFactory<Courses, String>("courseID"));
+                    courseName.setCellValueFactory(new PropertyValueFactory<Courses, String>("name"));
+                    courseIndustry.setCellValueFactory(new PropertyValueFactory<Courses, String>("industry"));
+                    courseLocation.setCellValueFactory(new PropertyValueFactory<Courses, String>("location"));
+                    courseLengthInHours.setCellValueFactory(new PropertyValueFactory<Courses, String>("numberOfHours"));
+                    
+                    //get the table and list the data
+                    table1.setItems(list);
+                }catch(SQLException ex){
+                    System.out.println("DATABASE ERROR SQL EXCEPTION");
+                }
     }
     
 }

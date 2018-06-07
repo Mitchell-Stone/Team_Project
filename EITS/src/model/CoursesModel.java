@@ -135,6 +135,153 @@ public class CoursesModel extends MainModel {
         }  
         return studentList;
     }
+        public ObservableList<Courses> getIndustryMusic() throws SQLException{
         
+        ObservableList<Courses> studentList = FXCollections.observableArrayList();
         
+        ResultSet rs = null;
+
+        //execute query to get all students
+        String query = "SELECT * FROM courses WHERE industry='Music'";
+
+        try{
+            java.sql.Connection conn = DbUtil.getConn(DbType.MYSQL);
+            PreparedStatement stmt = conn.prepareStatement(query);           
+            
+            Courses course;
+            
+            rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                course = new Courses(
+                        rs.getInt("courseID"), 
+                        rs.getString("name"), 
+                        rs.getString("location"), 
+                        rs.getString("industry"), 
+                        rs.getInt("numberOfHours"), 
+                        rs.getInt("finishingDegree"));
+                studentList.add(course);
+            }            
+        } catch (SQLException e) {
+            System.out.println(e);
+            return null;
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+        }  
+        return studentList;
+    }
+        public ObservableList<Courses> getIndustryMemes() throws SQLException{
+        
+        ObservableList<Courses> studentList = FXCollections.observableArrayList();
+        
+        ResultSet rs = null;
+
+        //execute query to get all students
+        String query = "SELECT * FROM courses WHERE industry='Memes'";
+
+        try{
+            java.sql.Connection conn = DbUtil.getConn(DbType.MYSQL);
+            PreparedStatement stmt = conn.prepareStatement(query);           
+            
+            Courses course;
+            
+            rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                course = new Courses(
+                        rs.getInt("courseID"), 
+                        rs.getString("name"), 
+                        rs.getString("location"), 
+                        rs.getString("industry"), 
+                        rs.getInt("numberOfHours"), 
+                        rs.getInt("finishingDegree"));
+                studentList.add(course);
+            }            
+        } catch (SQLException e) {
+            System.out.println(e);
+            return null;
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+        }  
+        return studentList;
+    }
+        public ObservableList<Courses> getIndustryIt() throws SQLException{
+        
+        ObservableList<Courses> studentList = FXCollections.observableArrayList();
+        
+        ResultSet rs = null;
+
+        //execute query to get all students
+        String query = "SELECT * FROM courses WHERE industry='IT'";
+
+        try{
+            java.sql.Connection conn = DbUtil.getConn(DbType.MYSQL);
+            PreparedStatement stmt = conn.prepareStatement(query);           
+            
+            Courses course;
+            
+            rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                course = new Courses(
+                        rs.getInt("courseID"), 
+                        rs.getString("name"), 
+                        rs.getString("location"), 
+                        rs.getString("industry"), 
+                        rs.getInt("numberOfHours"), 
+                        rs.getInt("finishingDegree"));
+                studentList.add(course);
+            }            
+        } catch (SQLException e) {
+            System.out.println(e);
+            return null;
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+        }  
+        return studentList;
+    }
+        public ObservableList<Courses> getIndustryPsi() throws SQLException{
+        
+        ObservableList<Courses> studentList = FXCollections.observableArrayList();
+        
+        ResultSet rs = null;
+
+        //execute query to get all students
+        String query = "SELECT * FROM courses WHERE industry='Psychological Science'";
+
+        try{
+            java.sql.Connection conn = DbUtil.getConn(DbType.MYSQL);
+            PreparedStatement stmt = conn.prepareStatement(query);           
+            
+            Courses course;
+            
+            rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                course = new Courses(
+                        rs.getInt("courseID"), 
+                        rs.getString("name"), 
+                        rs.getString("location"), 
+                        rs.getString("industry"), 
+                        rs.getInt("numberOfHours"), 
+                        rs.getInt("finishingDegree"));
+                studentList.add(course);
+            }            
+        } catch (SQLException e) {
+            System.out.println(e);
+            return null;
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+        }  
+        return studentList;
+    }
+         
 }

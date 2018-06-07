@@ -2,6 +2,8 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -25,6 +27,14 @@
     <RowConstraints minHeight="10.0" percentHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
+      <SplitMenuButton fx:id="industrySelect" mnemonicParsing="false" prefHeight="25.0" prefWidth="163.0" text="Industry Select" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+        <items>
+          <MenuItem fx:id="musicInd" mnemonicParsing="false" onAction="#music" text="Music" />
+          <MenuItem fx:id="itInd" mnemonicParsing="false" onAction="#it" text="IT" />
+            <MenuItem fx:id="memeInd" mnemonicParsing="false" onAction="#memes" text="Memes" />
+            <MenuItem fx:id="psychInd" mnemonicParsing="false" onAction="#psychSci" text="Psychological Science" />
+        </items>
+      </SplitMenuButton>
       <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="5" GridPane.rowIndex="1">
          <children>
             <Button mnemonicParsing="false" onAction="#myprofile" prefHeight="71.0" prefWidth="156.0" text="Details" />
