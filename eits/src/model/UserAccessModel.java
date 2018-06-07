@@ -6,6 +6,7 @@
 package model;
 
 import beans.Student;
+import beans.User;
 import db.DbType;
 import db.DbUtil;
 import java.sql.Connection;
@@ -19,7 +20,7 @@ import java.sql.Statement;
  * @author mitch
  */
 public class UserAccessModel extends MainModel  {
-        public static boolean checkUserPass(Student bean) {
+        public static boolean checkUserPass(User bean) {
     
         String sql = "SELECT * FROM $tablename WHERE email = ? AND password = ?";
         
