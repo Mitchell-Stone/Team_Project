@@ -86,19 +86,7 @@ public class UserSignInController implements Initializable {
     
     //sets the student properties so a new student can be added
     public void registerAction(ActionEvent event) throws NoSuchAlgorithmException, Exception {
-        Stage stage = null;
-        Parent root = null;
-        
-        if (event.getSource() == btn_submit) {
-            stage = (Stage) btn_submit.getScene().getWindow();
-                    
-            root = FXMLLoader.load(getClass().getResource("userSignIn.fxml"));
-        }
-        
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show(); 
-        
+                
         Student register = new Student();
         
         register.setTable("student");
@@ -122,8 +110,18 @@ public class UserSignInController implements Initializable {
                 if (!UserAccessModel.checkUserPass(register)) {
                     if (UserAccessModel.add(register)) {
 
-                        signup.setVisible(false);
-                        signin.setVisible(true);
+                        Stage stage = null;
+                        Parent root = null;
+
+                        if (event.getSource() == btn_submit) {
+                            stage = (Stage) btn_submit.getScene().getWindow();
+
+                            root = FXMLLoader.load(getClass().getResource("userSignIn.fxml"));
+                        }
+
+                        Scene scene = new Scene(root);
+                        stage.setScene(scene);
+                        stage.show();
 
                     } else {
                         errorOutput2.setText("There's been a mistake.");
