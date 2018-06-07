@@ -2,6 +2,7 @@
 package beans;
 
 public class User {
+
     
     private static String firstName;
     private static String lastName;

@@ -138,6 +138,39 @@ public class StudentModel extends MainModel {
             System.out.println(e);
             return false;
         }
+    }
     
+    public ObservableList<Student> searchForStudentsByID(int studentID) throws SQLException{
+        
+        ObservableList<Student> studentList = FXCollections.observableArrayList();
+        
+        Student student = null;
+        
+        ResultSet rs = null;
+
+        //execute query to get all students
+        String query = "SELECT * FROM student WHERE studentID LIKE '%?%'";
+
+        try{
+            java.sql.Connection conn = DbUtil.getConn(DbType.MYSQL);
+            PreparedStatement stmt = conn.prepareStatement(query);           
+            
+            stmt.setInt(1, studentID);
+            
+            rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                student = new Student(rs.getInt("studentID"),rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"));
+                studentList.add(student);
+            }            
+        } catch (SQLException e) {
+            System.out.println(e);
+            return null;
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+        }  
+        return studentList;
     }
 }

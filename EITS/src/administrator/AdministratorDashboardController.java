@@ -47,7 +47,8 @@ import security.SecurityMethods;
 /**
  * FXML Controller class
  *
- * @author 0111005906
+ * @author 0111005906 - Mitchell Stone
+ *
  */
 public class AdministratorDashboardController implements Initializable {
 
