@@ -5,6 +5,7 @@
  */
 package student;
 
+import beans.Assessment;
 import beans.Attendance;
 import beans.Courses;
 import beans.Student;
@@ -29,6 +30,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
+import model.AssessmentModel;
 import static model.AssessmentModel.getCoursesByDiplomaID;
 import model.AttendanceModel;
 import model.CoursesModel;
@@ -129,7 +131,7 @@ public class StudentDashboardController implements Initializable {
         System.out.println(currentUser);
         
         try {
-            AttendanceModel.logAttendance(ID);
+            AttendanceModel.logAttendance(Integer.parseInt(currentUser.get(0)));
         } catch (SQLException ex) {
             Logger.getLogger(StudentDashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -430,7 +432,7 @@ public class StudentDashboardController implements Initializable {
         
         currentDiploma = CoursesModel.getDiplomaByID(user);
         
-        System.out.println(currentDiploma);
+        System.out.println("Current diploma information " + currentDiploma);
         
         text1.setText(currentDiploma.get(0));
         text1.setEditable(false);
@@ -445,7 +447,7 @@ public class StudentDashboardController implements Initializable {
     
     }
     
-    private void displayAssignments() {
+    private void displayAssignments() throws SQLException {
         
         user.setID(Integer.parseInt(currentUser.get(1)));
         user.setTable("diploma");
@@ -453,11 +455,13 @@ public class StudentDashboardController implements Initializable {
         
         currentDiploma = CoursesModel.getDiplomaByID(user);
     
-        System.out.println(currentDiploma.get(0));
+        System.out.println("Current diplomaID " + currentDiploma.get(0));
         
-        ArrayList ggg = getCoursesByDiplomaID(Integer.parseInt(currentDiploma.get(0)));
+        ObservableList<Assessment> ggg = AssessmentModel.getCoursesByDiplomaIDTest(1);
         
         System.out.println(ggg);
+        
+        
     
     }
 

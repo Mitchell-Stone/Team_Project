@@ -8,7 +8,7 @@ and open the template in the editor.
     Author     : Martin
 */
 
-#accessPane{
+#gp_register, #gp_login{
     
     -fx-background-color: #333333;
     
@@ -21,7 +21,8 @@ and open the template in the editor.
     
 }
 
-#formLabel {
+
+#errorOutputLog {
     
     -fx-text-fill: #cccccc;
     

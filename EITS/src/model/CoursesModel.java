@@ -54,7 +54,7 @@ public class CoursesModel extends MainModel {
                 return currentDiploma;
                 
             } else {
-                System.out.println("N");
+                System.out.println("Error in fetching the current diploma.");
                 return null;
             }
             
