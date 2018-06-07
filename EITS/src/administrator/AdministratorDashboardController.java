@@ -58,10 +58,6 @@ public class AdministratorDashboardController implements Initializable {
     @FXML
     private VBox vb_selectionDetails;
     @FXML
-    private Button btn_addNewUser;
-    @FXML
-    private Button btn_administrator;
-    @FXML
     private Button btn_returnToLogin;
     @FXML
     private AnchorPane ap_adminDashboard;    
@@ -108,6 +104,10 @@ public class AdministratorDashboardController implements Initializable {
     
     private final String windowURL = "/globalInterfaces/addNewUser.fxml";
     private final String loginURL = "/userAccess/userSignIn.fxml";
+    @FXML
+    private Button btn_addNewUser1;
+    @FXML
+    private Button btn_administrator1;
     
     /**
      * Initializes the controller class.
