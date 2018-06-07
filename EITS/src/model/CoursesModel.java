@@ -65,9 +65,9 @@ public class CoursesModel extends MainModel {
     
     }
     
-    public static boolean assignCourse(int studentID, int courseID) throws SQLException {
+    public static boolean assignCourse(int studentID, int diplomaID) throws SQLException {
     
-        String sql = "UPDATE student SET courseID = ? WHERE studentID = ?";
+        String sql = "UPDATE student SET diplomaID = ? WHERE studentID = ?";
         
         ResultSet keys = null;
         
@@ -76,7 +76,7 @@ public class CoursesModel extends MainModel {
                 PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 ) {
         
-            stmt.setInt(1, courseID);
+            stmt.setInt(1, diplomaID);
             stmt.setInt(2, studentID);
             
             int affected = stmt.executeUpdate();
@@ -136,5 +136,5 @@ public class CoursesModel extends MainModel {
         return studentList;
     }
         
-        
+          
 }

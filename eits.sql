@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.9
+-- version 4.6.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Jun 04, 2018 at 10:09 AM
--- Server version: 5.7.21
--- PHP Version: 5.6.35
+-- Host: 127.0.0.1
+-- Generation Time: Jun 07, 2018 at 01:43 AM
+-- Server version: 5.7.14
+-- PHP Version: 5.6.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -28,16 +26,14 @@ SET time_zone = "+00:00";
 -- Table structure for table `admin`
 --
 
-DROP TABLE IF EXISTS `admin`;
-CREATE TABLE IF NOT EXISTS `admin` (
-  `adminID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `admin` (
+  `adminID` int(11) NOT NULL,
   `firstName` varchar(255) NOT NULL,
   `lastName` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `phoneNumber` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`adminID`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+  `phoneNumber` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `admin`
@@ -53,16 +49,13 @@ INSERT INTO `admin` (`adminID`, `firstName`, `lastName`, `email`, `password`, `p
 -- Table structure for table `assessment`
 --
 
-DROP TABLE IF EXISTS `assessment`;
-CREATE TABLE IF NOT EXISTS `assessment` (
-  `assessmentID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `assessment` (
+  `assessmentID` int(11) NOT NULL,
   `courseID` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `description` text NOT NULL,
-  `date` date NOT NULL,
-  PRIMARY KEY (`assessmentID`),
-  KEY `courseID` (`courseID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `assessment`
@@ -77,14 +70,10 @@ INSERT INTO `assessment` (`assessmentID`, `courseID`, `title`, `description`, `d
 -- Table structure for table `attendance`
 --
 
-DROP TABLE IF EXISTS `attendance`;
-CREATE TABLE IF NOT EXISTS `attendance` (
+CREATE TABLE `attendance` (
   `date` date NOT NULL,
   `studentID` int(11) NOT NULL,
-  `courseID` int(11) NOT NULL,
-  PRIMARY KEY (`date`),
-  KEY `studentID` (`studentID`),
-  KEY `courseID` (`courseID`)
+  `courseID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -92,7 +81,8 @@ CREATE TABLE IF NOT EXISTS `attendance` (
 --
 
 INSERT INTO `attendance` (`date`, `studentID`, `courseID`) VALUES
-('2018-05-15', 2, 1);
+('0000-00-00', 2, 1),
+('2018-06-07', 7, 1);
 
 -- --------------------------------------------------------
 
@@ -100,26 +90,24 @@ INSERT INTO `attendance` (`date`, `studentID`, `courseID`) VALUES
 -- Table structure for table `caseworker`
 --
 
-DROP TABLE IF EXISTS `caseworker`;
-CREATE TABLE IF NOT EXISTS `caseworker` (
-  `employeeID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `caseworker` (
+  `employeeID` int(11) NOT NULL,
   `firstName` varchar(255) NOT NULL,
   `lastName` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `specialty` varchar(255) DEFAULT NULL,
   `phoneNumber` int(11) DEFAULT NULL,
-  `bio` varchar(255) DEFAULT NULL,
-  `image` blob,
-  PRIMARY KEY (`employeeID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  `bio` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `caseworker`
 --
 
-INSERT INTO `caseworker` (`employeeID`, `firstName`, `lastName`, `email`, `password`, `specialty`, `phoneNumber`, `bio`, `image`) VALUES
-(1, 'Dave', 'Hunt', 'david.hunt@hotmail.com', 'seasame', 'Stuff', 404040404, '2', NULL);
+INSERT INTO `caseworker` (`employeeID`, `firstName`, `lastName`, `email`, `password`, `specialty`, `phoneNumber`, `bio`) VALUES
+(1, 'Dave', 'Hunt', 'david.hunt@hotmail.com', 'seasame', 'Stuff', 404040404, '2'),
+(2, 'j', 'j', 'j', 'GJ9AA0vnoZnx+piRZo7jq2BJ+C04xovnD1luqy4YV7c=', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -127,16 +115,14 @@ INSERT INTO `caseworker` (`employeeID`, `firstName`, `lastName`, `email`, `passw
 -- Table structure for table `courses`
 --
 
-DROP TABLE IF EXISTS `courses`;
-CREATE TABLE IF NOT EXISTS `courses` (
-  `courseID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `courses` (
+  `courseID` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `industry` varchar(255) NOT NULL,
   `location` varchar(255) NOT NULL,
   `numberOfHours` int(11) NOT NULL,
-  `finishingDegree` int(11) NOT NULL,
-  PRIMARY KEY (`courseID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  `finishingDegree` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `courses`
@@ -151,15 +137,13 @@ INSERT INTO `courses` (`courseID`, `name`, `industry`, `location`, `numberOfHour
 -- Table structure for table `diploma`
 --
 
-DROP TABLE IF EXISTS `diploma`;
-CREATE TABLE IF NOT EXISTS `diploma` (
-  `diplomaID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `diploma` (
+  `diplomaID` int(11) NOT NULL,
   `name` varchar(35) NOT NULL,
   `industry` varchar(35) NOT NULL,
   `location` varchar(35) NOT NULL,
-  `degree` varchar(100) NOT NULL,
-  PRIMARY KEY (`diplomaID`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  `degree` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `diploma`
@@ -174,12 +158,9 @@ INSERT INTO `diploma` (`diplomaID`, `name`, `industry`, `location`, `degree`) VA
 -- Table structure for table `diplomatocourses`
 --
 
-DROP TABLE IF EXISTS `diplomatocourses`;
-CREATE TABLE IF NOT EXISTS `diplomatocourses` (
+CREATE TABLE `diplomatocourses` (
   `dipolmaID` int(11) NOT NULL,
-  `courseID` int(11) NOT NULL,
-  KEY `dipolmaID` (`dipolmaID`),
-  KEY `courseID` (`courseID`)
+  `courseID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -195,9 +176,8 @@ INSERT INTO `diplomatocourses` (`dipolmaID`, `courseID`) VALUES
 -- Table structure for table `student`
 --
 
-DROP TABLE IF EXISTS `student`;
-CREATE TABLE IF NOT EXISTS `student` (
-  `studentID` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `student` (
+  `studentID` int(11) NOT NULL,
   `diplomaID` int(11) DEFAULT NULL,
   `employeeID` int(11) DEFAULT NULL,
   `firstName` varchar(255) NOT NULL,
@@ -207,11 +187,8 @@ CREATE TABLE IF NOT EXISTS `student` (
   `industryPreference` int(11) DEFAULT NULL,
   `visitCount` int(11) DEFAULT NULL,
   `averageGrade` int(11) DEFAULT NULL,
-  `assessmentsPassed` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`studentID`),
-  KEY `employee` (`employeeID`),
-  KEY `diplomaID` (`diplomaID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+  `assessmentsPassed` tinyint(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `student`
@@ -221,7 +198,7 @@ INSERT INTO `student` (`studentID`, `diplomaID`, `employeeID`, `firstName`, `las
 (1, 1, 1, 'Jake', 'Smith', 'jakesmithlive.com', 'seasame', NULL, NULL, NULL, NULL),
 (2, 1, 1, 'Matteo', 'Baldini', 'Matteo@live.com', 'seasame', NULL, NULL, NULL, NULL),
 (3, 1, 1, 'Dion', 'Bird', 'DionBird@live.com', 'seasame', NULL, NULL, NULL, NULL),
-(6, 1, NULL, 'zz', 'zz', 'zz', 'SmC/fUvB5IV0TPfo0IYFJHUvyhzkIzG+fEOf0jBD8VE=', NULL, NULL, NULL, NULL);
+(7, 1, NULL, 'o', 'o', 'o', 'ZcdMFaaGGHu2u/mVj0lPxrgAaANKZZqa1EmRsIxY8tI=', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -229,24 +206,112 @@ INSERT INTO `student` (`studentID`, `diplomaID`, `employeeID`, `firstName`, `las
 -- Table structure for table `submissions`
 --
 
-DROP TABLE IF EXISTS `submissions`;
-CREATE TABLE IF NOT EXISTS `submissions` (
+CREATE TABLE `submissions` (
   `assessmentID` int(11) NOT NULL,
   `courseID` int(11) NOT NULL,
   `studentID` int(11) NOT NULL,
-  `grade` int(11) NOT NULL,
-  KEY `assessmentID` (`assessmentID`),
-  KEY `courseID` (`courseID`),
-  KEY `studentID` (`studentID`)
+  `grade` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `submissions`
+-- Indexes for dumped tables
 --
 
-INSERT INTO `submissions` (`assessmentID`, `courseID`, `studentID`, `grade`) VALUES
-(1, 1, 6, 2);
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`adminID`);
 
+--
+-- Indexes for table `assessment`
+--
+ALTER TABLE `assessment`
+  ADD PRIMARY KEY (`assessmentID`),
+  ADD KEY `courseID` (`courseID`);
+
+--
+-- Indexes for table `attendance`
+--
+ALTER TABLE `attendance`
+  ADD KEY `studentID` (`studentID`),
+  ADD KEY `courseID` (`courseID`);
+
+--
+-- Indexes for table `caseworker`
+--
+ALTER TABLE `caseworker`
+  ADD PRIMARY KEY (`employeeID`);
+
+--
+-- Indexes for table `courses`
+--
+ALTER TABLE `courses`
+  ADD PRIMARY KEY (`courseID`);
+
+--
+-- Indexes for table `diploma`
+--
+ALTER TABLE `diploma`
+  ADD PRIMARY KEY (`diplomaID`);
+
+--
+-- Indexes for table `diplomatocourses`
+--
+ALTER TABLE `diplomatocourses`
+  ADD KEY `dipolmaID` (`dipolmaID`),
+  ADD KEY `courseID` (`courseID`);
+
+--
+-- Indexes for table `student`
+--
+ALTER TABLE `student`
+  ADD PRIMARY KEY (`studentID`),
+  ADD KEY `employee` (`employeeID`),
+  ADD KEY `diplomaID` (`diplomaID`);
+
+--
+-- Indexes for table `submissions`
+--
+ALTER TABLE `submissions`
+  ADD KEY `assessmentID` (`assessmentID`),
+  ADD KEY `courseID` (`courseID`),
+  ADD KEY `studentID` (`studentID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `adminID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `assessment`
+--
+ALTER TABLE `assessment`
+  MODIFY `assessmentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `caseworker`
+--
+ALTER TABLE `caseworker`
+  MODIFY `employeeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `courses`
+--
+ALTER TABLE `courses`
+  MODIFY `courseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `diploma`
+--
+ALTER TABLE `diploma`
+  MODIFY `diplomaID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
+-- AUTO_INCREMENT for table `student`
+--
+ALTER TABLE `student`
+  MODIFY `studentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- Constraints for dumped tables
 --
@@ -282,10 +347,9 @@ ALTER TABLE `student`
 -- Constraints for table `submissions`
 --
 ALTER TABLE `submissions`
-  ADD CONSTRAINT `submissions_ibfk_1` FOREIGN KEY (`assessmentID`) REFERENCES `assessment` (`assessmentID`),
+  ADD CONSTRAINT `submissions_assessment` FOREIGN KEY (`assessmentID`) REFERENCES `assessment` (`assessmentID`),
   ADD CONSTRAINT `submissions_ibfk_2` FOREIGN KEY (`courseID`) REFERENCES `courses` (`courseID`),
-  ADD CONSTRAINT `submissions_ibfk_3` FOREIGN KEY (`studentID`) REFERENCES `student` (`studentID`);
-COMMIT;
+  ADD CONSTRAINT `submissions_student` FOREIGN KEY (`studentID`) REFERENCES `student` (`studentID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

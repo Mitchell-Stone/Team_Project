@@ -230,7 +230,13 @@ public class CaseWorkerController implements Initializable {
     }
 
     @FXML
-    private void addStudentToCourse(ActionEvent event) {
+    private void addStudentToCourse(ActionEvent event) throws SQLException {
+        
+        int studentID = Integer.parseInt(idTextField.getText());
+        int diplomaID = Integer.parseInt(textCourseID.getText());
+        
+        CoursesModel.assignCourse(studentID, diplomaID);
+
   
     }
     
