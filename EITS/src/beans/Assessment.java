@@ -19,6 +19,8 @@ public class Assessment extends Courses {
     private String description; 
     private String date;
     
+    private int studentID;
+    
     private int diplomaID;
     private String name;
     private String industry;
@@ -122,6 +124,14 @@ public class Assessment extends Courses {
 
     public void setDegree(String degree) {
         this.degree = degree;
+    }
+
+    public int getStudentID() {
+        return studentID;
+    }
+
+    public void setStudentID(int studentID) {
+        this.studentID = studentID;
     }
     
     

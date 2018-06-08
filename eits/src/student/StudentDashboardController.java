@@ -30,6 +30,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
@@ -118,6 +119,11 @@ public class StudentDashboardController implements Initializable {
     ArrayList <String> currentUser;
     
     ArrayList<String> currentDiploma;
+    
+    ObservableList<Assessment> tableItems;
+    
+    int submitAssessmentID = 0;
+    int submitCourseID = 0;
     
     
     //END OF VARIABLES
@@ -230,13 +236,21 @@ public class StudentDashboardController implements Initializable {
     }
 
     @FXML
-    private void btn2(ActionEvent event) {
+    private void btn2(ActionEvent event) throws SQLException {
         
         switch(action2) {
         
             case "update_password":
                 
                 updatePassword();
+                
+                break;
+                
+            case "submit":
+                
+                System.out.println("SUBMISSION");
+                
+                submitAssessment();
                 
                 break;
                 
@@ -250,6 +264,8 @@ public class StudentDashboardController implements Initializable {
     private void showStudentProfile() {
     
         resetTextAndLabels();
+        
+        table1.setVisible(false);
         
         leftLabelMain.setText("Student details");
         
@@ -424,6 +440,8 @@ public class StudentDashboardController implements Initializable {
     private void displayDiploma() {
         
         resetTextAndLabels();
+        
+        table1.setVisible(false);
     
         leftLabelMain.setText("Diploma");
         
@@ -481,6 +499,34 @@ public class StudentDashboardController implements Initializable {
     
     private void displayAssignments() throws SQLException {
         
+        resetTextAndLabels();
+        
+        leftLabelMain.setText("Assessments");
+        
+        label1.setText("Assessment ID:");
+        label2.setText("Title:");
+        label3.setText("Description:");
+        label4.setText("Due date:");
+        label5.setText("Submitted:");
+        label6.setText("Grade:");
+        
+        text1.setEditable(false);
+        text2.setEditable(false);
+        text3.setEditable(false);
+        text4.setEditable(false);
+        text5.setEditable(false);
+        text6.setEditable(false);
+        
+        text1.setText("");
+        text2.setText("");
+        text3.setText("");
+        text4.setText("");
+        text5.setText("");
+        text6.setText("");
+        
+        btn1.setVisible(false);
+        btn2.setVisible(false);
+        
         table1.setVisible(true);
         
         user.setID(Integer.parseInt(currentUser.get(1)));
@@ -504,7 +550,7 @@ public class StudentDashboardController implements Initializable {
                     //Insantiate the main model
                     StudentModel model = new StudentModel();
                     //get all the students and put them in an observable list
-                    ObservableList<Assessment> aaa = AssessmentModel.getAssessmentsByDiplomaID(Integer.parseInt(currentDiploma.get(0)));
+                    tableItems = AssessmentModel.getAssessmentsByDiplomaID(Integer.parseInt(currentDiploma.get(0)));
                     //put the data in the appropriate columns
                     //diplomaid.setCellValueFactory(new PropertyValueFactory<Student, String>("diplomaID"));
                     //courseid.setCellValueFactory(new PropertyValueFactory<Student, String>("courseID"));
@@ -514,11 +560,93 @@ public class StudentDashboardController implements Initializable {
                     date.setCellValueFactory(new PropertyValueFactory<Student, String>("date"));
                     
                     //get the table and list the data
-                    table1.setItems(aaa);
+                    table1.setItems(tableItems);
+                    
                 }
                 catch(SQLException ex){
                     System.out.println("DATABASE ERROR SQL EXCEPTION");
                 }
+    
+    }
+
+    @FXML
+    private void displayAssignmentInfo(MouseEvent event) {
+        
+        displayAssessmentInfo();
+        
+    }
+    
+    private void displayAssessmentInfo() {
+    
+        Assessment assessment = (Assessment) table1.getSelectionModel().getSelectedItem();
+        text1.setText(Integer.toString(assessment.getAssessmentID()));
+        text2.setText(assessment.getTitle());
+        text3.setText(assessment.getDescription());
+        text4.setText(assessment.getDate());
+        
+        System.out.println("CourseID  " + Integer.toString(assessment.getCourseID()));
+        System.out.println("DiplomaID  " + Integer.toString(assessment.getDiplomaID()));
+        
+        Assessment submission = new Assessment();
+        
+        submission.setAssessmentID(assessment.getAssessmentID());
+        submission.setCourseID(assessment.getCourseID());
+        submission.setStudentID(Integer.parseInt(currentUser.get(0)));
+        
+        int type = AssessmentModel.checkSubmission(submission);
+        
+        switch (type) {
+            case 4000:
+                System.out.println("No Submission");
+                text5.setText("No");
+                text6.setText("Not available");
+                
+                btn2.setVisible(true);
+                
+                btn2.setText("Submit");
+                action2 = "submit";
+                
+                submitAssessmentID = assessment.getAssessmentID();
+                submitCourseID = assessment.getCourseID();
+                
+                break;
+            case 0:
+                System.out.println("Submitted but not graded");
+                text5.setText("Yes");
+                text6.setText("Pending");
+                btn2.setVisible(false);
+                break;
+            case 999:
+                System.out.println("what");
+                text5.setText("Error");
+                text6.setText("Error");
+                break;
+            default:
+                System.out.println("Grade is " + type);
+                text5.setText("Yes");
+                text6.setText(Integer.toString(type));
+                btn2.setVisible(false);
+                break;
+        }
+    
+    }
+    
+    private void submitAssessment() throws SQLException {
+        
+        Assessment submission = new Assessment();
+        
+        submission.setAssessmentID(submitAssessmentID);
+        submission.setCourseID(submitCourseID);
+        submission.setStudentID(Integer.parseInt(currentUser.get(0)));
+    
+        AssessmentModel.submitAssessment(submission);
+        
+        tableItems = AssessmentModel.getAssessmentsByDiplomaID(Integer.parseInt(currentDiploma.get(0)));
+        
+        text5.setText("Yes");
+        text6.setText("Pending");
+        
+        btn2.setVisible(false);
     
     }
 

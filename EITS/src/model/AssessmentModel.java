@@ -63,4 +63,54 @@ public class AssessmentModel {
     
     }
     
+    public static int checkSubmission(Assessment bean) {
+        
+        ResultSet rs = null;
+    
+        String sql = "SELECT * FROM submissions WHERE assessmentID = ? AND courseID = ? AND studentID = ?";
+        
+        try(
+                Connection conn = DbUtil.getConn(DbType.MYSQL);
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                ) {
+            
+            stmt.setInt(1, bean.getAssessmentID());
+            stmt.setInt(2, bean.getCourseID());
+            stmt.setInt(3, bean.getStudentID());
+            
+            rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                return rs.getInt("grade");
+            } else {
+                return 4000;
+            }
+            
+        } catch (Exception e) {
+            System.out.println(e);
+            return 999;
+        }
+    
+    }
+    
+    public static void submitAssessment(Assessment bean) {
+    
+        String sql = "INSERT INTO submissions (assessmentID, courseID, studentID) VALUES (?, ?, ?)";
+        
+        try(
+                Connection conn = DbUtil.getConn(DbType.MYSQL);
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                ) {
+            
+            stmt.setInt(1, bean.getAssessmentID());
+            stmt.setInt(2, bean.getCourseID());
+            stmt.setInt(3, bean.getStudentID());
+            
+            stmt.executeUpdate();
+            
+        } catch (Exception e) {
+        }
+    
+    }
+    
 }
