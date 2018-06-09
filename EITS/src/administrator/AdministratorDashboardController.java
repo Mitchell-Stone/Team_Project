@@ -19,8 +19,6 @@ import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.HPos;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -30,9 +28,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import model.AdministratorModel;
 import model.CaseWorkerModel;
@@ -52,16 +49,20 @@ public class AdministratorDashboardController implements Initializable {
     private final String student = "student";
     private final String caseWorker = "caseWorker";
     private final String admin = "admin";
+    private final String courses = "courses";
     
     @FXML
     private TableView tbl_data;
     @FXML
     private VBox vb_selectionDetails;
     @FXML
-    private Button btn_returnToLogin;
+    private Button btn_returnToLogin;  
     @FXML
-    private AnchorPane ap_adminDashboard;    
+    private GridPane gp_adminDashboard;
+    @FXML
+    private VBox vb_searchDetails;
     
+    @FXML
     Label lbl_searchHeader = new Label();
     RadioButton rbtn_id = new RadioButton();
     RadioButton rbtn_fname = new RadioButton();
@@ -70,7 +71,7 @@ public class AdministratorDashboardController implements Initializable {
     ToggleGroup rbtn_group = new ToggleGroup();
     
     
-    Label lbl_header = new Label();
+    Label lbl_header = new Label("Selection Details");
     Label lbl_search = new Label();
     TextField tf_search = new TextField();
     Button btn_submitSearch = new Button();
@@ -95,19 +96,15 @@ public class AdministratorDashboardController implements Initializable {
     Button btn_cancel = new Button();
     TextField tf_changePassword = new TextField();
     VBox vb_myProfile = new VBox();
+    HBox hb_buttons = new HBox();
     Label title = new Label("Welcome");
     GridPane grid = new GridPane();
-    
-    
-    //selected values: Student = 1, case worker = 2, admin = 3
+
     private String selectionType = null;
     
     private final String windowURL = "/globalInterfaces/addNewUser.fxml";
     private final String loginURL = "/userAccess/userSignIn.fxml";
-    @FXML
-    private Button btn_addNewUser1;
-    @FXML
-    private Button btn_administrator1;
+    
     
     /**
      * Initializes the controller class.
@@ -129,16 +126,7 @@ public class AdministratorDashboardController implements Initializable {
     
     private void myProfile(){    
         
-        grid.setAlignment(Pos.CENTER);
-        grid.setHgap(10);
-        
-        ColumnConstraints col1 = new ColumnConstraints();
-        col1.setHalignment(HPos.RIGHT);
-        grid.getColumnConstraints().add(col1);
-        vb_myProfile.setLayoutY(400); 
-        
-        ap_adminDashboard.getChildren().add(grid);
-        grid.getChildren().addAll(title, tf_firstName);
+        vb_searchDetails.getChildren().clear();
     }
     
     @FXML
@@ -263,30 +251,39 @@ public class AdministratorDashboardController implements Initializable {
             }
         }
     
-    @FXML
-    private void showAllStudents(MouseEvent event) throws SQLException {
+    private void setDashboard(){
         //show the table
         tbl_data.setVisible(true);
-        vb_selectionDetails.setVisible(true);
-        ap_adminDashboard.getChildren().remove(vb_myProfile);
+        tf_search.clear();
+        vb_selectionDetails.setVisible(false);
+        vb_searchDetails.setVisible(true);
+        gp_adminDashboard.getChildren().remove(vb_myProfile);
         hideChangePassword();
-        
-        //set the selected table value
-        selectionType = student;
-        
-        //clear the vbox of its children ready for the new details and set the
-        //text fields with the same name to be empty
+    }
+    
+    private void clearDashboardDetails(){
         vb_selectionDetails.getChildren().clear();
         tf_studentID.clear();
         tf_email.clear();
         tf_firstName.clear();
         tf_lastName.clear();
         
-        //create the selection details pane for student
-        createStudentDetails();
-        
         //clear the table of its previous content
         tbl_data.getColumns().clear();
+    }
+    
+    @FXML
+    private void showAllStudents(MouseEvent event) throws SQLException {
+        setDashboard();
+        
+        //create search options
+        searchStudent();
+        
+        selectionType = student;
+        //text fields with the same name to be empty
+        clearDashboardDetails();
+        
+        createStudentDetails();
         
         //Show all the students
         populateTable(student);
@@ -294,28 +291,15 @@ public class AdministratorDashboardController implements Initializable {
     
     @FXML
     private void showAllCaseWorkers(MouseEvent event) {
-        //show the table
-        tbl_data.setVisible(true);
-        vb_selectionDetails.setVisible(true);
-        ap_adminDashboard.getChildren().remove(vb_myProfile);
-        hideChangePassword();
+        setDashboard();
         
-        //set the selected table value
+        searchCaseWorker();
+        
         selectionType = caseWorker;
-        
-        //clear the vbox of its children ready for the new details and set the
         //text fields with the same name to be empty
-        vb_selectionDetails.getChildren().clear();
-        tf_employeeID.clear();
-        tf_email.clear();
-        tf_firstName.clear();
-        tf_lastName.clear();
+        clearDashboardDetails();
         
-        //create the selection details pane for case worker
         createCaseWorkerDetails();
-        
-        //clear the table of its previous content
-        tbl_data.getColumns().clear();
         
         //show all case workers
         populateTable(caseWorker);
@@ -323,29 +307,18 @@ public class AdministratorDashboardController implements Initializable {
     
     @FXML
     private void showAllAdministrators(MouseEvent event) {
-        //show the table
-        tbl_data.setVisible(true);
-        vb_selectionDetails.setVisible(true);
-        ap_adminDashboard.getChildren().remove(vb_myProfile);
-        hideChangePassword();
+        setDashboard();
+        
+        searchAdmin();
         
         //set the selected table value
         selectionType = admin;
         
-        //clear the vbox of its children ready for the new details and set the
         //text fields with the same name to be empty
-        vb_selectionDetails.getChildren().clear();
-        tf_adminID.clear();
-        tf_email.clear();
-        tf_firstName.clear();
-        tf_lastName.clear();
+        clearDashboardDetails();
         
-        //create the selection details pane for case worker
         createAdministratorDetails();
-        
-        //clear the table of its previous content
-        tbl_data.getColumns().clear();
-        
+              
         //show all case workers
         populateTable(admin);
     }
@@ -353,23 +326,19 @@ public class AdministratorDashboardController implements Initializable {
     @FXML
     private void showAllCourses(MouseEvent event) {
         //show the table
-        tbl_data.setVisible(true);
-        vb_selectionDetails.setVisible(false);
-        
-        //set the selected table value
-        selectionType = "courses";
-             
-        //clear the table of its previous content
-        tbl_data.getColumns().clear();
+        setDashboard();
+
+        selectionType = courses;
         
         //show all case workers
-        populateTable("courses");
+        populateTable(courses);
     }
     
     @FXML
     private void selectItem(MouseEvent event) {
         switch (selectionType) {
             case student:
+                vb_selectionDetails.setVisible(true);
                 //When an item is selected in the table get all the data for that item
                 Student st = (Student) tbl_data.getSelectionModel().getSelectedItem();
                 //set the text fields to show the selected item to allow for changes
@@ -379,6 +348,7 @@ public class AdministratorDashboardController implements Initializable {
                 tf_email.setText(st.getEmail());
                 break;
             case caseWorker:
+                vb_selectionDetails.setVisible(true);
                 //When an item is selected in the table get all the data for that item
                 CaseWorker cw = (CaseWorker) tbl_data.getSelectionModel().getSelectedItem();
                 //set the text fields to show the selected item to allow for changes
@@ -388,6 +358,7 @@ public class AdministratorDashboardController implements Initializable {
                 tf_email.setText(cw.getEmail());
                 break;
             case admin:
+                vb_selectionDetails.setVisible(true);
                 //When an item is selected in the table get all the data for that item
                 Administrator ad = (Administrator) tbl_data.getSelectionModel().getSelectedItem();
                 //set the text fields to show the selected item to allow for changes
@@ -401,19 +372,20 @@ public class AdministratorDashboardController implements Initializable {
         }
     }
     
-    private void searchOptions(String userType){
+    private void searchStudent(){
         //Search
-        lbl_searchHeader.setText("Searh for " + userType);
+        tf_search.clear();
+        vb_searchDetails.getChildren().clear();
+        
+        lbl_searchHeader.setText("Searh for Students");
         lbl_searchHeader.setStyle("-fx-font: 24 arial;");
-        rbtn_id.setText(userType + " ID");
+        rbtn_id.setText("Student ID");
         rbtn_id.setSelected(true);
         rbtn_id.requestFocus();
         rbtn_fname.setText("First Name");
         rbtn_lname.setText("Last Name");
         rbtn_email.setText("Email");  
         lbl_search.setText("Enter Search Value");
-        lbl_header.setText("Selection Details");
-        lbl_header.setStyle("-fx-font: 24 arial;");
         btn_submitSearch.setText("Submit");
         
         //put the radio buttons into a toggle group
@@ -422,42 +394,10 @@ public class AdministratorDashboardController implements Initializable {
         rbtn_fname.setToggleGroup(rbtn_group);
         rbtn_lname.setToggleGroup(rbtn_group);
         rbtn_email.setToggleGroup(rbtn_group);
-    }
-  
-    private void createTable(ObservableList list, TableColumn col, String idType){
-        //create the columns needed in the table
-        col = new TableColumn(idType);
-        TableColumn firstName = new TableColumn("First Name");
-        TableColumn lastName = new TableColumn("Last Name");
-        TableColumn email = new TableColumn("Email");
-        tbl_data.getColumns().addAll(col, firstName, lastName, email);
-          
-        //put the data in the appropriate columns
-        col.setCellValueFactory(new PropertyValueFactory<User, String>(idType));
-        firstName.setCellValueFactory(new PropertyValueFactory<User, String>("firstName"));
-        lastName.setCellValueFactory(new PropertyValueFactory<User, String>("lastName"));
-        email.setCellValueFactory(new PropertyValueFactory<User, String>("email"));
         
-        tbl_data.setItems(list); 
-    }
-    
-    private void createStudentDetails(){
-        //create search options
-        searchOptions("Student");
-                    
-        //Selection Details
-        btn_update.setText("Update Student");
-        btn_delete.setText("Delete Student");
-        btn_changePassword.setText("Change Password");
-        btn_confirmPassword.setText("Confirm Password");
-        btn_cancel.setText("Cancel");
-
-        vb_selectionDetails.getChildren().addAll(lbl_searchHeader, rbtn_id, rbtn_fname, rbtn_lname, 
-                rbtn_email, lbl_search, tf_search, btn_submitSearch, lbl_header, lbl_studentID, tf_studentID,
-                lbl_fName, tf_firstName, lbl_lName, tf_lastName, lbl_email, tf_email, btn_update, btn_delete, 
-                btn_changePassword, lbl_newPassword, tf_changePassword, btn_confirmPassword, btn_cancel);
+        vb_searchDetails.getChildren().addAll(lbl_searchHeader, rbtn_id, rbtn_fname, rbtn_lname, 
+                rbtn_email, lbl_search, tf_search, btn_submitSearch);
         
-        //create an on action event so the button knows what to do when pressed
         btn_submitSearch.setOnAction((event) -> { 
             tbl_data.getColumns().clear();
             if (rbtn_group.getSelectedToggle() != null) {
@@ -502,7 +442,190 @@ public class AdministratorDashboardController implements Initializable {
                 }
             }
         });
-            
+    }
+    
+    private void searchCaseWorker(){
+        //Search
+        vb_searchDetails.getChildren().clear();
+        
+        lbl_searchHeader.setText("Searh for Case Workers");
+        lbl_searchHeader.setStyle("-fx-font: 24 arial;");
+        rbtn_id.setText("Case Worker ID");
+        rbtn_id.setSelected(true);
+        rbtn_id.requestFocus();
+        rbtn_fname.setText("First Name");
+        rbtn_lname.setText("Last Name");
+        rbtn_email.setText("Email");  
+        lbl_search.setText("Enter Search Value");
+        lbl_header.setText("Selection Details");
+        lbl_header.setStyle("-fx-font: 24 arial;");
+        btn_submitSearch.setText("Submit");
+        
+        //put the radio buttons into a toggle group
+        rbtn_id.setToggleGroup(rbtn_group);
+        rbtn_id.setSelected(true);
+        rbtn_fname.setToggleGroup(rbtn_group);
+        rbtn_lname.setToggleGroup(rbtn_group);
+        rbtn_email.setToggleGroup(rbtn_group);
+        
+        vb_searchDetails.getChildren().addAll(lbl_searchHeader, rbtn_id, rbtn_fname, rbtn_lname, 
+                rbtn_email, lbl_search, tf_search, btn_submitSearch);
+        
+        btn_submitSearch.setOnAction((event) -> { 
+            tbl_data.getColumns().clear();
+            if (rbtn_group.getSelectedToggle() != null) {
+                RadioButton rbtn = (RadioButton) rbtn_group.getSelectedToggle();
+                System.out.println(rbtn.getText());
+                try { 
+                    StudentModel model = new StudentModel();
+                    TableColumn studentId = null;
+                    
+                    
+                    if (null != rbtn.getText()) switch (rbtn.getText()) {
+                        case "Employee ID":{
+                            //get all the students and put them in an observable list
+                            ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "employeeID");
+                            createTable(list, studentId, "employeeID");
+                                break;
+                            }
+                        case "First Name":{
+                            //get all the students and put them in an observable list
+                            ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "firstName");
+                            createTable(list, studentId, "employeeID");
+                                break;
+                            }
+                        case "Last Name":{
+                            //get all the students and put them in an observable list
+                            ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "lastName");
+                            createTable(list, studentId, "employeeID");
+                                break;
+                            }
+                        case "Email":{
+                            //get all the students and put them in an observable list
+                            ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "email");
+                            createTable(list, studentId, "employeeID");
+                                break;
+                            }
+                        default:
+                            break;
+                    }
+                } catch (SQLException ex) {
+                    System.out.println("SQL Database Error");
+                    System.out.println(ex);
+                }
+            }
+        });
+    }
+    
+    private void searchAdmin(){
+        //Search
+        vb_searchDetails.getChildren().clear();
+        
+        lbl_searchHeader.setText("Searh for Administrator");
+        lbl_searchHeader.setStyle("-fx-font: 24 arial;");
+        rbtn_id.setText("Administrator ID");
+        rbtn_id.setSelected(true);
+        rbtn_id.requestFocus();
+        rbtn_fname.setText("First Name");
+        rbtn_lname.setText("Last Name");
+        rbtn_email.setText("Email");  
+        lbl_search.setText("Enter Search Value");
+        lbl_header.setText("Selection Details");
+        lbl_header.setStyle("-fx-font: 24 arial;");
+        btn_submitSearch.setText("Submit");
+        
+        //put the radio buttons into a toggle group
+        rbtn_id.setToggleGroup(rbtn_group);
+        rbtn_id.setSelected(true);
+        rbtn_fname.setToggleGroup(rbtn_group);
+        rbtn_lname.setToggleGroup(rbtn_group);
+        rbtn_email.setToggleGroup(rbtn_group);
+        
+        vb_searchDetails.getChildren().addAll(lbl_searchHeader, rbtn_id, rbtn_fname, rbtn_lname, 
+                rbtn_email, lbl_search, tf_search, btn_submitSearch);
+        
+        btn_submitSearch.setOnAction((event) -> { 
+            tbl_data.getColumns().clear();
+            if (rbtn_group.getSelectedToggle() != null) {
+                RadioButton rbtn = (RadioButton) rbtn_group.getSelectedToggle();
+                System.out.println(rbtn.getText());
+                try { 
+                    StudentModel model = new StudentModel();
+                    TableColumn studentId = null;
+                    
+                    
+                    if (null != rbtn.getText()) switch (rbtn.getText()) {
+                        case "Administrator ID":{
+                            //get all the students and put them in an observable list
+                            ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "adminID");
+                            createTable(list, studentId, "adminID");
+                                break;
+                            }
+                        case "First Name":{
+                            //get all the students and put them in an observable list
+                            ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "firstName");
+                            createTable(list, studentId, "adminID");
+                                break;
+                            }
+                        case "Last Name":{
+                            //get all the students and put them in an observable list
+                            ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "lastName");
+                            createTable(list, studentId, "adminID");
+                                break;
+                            }
+                        case "Email":{
+                            //get all the students and put them in an observable list
+                            ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "email");
+                            createTable(list, studentId, "adminID");
+                                break;
+                            }
+                        default:
+                            break;
+                    }
+                } catch (SQLException ex) {
+                    System.out.println("SQL Database Error");
+                    System.out.println(ex);
+                }
+            }
+        });
+    }
+  
+    private void createTable(ObservableList list, TableColumn col, String idType){
+        //create the columns needed in the table
+        col = new TableColumn(idType);
+        TableColumn firstName = new TableColumn("First Name");
+        TableColumn lastName = new TableColumn("Last Name");
+        TableColumn email = new TableColumn("Email");
+        tbl_data.getColumns().addAll(col, firstName, lastName, email);
+          
+        //put the data in the appropriate columns
+        col.setCellValueFactory(new PropertyValueFactory<User, String>(idType));
+        firstName.setCellValueFactory(new PropertyValueFactory<User, String>("firstName"));
+        lastName.setCellValueFactory(new PropertyValueFactory<User, String>("lastName"));
+        email.setCellValueFactory(new PropertyValueFactory<User, String>("email"));
+        
+        tbl_data.setItems(list); 
+    }
+    
+    private void createStudentDetails(){                 
+        //Selection Details
+        tf_studentID.setId("tf_studentID");
+        tf_firstName.setId("tf_firstName");
+        tf_lastName.setId("tf_lastName");
+        tf_email.setId("tf_email"); 
+        btn_update.setText("Update Student");
+        btn_delete.setText("Delete Student");
+        btn_changePassword.setText("Change Password");
+        btn_confirmPassword.setText("Confirm Password");
+        btn_cancel.setText("Cancel");
+        
+        hb_buttons.getChildren().addAll(btn_update, btn_delete);
+        
+        vb_selectionDetails.getChildren().addAll(lbl_header, lbl_studentID, tf_studentID,
+                lbl_fName, tf_firstName, lbl_lName, tf_lastName, lbl_email, tf_email, hb_buttons, 
+                btn_changePassword, lbl_newPassword, tf_changePassword, btn_confirmPassword, btn_cancel);
+        
+        //create an on action event so the button knows what to do when pressed    
         btn_update.setOnAction((event) -> {
             updateUser(student, Integer.parseInt(tf_studentID.getText()), "studentID");
         });
@@ -525,7 +648,6 @@ public class AdministratorDashboardController implements Initializable {
     } 
    
     private void createCaseWorkerDetails(){
-        searchOptions("Employee");
         
         tf_employeeID.setId("tf_employeeID");
         tf_firstName.setId("tf_firstName");
@@ -538,8 +660,7 @@ public class AdministratorDashboardController implements Initializable {
         btn_confirmPassword.setText("Confirm Password");
         btn_cancel.setText("Cancel");
         
-        vb_selectionDetails.getChildren().addAll(lbl_searchHeader, rbtn_id, rbtn_fname, rbtn_lname, 
-                rbtn_email, lbl_search, tf_search, btn_submitSearch, lbl_header, lbl_employeeID, tf_employeeID, lbl_fName, 
+        vb_selectionDetails.getChildren().addAll(lbl_header, lbl_employeeID, tf_employeeID, lbl_fName, 
                 tf_firstName, lbl_lName, tf_lastName, lbl_email, tf_email, btn_update, 
                 btn_delete, btn_changePassword, lbl_newPassword, tf_changePassword,
                 btn_confirmPassword, btn_cancel);        
@@ -599,10 +720,7 @@ public class AdministratorDashboardController implements Initializable {
         });
     }
     
-    
-    
     private void createAdministratorDetails(){ 
-        searchOptions("Administrator");
         
         tf_adminID.setId("tf_adminID");
         tf_firstName.setId("tf_firstName");
@@ -615,8 +733,7 @@ public class AdministratorDashboardController implements Initializable {
         btn_confirmPassword.setText("Confirm Password");
         btn_cancel.setText("Cancel");
         
-        vb_selectionDetails.getChildren().addAll(lbl_searchHeader, rbtn_id, rbtn_fname, rbtn_lname, 
-                rbtn_email, lbl_search, tf_search, btn_submitSearch, lbl_header, lbl_adminID, tf_adminID, lbl_fName, 
+        vb_selectionDetails.getChildren().addAll(lbl_header, lbl_adminID, tf_adminID, lbl_fName, 
                 tf_firstName, lbl_lName, tf_lastName, lbl_email, tf_email, btn_update, 
                 btn_delete, btn_changePassword, lbl_newPassword, tf_changePassword, 
                 btn_confirmPassword, btn_cancel);

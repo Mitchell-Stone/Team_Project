@@ -8,3 +8,38 @@ and open the template in the editor.
     Author     : mitch
 */
 
+#vb_selectionDetails .label, .radio-button{
+    -fx-text-fill: #ffffff;
+}
+
+#vb_selectionDetails .button {
+    -fx-pref-width: 150px;
+}
+
+#rbtn_group {
+    -fx-text-fill: #ffffff;
+}
+
+#background {
+    
+    -fx-background-color: #333333;
+    
+}
+
+#admin_header {
+    -fx-text-fill: #ffffff;
+}
+
+#header_panel {
+    -fx-background-color: #ff8700;
+}
+
+#btn_labels {
+    -fx-text-fill: #ffffff;
+    -fx-alignment: center;
+}
+
+#lbl_header, #lbl_selection_header  {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 24;
+}

@@ -155,21 +155,6 @@ public class UserSignInController implements Initializable {
     
     }
     
-    private void openDashboard(String path){
-        try {
-            //closes current window and opens new one
-            Stage stage = (Stage) btn_register.getScene().getWindow();
-            Parent root = FXMLLoader.load(getClass().getResource(path));
-            
-            Scene scene = new Scene(root);
-            stage.setResizable(true);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException ex) {
-            Logger.getLogger(UserSignInController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
     private boolean confirmUserType(String userType) throws NoSuchAlgorithmException{
         User bean = new User();
         
