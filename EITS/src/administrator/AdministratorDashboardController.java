@@ -350,8 +350,6 @@ public class AdministratorDashboardController implements Initializable {
         
         //(Component, colIndex, rowIndex, colSpan, rowSpan)
         gp_adminDashboard.add(tbl_subjectTable, 2, 1, 1, 2);
-        
-        
     }
     
     @FXML
@@ -392,14 +390,7 @@ public class AdministratorDashboardController implements Initializable {
                 
                 showCourseSubjects();
                 
-                /*//When an item is selected in the table get all the data for that item
-                Courses co = (Courses) tbl_data.getSelectionModel().getSelectedItem();
-                //set the text fields to show the selected item to allow for changes
-                tf_adminID.setText(Integer.toString(co.getCourseID()));
-                tf_firstName.setText(co.getName());
-                tf_lastName.setText(co.getIndustry());
-                tf_email.setText(co.getLocation());
-                tf_email.setText(Integer.toString(co.getNumberOfHours()));*/
+
                 break;
             default:
                 break;
