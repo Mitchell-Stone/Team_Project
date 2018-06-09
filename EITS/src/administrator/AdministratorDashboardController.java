@@ -75,6 +75,7 @@ public class AdministratorDashboardController implements Initializable {
     Label lbl_search = new Label();
     TextField tf_search = new TextField();
     Button btn_submitSearch = new Button();
+    Button btn_cancelSearch = new Button();
     Label lbl_studentID = new Label("Student ID");
     Label lbl_employeeID = new Label("Employee ID");
     Label lbl_adminID = new Label("Admin ID");
@@ -138,6 +139,7 @@ public class AdministratorDashboardController implements Initializable {
     }
 
     private void populateTable(String user){
+        tbl_data.getColumns().clear();
             if (null != user)switch (user) {
             case "student":{
                 //create the columns needed in the table
@@ -331,7 +333,6 @@ public class AdministratorDashboardController implements Initializable {
         selectionType = courses;
         
         tbl_data.getColumns().clear();
-        vb_searchDetails.getChildren().clear();
         
         //show all case workers
         populateTable(courses);
@@ -390,6 +391,7 @@ public class AdministratorDashboardController implements Initializable {
         rbtn_email.setText("Email");  
         lbl_search.setText("Enter Search Value");
         btn_submitSearch.setText("Submit");
+        btn_cancelSearch.setText("Cancel");
         
         //put the radio buttons into a toggle group
         rbtn_id.setToggleGroup(rbtn_group);
@@ -399,7 +401,7 @@ public class AdministratorDashboardController implements Initializable {
         rbtn_email.setToggleGroup(rbtn_group);
         
         vb_searchDetails.getChildren().addAll(lbl_searchHeader, rbtn_id, rbtn_fname, rbtn_lname, 
-                rbtn_email, lbl_search, tf_search, btn_submitSearch);
+                rbtn_email, lbl_search, tf_search, btn_submitSearch, btn_cancelSearch);
         
         btn_submitSearch.setOnAction((event) -> { 
             tbl_data.getColumns().clear();
@@ -445,6 +447,11 @@ public class AdministratorDashboardController implements Initializable {
                 }
             }
         });
+        
+        btn_cancelSearch.setOnAction((event) ->{
+            populateTable(student);
+            tf_search.clear();
+        });
     }
     
     private void searchCaseWorker(){
@@ -463,6 +470,7 @@ public class AdministratorDashboardController implements Initializable {
         lbl_header.setText("Selection Details");
         lbl_header.setStyle("-fx-font: 24 arial;");
         btn_submitSearch.setText("Submit");
+        btn_cancelSearch.setText("Cancel");
         
         //put the radio buttons into a toggle group
         rbtn_id.setToggleGroup(rbtn_group);
@@ -472,7 +480,7 @@ public class AdministratorDashboardController implements Initializable {
         rbtn_email.setToggleGroup(rbtn_group);
         
         vb_searchDetails.getChildren().addAll(lbl_searchHeader, rbtn_id, rbtn_fname, rbtn_lname, 
-                rbtn_email, lbl_search, tf_search, btn_submitSearch);
+                rbtn_email, lbl_search, tf_search, btn_submitSearch, btn_cancelSearch);
         
         btn_submitSearch.setOnAction((event) -> { 
             tbl_data.getColumns().clear();
@@ -518,6 +526,11 @@ public class AdministratorDashboardController implements Initializable {
                 }
             }
         });
+        
+        btn_cancelSearch.setOnAction((event) ->{
+            populateTable(caseWorker);
+            tf_search.clear();
+        });
     }
     
     private void searchAdmin(){
@@ -536,6 +549,7 @@ public class AdministratorDashboardController implements Initializable {
         lbl_header.setText("Selection Details");
         lbl_header.setStyle("-fx-font: 24 arial;");
         btn_submitSearch.setText("Submit");
+        btn_cancelSearch.setText("Cancel");
         
         //put the radio buttons into a toggle group
         rbtn_id.setToggleGroup(rbtn_group);
@@ -545,7 +559,7 @@ public class AdministratorDashboardController implements Initializable {
         rbtn_email.setToggleGroup(rbtn_group);
         
         vb_searchDetails.getChildren().addAll(lbl_searchHeader, rbtn_id, rbtn_fname, rbtn_lname, 
-                rbtn_email, lbl_search, tf_search, btn_submitSearch);
+                rbtn_email, lbl_search, tf_search, btn_submitSearch, btn_cancel, btn_cancelSearch);
         
         btn_submitSearch.setOnAction((event) -> { 
             tbl_data.getColumns().clear();
@@ -590,6 +604,11 @@ public class AdministratorDashboardController implements Initializable {
                     System.out.println(ex);
                 }
             }
+        });
+        
+        btn_cancelSearch.setOnAction((event) ->{
+            populateTable(admin);
+            tf_search.clear();
         });
     }
   
