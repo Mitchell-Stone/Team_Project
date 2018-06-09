@@ -19,6 +19,7 @@ import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -100,6 +101,8 @@ public class AdministratorDashboardController implements Initializable {
     HBox hb_buttons = new HBox();
     Label title = new Label("Welcome");
     GridPane grid = new GridPane();
+    
+    TableView tbl_subjectTable = new TableView();
 
     private String selectionType = null;
     
@@ -331,6 +334,7 @@ public class AdministratorDashboardController implements Initializable {
         setDashboard();
         
         vb_searchDetails.setVisible(false);
+        vb_selectionDetails.setVisible(false);
 
         selectionType = courses;
         
@@ -338,6 +342,16 @@ public class AdministratorDashboardController implements Initializable {
         
         //show all case workers
         populateTable(courses);
+    }
+    
+    private void showCourseSubjects() {
+         
+        GridPane.setMargin(tbl_subjectTable, new Insets(20,20,20,0));
+        
+        //(Component, colIndex, rowIndex, colSpan, rowSpan)
+        gp_adminDashboard.add(tbl_subjectTable, 2, 1, 1, 2);
+        
+        
     }
     
     @FXML
@@ -374,15 +388,18 @@ public class AdministratorDashboardController implements Initializable {
                 tf_email.setText(ad.getEmail());
                 break;
             case courses:
-                vb_selectionDetails.setVisible(true);
-                //When an item is selected in the table get all the data for that item
+                vb_selectionDetails.setVisible(false);
+                
+                showCourseSubjects();
+                
+                /*//When an item is selected in the table get all the data for that item
                 Courses co = (Courses) tbl_data.getSelectionModel().getSelectedItem();
                 //set the text fields to show the selected item to allow for changes
                 tf_adminID.setText(Integer.toString(co.getCourseID()));
                 tf_firstName.setText(co.getName());
-                tf_lastName.setText(co.getIndustry()); 
+                tf_lastName.setText(co.getIndustry());
                 tf_email.setText(co.getLocation());
-                tf_email.setText(Integer.toString(co.getNumberOfHours()));
+                tf_email.setText(Integer.toString(co.getNumberOfHours()));*/
                 break;
             default:
                 break;
