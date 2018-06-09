@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 07, 2018 at 11:40 AM
+-- Generation Time: Jun 09, 2018 at 02:48 PM
 -- Server version: 10.1.30-MariaDB
 -- PHP Version: 7.2.1
 
@@ -25,6 +25,163 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `adminID` int(11) NOT NULL,
+  `firstName` varchar(255) NOT NULL,
+  `lastName` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `phoneNumber` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`adminID`, `firstName`, `lastName`, `email`, `password`, `phoneNumber`) VALUES
+(1, 'Mitch', 'Stone', 'mitchStone@email.com', 'seasame', '0404040404'),
+(2, 'aa', 'aa', 'aa@aa.com', 'mDSHbc+wXLFnpcJJU+uljErImxrfV/KPL50JrxB+6PA=', '0606066060'),
+(4, 'Gaben', 'Newell', 'lordgaben@steam.money', 'mDSHbc+wXLFnpcJJU+uljErImxrfV/KPL50JrxB+6PA=', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `assessment`
+--
+
+CREATE TABLE `assessment` (
+  `assessmentID` int(11) NOT NULL,
+  `courseID` int(11) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `assessment`
+--
+
+INSERT INTO `assessment` (`assessmentID`, `courseID`, `title`, `description`, `date`) VALUES
+(1, 1, 'History Of Pepe', 'Research the history of the pepe meme.', '2018-05-31'),
+(2, 1, 'Classic Memes', 'Research the History of the most classic and iconic memes.', '2018-06-23'),
+(3, 1, 'Foreign Memes 1 - Italian memes', 'Research the most popular memes used in the ex-Roman Empire.', '2018-06-30'),
+(4, 2, 'HTML5', 'Do Hello world in HTMl5.', '2018-06-30'),
+(5, 2, 'CSS3', 'Style Hello World In CSS3.', '2018-06-22'),
+(6, 3, 'Java', 'Learn Java.', '2018-06-20'),
+(7, 3, 'C#', 'Learn C#.', '2018-06-15'),
+(8, 4, 'EITS Learning Management App.', 'With the help of your jolly goodfellows build the EITS learning management app according to the project manager\'s specs.', '2018-06-18'),
+(9, 4, 'Document EITS', 'Draft a viable project to develop a complete product.', '2018-06-14'),
+(10, 5, 'Attempt to learn Sourcetree', 'In case of failure refer to Mr. Stone.', '2018-06-29'),
+(11, 4, 'MS Projects', 'Use MS Projects to create a viable project.', '2018-06-22'),
+(12, 6, 'CPR Practice1', 'Do the CPR.', '2018-06-21'),
+(13, 6, 'CPR Practice 2', 'Do more CPR.', '2018-06-16'),
+(14, 7, 'Anatomy 1 ', 'Learn about your insides.', '2018-06-16'),
+(15, 7, 'Anatomy 2', 'Learn about your mate\'s insides.', '2018-06-22'),
+(16, 7, 'Anatomy 3 ', 'Learn about your mate\'s cat\'s insides. He will not be pleased.', '2018-06-21'),
+(17, 8, 'Emergency Vehicle equipment', 'Learn about the emergency vehicle equipment.', '2018-06-29'),
+(18, 8, 'Speed driving course', 'Try to save people while driving like a nutcase.', '2018-06-30'),
+(19, 9, 'hand washing', 'That\'s about it.', '2018-06-22'),
+(20, 9, 'Surgeon Hand Washing', 'A bit more.', '2018-06-21'),
+(21, 10, 'Word and PP', 'MS Word and Power point.', '2018-06-15'),
+(22, 10, 'Excell ', 'Like MySQL but green.', '2018-06-15'),
+(23, 11, 'MS Projects', 'Learn how to use Projects.', '2018-06-16'),
+(24, 12, 'MS Others', 'Learn about lesser known MS Office programs, also become pro at Excell and PP animations. ', '2018-06-15'),
+(25, 13, 'Emergency Management Operations', 'Learn how to save all the people at the same time while sitting at your desk.', '2018-06-15'),
+(26, 14, 'Photoshop', 'Learn photoshop', '2018-06-22'),
+(27, 15, 'Illustrator', 'Learn Illustrator.', '2018-06-22'),
+(28, 16, 'Learn lightroom', 'Learn that and all the other Adobe software.', '2018-06-22'),
+(29, 17, 'Model making 1', 'Build a tiny house.', '2018-06-21'),
+(30, 18, 'Model making 2', 'Build more tiny houses and call it a tiny city. Filled with tiny people and a tiny park.', '2018-06-22'),
+(31, 19, 'Visual Arts 1', 'Learn about visual arts.', '2018-06-21'),
+(32, 19, 'Performing Arts', 'Learn about performing arts.', '2018-06-22');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attendance`
+--
+
+CREATE TABLE `attendance` (
+  `date` date NOT NULL,
+  `studentID` int(11) NOT NULL,
+  `courseID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `attendance`
+--
+
+INSERT INTO `attendance` (`date`, `studentID`, `courseID`) VALUES
+('0000-00-00', 2, 1),
+('2018-06-07', 7, 1),
+('2018-06-07', 25, 1),
+('2018-06-07', 8, 1),
+('2018-06-07', 8, 1),
+('2018-06-07', 25, 1),
+('2018-06-07', 24, 1),
+('2018-06-07', 8, 1),
+('2018-06-07', 8, 1),
+('2018-06-07', 8, 1),
+('2018-06-07', 8, 1),
+('2018-06-07', 8, 1),
+('2018-06-07', 8, 1),
+('2018-06-07', 8, 1),
+('2018-06-07', 8, 1),
+('2018-06-07', 8, 1),
+('2018-06-07', 8, 1),
+('2018-06-07', 8, 1),
+('2018-06-07', 9, 1),
+('2018-06-07', 9, 1),
+('2018-06-07', 9, 1),
+('2018-06-07', 9, 1),
+('2018-06-07', 9, 1),
+('2018-06-07', 9, 1),
+('2018-06-07', 9, 1),
+('2018-06-07', 8, 1),
+('2018-06-07', 8, 1),
+('2018-06-08', 8, 1),
+('2018-06-08', 8, 1),
+('2018-06-08', 8, 1),
+('2018-06-08', 8, 1),
+('2018-06-08', 8, 1),
+('2018-06-08', 8, 1),
+('2018-06-08', 8, 1),
+('2018-06-08', 8, 1),
+('2018-06-08', 8, 1),
+('2018-06-08', 8, 1),
+('2018-06-08', 8, 1),
+('2018-06-08', 8, 1),
+('2018-06-08', 8, 1),
+('2018-06-08', 8, 1),
+('2018-06-08', 8, 1),
+('2018-06-08', 8, 1),
+('2018-06-08', 8, 1),
+('2018-06-08', 8, 1),
+('2018-06-08', 8, 1),
+('2018-06-08', 8, 1),
+('2018-06-08', 8, 1),
+('2018-06-08', 8, 1),
+('2018-06-08', 8, 1),
+('2018-06-08', 8, 1),
+('2018-06-08', 24, 1),
+('2018-06-08', 8, 1),
+('2018-06-08', 24, 1),
+('2018-06-08', 8, 1),
+('2018-06-08', 24, 1),
+('2018-06-08', 24, 1),
+('2018-06-08', 24, 1),
+('2018-06-08', 8, 1),
+('2018-06-08', 24, 1),
+('2018-06-08', 24, 1),
+('2018-06-08', 24, 1),
+('2018-06-09', 8, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `caseworker`
 --
 
@@ -35,7 +192,7 @@ CREATE TABLE `caseworker` (
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `specialty` varchar(255) DEFAULT NULL,
-  `phoneNumber` int(11) DEFAULT NULL,
+  `phoneNumber` varchar(30) DEFAULT NULL,
   `bio` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -44,10 +201,117 @@ CREATE TABLE `caseworker` (
 --
 
 INSERT INTO `caseworker` (`employeeID`, `firstName`, `lastName`, `email`, `password`, `specialty`, `phoneNumber`, `bio`) VALUES
-(1, 'Dave', 'Hunt', 'david.hunt@hotmail.com', 'seasame', 'Stuff', 404040404, '2'),
+(1, 'Dave', 'Hunt', 'david.hunt@hotmail.com', 'seasame', 'Stuff', '404040404', '2'),
 (2, 'j', 'j', 'j', 'GJ9AA0vnoZnx+piRZo7jq2BJ+C04xovnD1luqy4YV7c=', NULL, NULL, NULL),
 (3, 'Lamp', 'Blanket', 'lampblanket@email.com', 'mDSHbc+wXLFnpcJJU+uljErImxrfV/KPL50JrxB+6PA=', NULL, NULL, NULL),
 (4, 'Jar', 'O\'Mayo', 'jaromayo@email.mayo', 'mDSHbc+wXLFnpcJJU+uljErImxrfV/KPL50JrxB+6PA=', NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `courses`
+--
+
+CREATE TABLE `courses` (
+  `courseID` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `industry` varchar(255) NOT NULL,
+  `location` varchar(255) NOT NULL,
+  `numberOfHours` int(11) NOT NULL,
+  `finishingDegree` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `courses`
+--
+
+INSERT INTO `courses` (`courseID`, `name`, `industry`, `location`, `numberOfHours`, `finishingDegree`) VALUES
+(1, 'Meme History', 'Memes', 'Meme Campus', 69, 420),
+(2, 'Internet Programming 1', 'IT', 'Coomera', 50, 1),
+(3, 'Object Oriented Programming 1', 'IT', 'Coomera', 100, 1),
+(4, 'Project Management 1', 'Management', 'Coomera', 100, 1),
+(5, 'Basics of Sourcetree', 'Pain', 'Hell', 250, 1),
+(6, 'CPR 1', 'Health', 'Coomera', 30, 1),
+(7, 'Basic Anatomy 1', 'Health', 'Coomera', 100, 1),
+(8, 'Ambulance Operations', 'Health', 'Southport', 200, 1),
+(9, 'Sanitation', 'Health', 'Coomera', 20, 1),
+(10, 'Basic MS Office', 'IT', 'Coomera', 100, 1),
+(11, 'Intermediate MS Office', 'IT', 'Coomera', 200, 1),
+(12, 'Advanced MS Office', 'IT', 'Coomera', 250, 1),
+(13, 'Ambulance Dispatch', 'Health', 'Southport', 200, 1),
+(14, 'Adobe Suite Basics', 'IT', 'Coomera', 100, 1),
+(15, 'Adobe Suite Intermediate', 'IT', 'Coomera', 250, 1),
+(16, 'Adobe Suite Advanced', 'IT', 'Coomera', 420, 1),
+(17, 'Modelling 1 ', 'Design', 'Coomera', 300, 1),
+(18, 'Modelling 2', 'Design', 'Coomera', 400, 1),
+(19, 'Art History', 'History', 'Coomera', 100, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `diploma`
+--
+
+CREATE TABLE `diploma` (
+  `diplomaID` int(11) NOT NULL,
+  `name` varchar(35) NOT NULL,
+  `industry` varchar(35) NOT NULL,
+  `location` varchar(35) NOT NULL,
+  `degree` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `diploma`
+--
+
+INSERT INTO `diploma` (`diplomaID`, `name`, `industry`, `location`, `degree`) VALUES
+(1, 'Diploma of Sofware Devoplment', 'IT', 'Coomara', 'Is a good one'),
+(2, 'EMS Certificate', 'Health', 'Coomera', 'Diploma'),
+(3, 'Diploma of Building Design', 'Design', 'Coomera', 'Diploma');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `diplomatocourses`
+--
+
+CREATE TABLE `diplomatocourses` (
+  `diplomaID` int(11) NOT NULL,
+  `courseID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `diplomatocourses`
+--
+
+INSERT INTO `diplomatocourses` (`diplomaID`, `courseID`) VALUES
+(1, 1),
+(1, 12),
+(1, 10),
+(1, 5),
+(1, 11),
+(1, 2),
+(1, 3),
+(1, 4),
+(1, 14),
+(2, 13),
+(2, 8),
+(2, 7),
+(2, 10),
+(2, 6),
+(2, 1),
+(2, 9),
+(3, 16),
+(3, 14),
+(3, 15),
+(3, 19),
+(3, 10),
+(3, 11),
+(3, 1),
+(3, 17),
+(3, 17),
+(3, 18),
+(3, 4);
 
 -- --------------------------------------------------------
 
@@ -96,15 +360,67 @@ INSERT INTO `student` (`studentID`, `diplomaID`, `employeeID`, `firstName`, `las
 (24, 2, 3, 'aaa', 'aaa', 'aaa', 'mDSHbc+wXLFnpcJJU+uljErImxrfV/KPL50JrxB+6PA=', NULL, NULL, NULL, NULL),
 (25, 3, 4, 'lll', 'lll', 'lll', 'yqIu9aEp2n8d08ROcy3cnL4UHC9FQoWQ74ot3xJWLVU=', NULL, NULL, NULL, NULL);
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `submissions`
+--
+
+CREATE TABLE `submissions` (
+  `assessmentID` int(11) NOT NULL,
+  `courseID` int(11) NOT NULL,
+  `studentID` int(11) NOT NULL,
+  `grade` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`adminID`);
+
+--
+-- Indexes for table `assessment`
+--
+ALTER TABLE `assessment`
+  ADD PRIMARY KEY (`assessmentID`),
+  ADD KEY `courseID` (`courseID`);
+
+--
+-- Indexes for table `attendance`
+--
+ALTER TABLE `attendance`
+  ADD KEY `studentID` (`studentID`),
+  ADD KEY `courseID` (`courseID`);
 
 --
 -- Indexes for table `caseworker`
 --
 ALTER TABLE `caseworker`
   ADD PRIMARY KEY (`employeeID`);
+
+--
+-- Indexes for table `courses`
+--
+ALTER TABLE `courses`
+  ADD PRIMARY KEY (`courseID`);
+
+--
+-- Indexes for table `diploma`
+--
+ALTER TABLE `diploma`
+  ADD PRIMARY KEY (`diplomaID`);
+
+--
+-- Indexes for table `diplomatocourses`
+--
+ALTER TABLE `diplomatocourses`
+  ADD KEY `dipolmaID` (`diplomaID`),
+  ADD KEY `courseID` (`courseID`);
 
 --
 -- Indexes for table `student`
@@ -115,14 +431,46 @@ ALTER TABLE `student`
   ADD KEY `diplomaID` (`diplomaID`);
 
 --
+-- Indexes for table `submissions`
+--
+ALTER TABLE `submissions`
+  ADD KEY `assessmentID` (`assessmentID`),
+  ADD KEY `courseID` (`courseID`),
+  ADD KEY `studentID` (`studentID`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `adminID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `assessment`
+--
+ALTER TABLE `assessment`
+  MODIFY `assessmentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `caseworker`
 --
 ALTER TABLE `caseworker`
   MODIFY `employeeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `courses`
+--
+ALTER TABLE `courses`
+  MODIFY `courseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+
+--
+-- AUTO_INCREMENT for table `diploma`
+--
+ALTER TABLE `diploma`
+  MODIFY `diplomaID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `student`
@@ -135,11 +483,39 @@ ALTER TABLE `student`
 --
 
 --
+-- Constraints for table `assessment`
+--
+ALTER TABLE `assessment`
+  ADD CONSTRAINT `assessment_ibfk_2` FOREIGN KEY (`courseID`) REFERENCES `courses` (`courseID`);
+
+--
+-- Constraints for table `attendance`
+--
+ALTER TABLE `attendance`
+  ADD CONSTRAINT `attendance_ibfk_1` FOREIGN KEY (`studentID`) REFERENCES `student` (`studentID`),
+  ADD CONSTRAINT `attendance_ibfk_2` FOREIGN KEY (`courseID`) REFERENCES `courses` (`courseID`);
+
+--
+-- Constraints for table `diplomatocourses`
+--
+ALTER TABLE `diplomatocourses`
+  ADD CONSTRAINT `diplomatocourses_ibfk_1` FOREIGN KEY (`courseID`) REFERENCES `courses` (`courseID`),
+  ADD CONSTRAINT `diplomatocourses_ibfk_2` FOREIGN KEY (`diplomaID`) REFERENCES `diploma` (`diplomaID`);
+
+--
 -- Constraints for table `student`
 --
 ALTER TABLE `student`
   ADD CONSTRAINT `student_ibfk_1` FOREIGN KEY (`employeeID`) REFERENCES `caseworker` (`employeeID`),
   ADD CONSTRAINT `student_ibfk_2` FOREIGN KEY (`diplomaID`) REFERENCES `diploma` (`diplomaID`) ON DELETE SET NULL ON UPDATE SET NULL;
+
+--
+-- Constraints for table `submissions`
+--
+ALTER TABLE `submissions`
+  ADD CONSTRAINT `submissions_assessment` FOREIGN KEY (`assessmentID`) REFERENCES `assessment` (`assessmentID`),
+  ADD CONSTRAINT `submissions_ibfk_2` FOREIGN KEY (`courseID`) REFERENCES `courses` (`courseID`),
+  ADD CONSTRAINT `submissions_student` FOREIGN KEY (`studentID`) REFERENCES `student` (`studentID`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
