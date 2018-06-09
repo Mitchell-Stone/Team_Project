@@ -18,8 +18,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import model.MainModel;
 import security.SecurityMethods;
 
@@ -46,6 +49,12 @@ public class AddNewUserController implements Initializable {
     private Button btn_returnToDashboard;
     @FXML
     private Button btn_cancel;
+    @FXML
+    private GridPane background;
+    @FXML
+    private Pane header_panel;
+    @FXML
+    private Label lbl_header;
     
     /**
      * Initializes the controller class.

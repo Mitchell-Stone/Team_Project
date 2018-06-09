@@ -14,7 +14,13 @@ and open the template in the editor.
 
 #vb_selectionDetails .button {
     -fx-pref-width: 150px;
+    -fx-pref-height: 35px;
 }
+
+#vb_searchDetails .label{
+    -fx-text-fill: #ffffff; 
+}
+
 
 #rbtn_group {
     -fx-text-fill: #ffffff;
@@ -42,4 +48,14 @@ and open the template in the editor.
 #lbl_header, #lbl_selection_header  {
     -fx-text-fill: #ffffff;
     -fx-font-size: 24;
+}
+
+#lbl_windowHeader {
+    -fx-text-fill: #ffffff;
+}
+
+#hb_buttons .buttons {
+    -fx-padding: 5px;
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
 }

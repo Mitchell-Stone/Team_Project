@@ -330,6 +330,9 @@ public class AdministratorDashboardController implements Initializable {
 
         selectionType = courses;
         
+        tbl_data.getColumns().clear();
+        vb_searchDetails.getChildren().clear();
+        
         //show all case workers
         populateTable(courses);
     }
