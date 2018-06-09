@@ -8,6 +8,7 @@ package administrator;
 import beans.Administrator;
 import beans.CaseWorker;
 import beans.Courses;
+import beans.Diploma;
 import beans.Student;
 import beans.User;
 import controllers.MainController;
@@ -35,6 +36,7 @@ import javafx.scene.layout.VBox;
 import model.AdministratorModel;
 import model.CaseWorkerModel;
 import model.CoursesModel;
+import model.DiplomaModel;
 import model.MainModel;
 import model.StudentModel;
 import security.SecurityMethods;
@@ -51,6 +53,7 @@ public class AdministratorDashboardController implements Initializable {
     private final String caseWorker = "caseWorker";
     private final String admin = "admin";
     private final String courses = "courses";
+    private final String diplomas = "diplomas";
     
     @FXML
     private TableView tbl_data;
@@ -223,27 +226,27 @@ public class AdministratorDashboardController implements Initializable {
                     System.out.println("DATABASE ERROR SQL EXCEPTION");
                 }   break;
                 }
-            case "courses":{
+            case "diplomas":{
                 //create the columns needed in the table
                 TableColumn courseID = new TableColumn("Course ID");
                 TableColumn courseName = new TableColumn("Course Name");
-                TableColumn courseIndustry = new TableColumn("Location");
-                TableColumn courseLocation = new TableColumn("Course Industry");
-                TableColumn courseLengthInHours = new TableColumn("Course Length (hrs)");
-                tbl_data.getColumns().addAll(courseID, courseName, courseIndustry, courseLocation, courseLengthInHours);
+                TableColumn courseIndustry = new TableColumn("Course Industry");
+                TableColumn courseLocation = new TableColumn("Location");
+                TableColumn courseType = new TableColumn("Type");
+                tbl_data.getColumns().addAll(courseID, courseName, courseIndustry, courseLocation, courseType);
                 //connect to the database and retrieve all courses
                 try{
                     //Insantiate the main model
-                    CoursesModel model = new CoursesModel();
+                    DiplomaModel model = new DiplomaModel();
                     //get all the students and put them in an observable list
-                    ObservableList<Courses> list = model.getAllCourses();
+                    ObservableList<Diploma> list = model.getAllDiplomas();
                     
                     //put the data in the appropriate columns
-                    courseID.setCellValueFactory(new PropertyValueFactory<Courses, String>("courseID"));
-                    courseName.setCellValueFactory(new PropertyValueFactory<Courses, String>("name"));
-                    courseIndustry.setCellValueFactory(new PropertyValueFactory<Courses, String>("industry"));
-                    courseLocation.setCellValueFactory(new PropertyValueFactory<Courses, String>("location"));
-                    courseLengthInHours.setCellValueFactory(new PropertyValueFactory<Courses, String>("numberOfHours"));
+                    courseID.setCellValueFactory(new PropertyValueFactory<Diploma, String>("diplomaID"));
+                    courseName.setCellValueFactory(new PropertyValueFactory<Diploma, String>("name"));
+                    courseIndustry.setCellValueFactory(new PropertyValueFactory<Diploma, String>("industry"));
+                    courseLocation.setCellValueFactory(new PropertyValueFactory<Diploma, String>("location"));
+                    courseType.setCellValueFactory(new PropertyValueFactory<Diploma, String>("degree"));
                     
                     //get the table and list the data
                     tbl_data.setItems(list);
@@ -341,7 +344,7 @@ public class AdministratorDashboardController implements Initializable {
         tbl_data.getColumns().clear();
         
         //show all case workers
-        populateTable(courses);
+        populateTable(diplomas);
     }
     
     private void showCourseSubjects() {
@@ -351,6 +354,7 @@ public class AdministratorDashboardController implements Initializable {
         //(Component, colIndex, rowIndex, colSpan, rowSpan)
         gp_adminDashboard.add(tbl_subjectTable, 2, 1, 1, 2);
     }
+
     
     @FXML
     private void selectItem(MouseEvent event) {

@@ -20,14 +20,14 @@ import javafx.collections.ObservableList;
  * @author mitch
  */
 public class DiplomaModel {
-    public ObservableList<Diploma> getAllCourses() throws SQLException{
+    public ObservableList<Diploma> getAllDiplomas() throws SQLException{
         
         ObservableList<Diploma> diplomaList = FXCollections.observableArrayList();
         
         ResultSet rs = null;
 
         //execute query to get all students
-        String query = "SELECT * FROM courses";
+        String query = "SELECT * FROM diploma";
 
         try{
             java.sql.Connection conn = DbUtil.getConn(DbType.MYSQL);
