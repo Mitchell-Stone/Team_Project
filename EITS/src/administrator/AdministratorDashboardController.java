@@ -224,8 +224,8 @@ public class AdministratorDashboardController implements Initializable {
                 //create the columns needed in the table
                 TableColumn courseID = new TableColumn("Course ID");
                 TableColumn courseName = new TableColumn("Course Name");
-                TableColumn courseIndustry = new TableColumn("Course Industry");
-                TableColumn courseLocation = new TableColumn("Location");
+                TableColumn courseIndustry = new TableColumn("Location");
+                TableColumn courseLocation = new TableColumn("Course Industry");
                 TableColumn courseLengthInHours = new TableColumn("Course Length (hrs)");
                 tbl_data.getColumns().addAll(courseID, courseName, courseIndustry, courseLocation, courseLengthInHours);
                 //connect to the database and retrieve all courses
@@ -329,6 +329,8 @@ public class AdministratorDashboardController implements Initializable {
     private void showAllCourses(MouseEvent event) {
         //show the table
         setDashboard();
+        
+        vb_searchDetails.setVisible(false);
 
         selectionType = courses;
         
@@ -370,6 +372,17 @@ public class AdministratorDashboardController implements Initializable {
                 tf_firstName.setText(ad.getFirstName());
                 tf_lastName.setText(ad.getLastName()); 
                 tf_email.setText(ad.getEmail());
+                break;
+            case courses:
+                vb_selectionDetails.setVisible(true);
+                //When an item is selected in the table get all the data for that item
+                Courses co = (Courses) tbl_data.getSelectionModel().getSelectedItem();
+                //set the text fields to show the selected item to allow for changes
+                tf_adminID.setText(Integer.toString(co.getCourseID()));
+                tf_firstName.setText(co.getName());
+                tf_lastName.setText(co.getIndustry()); 
+                tf_email.setText(co.getLocation());
+                tf_email.setText(Integer.toString(co.getNumberOfHours()));
                 break;
             default:
                 break;
