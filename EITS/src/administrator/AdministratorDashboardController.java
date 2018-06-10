@@ -550,33 +550,33 @@ public class AdministratorDashboardController implements Initializable {
                 RadioButton rbtn = (RadioButton) rbtn_group.getSelectedToggle();
                 System.out.println(rbtn.getText());
                 try { 
-                    StudentModel model = new StudentModel();
-                    TableColumn studentId = null;
+                    CaseWorkerModel model = new CaseWorkerModel();
+                    TableColumn employeeId = null;
                     
                     
                     if (null != rbtn.getText()) switch (rbtn.getText()) {
                         case "Employee ID":{
                             //get all the students and put them in an observable list
-                            ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "employeeID");
-                            createTable(list, studentId, "employeeID");
+                            ObservableList<CaseWorker> list = model.searchForCaseWorker(tf_search.getText(), "employeeID");
+                            createTable(list, employeeId, "employeeID");
                                 break;
                             }
                         case "First Name":{
                             //get all the students and put them in an observable list
-                            ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "firstName");
-                            createTable(list, studentId, "employeeID");
+                            ObservableList<CaseWorker> list = model.searchForCaseWorker(tf_search.getText(), "firstName");
+                            createTable(list, employeeId, "employeeID");
                                 break;
                             }
                         case "Last Name":{
                             //get all the students and put them in an observable list
-                            ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "lastName");
-                            createTable(list, studentId, "employeeID");
+                            ObservableList<CaseWorker> list = model.searchForCaseWorker(tf_search.getText(), "lastName");
+                            createTable(list, employeeId, "employeeID");
                                 break;
                             }
                         case "Email":{
                             //get all the students and put them in an observable list
-                            ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "email");
-                            createTable(list, studentId, "employeeID");
+                            ObservableList<CaseWorker> list = model.searchForCaseWorker(tf_search.getText(), "email");
+                            createTable(list, employeeId, "employeeID");
                                 break;
                             }
                         default:
@@ -629,33 +629,33 @@ public class AdministratorDashboardController implements Initializable {
                 RadioButton rbtn = (RadioButton) rbtn_group.getSelectedToggle();
                 System.out.println(rbtn.getText());
                 try { 
-                    StudentModel model = new StudentModel();
-                    TableColumn studentId = null;
+                    AdministratorModel model = new AdministratorModel();
+                    TableColumn adminId = null;
                     
                     
                     if (null != rbtn.getText()) switch (rbtn.getText()) {
                         case "Administrator ID":{
                             //get all the students and put them in an observable list
-                            ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "adminID");
-                            createTable(list, studentId, "adminID");
+                            ObservableList<Administrator> list = model.searchForAdmin(tf_search.getText(), "adminID");
+                            createTable(list, adminId, "adminID");
                                 break;
                             }
                         case "First Name":{
                             //get all the students and put them in an observable list
-                            ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "firstName");
-                            createTable(list, studentId, "adminID");
+                            ObservableList<Administrator> list = model.searchForAdmin(tf_search.getText(), "firstName");
+                            createTable(list, adminId, "adminID");
                                 break;
                             }
                         case "Last Name":{
                             //get all the students and put them in an observable list
-                            ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "lastName");
-                            createTable(list, studentId, "adminID");
+                            ObservableList<Administrator> list = model.searchForAdmin(tf_search.getText(), "lastName");
+                            createTable(list, adminId, "adminID");
                                 break;
                             }
                         case "Email":{
                             //get all the students and put them in an observable list
-                            ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "email");
-                            createTable(list, studentId, "adminID");
+                            ObservableList<Administrator> list = model.searchForAdmin(tf_search.getText(), "email");
+                            createTable(list, adminId, "adminID");
                                 break;
                             }
                         default:

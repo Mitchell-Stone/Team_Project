@@ -26,6 +26,9 @@ and open the template in the editor.
     -fx-pref-height: 35px;
 }
 
+#vb_navButtons .label{
+    -fx-font-size: 20;
+}
 
 #rbtn_group {
     -fx-text-fill: #ffffff;
