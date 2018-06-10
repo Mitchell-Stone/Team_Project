@@ -21,6 +21,11 @@ and open the template in the editor.
     -fx-text-fill: #ffffff; 
 }
 
+#vb_searchDetails .button {
+    -fx-pref-width: 150px;
+    -fx-pref-height: 35px;
+}
+
 
 #rbtn_group {
     -fx-text-fill: #ffffff;

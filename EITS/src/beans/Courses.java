@@ -10,8 +10,11 @@ package beans;
  * @author 0111005906
  */
 public class Courses {
+
+
  
     private int courseID;
+    private int diplomaID;
     private String name;
     private String industry;
     private String location;
@@ -31,7 +34,25 @@ public class Courses {
     public Courses() {
         
     }
+
+    public Courses(int diplomaID, int courseID, String name, String industry, String location, int numOfHours, int finDegree) {
+        this.diplomaID = diplomaID;
+        this.courseID = courseID;
+        this.name = name;
+        this.industry = industry;
+        this.location = location;
+        numberOfHours = numOfHours;
+        finishingDegree = finDegree;
+        
+    }
     
+    public int getDiplomaID() {
+        return diplomaID;
+    }
+
+    public void setDiplomaID(int dimplomaID) {
+        this.diplomaID = dimplomaID;
+    }
     
 
     public String getName() {

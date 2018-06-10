@@ -136,5 +136,42 @@ public class CoursesModel extends MainModel {
         return studentList;
     }
         
+    public ObservableList<Courses> getCoursesByDiplomaID(int id) throws SQLException {
+        
+        ObservableList<Courses> list = FXCollections.observableArrayList();
+        
+        ResultSet rs = null;
+
+        //execute query to get all students
+        String query = "SELECT diploma.diplomaID, diplomatocourses.courseID, courses.courseID, courses.name, courses.industry, courses.location, courses.numberOfHours, courses.finishingDegree "
+                     + "FROM (( diploma INNER JOIN diplomatocourses ON diploma.diplomaID = diplomatocourses.diplomaID) INNER JOIN courses ON diplomatocourses.courseID = courses.courseID) WHERE diploma.diplomaID = ?";
+
+        try(
+                java.sql.Connection conn = DbUtil.getConn(DbType.MYSQL);
+                PreparedStatement stmt = conn.prepareStatement(query);
+                ) {
+            
+            stmt.setInt(1, id);
+            
+            Courses course;
+            
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                course = new Courses(rs.getInt("diplomaID"), rs.getInt("courseID"), rs.getString("name"), rs.getString("industry"), rs.getString("location"), rs.getInt("numberOfHours"), rs.getInt("finishingDegree"));
+                list.add(course);
+            }            
+        } catch (SQLException e) {
+            System.out.println(e);
+            return null;
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+        }
+        
+        return list;
+    
+    }
           
 }

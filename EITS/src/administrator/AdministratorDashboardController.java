@@ -8,6 +8,7 @@ package administrator;
 import beans.Administrator;
 import beans.CaseWorker;
 import beans.Courses;
+import beans.Diploma;
 import beans.Student;
 import beans.User;
 import controllers.MainController;
@@ -19,6 +20,7 @@ import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -34,6 +36,7 @@ import javafx.scene.layout.VBox;
 import model.AdministratorModel;
 import model.CaseWorkerModel;
 import model.CoursesModel;
+import model.DiplomaModel;
 import model.MainModel;
 import model.StudentModel;
 import security.SecurityMethods;
@@ -50,6 +53,7 @@ public class AdministratorDashboardController implements Initializable {
     private final String caseWorker = "caseWorker";
     private final String admin = "admin";
     private final String courses = "courses";
+    private final String diplomas = "diplomas";
     
     @FXML
     private TableView tbl_data;
@@ -100,6 +104,8 @@ public class AdministratorDashboardController implements Initializable {
     HBox hb_buttons = new HBox();
     Label title = new Label("Welcome");
     GridPane grid = new GridPane();
+    
+    TableView tbl_subjectTable = new TableView();
 
     private String selectionType = null;
     
@@ -140,7 +146,7 @@ public class AdministratorDashboardController implements Initializable {
 
     private void populateTable(String user){
         tbl_data.getColumns().clear();
-            if (null != user)switch (user) {
+        if (null != user)switch (user) {
             case "student":{
                 //create the columns needed in the table
                 TableColumn studentID = new TableColumn("Student ID");
@@ -220,27 +226,28 @@ public class AdministratorDashboardController implements Initializable {
                     System.out.println("DATABASE ERROR SQL EXCEPTION");
                 }   break;
                 }
-            case "courses":{
+            case "diplomas":{
                 //create the columns needed in the table
                 TableColumn courseID = new TableColumn("Course ID");
                 TableColumn courseName = new TableColumn("Course Name");
                 TableColumn courseIndustry = new TableColumn("Course Industry");
                 TableColumn courseLocation = new TableColumn("Location");
-                TableColumn courseLengthInHours = new TableColumn("Course Length (hrs)");
-                tbl_data.getColumns().addAll(courseID, courseName, courseIndustry, courseLocation, courseLengthInHours);
+                TableColumn courseType = new TableColumn("Type");
+                tbl_data.getColumns().addAll(courseID, courseName, courseIndustry, courseLocation, courseType);
                 //connect to the database and retrieve all courses
                 try{
                     //Insantiate the main model
-                    CoursesModel model = new CoursesModel();
+                    DiplomaModel model = new DiplomaModel();
                     //get all the students and put them in an observable list
-                    ObservableList<Courses> list = model.getAllCourses();
+                    ObservableList<Diploma> list = model.getAllDiplomas();
                     
+                    System.out.println(list);
                     //put the data in the appropriate columns
-                    courseID.setCellValueFactory(new PropertyValueFactory<Courses, String>("courseID"));
-                    courseName.setCellValueFactory(new PropertyValueFactory<Courses, String>("name"));
-                    courseIndustry.setCellValueFactory(new PropertyValueFactory<Courses, String>("industry"));
-                    courseLocation.setCellValueFactory(new PropertyValueFactory<Courses, String>("location"));
-                    courseLengthInHours.setCellValueFactory(new PropertyValueFactory<Courses, String>("numberOfHours"));
+                    courseID.setCellValueFactory(new PropertyValueFactory<Diploma, String>("diplomaID"));
+                    courseName.setCellValueFactory(new PropertyValueFactory<Diploma, String>("diplomaName"));
+                    courseIndustry.setCellValueFactory(new PropertyValueFactory<Diploma, String>("diplomaIndustry"));
+                    courseLocation.setCellValueFactory(new PropertyValueFactory<Diploma, String>("diplomaLocation"));
+                    courseType.setCellValueFactory(new PropertyValueFactory<Diploma, String>("courseType"));
                     
                     //get the table and list the data
                     tbl_data.setItems(list);
@@ -252,6 +259,36 @@ public class AdministratorDashboardController implements Initializable {
                 break;
             }
         }
+    
+    private void populateSubjectTable(int diplomaID){
+        //create the columns needed in the table
+        TableColumn subjectID = new TableColumn("Subject ID");
+        TableColumn subjectName = new TableColumn("Subject Name");
+        TableColumn subjectIndustry = new TableColumn("Subject Industry");
+        TableColumn subjectLocation = new TableColumn("Subject Location");
+        TableColumn numOfHrs = new TableColumn("Subject Hours");
+        tbl_subjectTable.getColumns().addAll(subjectID, subjectName, subjectIndustry, subjectLocation, numOfHrs);
+        //connect to the database and retrieve all courses
+        try{
+            //Insantiate the main model
+            CoursesModel model = new CoursesModel();
+            //get all the students and put them in an observable list
+            ObservableList<Courses> list = model.getCoursesByDiplomaID(diplomaID);
+            
+            System.out.println(list);
+            //put the data in the appropriate columns
+            subjectID.setCellValueFactory(new PropertyValueFactory<Courses, String>("courseID"));
+            subjectName.setCellValueFactory(new PropertyValueFactory<Diploma, String>("name"));
+            subjectIndustry.setCellValueFactory(new PropertyValueFactory<Diploma, String>("industry"));
+            subjectLocation.setCellValueFactory(new PropertyValueFactory<Diploma, String>("location"));
+            numOfHrs.setCellValueFactory(new PropertyValueFactory<Diploma, String>("finishingDegree"));
+
+            //get the table and list the data
+            tbl_subjectTable.setItems(list);
+        }catch(SQLException ex){
+            System.out.println("DATABASE ERROR SQL EXCEPTION");
+        }
+    }
     
     private void setDashboard(){
         //show the table
@@ -278,6 +315,7 @@ public class AdministratorDashboardController implements Initializable {
     private void showAllStudents(MouseEvent event) throws SQLException {
         setDashboard();
         
+        
         //create search options
         searchStudent();
         
@@ -294,6 +332,7 @@ public class AdministratorDashboardController implements Initializable {
     @FXML
     private void showAllCaseWorkers(MouseEvent event) {
         setDashboard();
+        tbl_subjectTable.setVisible(false);
         
         searchCaseWorker();
         
@@ -310,6 +349,7 @@ public class AdministratorDashboardController implements Initializable {
     @FXML
     private void showAllAdministrators(MouseEvent event) {
         setDashboard();
+        tbl_subjectTable.setVisible(false);
         
         searchAdmin();
         
@@ -329,17 +369,33 @@ public class AdministratorDashboardController implements Initializable {
     private void showAllCourses(MouseEvent event) {
         //show the table
         setDashboard();
+        
+        vb_searchDetails.setVisible(false);
+        vb_selectionDetails.setVisible(false);
+        tbl_subjectTable.setVisible(false);
 
         selectionType = courses;
         
         tbl_data.getColumns().clear();
         
         //show all case workers
-        populateTable(courses);
+        populateTable(diplomas);
     }
     
+    private void showCourseSubjects(int diplomaID) throws SQLException {
+         
+        GridPane.setMargin(tbl_subjectTable, new Insets(20,20,20,0));
+        
+        //(Component, colIndex, rowIndex, colSpan, rowSpan)
+        gp_adminDashboard.add(tbl_subjectTable, 2, 1, 1, 2);
+        CoursesModel model = new CoursesModel();
+        ObservableList<Courses> courseList = model.getCoursesByDiplomaID(diplomaID);
+        
+        populateSubjectTable(diplomaID);
+    }
+
     @FXML
-    private void selectItem(MouseEvent event) {
+    private void selectItem(MouseEvent event) throws SQLException {
         switch (selectionType) {
             case student:
                 vb_selectionDetails.setVisible(true);
@@ -370,6 +426,14 @@ public class AdministratorDashboardController implements Initializable {
                 tf_firstName.setText(ad.getFirstName());
                 tf_lastName.setText(ad.getLastName()); 
                 tf_email.setText(ad.getEmail());
+                break;
+            case courses:
+                gp_adminDashboard.getChildren().remove(tbl_subjectTable);
+                tbl_subjectTable.setVisible(true);
+                Diploma di = (Diploma) tbl_data.getSelectionModel().getSelectedItem();
+                showCourseSubjects(di.getDiplomaID());
+                
+                
                 break;
             default:
                 break;
@@ -641,10 +705,10 @@ public class AdministratorDashboardController implements Initializable {
         btn_confirmPassword.setText("Confirm Password");
         btn_cancel.setText("Cancel");
         
-        hb_buttons.getChildren().addAll(btn_update, btn_delete);
+        /*hb_buttons.getChildren().addAll();*/
         
         vb_selectionDetails.getChildren().addAll(lbl_header, lbl_studentID, tf_studentID,
-                lbl_fName, tf_firstName, lbl_lName, tf_lastName, lbl_email, tf_email, hb_buttons, 
+                lbl_fName, tf_firstName, lbl_lName, tf_lastName, lbl_email, tf_email, btn_update, btn_delete,
                 btn_changePassword, lbl_newPassword, tf_changePassword, btn_confirmPassword, btn_cancel);
         
         //create an on action event so the button knows what to do when pressed    
