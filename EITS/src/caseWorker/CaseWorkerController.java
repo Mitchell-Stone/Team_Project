@@ -5,6 +5,7 @@
  */
 package caseWorker;
 
+import beans.CaseWorker;
 import beans.Courses;
 import beans.Student;
 import beans.User;
@@ -12,18 +13,23 @@ import controllers.MainController;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import model.CaseWorkerModel;
 import model.CoursesModel;
 import model.StudentModel;
 
@@ -70,6 +76,29 @@ public class CaseWorkerController implements Initializable {
     private TextField textIndustry;
     @FXML
     private TextField textLocation;
+    @FXML
+    private Button buttonAssessments;
+    @FXML
+    private Button buttonAttendance;
+    @FXML
+    private Button buttonUpdate;
+    @FXML
+    private TextField textWorkerEmail;
+    @FXML
+    private TextField textWorkerNumber;
+    @FXML
+    private TextField textPassword;
+    @FXML
+    private Button buttonConfirm;
+    @FXML
+    private Label labelFname;
+    @FXML
+    private Label labelLname;
+    @FXML
+    private VBox updateVbox;
+
+    ArrayList<String> currentCaseWorker;
+    CaseWorker caseworker = new CaseWorker();
 
     /**
      * Initialises the controller class.
@@ -78,7 +107,19 @@ public class CaseWorkerController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         uneditable();
+        updateVbox.setVisible(false);
 
+        try {
+            currentCaseWorker = CaseWorkerModel.getCaseWorkerByID(caseworker);
+        } catch (SQLException ex) {
+            Logger.getLogger(CaseWorkerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        showCaseWorkerName();
+    }
+    
+    private void showCaseWorkerName(){
+        labelFname.setText(currentCaseWorker.get(1));
+        labelLname.setText(currentCaseWorker.get(2));
     }
 
     @FXML
@@ -209,6 +250,10 @@ public class CaseWorkerController implements Initializable {
         textEmail.setEditable(true);
         textDiploma.setEditable(true);
         textWorker.setEditable(true);
+        textCourseID.setEditable(true);
+        textCourseName.setEditable(true);
+        textLocation.setEditable(true);
+        textIndustry.setEditable(true);
     }
 
     private void uneditable() {
@@ -218,6 +263,10 @@ public class CaseWorkerController implements Initializable {
         textEmail.setEditable(false);
         textDiploma.setEditable(false);
         textWorker.setEditable(false);
+        textCourseID.setEditable(false);
+        textCourseName.setEditable(false);
+        textLocation.setEditable(false);
+        textIndustry.setEditable(false);
     }
 
     @FXML
@@ -231,15 +280,41 @@ public class CaseWorkerController implements Initializable {
 
     @FXML
     private void addStudentToCourse(ActionEvent event) throws SQLException {
-        
+
         int studentID = Integer.parseInt(idTextField.getText());
         int diplomaID = Integer.parseInt(textCourseID.getText());
-        
+
         CoursesModel.assignCourse(studentID, diplomaID);
 
-  
     }
-    
-    
+
+    @FXML
+    private void updatesVisible(ActionEvent event) {
+        updateVbox.setVisible(true);
+    }
+
+    @FXML
+    private void confirmUpdates(ActionEvent event) {
+        updateVbox.setVisible(false);
+    }
+
+    @FXML
+    private void assignToCaseWorker(ActionEvent event) throws SQLException {
+        
+        int studentID = Integer.parseInt(idTextField.getText());
+        int employeeID = Integer.parseInt(currentCaseWorker.get(0));
+
+        CaseWorkerModel.assignCaseWorker(studentID, employeeID);
+        
+    }
+
+    @FXML
+    private void unassignToCaseWorker(ActionEvent event) throws SQLException {
+        
+        int studentID = Integer.parseInt(idTextField.getText());
+        int employeeID = 0;
+
+        CaseWorkerModel.assignCaseWorker(studentID, employeeID);
+    }
 
 }
