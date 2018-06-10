@@ -146,7 +146,7 @@ public class AdministratorDashboardController implements Initializable {
 
     private void populateTable(String user){
         tbl_data.getColumns().clear();
-            if (null != user)switch (user) {
+        if (null != user)switch (user) {
             case "student":{
                 //create the columns needed in the table
                 TableColumn studentID = new TableColumn("Student ID");
@@ -241,12 +241,13 @@ public class AdministratorDashboardController implements Initializable {
                     //get all the students and put them in an observable list
                     ObservableList<Diploma> list = model.getAllDiplomas();
                     
+                    System.out.println(list);
                     //put the data in the appropriate columns
                     courseID.setCellValueFactory(new PropertyValueFactory<Diploma, String>("diplomaID"));
-                    courseName.setCellValueFactory(new PropertyValueFactory<Diploma, String>("name"));
-                    courseIndustry.setCellValueFactory(new PropertyValueFactory<Diploma, String>("industry"));
-                    courseLocation.setCellValueFactory(new PropertyValueFactory<Diploma, String>("location"));
-                    courseType.setCellValueFactory(new PropertyValueFactory<Diploma, String>("degree"));
+                    courseName.setCellValueFactory(new PropertyValueFactory<Diploma, String>("diplomaName"));
+                    courseIndustry.setCellValueFactory(new PropertyValueFactory<Diploma, String>("diplomaIndustry"));
+                    courseLocation.setCellValueFactory(new PropertyValueFactory<Diploma, String>("diplomaLocation"));
+                    courseType.setCellValueFactory(new PropertyValueFactory<Diploma, String>("courseType"));
                     
                     //get the table and list the data
                     tbl_data.setItems(list);
@@ -258,6 +259,36 @@ public class AdministratorDashboardController implements Initializable {
                 break;
             }
         }
+    
+    private void populateSubjectTable(int diplomaID){
+        //create the columns needed in the table
+        TableColumn subjectID = new TableColumn("Subject ID");
+        TableColumn subjectName = new TableColumn("Subject Name");
+        TableColumn subjectIndustry = new TableColumn("Subject Industry");
+        TableColumn subjectLocation = new TableColumn("Subject Location");
+        TableColumn numOfHrs = new TableColumn("Subject Hours");
+        tbl_subjectTable.getColumns().addAll(subjectID, subjectName, subjectIndustry, subjectLocation, numOfHrs);
+        //connect to the database and retrieve all courses
+        try{
+            //Insantiate the main model
+            CoursesModel model = new CoursesModel();
+            //get all the students and put them in an observable list
+            ObservableList<Courses> list = model.getCoursesByDiplomaID(diplomaID);
+            
+            System.out.println(list);
+            //put the data in the appropriate columns
+            subjectID.setCellValueFactory(new PropertyValueFactory<Courses, String>("courseID"));
+            subjectName.setCellValueFactory(new PropertyValueFactory<Diploma, String>("name"));
+            subjectIndustry.setCellValueFactory(new PropertyValueFactory<Diploma, String>("industry"));
+            subjectLocation.setCellValueFactory(new PropertyValueFactory<Diploma, String>("location"));
+            numOfHrs.setCellValueFactory(new PropertyValueFactory<Diploma, String>("finishingDegree"));
+
+            //get the table and list the data
+            tbl_subjectTable.setItems(list);
+        }catch(SQLException ex){
+            System.out.println("DATABASE ERROR SQL EXCEPTION");
+        }
+    }
     
     private void setDashboard(){
         //show the table
@@ -284,6 +315,7 @@ public class AdministratorDashboardController implements Initializable {
     private void showAllStudents(MouseEvent event) throws SQLException {
         setDashboard();
         
+        
         //create search options
         searchStudent();
         
@@ -300,6 +332,7 @@ public class AdministratorDashboardController implements Initializable {
     @FXML
     private void showAllCaseWorkers(MouseEvent event) {
         setDashboard();
+        tbl_subjectTable.setVisible(false);
         
         searchCaseWorker();
         
@@ -316,6 +349,7 @@ public class AdministratorDashboardController implements Initializable {
     @FXML
     private void showAllAdministrators(MouseEvent event) {
         setDashboard();
+        tbl_subjectTable.setVisible(false);
         
         searchAdmin();
         
@@ -338,6 +372,7 @@ public class AdministratorDashboardController implements Initializable {
         
         vb_searchDetails.setVisible(false);
         vb_selectionDetails.setVisible(false);
+        tbl_subjectTable.setVisible(false);
 
         selectionType = courses;
         
@@ -347,17 +382,20 @@ public class AdministratorDashboardController implements Initializable {
         populateTable(diplomas);
     }
     
-    private void showCourseSubjects() {
+    private void showCourseSubjects(int diplomaID) throws SQLException {
          
         GridPane.setMargin(tbl_subjectTable, new Insets(20,20,20,0));
         
         //(Component, colIndex, rowIndex, colSpan, rowSpan)
         gp_adminDashboard.add(tbl_subjectTable, 2, 1, 1, 2);
+        CoursesModel model = new CoursesModel();
+        ObservableList<Courses> courseList = model.getCoursesByDiplomaID(diplomaID);
+        
+        populateSubjectTable(diplomaID);
     }
 
-    
     @FXML
-    private void selectItem(MouseEvent event) {
+    private void selectItem(MouseEvent event) throws SQLException {
         switch (selectionType) {
             case student:
                 vb_selectionDetails.setVisible(true);
@@ -390,11 +428,12 @@ public class AdministratorDashboardController implements Initializable {
                 tf_email.setText(ad.getEmail());
                 break;
             case courses:
-                vb_selectionDetails.setVisible(false);
+                gp_adminDashboard.getChildren().remove(tbl_subjectTable);
+                tbl_subjectTable.setVisible(true);
+                Diploma di = (Diploma) tbl_data.getSelectionModel().getSelectedItem();
+                showCourseSubjects(di.getDiplomaID());
                 
-                showCourseSubjects();
                 
-
                 break;
             default:
                 break;
@@ -666,10 +705,10 @@ public class AdministratorDashboardController implements Initializable {
         btn_confirmPassword.setText("Confirm Password");
         btn_cancel.setText("Cancel");
         
-        hb_buttons.getChildren().addAll(btn_update, btn_delete);
+        /*hb_buttons.getChildren().addAll();*/
         
         vb_selectionDetails.getChildren().addAll(lbl_header, lbl_studentID, tf_studentID,
-                lbl_fName, tf_firstName, lbl_lName, tf_lastName, lbl_email, tf_email, hb_buttons, 
+                lbl_fName, tf_firstName, lbl_lName, tf_lastName, lbl_email, tf_email, btn_update, btn_delete,
                 btn_changePassword, lbl_newPassword, tf_changePassword, btn_confirmPassword, btn_cancel);
         
         //create an on action event so the button knows what to do when pressed    

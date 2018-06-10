@@ -37,9 +37,10 @@ public class DiplomaModel {
             
             rs = stmt.executeQuery(query);
 
+           
             while (rs.next()) {
                 diploma = new Diploma(
-                        rs.getInt("diplomaID"), 
+                        rs.getInt("diplomaID"),
                         rs.getString("name"), 
                         rs.getString("industry"), 
                         rs.getString("location"), 
@@ -55,5 +56,9 @@ public class DiplomaModel {
             }
         }  
         return diplomaList;
+    }
+
+    public ObservableList<Courses> getCoursesByDiplomaID() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
