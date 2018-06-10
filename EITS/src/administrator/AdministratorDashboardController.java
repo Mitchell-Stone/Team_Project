@@ -293,6 +293,7 @@ public class AdministratorDashboardController implements Initializable {
     private void setDashboard(){
         //show the table
         tbl_data.setVisible(true);
+        tbl_subjectTable.setVisible(false);
         tf_search.clear();
         vb_selectionDetails.setVisible(false);
         vb_searchDetails.setVisible(true);
@@ -315,7 +316,6 @@ public class AdministratorDashboardController implements Initializable {
     private void showAllStudents(MouseEvent event) throws SQLException {
         setDashboard();
         
-        
         //create search options
         searchStudent();
         
@@ -332,7 +332,6 @@ public class AdministratorDashboardController implements Initializable {
     @FXML
     private void showAllCaseWorkers(MouseEvent event) {
         setDashboard();
-        tbl_subjectTable.setVisible(false);
         
         searchCaseWorker();
         
@@ -349,7 +348,6 @@ public class AdministratorDashboardController implements Initializable {
     @FXML
     private void showAllAdministrators(MouseEvent event) {
         setDashboard();
-        tbl_subjectTable.setVisible(false);
         
         searchAdmin();
         
