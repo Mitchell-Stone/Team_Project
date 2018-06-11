@@ -7,6 +7,7 @@ package caseWorker;
 
 import beans.CaseWorker;
 import beans.Courses;
+import beans.Diploma;
 import beans.Student;
 import beans.User;
 import controllers.MainController;
@@ -31,6 +32,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import model.CaseWorkerModel;
 import model.CoursesModel;
+import model.DiplomaModel;
 import model.StudentModel;
 
 /**
@@ -162,6 +164,9 @@ public class CaseWorkerController implements Initializable {
         secondaryTable.setVisible(true);
         allStudentsTable.setVisible(false);
         secondaryVbox.setVisible(true);
+        
+        int employeeID = Integer.parseInt(currentCaseWorker.get(0));
+        
         //Show My students in table
         TableColumn studentID = new TableColumn("ID");
         TableColumn firstName = new TableColumn("First Name");
@@ -171,10 +176,10 @@ public class CaseWorkerController implements Initializable {
         myStudentsTable.getColumns().addAll(studentID, firstName, lastName, email);
 
         try {
-
+            
             StudentModel model = new StudentModel();
 
-            ObservableList<Student> list = model.getAllStudents();
+            ObservableList<Student> list = model.getStudentsByCaseWorker(employeeID);
 
             studentID.setCellValueFactory(new PropertyValueFactory<Student, String>("studentID"));
             firstName.setCellValueFactory(new PropertyValueFactory<Student, String>("firstName"));
@@ -188,21 +193,21 @@ public class CaseWorkerController implements Initializable {
         }
         //Show Course in Secondary Table
         secondaryTable.getColumns().clear();
-        TableColumn courseID = new TableColumn("ID");
-        TableColumn courseName = new TableColumn("Course");
-        TableColumn courseIndustry = new TableColumn("Industry");
-        TableColumn courseLocation = new TableColumn("Location");
-        secondaryTable.getColumns().addAll(courseID, courseName, courseIndustry, courseLocation);
+        TableColumn diplomaID = new TableColumn("ID");
+        TableColumn diplomaName = new TableColumn("Diploma");
+        TableColumn diplomaIndustry = new TableColumn("Industry");
+        TableColumn diplomaLocation = new TableColumn("Location");
+        secondaryTable.getColumns().addAll(diplomaID, diplomaName, diplomaIndustry, diplomaLocation);
         try {
 
-            CoursesModel model = new CoursesModel();
+            DiplomaModel model = new DiplomaModel();
 
-            ObservableList<Courses> list = model.getAllCourses();
+            ObservableList<Diploma> list = model.getAllDiplomas();
 
-            courseID.setCellValueFactory(new PropertyValueFactory<Courses, String>("courseID"));
-            courseName.setCellValueFactory(new PropertyValueFactory<Courses, String>("name"));
-            courseIndustry.setCellValueFactory(new PropertyValueFactory<Courses, String>("industry"));
-            courseLocation.setCellValueFactory(new PropertyValueFactory<Courses, String>("location"));
+            diplomaID.setCellValueFactory(new PropertyValueFactory("diplomaID"));
+            diplomaName.setCellValueFactory(new PropertyValueFactory("diplomaName"));
+            diplomaIndustry.setCellValueFactory(new PropertyValueFactory("diplomaIndustry"));
+            diplomaLocation.setCellValueFactory(new PropertyValueFactory("diplomaLocation"));
             secondaryTable.setItems(list);
         } catch (NullPointerException ex) {
             System.out.println("No Pointer Exception");
@@ -222,7 +227,7 @@ public class CaseWorkerController implements Initializable {
     }
 
     @FXML
-    private void MyStudentSelect(MouseEvent event) {
+    private void MyStudentSelect(MouseEvent event) { 
         Student st = (Student) myStudentsTable.getSelectionModel().getSelectedItem();
         editable();
         idTextField.setText(Integer.toString(st.getStudentID()));
@@ -234,12 +239,12 @@ public class CaseWorkerController implements Initializable {
 
     @FXML
     private void selectCourse(MouseEvent event) {
-        Courses co = (Courses) secondaryTable.getSelectionModel().getSelectedItem();
+        Diploma di = (Diploma) secondaryTable.getSelectionModel().getSelectedItem();
         editable();
-        textCourseID.setText(Integer.toString(co.getCourseID()));
-        textCourseName.setText(co.getName());
-        textIndustry.setText(co.getIndustry());
-        textLocation.setText(co.getLocation());
+        textCourseID.setText(Integer.toString(di.getDiplomaID()));
+        textCourseName.setText(di.getDiplomaName());
+        textIndustry.setText(di.getDiplomaIndustry());
+        textLocation.setText(di.getDiplomaLocation());
         uneditable();
     }
 
@@ -312,7 +317,7 @@ public class CaseWorkerController implements Initializable {
     private void unassignToCaseWorker(ActionEvent event) throws SQLException {
         
         int studentID = Integer.parseInt(idTextField.getText());
-        int employeeID = 0;
+        int employeeID = 1;
 
         CaseWorkerModel.assignCaseWorker(studentID, employeeID);
     }

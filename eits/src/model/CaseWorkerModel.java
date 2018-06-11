@@ -112,32 +112,32 @@ public class CaseWorkerModel {
             return null;
         }
     }
-    
-    public ObservableList<CaseWorker> searchForCaseWorker(String searchValue, String searchType) throws SQLException{
-        
+
+    public ObservableList<CaseWorker> searchForCaseWorker(String searchValue, String searchType) throws SQLException {
+
         ObservableList<CaseWorker> employeeList = FXCollections.observableArrayList();
-        
+
         CaseWorker employee = null;
-        
+
         ResultSet rs = null;
 
         //execute query to get all students
         String sql = "SELECT * FROM caseworker WHERE $searchType LIKE ?";
-        
+
         String query = sql.replace("$searchType", searchType);
 
-        try{
+        try {
             java.sql.Connection conn = DbUtil.getConn(DbType.MYSQL);
-            PreparedStatement stmt = conn.prepareStatement(query);           
-            
+            PreparedStatement stmt = conn.prepareStatement(query);
+
             stmt.setString(1, "%" + searchValue + "%");
-            
+
             rs = stmt.executeQuery();
 
             while (rs.next()) {
-                employee = new CaseWorker(rs.getInt("employeeID"),rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"));
+                employee = new CaseWorker(rs.getInt("employeeID"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"));
                 employeeList.add(employee);
-            }            
+            }
         } catch (SQLException e) {
             System.out.println(e);
             return null;
@@ -145,40 +145,39 @@ public class CaseWorkerModel {
             if (rs != null) {
                 rs.close();
             }
-        }  
+        }
         return employeeList;
     }
-    
+
     public static boolean assignCaseWorker(int studentID, int employeeID) throws SQLException {
-    
+
         String sql = "UPDATE student SET employeeID = ? WHERE studentID = ?";
-        
+
         ResultSet keys = null;
-        
-        try(
+
+        try (
                 Connection conn = DbUtil.getConn(DbType.MYSQL);
-                PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                ) {
-        
+                PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);) {
+
             stmt.setInt(1, employeeID);
             stmt.setInt(2, studentID);
-            
+
             int affected = stmt.executeUpdate();
-            
+
             if (affected == 1) {
                 return true;
             } else {
                 return false;
             }
-        
+
         } catch (SQLException e) {
             System.err.println(e);
             return false;
         } finally {
-            if(keys != null) {
+            if (keys != null) {
                 keys.close();
             }
         }
-    
+
     }
 }
