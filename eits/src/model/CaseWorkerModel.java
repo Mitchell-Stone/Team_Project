@@ -179,9 +179,7 @@ public class CaseWorkerModel {
                 keys.close();
             }
         }
-<<<<<<< HEAD
 
-=======
     }
     
     public static boolean updateCaseWorkerPassword(User bean) {
@@ -208,6 +206,5 @@ public class CaseWorkerModel {
             System.out.println(e);
             return false;
         }
->>>>>>> 4db88d3778be264ce531de5881e4186038ca4665
     }
 }

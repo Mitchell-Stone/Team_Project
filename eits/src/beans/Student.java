@@ -10,6 +10,17 @@ public class Student extends User {
         this.email = email;
     }
     
+    public Student(int id, String fName, String lName, String email, int diplomaID, int employeeID){
+        studentID = id;
+        firstName = fName;
+        lastName = lName;
+        this.email = email;
+        this.diplomaID = diplomaID;
+        this.employeeID = employeeID;
+        
+    }
+    
+    
     private int studentID;
     private String firstName;
     private String lastName;

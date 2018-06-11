@@ -191,7 +191,8 @@ public class StudentModel extends MainModel {
             Student student;
 
             while (rs.next()) {
-                student = new Student(rs.getInt("studentID"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"));
+                student = new Student(rs.getInt("studentID"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"), 
+                        rs.getInt("diplomaID"), rs.getInt("employeeID"));
                 studentList.add(student);
             }
         } catch (SQLException e) {
@@ -204,4 +205,38 @@ public class StudentModel extends MainModel {
         }
         return studentList;
     }
+    
+    public ObservableList<Student> getAllStudentsCW() throws SQLException {
+
+        ObservableList<Student> studentList = FXCollections.observableArrayList();
+
+        ResultSet rs = null;
+
+        //execute query to get all students
+        String query = "SELECT * FROM student";
+
+        try {
+            java.sql.Connection conn = DbUtil.getConn(DbType.MYSQL);
+            PreparedStatement stmt = conn.prepareStatement(query);
+
+            Student student;
+
+            rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                student = new Student(rs.getInt("studentID"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"), 
+                        rs.getInt("diplomaID"), rs.getInt("employeeID"));
+                studentList.add(student);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+            return null;
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+        }
+        return studentList;
+    }
+
 }

@@ -136,19 +136,23 @@ public class CaseWorkerController implements Initializable {
         TableColumn firstName = new TableColumn("First Name");
         TableColumn lastName = new TableColumn("Last Name");
         TableColumn email = new TableColumn("email");
+        TableColumn studentDiplomaID = new TableColumn("Diploma ID");
+        TableColumn studentEmployeeID = new TableColumn("CaseWorker");
 
-        allStudentsTable.getColumns().addAll(studentID, firstName, lastName, email);
+        allStudentsTable.getColumns().addAll(studentID, firstName, lastName, email, studentDiplomaID, studentEmployeeID);
 
         try {
 
             StudentModel model = new StudentModel();
 
-            ObservableList<Student> list = model.getAllStudents();
+            ObservableList<Student> list = model.getAllStudentsCW();
 
             studentID.setCellValueFactory(new PropertyValueFactory<Student, String>("studentID"));
             firstName.setCellValueFactory(new PropertyValueFactory<Student, String>("firstName"));
             lastName.setCellValueFactory(new PropertyValueFactory<Student, String>("lastName"));
             email.setCellValueFactory(new PropertyValueFactory<Student, String>("email"));
+            studentDiplomaID.setCellValueFactory(new PropertyValueFactory<Student, String>("diplomaID"));
+            studentEmployeeID.setCellValueFactory(new PropertyValueFactory<Student, String>("employeeID"));
 
             allStudentsTable.setItems(list);
 
@@ -172,8 +176,10 @@ public class CaseWorkerController implements Initializable {
         TableColumn firstName = new TableColumn("First Name");
         TableColumn lastName = new TableColumn("Last Name");
         TableColumn email = new TableColumn("email");
+        TableColumn studentDiplomaID = new TableColumn("Diploma ID");
+        TableColumn studentEmployeeID = new TableColumn("CaseWorker");
 
-        myStudentsTable.getColumns().addAll(studentID, firstName, lastName, email);
+        myStudentsTable.getColumns().addAll(studentID, firstName, lastName, email, studentDiplomaID, studentEmployeeID);
 
         try {
             
@@ -185,6 +191,9 @@ public class CaseWorkerController implements Initializable {
             firstName.setCellValueFactory(new PropertyValueFactory<Student, String>("firstName"));
             lastName.setCellValueFactory(new PropertyValueFactory<Student, String>("lastName"));
             email.setCellValueFactory(new PropertyValueFactory<Student, String>("email"));
+            studentDiplomaID.setCellValueFactory(new PropertyValueFactory<Student, String>("diplomaID"));
+            studentEmployeeID.setCellValueFactory(new PropertyValueFactory<Student, String>("employeeID"));
+            
 
             myStudentsTable.setItems(list);
 
@@ -227,13 +236,15 @@ public class CaseWorkerController implements Initializable {
     }
 
     @FXML
-    private void MyStudentSelect(MouseEvent event) { 
+    private void MyStudentSelect(MouseEvent event) throws SQLException { 
         Student st = (Student) myStudentsTable.getSelectionModel().getSelectedItem();
         editable();
         idTextField.setText(Integer.toString(st.getStudentID()));
         textFname.setText(st.getFirstName());
         textLname.setText(st.getLastName());
         textEmail.setText(st.getEmail());
+       // ObservableList<Diploma> currentDiploma = DiplomaModel.getDiplomaByStudent(1);
+        //textDiploma.setText
         uneditable();
     }
 
