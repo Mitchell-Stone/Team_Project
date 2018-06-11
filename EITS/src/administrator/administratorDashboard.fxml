@@ -36,8 +36,18 @@
             </Label>
          </children>
       </Pane>
-      <VBox id="vb_navButtons" fx:id="vb_navButtons" prefHeight="736.0" prefWidth="142.0" spacing="5.0" stylesheets="@../stylesheets/main.css" GridPane.rowIndex="1" GridPane.rowSpan="2">
+      <VBox prefHeight="736.0" prefWidth="142.0" spacing="5.0" GridPane.rowIndex="1" GridPane.rowSpan="2">
          <children>
+            <Button mnemonicParsing="false" onMouseClicked="#btn_myProfile" prefHeight="70.0" prefWidth="250.0" stylesheets="@../stylesheets/main.css">
+               <graphic>
+                  <ImageView fitHeight="38.0" fitWidth="75.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/briefcase-144.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Label id="btn_labels" prefHeight="17.0" prefWidth="279.0" stylesheets="@../stylesheets/main.css" text="My Profile" />
             <Button mnemonicParsing="false" onMouseClicked="#addNewUser" prefHeight="70.0" prefWidth="250.0" stylesheets="@../stylesheets/main.css">
                <graphic>
                   <ImageView fitHeight="37.0" fitWidth="68.0" pickOnBounds="true" preserveRatio="true">
@@ -88,7 +98,7 @@
                </graphic>
             </Button>
             <Label id="btn_labels" prefHeight="17.0" prefWidth="258.0" stylesheets="@../stylesheets/main.css" text="Courses" />
-            <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="250.0" stylesheets="@../stylesheets/main.css">
+            <Button mnemonicParsing="false" onAction="#btn_showReports" prefHeight="70.0" prefWidth="250.0" stylesheets="@../stylesheets/main.css">
                <graphic>
                   <ImageView fitHeight="39.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
                      <image>

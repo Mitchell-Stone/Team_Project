@@ -18,6 +18,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -723,7 +724,7 @@ public class AdministratorDashboardController implements Initializable {
         });
         
         btn_confirmPassword.setOnAction((event) ->{
-            confirmPassword(student, Integer.parseInt(tf_studentID.getText()), tf_changePassword.getText());         
+            confirmPassword(student, "studentID", Integer.parseInt(tf_studentID.getText()), tf_changePassword.getText());         
         });
         
         btn_cancel.setOnAction((event) ->{
@@ -796,7 +797,7 @@ public class AdministratorDashboardController implements Initializable {
         });
         
         btn_confirmPassword.setOnAction((event) ->{
-            confirmPassword(caseWorker, Integer.parseInt(tf_employeeID.getText()), tf_changePassword.getText());         
+            confirmPassword(caseWorker, "employeeID", Integer.parseInt(tf_employeeID.getText()), tf_changePassword.getText());         
         });
         
         btn_cancel.setOnAction((event) ->{
@@ -869,7 +870,7 @@ public class AdministratorDashboardController implements Initializable {
         });
         
         btn_confirmPassword.setOnAction((event) ->{
-            confirmPassword(admin, Integer.parseInt(tf_adminID.getText()), tf_changePassword.getText());         
+            confirmPassword(admin, "adminID" ,Integer.parseInt(tf_adminID.getText()), tf_changePassword.getText());         
         });
         
         btn_cancel.setOnAction((event) ->{
@@ -909,18 +910,16 @@ public class AdministratorDashboardController implements Initializable {
         System.out.println(userType + " updated");       
     }
     
-    public void confirmPassword(String userType, int userID, String password){
+    public void confirmPassword(String userType, String idType, int userID, String password){
         User user = new User();
+        
+        user.setIDType(idType);
         user.setTable(userType);
         user.setID(userID);
-        try {
-            user.setPassword(SecurityMethods.getHash(password));
-            System.out.println("Password changed");
-        } catch (NoSuchAlgorithmException ex) {
-            System.out.println("Error with encoding password.");
-        }
-        StudentModel.updateStudentPassword(user);
-
+        user.setPassword(password);
+        
+        MainModel.updatePassword(user);
+        
         tf_changePassword.clear();
         hideChangePassword();
     }
@@ -951,5 +950,9 @@ public class AdministratorDashboardController implements Initializable {
     private void returnToLogin(MouseEvent event) throws IOException {
         MainController main = new MainController();
         main.openNewWindow(loginURL, btn_returnToLogin);
+    }
+
+    @FXML
+    private void btn_showReports(ActionEvent event) {
     }
 }

@@ -2,9 +2,12 @@
 package beans;
 
 public class User {
+
+
     
     private static String firstName;
     private static String lastName;
+    private String IDType;
     private String email;
     private String password;
     private String userName;
@@ -13,6 +16,15 @@ public class User {
     private String idType;
     private static int ID;
 
+    
+    public String getIDType() {
+        return IDType;
+    }
+
+    public void setIDType(String IDType) {
+        this.IDType = IDType;
+    }
+    
     public String getIdType() {
         return idType;
     }

@@ -34,10 +34,8 @@ and open the template in the editor.
     -fx-text-fill: #ffffff;
 }
 
-#background {
-    
-    -fx-background-color: #333333;
-    
+#background {   
+    -fx-background-color: #333333;  
 }
 
 #admin_header {
