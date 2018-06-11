@@ -74,9 +74,9 @@ public class MainModel {
                 
                 Omni output = new Omni();
                 
-                int lenght = columnNames.size();
-                
-                switch(lenght) {
+                int length = columnNames.size();
+               
+                switch(length) {
                 
                     case 2:
                         

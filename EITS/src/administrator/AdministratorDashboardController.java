@@ -18,6 +18,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -293,6 +294,7 @@ public class AdministratorDashboardController implements Initializable {
     private void setDashboard(){
         //show the table
         tbl_data.setVisible(true);
+        tbl_subjectTable.setVisible(false);
         tf_search.clear();
         vb_selectionDetails.setVisible(false);
         vb_searchDetails.setVisible(true);
@@ -315,7 +317,6 @@ public class AdministratorDashboardController implements Initializable {
     private void showAllStudents(MouseEvent event) throws SQLException {
         setDashboard();
         
-        
         //create search options
         searchStudent();
         
@@ -332,7 +333,6 @@ public class AdministratorDashboardController implements Initializable {
     @FXML
     private void showAllCaseWorkers(MouseEvent event) {
         setDashboard();
-        tbl_subjectTable.setVisible(false);
         
         searchCaseWorker();
         
@@ -349,7 +349,6 @@ public class AdministratorDashboardController implements Initializable {
     @FXML
     private void showAllAdministrators(MouseEvent event) {
         setDashboard();
-        tbl_subjectTable.setVisible(false);
         
         searchAdmin();
         
@@ -552,33 +551,33 @@ public class AdministratorDashboardController implements Initializable {
                 RadioButton rbtn = (RadioButton) rbtn_group.getSelectedToggle();
                 System.out.println(rbtn.getText());
                 try { 
-                    StudentModel model = new StudentModel();
-                    TableColumn studentId = null;
+                    CaseWorkerModel model = new CaseWorkerModel();
+                    TableColumn employeeId = null;
                     
                     
                     if (null != rbtn.getText()) switch (rbtn.getText()) {
                         case "Employee ID":{
                             //get all the students and put them in an observable list
-                            ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "employeeID");
-                            createTable(list, studentId, "employeeID");
+                            ObservableList<CaseWorker> list = model.searchForCaseWorker(tf_search.getText(), "employeeID");
+                            createTable(list, employeeId, "employeeID");
                                 break;
                             }
                         case "First Name":{
                             //get all the students and put them in an observable list
-                            ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "firstName");
-                            createTable(list, studentId, "employeeID");
+                            ObservableList<CaseWorker> list = model.searchForCaseWorker(tf_search.getText(), "firstName");
+                            createTable(list, employeeId, "employeeID");
                                 break;
                             }
                         case "Last Name":{
                             //get all the students and put them in an observable list
-                            ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "lastName");
-                            createTable(list, studentId, "employeeID");
+                            ObservableList<CaseWorker> list = model.searchForCaseWorker(tf_search.getText(), "lastName");
+                            createTable(list, employeeId, "employeeID");
                                 break;
                             }
                         case "Email":{
                             //get all the students and put them in an observable list
-                            ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "email");
-                            createTable(list, studentId, "employeeID");
+                            ObservableList<CaseWorker> list = model.searchForCaseWorker(tf_search.getText(), "email");
+                            createTable(list, employeeId, "employeeID");
                                 break;
                             }
                         default:
@@ -631,33 +630,33 @@ public class AdministratorDashboardController implements Initializable {
                 RadioButton rbtn = (RadioButton) rbtn_group.getSelectedToggle();
                 System.out.println(rbtn.getText());
                 try { 
-                    StudentModel model = new StudentModel();
-                    TableColumn studentId = null;
+                    AdministratorModel model = new AdministratorModel();
+                    TableColumn adminId = null;
                     
                     
                     if (null != rbtn.getText()) switch (rbtn.getText()) {
                         case "Administrator ID":{
                             //get all the students and put them in an observable list
-                            ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "adminID");
-                            createTable(list, studentId, "adminID");
+                            ObservableList<Administrator> list = model.searchForAdmin(tf_search.getText(), "adminID");
+                            createTable(list, adminId, "adminID");
                                 break;
                             }
                         case "First Name":{
                             //get all the students and put them in an observable list
-                            ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "firstName");
-                            createTable(list, studentId, "adminID");
+                            ObservableList<Administrator> list = model.searchForAdmin(tf_search.getText(), "firstName");
+                            createTable(list, adminId, "adminID");
                                 break;
                             }
                         case "Last Name":{
                             //get all the students and put them in an observable list
-                            ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "lastName");
-                            createTable(list, studentId, "adminID");
+                            ObservableList<Administrator> list = model.searchForAdmin(tf_search.getText(), "lastName");
+                            createTable(list, adminId, "adminID");
                                 break;
                             }
                         case "Email":{
                             //get all the students and put them in an observable list
-                            ObservableList<Student> list = model.searchForStudents(tf_search.getText(), "email");
-                            createTable(list, studentId, "adminID");
+                            ObservableList<Administrator> list = model.searchForAdmin(tf_search.getText(), "email");
+                            createTable(list, adminId, "adminID");
                                 break;
                             }
                         default:
@@ -725,7 +724,7 @@ public class AdministratorDashboardController implements Initializable {
         });
         
         btn_confirmPassword.setOnAction((event) ->{
-            confirmPassword(student, Integer.parseInt(tf_studentID.getText()), tf_changePassword.getText());         
+            confirmPassword(student, "studentID", Integer.parseInt(tf_studentID.getText()), tf_changePassword.getText());         
         });
         
         btn_cancel.setOnAction((event) ->{
@@ -798,7 +797,7 @@ public class AdministratorDashboardController implements Initializable {
         });
         
         btn_confirmPassword.setOnAction((event) ->{
-            confirmPassword(caseWorker, Integer.parseInt(tf_employeeID.getText()), tf_changePassword.getText());         
+            confirmPassword(caseWorker, "employeeID", Integer.parseInt(tf_employeeID.getText()), tf_changePassword.getText());         
         });
         
         btn_cancel.setOnAction((event) ->{
@@ -871,7 +870,7 @@ public class AdministratorDashboardController implements Initializable {
         });
         
         btn_confirmPassword.setOnAction((event) ->{
-            confirmPassword(admin, Integer.parseInt(tf_adminID.getText()), tf_changePassword.getText());         
+            confirmPassword(admin, "adminID" ,Integer.parseInt(tf_adminID.getText()), tf_changePassword.getText());         
         });
         
         btn_cancel.setOnAction((event) ->{
@@ -911,18 +910,16 @@ public class AdministratorDashboardController implements Initializable {
         System.out.println(userType + " updated");       
     }
     
-    public void confirmPassword(String userType, int userID, String password){
+    public void confirmPassword(String userType, String idType, int userID, String password){
         User user = new User();
+        
+        user.setIDType(idType);
         user.setTable(userType);
         user.setID(userID);
-        try {
-            user.setPassword(SecurityMethods.getHash(password));
-            System.out.println("Password changed");
-        } catch (NoSuchAlgorithmException ex) {
-            System.out.println("Error with encoding password.");
-        }
-        StudentModel.updateStudentPassword(user);
-
+        user.setPassword(password);
+        
+        MainModel.updatePassword(user);
+        
         tf_changePassword.clear();
         hideChangePassword();
     }
@@ -953,5 +950,9 @@ public class AdministratorDashboardController implements Initializable {
     private void returnToLogin(MouseEvent event) throws IOException {
         MainController main = new MainController();
         main.openNewWindow(loginURL, btn_returnToLogin);
+    }
+
+    @FXML
+    private void btn_showReports(ActionEvent event) {
     }
 }

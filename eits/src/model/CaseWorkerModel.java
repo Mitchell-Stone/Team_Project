@@ -7,6 +7,7 @@ package model;
 
 import beans.CaseWorker;
 import beans.Student;
+import beans.User;
 import db.DbType;
 import db.DbUtil;
 import java.sql.Connection;
@@ -178,6 +179,35 @@ public class CaseWorkerModel {
                 keys.close();
             }
         }
+<<<<<<< HEAD
 
+=======
+    }
+    
+    public static boolean updateCaseWorkerPassword(User bean) {
+    
+        String sql = "UPDATE caseworker SET password = ? WHERE studentID = ?";
+        
+        try(
+                Connection conn = DbUtil.getConn(DbType.MYSQL);
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                ) {
+            
+            stmt.setString(1, bean.getPassword());
+            stmt.setInt(2, bean.getID());
+            
+            int affected = stmt.executeUpdate();
+            
+            if (affected == 1) {
+                return true;
+            } else {
+                return false;
+            }
+            
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
+        }
+>>>>>>> 4db88d3778be264ce531de5881e4186038ca4665
     }
 }

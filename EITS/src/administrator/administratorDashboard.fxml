@@ -98,7 +98,7 @@
                </graphic>
             </Button>
             <Label id="btn_labels" prefHeight="17.0" prefWidth="258.0" stylesheets="@../stylesheets/main.css" text="Courses" />
-            <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="250.0" stylesheets="@../stylesheets/main.css">
+            <Button mnemonicParsing="false" onAction="#btn_showReports" prefHeight="70.0" prefWidth="250.0" stylesheets="@../stylesheets/main.css">
                <graphic>
                   <ImageView fitHeight="39.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
                      <image>

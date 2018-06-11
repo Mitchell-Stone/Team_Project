@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import security.SecurityMethods;
 
 public class MainModel {
 
@@ -134,6 +135,33 @@ public class MainModel {
         } catch (Exception e) {
             System.err.println(e);
             return null;
+        }
+    }
+    
+    public static boolean updatePassword(User bean) {
+    
+        String sql = "UPDATE $tablename SET password = ? WHERE $idType = ?";
+        String query = sql.replace("$tablename", bean.getTable()).replace("$idType", bean.getIDType());
+        
+        try(
+                Connection conn = DbUtil.getConn(DbType.MYSQL);
+                PreparedStatement stmt = conn.prepareStatement(query);
+                ) {
+            
+            stmt.setString(1, SecurityMethods.getHash(bean.getPassword()));
+            stmt.setInt(2, bean.getID());
+            
+            int affected = stmt.executeUpdate();
+            
+            if (affected == 1) {
+                return true;
+            } else {
+                return false;
+            }
+            
+        } catch (Exception e) {
+            System.out.println(e);
+            return false;
         }
     }
 }
