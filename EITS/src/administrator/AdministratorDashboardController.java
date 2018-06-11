@@ -14,33 +14,37 @@ import beans.User;
 import controllers.MainController;
 import java.io.IOException;
 import java.net.URL;
-import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import model.AdministratorModel;
 import model.CaseWorkerModel;
 import model.CoursesModel;
 import model.DiplomaModel;
 import model.MainModel;
 import model.StudentModel;
-import security.SecurityMethods;
 
 /**
  * FXML Controller class
@@ -105,6 +109,7 @@ public class AdministratorDashboardController implements Initializable {
     HBox hb_buttons = new HBox();
     Label title = new Label("Welcome");
     GridPane grid = new GridPane();
+    ContextMenu contextMenu = new ContextMenu();
     
     TableView tbl_subjectTable = new TableView();
 
@@ -129,11 +134,9 @@ public class AdministratorDashboardController implements Initializable {
         hideChangePassword();
         tbl_data.setVisible(false);
         vb_selectionDetails.setVisible(false);
-        
     } 
     
     private void myProfile(){    
-        
         vb_searchDetails.getChildren().clear();
     }
     
@@ -265,10 +268,8 @@ public class AdministratorDashboardController implements Initializable {
         //create the columns needed in the table
         TableColumn subjectID = new TableColumn("Subject ID");
         TableColumn subjectName = new TableColumn("Subject Name");
-        TableColumn subjectIndustry = new TableColumn("Subject Industry");
         TableColumn subjectLocation = new TableColumn("Subject Location");
-        TableColumn numOfHrs = new TableColumn("Subject Hours");
-        tbl_subjectTable.getColumns().addAll(subjectID, subjectName, subjectIndustry, subjectLocation, numOfHrs);
+        tbl_subjectTable.getColumns().addAll(subjectID, subjectName, subjectLocation);
         //connect to the database and retrieve all courses
         try{
             //Insantiate the main model
@@ -280,9 +281,7 @@ public class AdministratorDashboardController implements Initializable {
             //put the data in the appropriate columns
             subjectID.setCellValueFactory(new PropertyValueFactory<Courses, String>("courseID"));
             subjectName.setCellValueFactory(new PropertyValueFactory<Diploma, String>("name"));
-            subjectIndustry.setCellValueFactory(new PropertyValueFactory<Diploma, String>("industry"));
             subjectLocation.setCellValueFactory(new PropertyValueFactory<Diploma, String>("location"));
-            numOfHrs.setCellValueFactory(new PropertyValueFactory<Diploma, String>("finishingDegree"));
 
             //get the table and list the data
             tbl_subjectTable.setItems(list);
@@ -427,16 +426,36 @@ public class AdministratorDashboardController implements Initializable {
                 tf_email.setText(ad.getEmail());
                 break;
             case courses:
+                tbl_subjectTable.getColumns().clear();
                 gp_adminDashboard.getChildren().remove(tbl_subjectTable);
                 tbl_subjectTable.setVisible(true);
+
                 Diploma di = (Diploma) tbl_data.getSelectionModel().getSelectedItem();
-                showCourseSubjects(di.getDiplomaID());
-                
-                
+                showCourseSubjects(di.getDiplomaID());      
+                tableContextMenu();
+
                 break;
             default:
                 break;
         }
+    }
+    
+    private void tableContextMenu(){
+        MenuItem mi1 = new MenuItem("Edit Course");
+        MenuItem mi2 = new MenuItem("Add Course");
+        mi1.setOnAction((ActionEvent event) -> {
+            Object item = tbl_data.getSelectionModel().getSelectedItem();
+            System.out.println("Selected item: " + item);
+        });
+        
+        mi2.setOnAction((ActionEvent event) -> {
+            Object item = tbl_data.getSelectionModel().getSelectedItem();
+            System.out.println("Selected item: " + item);
+        });
+
+        ContextMenu menu = new ContextMenu();
+        menu.getItems().addAll(mi1, mi2);
+        tbl_data.setContextMenu(menu);
     }
     
     private void searchStudent(){
