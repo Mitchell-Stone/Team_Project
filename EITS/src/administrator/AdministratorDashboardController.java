@@ -20,7 +20,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -34,14 +33,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import mainWindow.MainWindowController;
 import model.AdministratorModel;
 import model.CaseWorkerModel;
 import model.CoursesModel;
@@ -144,7 +139,6 @@ public class AdministratorDashboardController implements Initializable {
         vb_searchDetails.getChildren().clear();
     }
     
-    @FXML
     private void btn_myProfile(MouseEvent event) {
         tbl_data.setVisible(false);
         vb_selectionDetails.setVisible(false);
@@ -967,11 +961,6 @@ public class AdministratorDashboardController implements Initializable {
         lbl_newPassword.setVisible(false);
     }
 
-    @FXML
-    private void addNewUser(MouseEvent event) throws IOException {
-        MainController main = new MainController();
-        main.openNewWindow(addNewUserURL);
-    }
 
     @FXML
     private void returnToLogin(MouseEvent event) throws IOException {
@@ -981,5 +970,24 @@ public class AdministratorDashboardController implements Initializable {
 
     @FXML
     private void btn_showReports(ActionEvent event) {
+        
+    }
+
+    @FXML
+    private void addUser(MouseEvent event) {
+        MainController main = new MainController();
+        try{
+            main.openNewWindow(addNewUserURL);
+        }catch(IOException ex){
+            System.out.println(ex);
+        }
     }
 }
+
+
+/*try{
+MainController main = new MainController();
+main.openNewWindow(addNewUserURL);
+}catch(IOException ex){
+System.out.println(ex);
+}*/
