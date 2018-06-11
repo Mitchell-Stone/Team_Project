@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -39,6 +41,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import mainWindow.MainWindowController;
 import model.AdministratorModel;
 import model.CaseWorkerModel;
 import model.CoursesModel;
@@ -115,7 +118,8 @@ public class AdministratorDashboardController implements Initializable {
 
     private String selectionType = null;
     
-    private final String windowURL = "/globalInterfaces/addNewUser.fxml";
+    private final String addNewUserURL = "/globalInterfaces/addNewUser.fxml";
+    private final String addNewCourseURL = "/globalInterfaces/addNewCourse.fxml";
     private final String loginURL = "/userAccess/userSignIn.fxml";
     
     
@@ -449,8 +453,12 @@ public class AdministratorDashboardController implements Initializable {
         });
         
         mi2.setOnAction((ActionEvent event) -> {
-            Object item = tbl_data.getSelectionModel().getSelectedItem();
-            System.out.println("Selected item: " + item);
+            MainController cont = new MainController();
+            try {
+                cont.openNewWindow(addNewCourseURL);
+            } catch (IOException ex) {
+                Logger.getLogger(AdministratorDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
 
         ContextMenu menu = new ContextMenu();
@@ -962,7 +970,7 @@ public class AdministratorDashboardController implements Initializable {
     @FXML
     private void addNewUser(MouseEvent event) throws IOException {
         MainController main = new MainController();
-        main.openNewWindow(windowURL);
+        main.openNewWindow(addNewUserURL);
     }
 
     @FXML

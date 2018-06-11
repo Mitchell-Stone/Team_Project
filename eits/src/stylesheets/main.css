@@ -26,6 +26,11 @@ and open the template in the editor.
     -fx-pref-height: 35px;
 }
 
+#lbl_subHeadings{
+    -fx-text-fill: #ffffff;
+    -fx-alignment: center;
+}
+
 #vb_navButtons .label{
     -fx-font-size: 20;
 }

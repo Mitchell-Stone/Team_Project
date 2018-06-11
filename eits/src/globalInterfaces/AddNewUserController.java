@@ -21,7 +21,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import model.MainModel;
 import security.SecurityMethods;
@@ -37,24 +36,24 @@ public class AddNewUserController implements Initializable {
     private ComboBox cb_tableSelection;
     @FXML
     private Button btn_addUser;
-    @FXML
     private TextField tf_firstName;
-    @FXML
     private TextField tf_lastName;
-    @FXML
     private TextField tf_email;
-    @FXML
     private TextField tf_password;
     
     private Button btn_returnToDashboard;
     @FXML
     private Button btn_cancel;
     @FXML
-    private GridPane background;
-    @FXML
     private Pane header_panel;
     @FXML
-    private Label lbl_header;
+    private Label lbl_windowHeader;
+    @FXML
+    private TextField tf_courseName;
+    @FXML
+    private TextField tf_courseIndustry;
+    @FXML
+    private TextField tf_courseLocation;
     
     /**
      * Initializes the controller class.
@@ -71,7 +70,6 @@ public class AddNewUserController implements Initializable {
          
     }    
 
-    @FXML
     private void btn_addUser(MouseEvent event) throws SQLException, IOException, NoSuchAlgorithmException {
         
         String userType = cb_tableSelection.getSelectionModel().getSelectedItem().toString();
@@ -106,5 +104,9 @@ public class AddNewUserController implements Initializable {
     @FXML
     private void cancel(MouseEvent event) throws IOException {
         ((Node)(event.getSource())).getScene().getWindow().hide();
+    }
+
+    @FXML
+    private void btn_addCourse(MouseEvent event) {
     }
 }

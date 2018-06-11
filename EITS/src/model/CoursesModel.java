@@ -171,7 +171,6 @@ public class CoursesModel extends MainModel {
         }
         
         return list;
-    
     }
           
 }
