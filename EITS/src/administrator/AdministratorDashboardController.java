@@ -962,7 +962,10 @@ public class AdministratorDashboardController implements Initializable {
 
     @FXML
     private void btn_showReports(ActionEvent event) {
-        
+        vb_selectionDetails.setVisible(false);
+        vb_searchDetails.setVisible(false);
+        tbl_data.setVisible(false);
+        tbl_subjectTable.setVisible(false);
     }
 
     @FXML
@@ -973,5 +976,13 @@ public class AdministratorDashboardController implements Initializable {
         }catch(IOException ex){
             System.out.println(ex);
         }
+    }
+
+    @FXML
+    private void btn_showSettings(MouseEvent event) {
+        vb_selectionDetails.setVisible(false);
+        vb_searchDetails.setVisible(false);
+        tbl_data.setVisible(false);
+        tbl_subjectTable.setVisible(false);
     }
 }

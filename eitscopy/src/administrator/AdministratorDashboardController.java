@@ -975,6 +975,9 @@ public class AdministratorDashboardController implements Initializable {
 
     @FXML
     private void btn_showReports(ActionEvent event) {
+        tbl_data.setVisible(false);
+        vb_searchDetails.setVisible(false);
+        vb_selectionDetails.setVisible(false);
         
     }
 
@@ -988,11 +991,3 @@ public class AdministratorDashboardController implements Initializable {
         }
     }
 }
-
-
-/*try{
-MainController main = new MainController();
-main.openNewWindow(addNewUserURL);
-}catch(IOException ex){
-System.out.println(ex);
-}*/

@@ -98,7 +98,7 @@
                </graphic>
             </Button>
             <Label id="btn_labels" prefHeight="17.0" prefWidth="250.0" stylesheets="@../stylesheets/main.css" text="Reports" />
-            <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="250.0" stylesheets="@../stylesheets/main.css">
+            <Button mnemonicParsing="false" onMouseClicked="#btn_showSettings" prefHeight="70.0" prefWidth="250.0" stylesheets="@../stylesheets/main.css">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
