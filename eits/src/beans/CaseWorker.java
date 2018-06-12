@@ -10,6 +10,11 @@ package beans;
  * @author mitch
  */
 public class CaseWorker extends User{
+     private int employeeID;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String phoneNumber;
     
     public CaseWorker(){
         
@@ -21,6 +26,11 @@ public class CaseWorker extends User{
         lastName = lname;
         this.email = email;
     }
+    public CaseWorker(String email, String phoneNumber){
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+    }
+    
 
     public int getEmployeeID() {
         return employeeID;
@@ -53,8 +63,12 @@ public class CaseWorker extends User{
     public void setEmail(String email) {
         this.email = email;
     }
-    private int employeeID;
-    private String firstName;
-    private String lastName;
-    private String email;
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
 }

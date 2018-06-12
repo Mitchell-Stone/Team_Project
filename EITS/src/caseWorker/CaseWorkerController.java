@@ -13,6 +13,7 @@ import beans.User;
 import controllers.MainController;
 import java.io.IOException;
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -34,6 +35,7 @@ import model.CaseWorkerModel;
 import model.CoursesModel;
 import model.DiplomaModel;
 import model.StudentModel;
+import security.SecurityMethods;
 
 /**
  * FXML Controller class
@@ -98,13 +100,23 @@ public class CaseWorkerController implements Initializable {
     private Label labelLname;
     @FXML
     private VBox updateVbox;
+    @FXML
+    private Button buttonAssignStudent;
+    @FXML
+    private Button buttonUnassignStudent;
+    @FXML
+    private Label emptyFieldsLabel;
+    @FXML
+    private TextField textNewPassword;
 
     ArrayList<String> currentCaseWorker;
-    CaseWorker caseworker = new CaseWorker();
 
-    /**
-     * Initialises the controller class.
-     */
+    CaseWorker caseworker = new CaseWorker();
+    CaseWorker access = new CaseWorker();
+
+    ArrayList<String> studentDiploma;
+    ArrayList<String> studentCaseWorker;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -117,9 +129,16 @@ public class CaseWorkerController implements Initializable {
             Logger.getLogger(CaseWorkerController.class.getName()).log(Level.SEVERE, null, ex);
         }
         showCaseWorkerName();
+        try {
+            getMyStudentsTable();
+        } catch (SQLException ex) {
+            Logger.getLogger(CaseWorkerController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NumberFormatException ex) {
+            Logger.getLogger(CaseWorkerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
-    private void showCaseWorkerName(){
+
+    private void showCaseWorkerName() {
         labelFname.setText(currentCaseWorker.get(1));
         labelLname.setText(currentCaseWorker.get(2));
     }
@@ -131,6 +150,8 @@ public class CaseWorkerController implements Initializable {
         secondaryTable.setVisible(false);
         allStudentsTable.setVisible(true);
         secondaryVbox.setVisible(false);
+        buttonAssignStudent.setDisable(false);
+        buttonUnassignStudent.setDisable(true);
         // show all students in table
         TableColumn studentID = new TableColumn("ID");
         TableColumn firstName = new TableColumn("First Name");
@@ -163,14 +184,21 @@ public class CaseWorkerController implements Initializable {
 
     @FXML
     private void getMyStudents(ActionEvent event) throws SQLException {
+        getMyStudentsTable();
+
+    }
+
+    public void getMyStudentsTable() throws SQLException, NumberFormatException {
         myStudentsTable.getColumns().clear();
         myStudentsTable.setVisible(true);
         secondaryTable.setVisible(true);
         allStudentsTable.setVisible(false);
         secondaryVbox.setVisible(true);
-        
+        buttonAssignStudent.setDisable(true);
+        buttonUnassignStudent.setDisable(false);
+
         int employeeID = Integer.parseInt(currentCaseWorker.get(0));
-        
+
         //Show My students in table
         TableColumn studentID = new TableColumn("ID");
         TableColumn firstName = new TableColumn("First Name");
@@ -182,7 +210,7 @@ public class CaseWorkerController implements Initializable {
         myStudentsTable.getColumns().addAll(studentID, firstName, lastName, email, studentDiplomaID, studentEmployeeID);
 
         try {
-            
+
             StudentModel model = new StudentModel();
 
             ObservableList<Student> list = model.getStudentsByCaseWorker(employeeID);
@@ -193,7 +221,6 @@ public class CaseWorkerController implements Initializable {
             email.setCellValueFactory(new PropertyValueFactory<Student, String>("email"));
             studentDiplomaID.setCellValueFactory(new PropertyValueFactory<Student, String>("diplomaID"));
             studentEmployeeID.setCellValueFactory(new PropertyValueFactory<Student, String>("employeeID"));
-            
 
             myStudentsTable.setItems(list);
 
@@ -221,30 +248,59 @@ public class CaseWorkerController implements Initializable {
         } catch (NullPointerException ex) {
             System.out.println("No Pointer Exception");
         }
-
     }
 
     @FXML
-    private void selectStudent(MouseEvent event) {
+    private void selectStudent(MouseEvent event) throws SQLException {
         Student st = (Student) allStudentsTable.getSelectionModel().getSelectedItem();
         editable();
         idTextField.setText(Integer.toString(st.getStudentID()));
         textFname.setText(st.getFirstName());
         textLname.setText(st.getLastName());
         textEmail.setText(st.getEmail());
+
+        studentDiploma = DiplomaModel.getDiplomaByStudent(st);
+
+        if (studentDiploma == null) {
+            textDiploma.setText("None Selected");
+        } else {
+            textDiploma.setText(studentDiploma.get(1));
+        }
+
+        studentCaseWorker = CaseWorkerModel.getCaseWorkerByStudent(st);
+
+        if (studentCaseWorker == null) {
+            textWorker.setText("Un-Assigned");
+        } else {
+            textWorker.setText(studentCaseWorker.get(1));
+        }
         uneditable();
     }
 
     @FXML
-    private void MyStudentSelect(MouseEvent event) throws SQLException { 
+    private void MyStudentSelect(MouseEvent event) throws SQLException {
         Student st = (Student) myStudentsTable.getSelectionModel().getSelectedItem();
         editable();
         idTextField.setText(Integer.toString(st.getStudentID()));
         textFname.setText(st.getFirstName());
         textLname.setText(st.getLastName());
         textEmail.setText(st.getEmail());
-       // ObservableList<Diploma> currentDiploma = DiplomaModel.getDiplomaByStudent(1);
-        //textDiploma.setText
+
+        studentDiploma = DiplomaModel.getDiplomaByStudent(st);
+
+        if (studentDiploma == null) {
+            textDiploma.setText("Un-Assigned");
+        } else {
+            textDiploma.setText(studentDiploma.get(1));
+        }
+
+        studentCaseWorker = CaseWorkerModel.getCaseWorkerByStudent(st);
+
+        if (studentCaseWorker == null) {
+            textWorker.setText("None Selected");
+        } else {
+            textWorker.setText(studentCaseWorker.get(1));
+        }
         uneditable();
     }
 
@@ -301,36 +357,72 @@ public class CaseWorkerController implements Initializable {
         int diplomaID = Integer.parseInt(textCourseID.getText());
 
         CoursesModel.assignCourse(studentID, diplomaID);
+        textDiploma.setText(textCourseName.getText());
 
     }
 
     @FXML
     private void updatesVisible(ActionEvent event) {
         updateVbox.setVisible(true);
+        textWorkerEmail.setText(currentCaseWorker.get(3));
+
     }
 
     @FXML
-    private void confirmUpdates(ActionEvent event) {
-        updateVbox.setVisible(false);
+    private void confirmUpdates(ActionEvent event) throws SQLException, NoSuchAlgorithmException {
+
+        if ("".equals(textPassword.getText()) || "".equals(textNewPassword.getText())
+                || "".equals(textWorkerEmail.getText())) {
+            emptyFieldsLabel.setVisible(true);
+            emptyFieldsLabel.setText("Field(s) empty ");
+        } else {
+
+            caseworker.setFirstName(currentCaseWorker.get(1));
+            caseworker.setLastName(currentCaseWorker.get(2));
+            caseworker.setEmail(textWorkerEmail.getText());
+            caseworker.setEmployeeID(Integer.parseInt(currentCaseWorker.get(0)));
+
+            access.setPassword(SecurityMethods.getHash(textNewPassword.getText()));
+            access.setEmployeeID(Integer.parseInt(currentCaseWorker.get(0)));
+
+            String oldPass = currentCaseWorker.get(4);
+            String Pass1 = SecurityMethods.getHash(textNewPassword.getText());
+            if (oldPass != Pass1) {
+                emptyFieldsLabel.setVisible(true);
+                emptyFieldsLabel.setText("Wrong Password");
+            } else {
+                CaseWorkerModel.updateCaseWorkerPassword(access);
+            }
+
+            if (CaseWorkerModel.updateCaseWorker(caseworker)) {
+                emptyFieldsLabel.setVisible(false);
+            }
+            // updateVbox.setVisible(false);
+            currentCaseWorker = CaseWorkerModel.getCaseWorkerByID(caseworker);
+            System.out.println(currentCaseWorker);
+
+        }
     }
 
     @FXML
     private void assignToCaseWorker(ActionEvent event) throws SQLException {
-        
+
         int studentID = Integer.parseInt(idTextField.getText());
         int employeeID = Integer.parseInt(currentCaseWorker.get(0));
 
         CaseWorkerModel.assignCaseWorker(studentID, employeeID);
-        
+
+        textWorker.setText(currentCaseWorker.get(1));
     }
 
     @FXML
     private void unassignToCaseWorker(ActionEvent event) throws SQLException {
-        
+
         int studentID = Integer.parseInt(idTextField.getText());
         int employeeID = 1;
 
         CaseWorkerModel.assignCaseWorker(studentID, employeeID);
+        getMyStudentsTable();
     }
 
 }

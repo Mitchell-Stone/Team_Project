@@ -184,7 +184,7 @@ public class CaseWorkerModel {
     
     public static boolean updateCaseWorkerPassword(User bean) {
     
-        String sql = "UPDATE caseworker SET password = ? WHERE studentID = ?";
+        String sql = "UPDATE caseworker SET password = ? WHERE employeeID = ?";
         
         try(
                 Connection conn = DbUtil.getConn(DbType.MYSQL);
@@ -193,7 +193,6 @@ public class CaseWorkerModel {
             
             stmt.setString(1, bean.getPassword());
             stmt.setInt(2, bean.getID());
-            
             int affected = stmt.executeUpdate();
             
             if (affected == 1) {
@@ -206,5 +205,39 @@ public class CaseWorkerModel {
             System.out.println(e);
             return false;
         }
+    }
+    
+     public static ArrayList<String> getCaseWorkerByStudent(Student student) throws SQLException {
+
+        ArrayList<String> studentCaseWorker = new ArrayList<>();
+        ResultSet rs;
+
+        String query = "SELECT * FROM caseworker WHERE employeeID = ?";
+
+        try {
+            java.sql.Connection conn = DbUtil.getConn(DbType.MYSQL);
+            PreparedStatement stmt = conn.prepareStatement(query);
+
+            stmt.setInt(1, student.getEmployeeID());
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                
+                studentCaseWorker.add(Integer.toString(rs.getInt("employeeID")));
+                studentCaseWorker.add(rs.getString("firstName"));
+                studentCaseWorker.add(rs.getString("lastName"));
+                studentCaseWorker.add(rs.getString("email"));
+                
+                return studentCaseWorker;
+                
+            } else {
+                System.out.println("Error in fetching the current Case Worker.");
+                return null;
+            }
+            
+        } catch (Exception e) {
+            System.err.println(e);
+            return null;
+        }
+    
     }
 }
