@@ -710,6 +710,8 @@ public class StudentDashboardController implements Initializable {
         
         resetTextAndLabels();
         
+        diplomas.setVisible(true);
+        
         leftLabelMain.setText("Diploma");
         
         label1.setText("Diploma ID");
@@ -817,6 +819,8 @@ public class StudentDashboardController implements Initializable {
     }
 
     private void resetToUserDetails() {
+        
+        diplomas.setVisible(false);
     
         leftLabelMain.setVisible(true);
         leftLabelMain.setText("Student details");
@@ -842,6 +846,8 @@ public class StudentDashboardController implements Initializable {
     }
     
     private void resetTextAndLabels() {
+        
+        diplomas.setVisible(false);
         
         leftLabelMain.setVisible(true);
     
@@ -872,6 +878,8 @@ public class StudentDashboardController implements Initializable {
     }
     
     private void setStart() {
+        
+        diplomas.setVisible(false);
     
         text1.setVisible(false);
         text2.setVisible(false);
