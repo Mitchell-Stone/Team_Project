@@ -809,13 +809,20 @@ public class StudentDashboardController implements Initializable {
         
         ArrayList<String> cwInfo = CaseWorkerModel.getCaseWorkerByID(caseworker);
         
-        System.out.println(cwInfo);
-        
-        text1.setText(cwInfo.get(0));
-        text2.setText(cwInfo.get(1));
-        text3.setText(cwInfo.get(2));
-        text4.setText(cwInfo.get(3));
-        text5.setText(cwInfo.get(5));
+        if (cwInfo == null) {
+            text1.setText("Unassigned");
+            text2.setText("Unassigned");
+            text3.setText("Unassigned");
+            text4.setText("Unassigned");
+            text5.setText("Unassigned");
+        } else {
+            System.out.println(cwInfo);
+            text1.setText(cwInfo.get(0));
+            text2.setText(cwInfo.get(1));
+            text3.setText(cwInfo.get(2));
+            text4.setText(cwInfo.get(3));
+            text5.setText(cwInfo.get(5));
+        }
         
     }
     
