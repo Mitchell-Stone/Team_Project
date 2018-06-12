@@ -23,8 +23,10 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -36,13 +38,16 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import model.AssessmentModel;
 import model.AttendanceModel;
 import model.CaseWorkerModel;
 import model.CoursesModel;
+import model.DiplomaModel;
 import model.MainModel;
 import model.StudentModel;
 import model.UserAccessModel;
@@ -106,6 +111,10 @@ public class StudentDashboardController implements Initializable {
     private Pane bottomPaneCenter;
     @FXML
     private TextArea test1;
+    @FXML
+    private Button logoutBtn1;
+    @FXML
+    private GridPane grid;
     /**
      * Initializes the controller class.
      */
@@ -134,8 +143,11 @@ public class StudentDashboardController implements Initializable {
     int submitCourseID = 0;
     
     boolean dropped = false;
+    
+    VBox diplomas = new VBox();
+    
     @FXML
-    private Button logoutBtn1;
+    private Button industrybtn;
     
     //END OF VARIABLES
     
@@ -187,14 +199,16 @@ public class StudentDashboardController implements Initializable {
         
         log.setStudentID(ID);
         
-        
-        
     }
 
     @FXML
     private void industry(ActionEvent event) {
         
+        displayIndustries();
+        
     }
+    
+    
 
     @FXML
     private void logout(ActionEvent event) throws IOException {
@@ -236,6 +250,19 @@ public class StudentDashboardController implements Initializable {
                 resetToUserDetails();
                 
                 showStudentProfile();
+                
+                break;
+                
+            case "confirm_diploma":
+                
+                confirmDiplomaSelection();
+                
+                diplomas.setVisible(false);
+                
+                resetTextAndLabels();
+                
+                btn1.setVisible(false);
+                btn2.setVisible(false);
                 
                 break;
                 
@@ -674,6 +701,118 @@ public class StudentDashboardController implements Initializable {
         }
         
         
+    
+    }
+    
+    public void displayIndustries() {
+    
+        table1.setVisible(false);
+        
+        resetTextAndLabels();
+        
+        leftLabelMain.setText("Diploma");
+        
+        label1.setText("Diploma ID");
+        
+        label2.setText("Name");
+        
+        label3.setText("Industry");
+        
+        label4.setText("Location");
+        
+        label5.setText("Degree");
+        
+        label6.setVisible(false);
+        text6.setVisible(false);
+        label7.setVisible(false);
+        text7.setVisible(false);
+        
+        btn1.setVisible(false);
+        btn2.setVisible(false);
+        
+        grid.add(diplomas, 3, 2);
+        
+        ArrayList<String> industries = DiplomaModel.getIndustries();
+        
+        ArrayList<String> ids = DiplomaModel.getIDs();
+        
+        System.out.println(industries);
+        
+        System.out.println(ids);
+        
+        diplomas.setSpacing(8);
+        
+        Student dpl = new Student();
+        
+        for (int i = 0; i < industries.size(); i++) {
+            
+            Pane pane = new Pane();
+            
+            Label title = new Label(industries.get(i));
+            
+            Label id = new Label(ids.get(i));
+            
+            title.setStyle("-fx-text-fill: white;" + "-fx-font-size: 25;");
+            title.setLayoutX(20);
+            title.setLayoutY(15);
+            
+            title.setOnMouseClicked((MouseEvent diplomaSelected) -> {
+                
+                
+                
+                try {
+                    dpl.setDiplomaID(Integer.parseInt(id.getText()));
+                    
+                    ArrayList<String> selectedDiploma = DiplomaModel.getDiplomaByStudent(dpl);
+                    
+                    text1.setText(selectedDiploma.get(0));
+                    text1.setEditable(false);
+                    text2.setText(selectedDiploma.get(1));
+                    text2.setEditable(false);
+                    text3.setText(selectedDiploma.get(2));
+                    text3.setEditable(false);
+                    text4.setText(selectedDiploma.get(3));
+                    text4.setEditable(false);
+                    text5.setText(selectedDiploma.get(4));
+                    text5.setEditable(false);
+                    
+                    if (Integer.parseInt(currentUser.get(1)) == 0) {
+
+                        btn1.setVisible(true);
+                    
+                        btn1.setText("Confirm");
+
+                        action1 = "confirm_diploma";
+
+                    } else {
+                        btn1.setVisible(false);
+                    }
+                    
+                } catch (SQLException ex) {
+                    Logger.getLogger(StudentDashboardController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+            });
+            
+            id.setStyle("-fx-text-fill: white;" + "-fx-font-size: 15;");
+            
+            id.setLayoutX(20);
+            id.setLayoutY(70);
+            
+            pane.getChildren().addAll(title, id);
+            
+            pane.setMinHeight(100);
+            pane.setStyle("-fx-border-color: #0066ff;" + "-fx-background-color: #404040;");
+            
+            diplomas.getChildren().add(pane);
+            
+        }
+    
+    }
+    
+    private void confirmDiplomaSelection() {
+    
+        DiplomaModel.assignDiplomaToStudent(Integer.parseInt(currentUser.get(0)), Integer.parseInt(text1.getText()));
     
     }
 

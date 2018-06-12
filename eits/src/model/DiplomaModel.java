@@ -79,6 +79,7 @@ public class DiplomaModel {
             PreparedStatement stmt = conn.prepareStatement(query);
 
             stmt.setInt(1, student.getDiplomaID());
+            
             rs = stmt.executeQuery();
             if (rs.next()) {
                 
@@ -129,6 +130,84 @@ public class DiplomaModel {
                 keys.close();
             }
         }
+    }
+    
+    public static ArrayList<String> getIndustries() {
+        
+        ArrayList<String> industries = new ArrayList();
+        
+        ResultSet rs;
+    
+        String query = "SELECT industry FROM diploma";
+        
+        try(
+                Connection conn = DbUtil.getConn(DbType.MYSQL);
+                PreparedStatement stmt = conn.prepareStatement(query);
+                ) {
+            
+            rs = stmt.executeQuery();
+            
+            while(rs.next()) {
+            
+                industries.add(rs.getString("industry"));
+                
+            }
+            
+            return industries;
+            
+        } catch (Exception e) {
+            return null;
+        }
+        
+    }
+    
+    public static ArrayList<String> getIDs() {
+        
+        ArrayList<String> industries = new ArrayList();
+        
+        ResultSet rs;
+    
+        String query = "SELECT diplomaID FROM diploma";
+        
+        try(
+                Connection conn = DbUtil.getConn(DbType.MYSQL);
+                PreparedStatement stmt = conn.prepareStatement(query);
+                ) {
+            
+            rs = stmt.executeQuery();
+            
+            while(rs.next()) {
+            
+                industries.add(Integer.toString(rs.getInt("diplomaID")));
+                
+            }
+            
+            return industries;
+            
+        } catch (Exception e) {
+            return null;
+        }
+        
+    }
+    
+    public static void assignDiplomaToStudent(int studentid, int diplomaid) {
+    
+        String query = "UPDATE student SET diplomaID = ? WHERE studentID = ?";
+        
+        try(
+                Connection conn = DbUtil.getConn(DbType.MYSQL);
+                PreparedStatement stmt = conn.prepareStatement(query);
+                ) {
+            
+            stmt.setInt(1, diplomaid);
+            stmt.setInt(2, studentid);
+            
+            stmt.executeUpdate();
+            
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    
     }
 
 }
