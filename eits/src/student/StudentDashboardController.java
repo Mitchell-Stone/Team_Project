@@ -7,6 +7,7 @@ package student;
 
 import beans.Assessment;
 import beans.Attendance;
+import beans.CaseWorker;
 import beans.Courses;
 import beans.Student;
 import beans.User;
@@ -28,14 +29,19 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import model.AssessmentModel;
 import model.AttendanceModel;
+import model.CaseWorkerModel;
 import model.CoursesModel;
 import model.MainModel;
 import model.StudentModel;
@@ -98,6 +104,8 @@ public class StudentDashboardController implements Initializable {
     private Pane bottomPaneLeft;
     @FXML
     private Pane bottomPaneCenter;
+    @FXML
+    private TextArea test1;
     /**
      * Initializes the controller class.
      */
@@ -125,6 +133,9 @@ public class StudentDashboardController implements Initializable {
     int submitAssessmentID = 0;
     int submitCourseID = 0;
     
+    boolean dropped = false;
+    @FXML
+    private Button logoutBtn1;
     
     //END OF VARIABLES
     
@@ -609,12 +620,16 @@ public class StudentDashboardController implements Initializable {
                 submitAssessmentID = assessment.getAssessmentID();
                 submitCourseID = assessment.getCourseID();
                 
+                test1.setVisible(true);
+                test1.setText("File not detected");
+                
                 break;
             case 0:
                 System.out.println("Submitted but not graded");
                 text5.setText("Yes");
                 text6.setText("Pending");
                 btn2.setVisible(false);
+                test1.setVisible(false);
                 break;
             case 999:
                 System.out.println("what");
@@ -626,6 +641,7 @@ public class StudentDashboardController implements Initializable {
                 text5.setText("Yes");
                 text6.setText(Integer.toString(type));
                 btn2.setVisible(false);
+                test1.setVisible(false);
                 break;
         }
     
@@ -633,20 +649,31 @@ public class StudentDashboardController implements Initializable {
     
     private void submitAssessment() throws SQLException {
         
-        Assessment submission = new Assessment();
+        if (dropped) {
+            Assessment submission = new Assessment();
         
-        submission.setAssessmentID(submitAssessmentID);
-        submission.setCourseID(submitCourseID);
-        submission.setStudentID(Integer.parseInt(currentUser.get(0)));
-    
-        AssessmentModel.submitAssessment(submission);
+            submission.setAssessmentID(submitAssessmentID);
+            submission.setCourseID(submitCourseID);
+            submission.setStudentID(Integer.parseInt(currentUser.get(0)));
+
+            AssessmentModel.submitAssessment(submission);
+
+            tableItems = AssessmentModel.getAssessmentsByDiplomaID(Integer.parseInt(currentDiploma.get(0)));
+
+            text5.setText("Yes");
+            text6.setText("Pending");
+
+            btn2.setVisible(false);
+            dropped = false;
+            
+            test1.setVisible(false);
+            test1.setText("");
+            
+        } else {
+            test1.setText("Error, file necessary before submission.");
+        }
         
-        tableItems = AssessmentModel.getAssessmentsByDiplomaID(Integer.parseInt(currentDiploma.get(0)));
         
-        text5.setText("Yes");
-        text6.setText("Pending");
-        
-        btn2.setVisible(false);
     
     }
 
@@ -699,6 +726,9 @@ public class StudentDashboardController implements Initializable {
         text6.setVisible(true);
         
         errorLabel.setText("");
+        
+        test1.setVisible(false);
+        test1.setText("");
     
     }
     
@@ -728,7 +758,65 @@ public class StudentDashboardController implements Initializable {
         leftLabelMain.setVisible(false);
         
         errorLabel.setText("");
+        
+        test1.setVisible(false);
     
+    }
+
+    ////////////DRAG/DROP/////////////
+    
+    @FXML
+    private void dragOver(DragEvent event) {
+        Dragboard board = event.getDragboard();
+      if (board.hasFiles()) {
+        event.acceptTransferModes(TransferMode.ANY);
+      }
+    }
+
+    @FXML
+    private void dragDropped(DragEvent event) {
+        
+        test1.setText("File Dropped");
+        dropped = true;
+
+    }
+
+    @FXML
+    private void caseWorker(ActionEvent event) throws SQLException {
+        
+        resetTextAndLabels();
+        
+        label1.setText("CaseWorker ID");
+        label2.setText("First Name");
+        label3.setText("Last Name");
+        label4.setText("Email");
+        label5.setText("Phone Number");
+        
+        label6.setVisible(false);
+        label7.setVisible(false);
+        
+        text6.setVisible(false);
+        text7.setVisible(false);
+        
+        table1.setVisible(false);
+        test1.setVisible(false);
+        
+        leftLabelMain.setText("CaseWorker");
+        
+        CaseWorker caseworker = new CaseWorker();
+        
+        caseworker.setID(Integer.parseInt(currentUser.get(2)));
+        
+        ArrayList<String> cwInfo = CaseWorkerModel.getCaseWorkerByID(caseworker);
+        
+        System.out.println(cwInfo);
+        
+        text1.setText(cwInfo.get(0));
+        text2.setText(cwInfo.get(1));
+        text3.setText(cwInfo.get(2));
+        text4.setText(cwInfo.get(3));
+        text5.setText(cwInfo.get(5));
+        
     }
     
 }
