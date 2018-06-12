@@ -36,6 +36,7 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
@@ -103,8 +104,6 @@ public class StudentDashboardController implements Initializable {
     @FXML
     private Pane bottomPaneLeft;
     @FXML
-    private Pane bottomPaneCenter;
-    @FXML
     private TextArea test1;
     /**
      * Initializes the controller class.
@@ -136,6 +135,10 @@ public class StudentDashboardController implements Initializable {
     boolean dropped = false;
     @FXML
     private Button logoutBtn1;
+    @FXML
+    private GridPane grid;
+    @FXML
+    private VBox testbox;
     
     //END OF VARIABLES
     
@@ -187,13 +190,27 @@ public class StudentDashboardController implements Initializable {
         
         log.setStudentID(ID);
         
-        
-        
     }
 
     @FXML
     private void industry(ActionEvent event) {
         
+        addPane();
+        
+        System.out.println("Clicked");
+        
+        table1.setVisible(false);
+        
+        VBox box = new VBox();
+        
+        grid.add(box, ID, ID);
+        
+    }
+    
+    public void addPane() {
+    
+        
+    
     }
 
     @FXML
