@@ -86,7 +86,7 @@ public class MainModel {
             
             return affected == 1;
             
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
             return false;
         }

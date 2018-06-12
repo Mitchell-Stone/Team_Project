@@ -218,7 +218,7 @@ public class AdministratorDashboardController implements Initializable {
                     System.out.println("DATABASE ERROR SQL EXCEPTION");
                 }   break;
                 }
-            case "diplomas":{
+            case "courses":{
                 //create the columns needed in the table
                 TableColumn courseID = new TableColumn("Course ID");
                 TableColumn courseName = new TableColumn("Course Name");
@@ -365,7 +365,7 @@ public class AdministratorDashboardController implements Initializable {
         tbl_data.getColumns().clear();
         
         //show all case workers
-        populateTable(diplomas);
+        populateTable(courses);
     }
     
     private void showCourseSubjects(int diplomaID) throws SQLException {
@@ -419,6 +419,7 @@ public class AdministratorDashboardController implements Initializable {
                 tbl_subjectTable.setVisible(true);
 
                 Diploma di = (Diploma) tbl_data.getSelectionModel().getSelectedItem();
+                
                 showCourseSubjects(di.getDiplomaID());      
                 
                 tableContextMenu();
@@ -432,9 +433,10 @@ public class AdministratorDashboardController implements Initializable {
     private void tableContextMenu(){
         MenuItem mi1 = new MenuItem("Edit Course");
         MenuItem mi2 = new MenuItem("Add Course");
+        MenuItem mi3 = new MenuItem("Delete Course");
         mi1.setOnAction((ActionEvent event) -> {
             Object item = tbl_data.getSelectionModel().getSelectedItem();
-            System.out.println("Selected item: " + item);
+            System.out.println("Edit Course");
         });
         
         mi2.setOnAction((ActionEvent event) -> {
@@ -444,12 +446,21 @@ public class AdministratorDashboardController implements Initializable {
                 event.consume();
             } catch (IOException ex) {
                 Logger.getLogger(AdministratorDashboardController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            }  
+        });
+        
+        mi3.setOnAction((ActionEvent event) -> {
+            Diploma item = (Diploma) tbl_data.getSelectionModel().getSelectedItem();
             
+            CoursesModel.deleteCourse(item.getDiplomaID());
+            System.out.println("Delete Course");
+            
+            tbl_data.getColumns().clear();
+            populateTable(courses);
         });
 
         ContextMenu menu = new ContextMenu();
-        menu.getItems().addAll(mi1, mi2);
+        menu.getItems().addAll(mi1, mi2, mi3);
         tbl_data.setContextMenu(menu);
     }
     

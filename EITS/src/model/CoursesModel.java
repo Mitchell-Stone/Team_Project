@@ -171,4 +171,23 @@ public class CoursesModel extends MainModel {
         }       
         return list;
     }
+    
+    public static boolean deleteCourse(int courseID){
+        String sql = "DELETE FROM diploma WHERE diplomaID = ?";
+               
+        try{
+            Connection conn = DbUtil.getConn(DbType.MYSQL);
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            
+            stmt.setInt(1, courseID);
+            
+            int affected = stmt.executeUpdate();
+            
+            return affected == 1;
+            
+        } catch (SQLException e) {
+            System.out.println(e);
+            return false;
+        }
+    }
 }
