@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<GridPane id="background" fx:id="gp_adminDashboard" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1300.0" stylesheets="@../stylesheets/main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="administrator.AdministratorDashboardController">
+  <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="559.0" minWidth="10.0" prefWidth="135.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="849.0" minWidth="10.0" prefWidth="679.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="371.0" minWidth="10.0" prefWidth="371.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="95.0" minHeight="10.0" prefHeight="95.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="532.0" minHeight="10.0" prefHeight="237.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="648.0" minHeight="10.0" prefHeight="568.0" vgrow="SOMETIMES" />
+      <RowConstraints />
+  </rowConstraints>
+   <children>
+      <Pane id="header_panel" prefHeight="100.0" prefWidth="1308.0" stylesheets="@../stylesheets/main.css" GridPane.columnSpan="3">
+         <children>
+            <Button fx:id="btn_returnToLogin" layoutX="1180.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#returnToLogin" prefHeight="28.0" prefWidth="106.0" text="Return To Login" />
+            <Label id="admin_header" layoutX="14.0" layoutY="23.0" prefHeight="52.0" prefWidth="537.0" stylesheets="@../stylesheets/main.css" text="Administrator Dashboard">
+               <font>
+                  <Font name="Arial" size="45.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <VBox prefHeight="736.0" prefWidth="142.0" spacing="5.0" GridPane.rowIndex="1" GridPane.rowSpan="2">
+         <children>
+            <Button mnemonicParsing="false" onMouseClicked="#addUser" prefHeight="70.0" prefWidth="250.0" stylesheets="@../stylesheets/main.css">
+               <graphic>
+                  <ImageView fitHeight="37.0" fitWidth="68.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/approve-144.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Label id="btn_labels" prefHeight="17.0" prefWidth="258.0" stylesheets="@../stylesheets/main.css" text="Add New User" />
+            <Button mnemonicParsing="false" onMouseClicked="#showAllStudents" prefHeight="70.0" prefWidth="250.0" stylesheets="@../stylesheets/main.css">
+               <graphic>
+                  <ImageView fitHeight="36.0" fitWidth="54.0" onMouseClicked="#showAllStudents" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/manager-144.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Label id="btn_labels" prefHeight="17.0" prefWidth="283.0" stylesheets="@../stylesheets/main.css" text="Students" />
+            <Button mnemonicParsing="false" onMouseClicked="#showAllCaseWorkers" prefHeight="70.0" prefWidth="250.0" stylesheets="@../stylesheets/main.css">
+               <graphic>
+                  <ImageView fitHeight="39.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/assistant-144.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Label id="btn_labels" prefHeight="17.0" prefWidth="282.0" stylesheets="@../stylesheets/main.css" text="Case Workers" />
+            <Button mnemonicParsing="false" onMouseClicked="#showAllAdministrators" prefHeight="70.0" prefWidth="250.0" stylesheets="@../stylesheets/main.css">
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/businessman-144.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Label id="btn_labels" prefHeight="17.0" prefWidth="248.0" stylesheets="@../stylesheets/main.css" text="Administrators" />
+            <Button mnemonicParsing="false" onMouseClicked="#showAllCourses" prefHeight="70.0" prefWidth="250.0" stylesheets="@../stylesheets/main.css">
+               <graphic>
+                  <ImageView fitHeight="42.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/todo_list-144.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Label id="btn_labels" prefHeight="17.0" prefWidth="258.0" stylesheets="@../stylesheets/main.css" text="Courses" />
+            <Button mnemonicParsing="false" onAction="#btn_showReports" prefHeight="70.0" prefWidth="250.0" stylesheets="@../stylesheets/main.css">
+               <graphic>
+                  <ImageView fitHeight="39.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/bullish-144.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Label id="btn_labels" prefHeight="17.0" prefWidth="250.0" stylesheets="@../stylesheets/main.css" text="Reports" />
+            <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="250.0" stylesheets="@../stylesheets/main.css">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <graphic>
+                  <ImageView fitHeight="41.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/services-144.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Label id="btn_labels" prefHeight="17.0" prefWidth="261.0" stylesheets="@../stylesheets/main.css" text="Settings" />
+         </children>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+      </VBox>
+      <TableView id="tbl_data" fx:id="tbl_data" onMouseClicked="#selectItem" prefHeight="736.0" prefWidth="808.0" stylesheets="@../stylesheets/main.css" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="2">
+         <GridPane.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </GridPane.margin>
+      </TableView>
+      <VBox id="vb_selectionDetails" fx:id="vb_selectionDetails" prefHeight="803.0" prefWidth="267.0" spacing="5.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+         <children>
+            <Label id="lbl_selection_header" prefHeight="36.0" prefWidth="364.0" stylesheets="@../stylesheets/main.css" text="Selection Details" textAlignment="CENTER">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets top="10.0" />
+         </padding>
+         <GridPane.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" />
+         </GridPane.margin>
+      </VBox>
+      <VBox id="vb_searchDetails" fx:id="vb_searchDetails" prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+         <children>
+            <Label id="lbl_selection_header" fx:id="lbl_searchHeader" prefHeight="36.0" prefWidth="364.0" stylesheets="@../stylesheets/main.css" text="Search Details" textAlignment="CENTER">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+         </children>
+         <padding>
+            <Insets top="10.0" />
+         </padding>
+         <GridPane.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" />
+         </GridPane.margin>
+      </VBox>
+   </children>
+</GridPane>
