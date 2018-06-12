@@ -168,9 +168,7 @@ public class CoursesModel extends MainModel {
             if (rs != null) {
                 rs.close();
             }
-        }
-        
+        }       
         return list;
     }
-          
 }

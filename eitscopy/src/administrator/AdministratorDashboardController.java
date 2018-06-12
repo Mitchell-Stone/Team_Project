@@ -441,9 +441,10 @@ public class AdministratorDashboardController implements Initializable {
     private void tableContextMenu(){
         MenuItem mi1 = new MenuItem("Edit Course");
         MenuItem mi2 = new MenuItem("Add Course");
+        MenuItem mi3 = new MenuItem("Delete Course");
         mi1.setOnAction((ActionEvent event) -> {
             Object item = tbl_data.getSelectionModel().getSelectedItem();
-            System.out.println("Selected item: " + item);
+            System.out.println("Need to implement Edit function");
         });
         
         mi2.setOnAction((ActionEvent event) -> {
@@ -454,9 +455,13 @@ public class AdministratorDashboardController implements Initializable {
                 Logger.getLogger(AdministratorDashboardController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
+        
+        mi3.setOnAction((ActionEvent event) -> {
+           System.out.println("Need to implement Delete function");
+        });
 
         ContextMenu menu = new ContextMenu();
-        menu.getItems().addAll(mi1, mi2);
+        menu.getItems().addAll(mi1, mi2, mi3);
         tbl_data.setContextMenu(menu);
     }
     

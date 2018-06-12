@@ -29,14 +29,14 @@
       <VBox prefHeight="401.0" prefWidth="237.0" spacing="10.0" GridPane.rowIndex="1" GridPane.rowSpan="2">
          <children>
             <Label text="Select User Type" textFill="WHITE" />
-            <ComboBox fx:id="cb_tableSelection" prefWidth="150.0" promptText="Select Course Type" />
+            <ComboBox fx:id="cb_courseType" prefWidth="150.0" promptText="Select Course Type" />
             <Label text="Course Name" textFill="WHITE" />
             <TextField fx:id="tf_courseName" />
             <Label text="Course Industry" textFill="WHITE" />
             <TextField fx:id="tf_courseIndustry" />
             <Label text="Course Location" textFill="WHITE" />
             <TextField fx:id="tf_courseLocation" />
-            <Button fx:id="btn_addUser" mnemonicParsing="false" onMouseClicked="#btn_addCourse" prefHeight="36.0" prefWidth="145.0" text="Add Course" />
+            <Button fx:id="btn_addCourse" mnemonicParsing="false" onMouseClicked="#btn_addCourse" prefHeight="36.0" prefWidth="145.0" text="Add Course" />
             <Button fx:id="btn_cancel" mnemonicParsing="false" onMouseClicked="#cancel" prefHeight="36.0" prefWidth="146.0" text="Cancel" />
          </children>
          <GridPane.margin>
@@ -59,7 +59,7 @@
       </TableView>
       <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.rowSpan="2">
          <children>
-            <Label id="lbl_subHeadings" prefHeight="17.0" prefWidth="367.0" text="Select User Type" textFill="WHITE">
+            <Label id="lbl_subHeadings" prefHeight="17.0" prefWidth="367.0" text="Drag Subject Over to Select" textFill="WHITE">
                <font>
                   <Font size="24.0" />
                </font>

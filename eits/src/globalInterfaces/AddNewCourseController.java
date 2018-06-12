@@ -6,6 +6,7 @@
 package globalInterfaces;
 
 import beans.Courses;
+import beans.Diploma;
 import beans.User;
 import java.net.URL;
 import java.sql.SQLException;
@@ -26,7 +27,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import model.CoursesModel;
+import model.DiplomaModel;
 
 /**
  * FXML Controller class
@@ -36,15 +39,11 @@ import model.CoursesModel;
 public class AddNewCourseController implements Initializable {
 
     @FXML
-    private ComboBox cb_tableSelection;
-    @FXML
     private TextField tf_courseName;
     @FXML
     private TextField tf_courseIndustry;
     @FXML
     private TextField tf_courseLocation;
-    @FXML
-    private Button btn_addUser;
     @FXML
     private Button btn_cancel;
     @FXML
@@ -53,6 +52,10 @@ public class AddNewCourseController implements Initializable {
     private Label lbl_windowHeader;
     @FXML
     private TableView tbl_courses;
+    @FXML
+    private Button btn_addCourse;
+    @FXML
+    private ComboBox cb_courseType;
 
     /**
      * Initializes the controller class.
@@ -61,9 +64,11 @@ public class AddNewCourseController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         ObservableList<String> options = FXCollections.observableArrayList(
-            "Diploma"
+            "Diploma",
+            "Certificate 4",
+            "Certificate 3"
         );
-        cb_tableSelection.getItems().addAll(options);
+        cb_courseType.getItems().addAll(options);
         
         try {
             populateCoursesTable();
@@ -94,7 +99,16 @@ public class AddNewCourseController implements Initializable {
     }
     
     @FXML
-    private void btn_addCourse(MouseEvent event) {
+    private void btn_addCourse(MouseEvent event) throws SQLException {
+        Diploma dip = new Diploma();
+        
+        dip.setDiplomaName(tf_courseName.getText());
+        dip.setDiplomaIndustry(tf_courseIndustry.getText());
+        dip.setDiplomaLocation(tf_courseLocation.getText());
+        dip.setCourseType(cb_courseType.getSelectionModel().getSelectedItem().toString());
+        
+        DiplomaModel.addNewDiploma(dip);
+        ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 
     @FXML

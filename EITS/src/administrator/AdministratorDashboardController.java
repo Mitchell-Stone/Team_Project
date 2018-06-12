@@ -20,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -33,6 +34,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -126,8 +128,6 @@ public class AdministratorDashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        //populates the my profile tab
-        myProfile();
         
         //hides everything until it is needed
         hideChangePassword();
@@ -135,16 +135,6 @@ public class AdministratorDashboardController implements Initializable {
         vb_selectionDetails.setVisible(false);
     } 
     
-    private void myProfile(){    
-        vb_searchDetails.getChildren().clear();
-    }
-    
-    private void btn_myProfile(MouseEvent event) {
-        tbl_data.setVisible(false);
-        vb_selectionDetails.setVisible(false);
-        
-        myProfile();
-    }
 
     private void populateTable(String user){
         tbl_data.getColumns().clear();
@@ -430,6 +420,7 @@ public class AdministratorDashboardController implements Initializable {
 
                 Diploma di = (Diploma) tbl_data.getSelectionModel().getSelectedItem();
                 showCourseSubjects(di.getDiplomaID());      
+                
                 tableContextMenu();
 
                 break;
@@ -450,9 +441,11 @@ public class AdministratorDashboardController implements Initializable {
             MainController cont = new MainController();
             try {
                 cont.openNewWindow(addNewCourseURL);
+                event.consume();
             } catch (IOException ex) {
                 Logger.getLogger(AdministratorDashboardController.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
         });
 
         ContextMenu menu = new ContextMenu();
@@ -961,7 +954,6 @@ public class AdministratorDashboardController implements Initializable {
         lbl_newPassword.setVisible(false);
     }
 
-
     @FXML
     private void returnToLogin(MouseEvent event) throws IOException {
         MainController main = new MainController();
@@ -983,11 +975,3 @@ public class AdministratorDashboardController implements Initializable {
         }
     }
 }
-
-
-/*try{
-MainController main = new MainController();
-main.openNewWindow(addNewUserURL);
-}catch(IOException ex){
-System.out.println(ex);
-}*/
