@@ -18,6 +18,10 @@ public class Diploma {
         diplomaLocation = location;
         courseType = type;
     }
+    
+    public Diploma() {
+    
+    }
 
     public int getDiplomaID() {
         return diplomaID;
