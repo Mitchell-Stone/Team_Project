@@ -6,6 +6,7 @@
 package model;
 
 import beans.Courses;
+import beans.Submission;
 import beans.User;
 import db.DbType;
 import db.DbUtil;
@@ -189,5 +190,42 @@ public class CoursesModel extends MainModel {
             System.out.println(e);
             return false;
         }
+    }
+
+     public static ArrayList<String> getCourseByID(Submission submission) throws SQLException {
+
+        ArrayList<String> subjectName = new ArrayList<>();
+        ResultSet rs;
+
+        String query = "SELECT * FROM courses WHERE courseID = ?";
+
+        try {
+            java.sql.Connection conn = DbUtil.getConn(DbType.MYSQL);
+            PreparedStatement stmt = conn.prepareStatement(query);
+
+            stmt.setInt(1, submission.getCourseID());
+            
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                
+                subjectName.add(Integer.toString(rs.getInt("courseID")));
+                subjectName.add(rs.getString("name"));
+                subjectName.add(rs.getString("industry"));
+                subjectName.add(rs.getString("location"));
+                subjectName.add(Integer.toString(rs.getInt("numberOfHours")));
+                subjectName.add(Integer.toString(rs.getInt("finishingDegree")));
+                
+                return subjectName;
+                
+            } else {
+                System.out.println("Error in fetching the current course.");
+                return null;
+            }
+            
+        } catch (Exception e) {
+            System.err.println(e);
+            return null;
+        }
+    
     }
 }

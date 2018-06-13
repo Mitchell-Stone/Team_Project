@@ -1,6 +1,5 @@
 package model;
 
-import beans.CaseWorker;
 import beans.Student;
 import beans.User;
 import db.DbType;
