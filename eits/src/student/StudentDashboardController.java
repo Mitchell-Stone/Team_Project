@@ -815,6 +815,18 @@ public class StudentDashboardController implements Initializable {
     private void confirmDiplomaSelection() {
     
         DiplomaModel.assignDiplomaToStudent(Integer.parseInt(currentUser.get(0)), Integer.parseInt(text1.getText()));
+        
+        user.setTable("student");
+        user.setColumn("studentID");
+        user.setID(ID);
+
+        currentUser = MainModel.getUserByID(user);
+        
+        user.setTable("diploma");
+        user.setColumn("diplomaID");
+        user.setID(Integer.parseInt(currentUser.get(1)));
+        
+        currentDiploma = CoursesModel.getDiplomaByID(user);
     
     }
 
@@ -949,6 +961,9 @@ public class StudentDashboardController implements Initializable {
         test1.setVisible(false);
         
         leftLabelMain.setText("CaseWorker");
+        
+        btn1.setVisible(false);
+        btn2.setVisible(false);
         
         CaseWorker caseworker = new CaseWorker();
         
