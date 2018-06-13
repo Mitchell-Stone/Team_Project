@@ -8,6 +8,7 @@ package model;
 import beans.Administrator;
 import beans.Assessment;
 import beans.Student;
+import beans.Submission;
 import db.DbType;
 import db.DbUtil;
 import java.sql.Connection;
@@ -112,5 +113,42 @@ public class AssessmentModel {
         }
     
     }
+    
+    public static ArrayList<String> getAssessmentByID(Submission submission) throws SQLException {
+
+        ArrayList<String> assessmentName = new ArrayList<>();
+        ResultSet rs;
+
+        String query = "SELECT * FROM assessment WHERE assessmentID = ?";
+
+        try {
+            java.sql.Connection conn = DbUtil.getConn(DbType.MYSQL);
+            PreparedStatement stmt = conn.prepareStatement(query);
+
+            stmt.setInt(1, submission.getAssessmentID());
+            
+            rs = stmt.executeQuery();
+            if (rs.next()) {
+                
+                assessmentName.add(Integer.toString(rs.getInt("assessmentID")));
+                assessmentName.add(Integer.toString(rs.getInt("courseID")));
+                assessmentName.add(rs.getString("title"));
+                assessmentName.add(rs.getString("description"));
+                assessmentName.add(rs.getString("date"));
+                
+                return assessmentName;
+                
+            } else {
+                System.out.println("Error in fetching the current assessment.");
+                return null;
+            }
+            
+        } catch (Exception e) {
+            System.err.println(e);
+            return null;
+        }
+    
+    }
+   
     
 }

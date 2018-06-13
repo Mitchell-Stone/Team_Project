@@ -14,6 +14,17 @@ public class Attendance extends Courses {
     private String date;
     private int studentID;
     private int courseID;
+    
+    public Attendance(String date, int studentID,int courseID){
+        this.date = date;
+        this.studentID = studentID;
+        this.courseID = courseID;
+    }
+
+    public Attendance() {
+
+    }
+    
 
     public String getDate() {
         return date;

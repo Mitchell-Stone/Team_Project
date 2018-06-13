@@ -39,10 +39,10 @@
       </Label>
       <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="5" GridPane.rowIndex="1">
          <children>
-            <Button fx:id="myStudentsButton" mnemonicParsing="false" onAction="#getMyStudents" prefHeight="74.0" prefWidth="300.0" text="My Students" />
+            <Button fx:id="myStudentsButton" mnemonicParsing="false" onAction="#getMyStudentsTable" prefHeight="74.0" prefWidth="300.0" text="My Students" />
             <Button fx:id="allStudentsButton" mnemonicParsing="false" onAction="#getAllStudents" prefHeight="74.0" prefWidth="300.0" text="All Students" />
-            <Button fx:id="buttonAssessments" mnemonicParsing="false" prefHeight="74.0" prefWidth="300.0" text="Assessments" />
-            <Button fx:id="buttonAttendance" mnemonicParsing="false" prefHeight="74.0" prefWidth="300.0" text="Attendance" />
+            <Button fx:id="buttonAssessments" mnemonicParsing="false" onAction="#getSubmissons" prefHeight="74.0" prefWidth="300.0" text="Assessments" />
+            <Button fx:id="buttonAttendance" mnemonicParsing="false" onAction="#getAttendance" prefHeight="74.0" prefWidth="300.0" text="Attendance" />
             <Button fx:id="buttonUpdate" mnemonicParsing="false" onAction="#updatesVisible" prefHeight="74.0" prefWidth="300.0" text="Update Information" />
          </children>
       </VBox>
@@ -149,7 +149,8 @@
             </Label>
             <TextField fx:id="textNewPassword" promptText="Enter to update Password" />
             <Label fx:id="emptyFieldsLabel" text="Field(s) are empty!" textFill="#cd1313" visible="false" />
-            <Button fx:id="buttonConfirm" mnemonicParsing="false" onAction="#confirmUpdates" prefHeight="40.0" prefWidth="298.0" text="Confirm Information" />
+            <Button fx:id="buttonConfirm" mnemonicParsing="false" onAction="#confirmUpdates" prefHeight="40.0" prefWidth="292.0" text="Confirm Information" />
+            <Button fx:id="cancelUpdate" mnemonicParsing="false" onAction="#cancelUpdate" prefHeight="40.0" prefWidth="292.0" text="Cancel" />
          </children>
       </VBox>
       <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5">
@@ -166,5 +167,10 @@
             </Label>
          </children>
       </Pane>
+      <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+         <children>
+            <Button fx:id="gradeButton" mnemonicParsing="false" onAction="#gradeAssessment" prefHeight="25.0" prefWidth="232.0" text="Grade Assessment" />
+         </children>
+      </VBox>
    </children>
 </GridPane>
