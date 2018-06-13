@@ -477,6 +477,9 @@ public class StudentDashboardController implements Initializable {
     
     private void displayDiploma() {
         
+        emptyFields();
+        emptyLabels();
+        
         resetTextAndLabels();
         
         table1.setVisible(false);
@@ -537,6 +540,9 @@ public class StudentDashboardController implements Initializable {
     
     private void displayAssignments() throws SQLException {
         
+        emptyFields();
+        emptyLabels();
+        
         resetTextAndLabels();
         
         leftLabelMain.setText("Assessments");
@@ -554,13 +560,6 @@ public class StudentDashboardController implements Initializable {
         text4.setEditable(false);
         text5.setEditable(false);
         text6.setEditable(false);
-        
-        text1.setText("");
-        text2.setText("");
-        text3.setText("");
-        text4.setText("");
-        text5.setText("");
-        text6.setText("");
         
         btn1.setVisible(false);
         btn2.setVisible(false);
@@ -615,6 +614,11 @@ public class StudentDashboardController implements Initializable {
     }
     
     private void displayAssessmentInfo() {
+        
+        emptyFields();
+        emptyLabels();
+        
+        leftLabelMain.setText("Details");
     
         Assessment assessment = (Assessment) table1.getSelectionModel().getSelectedItem();
         text1.setText(Integer.toString(assessment.getAssessmentID()));
@@ -705,6 +709,9 @@ public class StudentDashboardController implements Initializable {
     }
     
     public void displayIndustries() {
+        
+        emptyFields();
+        emptyLabels();
     
         table1.setVisible(false);
         
@@ -919,6 +926,34 @@ public class StudentDashboardController implements Initializable {
         errorLabel.setText("");
         
         test1.setVisible(false);
+    
+    }
+    
+    private void emptyLabels() {
+        
+        leftLabelMain.setText("");
+    
+        label1.setText("");
+        label2.setText("");
+        label3.setText("");
+        label4.setText("");
+        label5.setText("");
+        label6.setText("");
+        label7.setText("");
+        
+        errorLabel.setText("");
+    
+    }
+    
+    private void emptyFields() {
+    
+        text1.setText("");
+        text2.setText("");
+        text3.setText("");
+        text4.setText("");
+        text5.setText("");
+        text6.setText("");
+        text7.setText("");
     
     }
 
