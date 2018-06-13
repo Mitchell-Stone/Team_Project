@@ -43,8 +43,8 @@ public class AttendanceModel {
         } catch (Exception e) {
                 System.out.println(e);
         }
-    
     }
+    
     public ObservableList<Attendance> getAttendanceByStudentID( int studentID ) throws SQLException {
 
         ObservableList<Attendance> attendanceList = FXCollections.observableArrayList();
