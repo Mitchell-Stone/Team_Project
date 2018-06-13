@@ -5,11 +5,13 @@
  */
 package caseWorker;
 
+import beans.Assessment;
 import beans.Attendance;
 import beans.CaseWorker;
 import beans.Courses;
 import beans.Diploma;
 import beans.Student;
+import beans.Submission;
 import beans.User;
 import controllers.MainController;
 import java.io.IOException;
@@ -32,11 +34,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import model.AssessmentModel;
 import model.AttendanceModel;
 import model.CaseWorkerModel;
 import model.CoursesModel;
 import model.DiplomaModel;
 import model.StudentModel;
+import model.SubmissionsModel;
 import security.SecurityMethods;
 
 /**
@@ -110,15 +114,10 @@ public class CaseWorkerController implements Initializable {
     private TextField textNewPassword;
     @FXML
     private Button cancelUpdate;
-    @FXML
     private Label secondaryLabel;
-    @FXML
     private Label textSecondary1;
-    @FXML
     private Label textSecondary2;
-    @FXML
     private Label textSecondary3;
-    @FXML
     private Label textSecondary4;
 
     CaseWorker caseworker = new CaseWorker();
@@ -127,6 +126,11 @@ public class CaseWorkerController implements Initializable {
     ArrayList<String> studentDiploma;
     ArrayList<String> studentCaseWorker;
     ArrayList<String> currentCaseWorker;
+    ArrayList<String> assessmentName;
+    ArrayList<String> subjectName;
+    @FXML
+    private Button gradeButton;
+    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -203,6 +207,8 @@ public class CaseWorkerController implements Initializable {
         secondaryLabel.setText("Diploma");
         textSecondary1.setText("ID");
         textSecondary2.setText("Name");
+        textSecondary3.setText("Industry");
+        textSecondary3.setText("Location");
         textSecondary3.setVisible(true);
         textSecondary4.setVisible(true);
         textIndustry.setVisible(true);
@@ -278,13 +284,15 @@ public class CaseWorkerController implements Initializable {
     @FXML
     private void getSubmissons(ActionEvent event) throws SQLException {
         getMyStudents();
-        secondaryLabel.setText("Assessment");
-        textSecondary1.setText("Name");
-        textSecondary2.setText("Date");
-        textSecondary3.setVisible(false);
-        textSecondary4.setVisible(false);
-        textIndustry.setVisible(false);
-        textLocation.setVisible(false);
+        secondaryLabel.setText("Submission");
+        textSecondary1.setText("Diploma:");
+        textSecondary2.setText("Subject:");
+        textSecondary3.setText("Assessment Name:");
+        textSecondary4.setText("Grade:");
+        textSecondary3.setVisible(true);
+        textSecondary4.setVisible(true);
+        textIndustry.setVisible(true);
+        textLocation.setVisible(true);
         addCourse.setVisible(false);
 
     }
@@ -295,8 +303,8 @@ public class CaseWorkerController implements Initializable {
         textCourseID.clear();
         textCourseName.clear();
         secondaryLabel.setText("Attendance");
-        textSecondary1.setText("Name");
-        textSecondary2.setText("Date");
+        textSecondary1.setText("Name:");
+        textSecondary2.setText("Date:");
         textSecondary3.setVisible(false);
         textSecondary4.setVisible(false);
         textIndustry.setVisible(false);
@@ -309,8 +317,7 @@ public class CaseWorkerController implements Initializable {
         secondaryTable.getColumns().clear();
         TableColumn studentID = new TableColumn("StudentID");
         TableColumn date = new TableColumn("Date");
-        TableColumn coureID = new TableColumn("CourseID");
-        secondaryTable.getColumns().addAll(studentID, date, coureID);
+        secondaryTable.getColumns().addAll(studentID, date);
         try {
 
             AttendanceModel model = new AttendanceModel();
@@ -319,7 +326,30 @@ public class CaseWorkerController implements Initializable {
 
             studentID.setCellValueFactory(new PropertyValueFactory("studentID"));
             date.setCellValueFactory(new PropertyValueFactory("date"));
-            coureID.setCellValueFactory(new PropertyValueFactory("coureID"));
+            secondaryTable.setItems(list);
+        } catch (NullPointerException ex) {
+            System.out.println("No Pointer Exception");
+        }
+    }
+
+    public void populateSubmisson(int studID) throws SQLException {
+        secondaryTable.getColumns().clear();
+        TableColumn assessmentID = new TableColumn("AssessmentID");
+        TableColumn courseID = new TableColumn("CourseID");
+        TableColumn studentID = new TableColumn("StudentID");
+        TableColumn grade = new TableColumn("Grade");
+        secondaryTable.getColumns().addAll(assessmentID, courseID, studentID, grade);
+        try {
+
+            SubmissionsModel model = new SubmissionsModel();
+
+            ObservableList<Submission> list = model.getSubmissionsByStudentID(studID);
+
+            assessmentID.setCellValueFactory(new PropertyValueFactory("assessmentID"));
+            courseID.setCellValueFactory(new PropertyValueFactory("courseID"));
+            studentID.setCellValueFactory(new PropertyValueFactory("studentID"));
+            grade.setCellValueFactory(new PropertyValueFactory("grade"));
+
             secondaryTable.setItems(list);
         } catch (NullPointerException ex) {
             System.out.println("No Pointer Exception");
@@ -381,11 +411,14 @@ public class CaseWorkerController implements Initializable {
             int studID = Integer.parseInt(idTextField.getText());
             populateAttendance(studID);
         }
+        if (secondaryLabel.getText().equals("Submission")) {
+            int studID = Integer.parseInt(idTextField.getText());
+            populateSubmisson(studID);
+        }
         uneditable();
     }
 
-    @FXML
-    private void selectSecondaryInformation(MouseEvent event) {
+    private void selectSecondaryInformation(MouseEvent event) throws SQLException {
         switch (secondaryLabel.getText()) {
             case "Diploma": {
 
@@ -403,6 +436,18 @@ public class CaseWorkerController implements Initializable {
                 editable();
                 textCourseName.setText(at.getDate());
                 textCourseID.setText(textFname.getText());
+                uneditable();
+
+            }
+            case "Submission": {
+                Submission su = (Submission) secondaryTable.getSelectionModel().getSelectedItem();
+                assessmentName = AssessmentModel.getAssessmentByID(su);
+                subjectName = CoursesModel.getCourseByID(su);
+                editable();
+                textCourseID.setText(textDiploma.getText());
+                textCourseName.setText(subjectName.get(1));
+                textIndustry.setText(assessmentName.get(2));
+                
                 uneditable();
 
             }
@@ -529,5 +574,13 @@ public class CaseWorkerController implements Initializable {
 
         CaseWorkerModel.assignCaseWorker(studentID, employeeID);
         getMyStudentsTable();
+    }
+
+    @FXML
+    private void selectCourse(MouseEvent event) {
+    }
+
+    @FXML
+    private void gradeAssessment(ActionEvent event) {
     }
 }
