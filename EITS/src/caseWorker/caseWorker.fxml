@@ -31,7 +31,7 @@
    <children>
       <TableView fx:id="allStudentsTable" onMouseClicked="#selectStudent" prefHeight="291.0" prefWidth="616.0" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.rowSpan="2" />
       <TableView fx:id="myStudentsTable" onMouseClicked="#MyStudentSelect" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-      <TableView fx:id="secondaryTable" onMouseClicked="#selectCourse" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+      <TableView fx:id="secondaryTable" onMouseClicked="#selectSecondaryInformation" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
       <Label alignment="CENTER" prefHeight="69.0" prefWidth="616.0" text="CaseWorker" GridPane.columnIndex="3">
          <font>
             <Font size="70.0" />
@@ -95,30 +95,30 @@
       </VBox>
       <VBox fx:id="secondaryVbox" prefHeight="280.0" prefWidth="231.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <children>
-            <Label alignment="CENTER" prefHeight="34.0" prefWidth="233.0" text="Diploma">
+            <Label fx:id="secondaryLabel" alignment="CENTER" prefHeight="34.0" prefWidth="233.0" text="Diploma">
                <font>
                   <Font size="23.0" />
                </font>
             </Label>
-            <Label text="ID:">
+            <Label fx:id="textSecondary1" text="ID:">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
             <TextField fx:id="textCourseID" />
-            <Label text="Name:">
+            <Label fx:id="textSecondary2" text="Name:">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
             <TextField fx:id="textCourseName" />
-            <Label text="Industry:">
+            <Label fx:id="textSecondary3" text="Industry:">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
             <TextField fx:id="textIndustry" />
-            <Label text="Location:">
+            <Label fx:id="textSecondary4" text="Location:">
                <font>
                   <Font size="15.0" />
                </font>
