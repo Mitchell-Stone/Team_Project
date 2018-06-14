@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1178.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="caseWorker.CaseWorkerController">
+<GridPane id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="760.0" prefWidth="1178.0" stylesheets="@../stylesheets/main.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="caseWorker.CaseWorkerController">
   <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="955.0" minWidth="10.0" percentWidth="1.0" prefWidth="46.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="955.0" minWidth="10.0" prefWidth="249.0" />
@@ -22,154 +22,155 @@
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="581.0" minWidth="10.0" percentWidth="1.0" prefWidth="45.0" />
   </columnConstraints>
   <rowConstraints>
-    <RowConstraints maxHeight="249.0" minHeight="2.0" prefHeight="70.0" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="249.0" minHeight="2.0" prefHeight="94.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="249.0" minHeight="10.0" prefHeight="12.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="500.0" minHeight="10.0" percentHeight="0.0" prefHeight="364.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="500.0" minHeight="0.0" percentHeight="0.0" prefHeight="236.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="156.0" minHeight="10.0" prefHeight="90.0" vgrow="SOMETIMES" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <TableView fx:id="allStudentsTable" onMouseClicked="#selectStudent" prefHeight="291.0" prefWidth="616.0" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="1" GridPane.rowSpan="2" />
-      <TableView fx:id="myStudentsTable" onMouseClicked="#MyStudentSelect" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-      <TableView fx:id="secondaryTable" onMouseClicked="#selectSecondaryInformation" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-      <Label alignment="CENTER" prefHeight="69.0" prefWidth="616.0" text="CaseWorker" GridPane.columnIndex="3">
-         <font>
-            <Font size="70.0" />
-         </font>
-      </Label>
-      <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="5" GridPane.rowIndex="1">
+      <TableView fx:id="allStudentsTable" onMouseClicked="#selectStudent" prefHeight="291.0" prefWidth="616.0" visible="false" GridPane.columnIndex="3" GridPane.rowIndex="2" GridPane.rowSpan="2" />
+      <TableView id="tableGrey" fx:id="myStudentsTable" onMouseClicked="#MyStudentSelect" prefHeight="200.0" prefWidth="200.0" stylesheets="@../stylesheets/main.css" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+      <TableView id="tableGrey" fx:id="secondaryTable" onMouseClicked="#selectSecondaryInformation" prefHeight="200.0" prefWidth="200.0" stylesheets="@../stylesheets/main.css" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+      <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="5" GridPane.rowIndex="2">
          <children>
-            <Button fx:id="myStudentsButton" mnemonicParsing="false" onAction="#getMyStudentsTable" prefHeight="74.0" prefWidth="300.0" text="My Students" />
-            <Button fx:id="allStudentsButton" mnemonicParsing="false" onAction="#getAllStudents" prefHeight="74.0" prefWidth="300.0" text="All Students" />
-            <Button fx:id="buttonAssessments" mnemonicParsing="false" onAction="#getSubmissons" prefHeight="74.0" prefWidth="300.0" text="Assessments" />
-            <Button fx:id="buttonAttendance" mnemonicParsing="false" onAction="#getAttendance" prefHeight="74.0" prefWidth="300.0" text="Attendance" />
-            <Button fx:id="buttonUpdate" mnemonicParsing="false" onAction="#updatesVisible" prefHeight="74.0" prefWidth="300.0" text="Update Information" />
+            <Button id="greyButtons" fx:id="myStudentsButton" mnemonicParsing="false" onAction="#getMyStudentsTable" prefHeight="74.0" prefWidth="300.0" stylesheets="@../stylesheets/main.css" text="My Students" />
+            <Button id="greyButtons" fx:id="allStudentsButton" mnemonicParsing="false" onAction="#getAllStudents" prefHeight="74.0" prefWidth="300.0" stylesheets="@../stylesheets/main.css" text="All Students" />
+            <Button id="greyButtons" fx:id="buttonAssessments" mnemonicParsing="false" onAction="#getSubmissons" prefHeight="74.0" prefWidth="300.0" stylesheets="@../stylesheets/main.css" text="Assessments" />
+            <Button id="greyButtons" fx:id="buttonAttendance" mnemonicParsing="false" onAction="#getAttendance" prefHeight="74.0" prefWidth="300.0" stylesheets="@../stylesheets/main.css" text="Attendance" />
+            <Button id="greyButtons" fx:id="buttonUpdate" mnemonicParsing="false" onAction="#updatesVisible" prefHeight="74.0" prefWidth="300.0" stylesheets="@../stylesheets/main.css" text="Update Information" />
          </children>
       </VBox>
-      <VBox prefHeight="376.0" prefWidth="231.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <VBox prefHeight="376.0" prefWidth="231.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <children>
-            <Label alignment="CENTER" prefHeight="34.0" prefWidth="275.0" text="Information">
+            <Label alignment="CENTER" prefHeight="34.0" prefWidth="275.0" stylesheets="@../stylesheets/main.css" text="Information">
                <font>
                   <Font size="26.0" />
                </font>
             </Label>
-            <Label text="ID:">
+            <Label stylesheets="@../stylesheets/main.css" text="ID:">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <TextField fx:id="idTextField" />
-            <Label text="First Name:">
+            <TextField id="textfieldGrey" fx:id="idTextField" />
+            <Label stylesheets="@../stylesheets/main.css" text="First Name:">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <TextField fx:id="textFname" />
-            <Label text="Last Name:">
+            <TextField id="textfieldGrey" fx:id="textFname" />
+            <Label stylesheets="@../stylesheets/main.css" text="Last Name:">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <TextField fx:id="textLname" />
-            <Label text="Email:">
+            <TextField id="textfieldGrey" fx:id="textLname" />
+            <Label stylesheets="@../stylesheets/main.css" text="Email:">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <TextField fx:id="textEmail" />
-            <Label text="Diploma:">
+            <TextField id="textfieldGrey" fx:id="textEmail" />
+            <Label stylesheets="@../stylesheets/main.css" text="Diploma:">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <TextField fx:id="textDiploma" />
-            <Label text="Case Worker:">
+            <TextField id="textfieldGrey" fx:id="textDiploma" />
+            <Label stylesheets="@../stylesheets/main.css" text="Case Worker:">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <TextField fx:id="textWorker" />
-            <Button fx:id="buttonAssignStudent" mnemonicParsing="false" onAction="#assignToCaseWorker" prefHeight="26.0" prefWidth="232.0" text="Assign Student" />
-            <Button fx:id="buttonUnassignStudent" mnemonicParsing="false" onAction="#unassignToCaseWorker" prefHeight="26.0" prefWidth="232.0" text="Un-Assign Student" />
+            <TextField id="textfieldGrey" fx:id="textWorker" />
+            <Button id="greenButtons" fx:id="buttonAssignStudent" mnemonicParsing="false" onAction="#assignToCaseWorker" prefHeight="26.0" prefWidth="232.0" stylesheets="@../stylesheets/main.css" text="Assign Student" />
+            <Button id="greenButtons" fx:id="buttonUnassignStudent" mnemonicParsing="false" onAction="#unassignToCaseWorker" prefHeight="26.0" prefWidth="232.0" stylesheets="@../stylesheets/main.css" text="Un-Assign Student" />
          </children>
       </VBox>
-      <VBox fx:id="secondaryVbox" prefHeight="280.0" prefWidth="231.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <VBox fx:id="secondaryVbox" prefHeight="280.0" prefWidth="231.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <children>
-            <Label fx:id="secondaryLabel" alignment="CENTER" prefHeight="34.0" prefWidth="233.0" text="Diploma">
+            <Label fx:id="secondaryLabel" alignment="CENTER" prefHeight="34.0" prefWidth="233.0" stylesheets="@../stylesheets/main.css" text="Diploma">
                <font>
                   <Font size="23.0" />
                </font>
             </Label>
-            <Label fx:id="textSecondary1" text="ID:">
+            <Label fx:id="textSecondary1" stylesheets="@../stylesheets/main.css" text="ID:">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <TextField fx:id="textCourseID" />
-            <Label fx:id="textSecondary2" text="Name:">
+            <TextField id="textfieldGrey" fx:id="textCourseID" />
+            <Label fx:id="textSecondary2" stylesheets="@../stylesheets/main.css" text="Name:">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <TextField fx:id="textCourseName" />
-            <Label fx:id="textSecondary3" text="Industry:">
+            <TextField id="textfieldGrey" fx:id="textCourseName" />
+            <Label fx:id="textSecondary3" stylesheets="@../stylesheets/main.css" text="Industry:">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <TextField fx:id="textIndustry" />
-            <Label fx:id="textSecondary4" text="Location:">
+            <TextField id="textfieldGrey" fx:id="textIndustry" />
+            <Label fx:id="textSecondary4" stylesheets="@../stylesheets/main.css" text="Location:">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <TextField fx:id="textLocation" />
-            <Button fx:id="addCourse" mnemonicParsing="false" onAction="#addStudentToCourse" prefHeight="26.0" prefWidth="232.0" text="Add Student to Diploma / Course" />
+            <TextField id="textfieldGrey" fx:id="textLocation" />
+            <Button id="greenButtons" fx:id="addCourse" mnemonicParsing="false" onAction="#addStudentToCourse" prefHeight="26.0" prefWidth="232.0" stylesheets="@../stylesheets/main.css" text="Add Student to Diploma / Course" />
          </children>
       </VBox>
-      <Button fx:id="logOutButton" mnemonicParsing="false" onAction="#logOut" prefHeight="74.0" prefWidth="300.0" text="Log-Out" GridPane.columnIndex="5" GridPane.rowIndex="3" />
-      <VBox fx:id="updateVbox" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="5" GridPane.rowIndex="2">
+      <Button id="greyButtons" fx:id="logOutButton" mnemonicParsing="false" onAction="#logOut" prefHeight="74.0" prefWidth="300.0" stylesheets="@../stylesheets/main.css" text="Log-Out" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+      <VBox fx:id="updateVbox" prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="5" GridPane.rowIndex="3">
          <children>
-            <Label text="Email:">
+            <Label stylesheets="@../stylesheets/main.css" text="Email:">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <TextField fx:id="textWorkerEmail" />
-            <Label text="Password:">
+            <TextField id="textfieldGrey" fx:id="textWorkerEmail" />
+            <Label stylesheets="@../stylesheets/main.css" text="Password:">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <TextField fx:id="textPassword" promptText="********" />
-            <Label text="New Password:">
+            <TextField id="textfieldGrey" fx:id="textPassword" promptText="********" />
+            <Label stylesheets="@../stylesheets/main.css" text="New Password:">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <TextField fx:id="textNewPassword" promptText="Enter to update Password" />
-            <Label fx:id="emptyFieldsLabel" text="Field(s) are empty!" textFill="#cd1313" visible="false" />
-            <Button fx:id="buttonConfirm" mnemonicParsing="false" onAction="#confirmUpdates" prefHeight="40.0" prefWidth="292.0" text="Confirm Information" />
-            <Button fx:id="cancelUpdate" mnemonicParsing="false" onAction="#cancelUpdate" prefHeight="40.0" prefWidth="292.0" text="Cancel" />
+            <TextField id="textfieldGrey" fx:id="textNewPassword" promptText="Enter to update Password" />
+            <Label fx:id="emptyFieldsLabel" stylesheets="@../stylesheets/main.css" text="Field(s) are empty!" textFill="#cd1313" visible="false" />
+            <Button id="greyButtons" fx:id="buttonConfirm" mnemonicParsing="false" onAction="#confirmUpdates" prefHeight="40.0" prefWidth="292.0" stylesheets="@../stylesheets/main.css" text="Confirm Information" />
+            <Button id="greyButtons" fx:id="cancelUpdate" mnemonicParsing="false" onAction="#cancelUpdate" prefHeight="40.0" prefWidth="292.0" stylesheets="@../stylesheets/main.css" text="Cancel" />
          </children>
       </VBox>
-      <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5">
+      <Pane id="titlePane" prefHeight="86.0" prefWidth="1178.0" stylesheets="@../stylesheets/main.css" GridPane.columnSpan="7">
          <children>
-            <Label fx:id="labelFname" layoutX="102.0" layoutY="14.0" text="First Name">
+            <Label fx:id="labelLname" layoutX="990.0" layoutY="48.0" stylesheets="@../stylesheets/main.css" text="Last Name">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <Label fx:id="labelLname" layoutX="103.0" layoutY="35.0" text="Last Name">
+            <Label fx:id="labelFname" layoutX="989.0" layoutY="26.0" stylesheets="@../stylesheets/main.css" text="First Name">
                <font>
                   <Font size="15.0" />
+               </font>
+            </Label>
+            <Label layoutY="2.0" prefHeight="69.0" prefWidth="500.0" stylesheets="@../stylesheets/main.css" text=" Case Worker " textFill="#fcfcfc">
+               <font>
+                  <Font name="Arial" size="45.0" />
                </font>
             </Label>
          </children>
       </Pane>
-      <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+      <VBox prefHeight="200.0" prefWidth="100.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
          <children>
-            <Button fx:id="gradeButton" mnemonicParsing="false" onAction="#gradeAssessment" prefHeight="25.0" prefWidth="232.0" text="Grade Assessment" />
+            <Button id="greenButtons" fx:id="gradeButton" mnemonicParsing="false" onAction="#gradeAssessment" prefHeight="25.0" prefWidth="232.0" stylesheets="@../stylesheets/main.css" text="Grade Assessment" />
          </children>
       </VBox>
    </children>

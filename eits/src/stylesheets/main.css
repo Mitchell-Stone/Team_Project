@@ -70,3 +70,44 @@ and open the template in the editor.
     -fx-border-insets: 5px;
     -fx-background-insets: 5px;
 }
+#titlePane {
+    -fx-background-color: #78c14b;
+}
+.label{
+     -fx-text-fill: #ffffff;
+}
+
+#greyButtons{
+    -fx-background-color:   #404040;
+    -fx-border-color: #1a1a1a;
+    -fx-text-fill: white;
+}
+#greenButtons{
+    -fx-background-color: #78c14b;
+    -fx-text-fill: white;
+
+}
+#textfieldGrey{
+    -fx-background-color:   #666564;
+    -fx-text-fill: white;
+}
+
+#tableGrey{
+    -fx-background-color:   #666564;
+}
+#tableGrey .column-header-background{
+    -fx-background-color: #404040;
+}
+
+#tableGrey .column-header-background .label{
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+}
+
+#tableGrey .column-header {
+    -fx-background-color: transparent;
+}
+#tableGrey  .filler {
+    -fx-background-color: #404040;
+}
+

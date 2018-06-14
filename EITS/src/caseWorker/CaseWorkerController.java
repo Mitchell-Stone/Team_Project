@@ -443,12 +443,13 @@ public class CaseWorkerController implements Initializable {
                 break;
             }
             case "Attendance": {
+                System.out.println(secondaryLabel.getText());
                 Attendance at = (Attendance) secondaryTable.getSelectionModel().getSelectedItem();
                 editable();
                 textCourseName.setText(at.getDate());
                 textCourseID.setText(textFname.getText());
                 uneditable();
-
+                break;
             }
             case "Submission": {
                 Submission su = (Submission) secondaryTable.getSelectionModel().getSelectedItem();
@@ -460,6 +461,7 @@ public class CaseWorkerController implements Initializable {
                 textIndustry.setText(assessmentName.get(2));
                 uneditable();
                 textLocation.setEditable(true);
+                break;
             }
         }
     }
@@ -588,9 +590,19 @@ public class CaseWorkerController implements Initializable {
 
     @FXML
     private void gradeAssessment(ActionEvent event) throws SQLException {
+        
+        try {
+            int grade = Integer.parseInt(textLocation.getText());
+            System.out.println(grade);
+            System.out.println("It's an Int.");
+        } catch (NumberFormatException e) {
+            textLocation.clear();
+            textLocation.setPromptText("Invalid Grade");
+        }
+        
         int grade = Integer.parseInt(textLocation.getText());
         int studentID = Integer.parseInt(idTextField.getText());
-        if (grade < 101 || grade < -1) {
+        if (grade < 101 || grade < -1 && !textLocation.getPromptText().equals("Invalid Grade")){
             SubmissionsModel.updateGrade(grade, studentID);
             populateSubmisson(studentID);
         } else {
