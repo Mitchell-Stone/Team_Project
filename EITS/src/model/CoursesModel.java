@@ -192,7 +192,7 @@ public class CoursesModel extends MainModel {
         }
     }
 
-     public static ArrayList<String> getCourseByID(Submission submission) throws SQLException {
+    public static ArrayList<String> getCourseByID(Submission submission) throws SQLException {
 
         ArrayList<String> subjectName = new ArrayList<>();
         ResultSet rs;
@@ -228,8 +228,7 @@ public class CoursesModel extends MainModel {
         }
     
     }
-     
-     
+    
     public Courses getSubjectByID(int subjectID) throws SQLException {
  
         String sql = "SELECT * FROM courses WHERE courseID = ?";
