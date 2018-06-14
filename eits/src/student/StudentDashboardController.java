@@ -194,6 +194,8 @@ public class StudentDashboardController implements Initializable {
     @FXML
     private void assignments(ActionEvent event) throws SQLException {
         
+        table1.getColumns().clear();
+        
         displayAssignments();
         
         Attendance log = new Attendance();
