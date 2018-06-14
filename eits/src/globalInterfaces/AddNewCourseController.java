@@ -71,6 +71,8 @@ public class AddNewCourseController implements Initializable {
     private Label lbl_dropSubjectsHere;
     
 
+    
+    
     /**
      * Initializes the controller class.
      */
@@ -121,6 +123,8 @@ public class AddNewCourseController implements Initializable {
             event.consume();
         });
         
+        ObservableList<Courses> list = FXCollections.observableArrayList();
+        
         lbl_dropSubjectsHere.setOnDragDropped((DragEvent event) -> {
             Dragboard db = event.getDragboard();
             boolean success = false;
@@ -129,7 +133,14 @@ public class AddNewCourseController implements Initializable {
                 lbl_dropSubjectsHere.setTextFill(Color.WHITE);
                 System.out.println("Course dropped with ID: " + db.getString());
                 try {
-                    populateAddSubjectTable(Integer.parseInt(db.getString()));
+                    CoursesModel model = new CoursesModel();
+        
+                    Courses course = model.getSubjectByID(Integer.parseInt(db.getString()));
+                    
+                    list.add(course);
+                    System.out.println(list);
+                    tbl_addSubjects.setItems(list);
+                    
                 } catch (SQLException ex) {
                     Logger.getLogger(AddNewCourseController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -153,7 +164,14 @@ public class AddNewCourseController implements Initializable {
         } catch (SQLException ex) {
             Logger.getLogger(AddNewCourseController.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }    
+    }  
+    
+    private ObservableList<Courses> courseList(Courses course){
+        ObservableList<Courses> list = FXCollections.observableArrayList();
+        list.add(course);
+
+        return list;
+    } 
     
     private void populateSubjectsTable() throws SQLException{
         
@@ -191,11 +209,7 @@ public class AddNewCourseController implements Initializable {
     }
     
     private void populateAddSubjectTable(int subjectID) throws SQLException{
-        CoursesModel model = new CoursesModel();
         
-        ObservableList<Courses> courseList = model.getSubjectByID(subjectID);
-                
-        tbl_addSubjects.setItems(courseList);
     }
     
     @FXML

@@ -228,22 +228,22 @@ public class CoursesModel extends MainModel {
         }
     }
     
-    public ObservableList<Courses> getSubjectByID(int subjectID) throws SQLException{
-        
-        ObservableList<Courses> courseList = FXCollections.observableArrayList();
-        
+    public Courses getSubjectByID(int subjectID) throws SQLException{
+       
         ResultSet rs = null;
 
         //execute query to get all students
         String sql = "SELECT * FROM courses WHERE courseID = ?;";
         String query = sql.replace("?", Integer.toString(subjectID));
-
+        
+        Courses course = null;
+        
         try{
             java.sql.Connection conn = DbUtil.getConn(DbType.MYSQL);
             PreparedStatement stmt = conn.prepareStatement(query);           
 
             System.out.println(stmt);
-            Courses course;
+            
             
             rs = stmt.executeQuery(query);
 
@@ -255,7 +255,7 @@ public class CoursesModel extends MainModel {
                         rs.getString("industry"), 
                         rs.getInt("numberOfHours"), 
                         rs.getInt("finishingDegree"));
-                courseList.add(course);
+                return course;
             }            
         } catch (SQLException e) {
             System.out.println(e);
@@ -264,7 +264,8 @@ public class CoursesModel extends MainModel {
             if (rs != null) {
                 rs.close();
             }
+            
         }  
-        return courseList;
+        return course;
     }
 }
