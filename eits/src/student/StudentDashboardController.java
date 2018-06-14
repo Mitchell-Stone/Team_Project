@@ -23,10 +23,8 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
@@ -39,8 +37,8 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
 import model.AssessmentModel;
@@ -115,9 +113,10 @@ public class StudentDashboardController implements Initializable {
     private Button logoutBtn1;
     @FXML
     private GridPane grid;
-    /**
-     * Initializes the controller class.
-     */
+    @FXML
+    private Button industrybtn;
+    @FXML
+    private HBox banner;
     
     //VARIABLES
     
@@ -128,7 +127,9 @@ public class StudentDashboardController implements Initializable {
     User user = new User();
     
     boolean visible = false;
+    
     String action1 = null;
+    
     String action2 = null;
     
     int ID = 0;
@@ -140,14 +141,12 @@ public class StudentDashboardController implements Initializable {
     ObservableList<Assessment> tableItems;
     
     int submitAssessmentID = 0;
+    
     int submitCourseID = 0;
     
     boolean dropped = false;
     
     VBox diplomas = new VBox();
-    
-    @FXML
-    private Button industrybtn;
     
     //END OF VARIABLES
     
@@ -173,6 +172,8 @@ public class StudentDashboardController implements Initializable {
         }
         
         setStart();
+        
+        
         
     }   
 
@@ -257,9 +258,9 @@ public class StudentDashboardController implements Initializable {
                 
                 confirmDiplomaSelection();
                 
-                diplomas.setVisible(false);
-                
                 resetTextAndLabels();
+                
+                diplomas.setVisible(false);
                 
                 btn1.setVisible(false);
                 btn2.setVisible(false);
@@ -358,41 +359,48 @@ public class StudentDashboardController implements Initializable {
     }
     
     private void updateUserdetailsConfirm() {
-    
-        if ("".equals(text4.getText()) || "".equals(text5.getText()) || "".equals(text6.getText())) {
-            errorLabel.setTextFill(Paint.valueOf("red"));
-            errorLabel.setText("There are empty fields.");
-        } else {
+        
+        if (text4.getText().matches("^[a-zA-Z]+$") || text5.getText().matches("^[a_zA-Z]+$")) {
             
-            user.setID(ID);
-            user.setFirstName(text4.getText());
-            user.setLastName(text5.getText());
-            user.setEmail(text6.getText());
-
-            if (StudentModel.updateStudent(user)) {
-
-                errorLabel.setTextFill(Paint.valueOf("green"));
-                errorLabel.setText("Success!");
-                
-                user.setID(ID);
-
-                currentUser = MainModel.getUserByID(user);
-
-                System.out.println(currentUser);
-
-                text1.setText(currentUser.get(0));
-                text4.setText(currentUser.get(3));
-                text5.setText(currentUser.get(4));
-                text6.setText(currentUser.get(5));
-                
-                btn1.setText("Back");
-                action1 = "reset_user_details";
-
+            if ("".equals(text4.getText()) || "".equals(text5.getText()) || "".equals(text6.getText())) {
+                errorLabel.setText("ERROR: There are empty fields.");
             } else {
-                errorLabel.setTextFill(Paint.valueOf("red"));
-                errorLabel.setText("Error. Please try again.");
-            }         
+
+                user.setID(ID);
+                user.setFirstName(text4.getText());
+                user.setLastName(text5.getText());
+                user.setEmail(text6.getText());
+
+                if (StudentModel.updateStudent(user)) {
+
+                    errorLabel.setTextFill(Paint.valueOf("green"));
+                    errorLabel.setText("Success!");
+
+                    user.setID(ID);
+
+                    currentUser = MainModel.getUserByID(user);
+
+                    System.out.println(currentUser);
+
+                    text1.setText(currentUser.get(0));
+                    text4.setText(currentUser.get(3));
+                    text5.setText(currentUser.get(4));
+                    text6.setText(currentUser.get(5));
+
+                    btn1.setText("Back");
+                    action1 = "reset_user_details";
+
+                } else {
+                    errorLabel.setTextFill(Paint.valueOf("red"));
+                    errorLabel.setText("ERROR: Please try again.");
+                }         
         }
+            
+        } else {
+            errorLabel.setText("ERROR: Please remove any numbers from first and last names.");
+        }
+    
+        
     
     }
     
@@ -442,7 +450,7 @@ public class StudentDashboardController implements Initializable {
         
         if ("".equals(cp) || "".equals(pw1) || "".equals(pw2)) {
             errorLabel.setTextFill(Paint.valueOf("red"));
-            errorLabel.setText("There are empty fields.");
+            errorLabel.setText("ERROR: There are empty fields.");
         } else {
             if (UserAccessModel.checkUserPass(access)) {
                 if (pw1.equals(pw2) && !cp.equals(pw1) && !cp.equals(pw2)) {
@@ -458,18 +466,18 @@ public class StudentDashboardController implements Initializable {
                         
                     } else {
                         errorLabel.setTextFill(Paint.valueOf("red"));
-                        errorLabel.setText("There's been a mistake.");
+                        errorLabel.setText("ERROR: There's been a mistake.");
                     }
                 } else if(cp.equals(pw2) && pw2.equals(pw1)) {
                     errorLabel.setTextFill(Paint.valueOf("red"));
-                    errorLabel.setText("The current password is the same as the new one.");
+                    errorLabel.setText("ERROR: The current password is the same as the new one.");
                 } else {
                     errorLabel.setTextFill(Paint.valueOf("red"));
-                    errorLabel.setText("The passwords entered do not match.");
+                    errorLabel.setText("ERROR: The passwords entered do not match.");
                 }
             } else {
                 errorLabel.setTextFill(Paint.valueOf("red"));
-                errorLabel.setText("The current password appears to be wrong.");
+                errorLabel.setText("ERROR: The current password appears to be wrong.");
             }
         }
     
@@ -601,7 +609,7 @@ public class StudentDashboardController implements Initializable {
                     
                 }
                 catch(SQLException ex){
-                    System.out.println("DATABASE ERROR SQL EXCEPTION");
+                    System.out.println("ERROR: DATABASE ERROR SQL EXCEPTION");
                 }
     
     }
@@ -617,6 +625,13 @@ public class StudentDashboardController implements Initializable {
         
         emptyFields();
         emptyLabels();
+        
+        label1.setText("Assessment ID:");
+        label2.setText("Title::");
+        label3.setText("Description:");
+        label4.setText("Due Date:");
+        label5.setText("Submitted:");
+        label6.setText("Grade:");
         
         leftLabelMain.setText("Details");
     
@@ -701,11 +716,9 @@ public class StudentDashboardController implements Initializable {
             test1.setText("");
             
         } else {
-            test1.setText("Error, file necessary before submission.");
+            test1.setText("ERROR: File necessary before submission.");
         }
         
-        
-    
     }
     
     public void displayIndustries() {
@@ -767,8 +780,6 @@ public class StudentDashboardController implements Initializable {
             
             title.setOnMouseClicked((MouseEvent diplomaSelected) -> {
                 
-                
-                
                 try {
                     dpl.setDiplomaID(Integer.parseInt(id.getText()));
                     
@@ -820,7 +831,7 @@ public class StudentDashboardController implements Initializable {
     }
     
     private void confirmDiplomaSelection() {
-    
+        
         DiplomaModel.assignDiplomaToStudent(Integer.parseInt(currentUser.get(0)), Integer.parseInt(text1.getText()));
         
         user.setTable("student");
@@ -834,6 +845,53 @@ public class StudentDashboardController implements Initializable {
         user.setID(Integer.parseInt(currentUser.get(1)));
         
         currentDiploma = CoursesModel.getDiplomaByID(user);
+    
+    }
+    
+    private void displayCaseWorkerInfo() throws SQLException {
+    
+        resetTextAndLabels();
+        
+        label1.setText("CaseWorker ID");
+        label2.setText("First Name");
+        label3.setText("Last Name");
+        label4.setText("Email");
+        label5.setText("Phone Number");
+        
+        label6.setVisible(false);
+        label7.setVisible(false);
+        
+        text6.setVisible(false);
+        text7.setVisible(false);
+        
+        table1.setVisible(false);
+        test1.setVisible(false);
+        
+        leftLabelMain.setText("CaseWorker");
+        
+        btn1.setVisible(false);
+        btn2.setVisible(false);
+        
+        CaseWorker caseworker = new CaseWorker();
+        
+        caseworker.setID(Integer.parseInt(currentUser.get(2)));
+        
+        ArrayList<String> cwInfo = CaseWorkerModel.getCaseWorkerByID(caseworker);
+        
+        if (cwInfo == null) {
+            text1.setText("Unassigned");
+            text2.setText("Unassigned");
+            text3.setText("Unassigned");
+            text4.setText("Unassigned");
+            text5.setText("Unassigned");
+        } else {
+            System.out.println(cwInfo);
+            text1.setText(cwInfo.get(0));
+            text2.setText(cwInfo.get(1));
+            text3.setText(cwInfo.get(2));
+            text4.setText(cwInfo.get(3));
+            text5.setText(cwInfo.get(5));
+        }
     
     }
 
@@ -978,48 +1036,7 @@ public class StudentDashboardController implements Initializable {
     @FXML
     private void caseWorker(ActionEvent event) throws SQLException {
         
-        resetTextAndLabels();
-        
-        label1.setText("CaseWorker ID");
-        label2.setText("First Name");
-        label3.setText("Last Name");
-        label4.setText("Email");
-        label5.setText("Phone Number");
-        
-        label6.setVisible(false);
-        label7.setVisible(false);
-        
-        text6.setVisible(false);
-        text7.setVisible(false);
-        
-        table1.setVisible(false);
-        test1.setVisible(false);
-        
-        leftLabelMain.setText("CaseWorker");
-        
-        btn1.setVisible(false);
-        btn2.setVisible(false);
-        
-        CaseWorker caseworker = new CaseWorker();
-        
-        caseworker.setID(Integer.parseInt(currentUser.get(2)));
-        
-        ArrayList<String> cwInfo = CaseWorkerModel.getCaseWorkerByID(caseworker);
-        
-        if (cwInfo == null) {
-            text1.setText("Unassigned");
-            text2.setText("Unassigned");
-            text3.setText("Unassigned");
-            text4.setText("Unassigned");
-            text5.setText("Unassigned");
-        } else {
-            System.out.println(cwInfo);
-            text1.setText(cwInfo.get(0));
-            text2.setText(cwInfo.get(1));
-            text3.setText(cwInfo.get(2));
-            text4.setText(cwInfo.get(3));
-            text5.setText(cwInfo.get(5));
-        }
+        displayCaseWorkerInfo();
         
     }
     

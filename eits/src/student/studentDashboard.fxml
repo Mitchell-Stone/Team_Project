@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane fx:id="grid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="734.0" prefWidth="1216.0" style="-fx-background-color: #333333;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="student.StudentDashboardController">
+<GridPane fx:id="grid" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="734.0" prefWidth="1216.0" style="-fx-background-color: #333333;" stylesheets="@../stylesheets/studentDashboardStyle.css" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="student.StudentDashboardController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="4.0" prefWidth="100.0" />
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="25.0" prefWidth="100.0" />
@@ -82,7 +82,7 @@
             <TextField fx:id="text6" style="-fx-background-color: white;" />
             <Label fx:id="label7" prefHeight="17.0" prefWidth="267.0" style="-fx-text-fill: white;" text="Label" />
             <TextField fx:id="text7" style="-fx-background-color: white;" />
-            <Label fx:id="errorLabel" alignment="CENTER" prefHeight="60.0" prefWidth="337.0" textFill="#e3101082">
+            <Label alignment="CENTER" prefHeight="60.0" prefWidth="337.0" textFill="#e3101082">
                <font>
                   <Font size="14.0" />
                </font></Label>
@@ -97,7 +97,7 @@
                </font></Button>
          </children>
       </VBox>
-      <HBox prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #0066ff;" GridPane.columnSpan="6">
+      <HBox fx:id="banner" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #0066ff;" GridPane.columnSpan="6">
          <children>
             <Label alignment="CENTER" prefHeight="73.0" prefWidth="183.0" style="-fx-text-fill: white;" text="Student">
                <font>
@@ -109,6 +109,9 @@
          <children>
             <TextArea fx:id="test1" layoutX="41.0" layoutY="24.0" onDragDropped="#dragDropped" onDragOver="#dragOver" prefHeight="70.0" prefWidth="223.0" />
          </children></Pane>
-      <Pane fx:id="bottomPaneCenter" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #404040; -fx-background-radius: 10;" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+      <Pane fx:id="bottomPaneCenter" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #404040; -fx-background-radius: 10;" GridPane.columnIndex="3" GridPane.rowIndex="4">
+         <children>
+            <Label fx:id="errorLabel" alignment="CENTER" layoutX="25.0" layoutY="9.0" prefHeight="99.0" prefWidth="606.0" style="-fx-text-fill: white;" wrapText="true" />
+         </children></Pane>
    </children>
 </GridPane>
