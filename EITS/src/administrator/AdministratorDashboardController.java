@@ -20,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -33,6 +34,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -126,8 +128,6 @@ public class AdministratorDashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        //populates the my profile tab
-        myProfile();
         
         //hides everything until it is needed
         hideChangePassword();
@@ -135,16 +135,6 @@ public class AdministratorDashboardController implements Initializable {
         vb_selectionDetails.setVisible(false);
     } 
     
-    private void myProfile(){    
-        vb_searchDetails.getChildren().clear();
-    }
-    
-    private void btn_myProfile(MouseEvent event) {
-        tbl_data.setVisible(false);
-        vb_selectionDetails.setVisible(false);
-        
-        myProfile();
-    }
 
     private void populateTable(String user){
         tbl_data.getColumns().clear();
@@ -228,7 +218,7 @@ public class AdministratorDashboardController implements Initializable {
                     System.out.println("DATABASE ERROR SQL EXCEPTION");
                 }   break;
                 }
-            case "diplomas":{
+            case "courses":{
                 //create the columns needed in the table
                 TableColumn courseID = new TableColumn("Course ID");
                 TableColumn courseName = new TableColumn("Course Name");
@@ -375,7 +365,7 @@ public class AdministratorDashboardController implements Initializable {
         tbl_data.getColumns().clear();
         
         //show all case workers
-        populateTable(diplomas);
+        populateTable(courses);
     }
     
     private void showCourseSubjects(int diplomaID) throws SQLException {
@@ -429,7 +419,9 @@ public class AdministratorDashboardController implements Initializable {
                 tbl_subjectTable.setVisible(true);
 
                 Diploma di = (Diploma) tbl_data.getSelectionModel().getSelectedItem();
+                
                 showCourseSubjects(di.getDiplomaID());      
+                
                 tableContextMenu();
 
                 break;
@@ -441,22 +433,34 @@ public class AdministratorDashboardController implements Initializable {
     private void tableContextMenu(){
         MenuItem mi1 = new MenuItem("Edit Course");
         MenuItem mi2 = new MenuItem("Add Course");
+        MenuItem mi3 = new MenuItem("Delete Course");
         mi1.setOnAction((ActionEvent event) -> {
             Object item = tbl_data.getSelectionModel().getSelectedItem();
-            System.out.println("Selected item: " + item);
+            System.out.println("Edit Course");
         });
         
         mi2.setOnAction((ActionEvent event) -> {
             MainController cont = new MainController();
             try {
                 cont.openNewWindow(addNewCourseURL);
+                event.consume();
             } catch (IOException ex) {
                 Logger.getLogger(AdministratorDashboardController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            }  
+        });
+        
+        mi3.setOnAction((ActionEvent event) -> {
+            Diploma item = (Diploma) tbl_data.getSelectionModel().getSelectedItem();
+            
+            CoursesModel.deleteCourse(item.getDiplomaID());
+            System.out.println("Delete Course");
+            
+            tbl_data.getColumns().clear();
+            populateTable(courses);
         });
 
         ContextMenu menu = new ContextMenu();
-        menu.getItems().addAll(mi1, mi2);
+        menu.getItems().addAll(mi1, mi2, mi3);
         tbl_data.setContextMenu(menu);
     }
     
@@ -961,7 +965,6 @@ public class AdministratorDashboardController implements Initializable {
         lbl_newPassword.setVisible(false);
     }
 
-
     @FXML
     private void returnToLogin(MouseEvent event) throws IOException {
         MainController main = new MainController();
@@ -970,9 +973,10 @@ public class AdministratorDashboardController implements Initializable {
 
     @FXML
     private void btn_showReports(ActionEvent event) {
-        
-        
-        
+        vb_selectionDetails.setVisible(false);
+        vb_searchDetails.setVisible(false);
+        tbl_data.setVisible(false);
+        tbl_subjectTable.setVisible(false);
     }
 
     @FXML
@@ -984,12 +988,12 @@ public class AdministratorDashboardController implements Initializable {
             System.out.println(ex);
         }
     }
+
+    @FXML
+    private void btn_showSettings(MouseEvent event) {
+        vb_selectionDetails.setVisible(false);
+        vb_searchDetails.setVisible(false);
+        tbl_data.setVisible(false);
+        tbl_subjectTable.setVisible(false);
+    }
 }
-
-
-/*try{
-MainController main = new MainController();
-main.openNewWindow(addNewUserURL);
-}catch(IOException ex){
-System.out.println(ex);
-}*/

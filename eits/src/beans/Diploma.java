@@ -19,8 +19,16 @@ public class Diploma {
         courseType = type;
     }
     
+
+    public Diploma(String name, String industry, String location, String type) {
+        diplomaName = name;
+        diplomaIndustry = industry;
+        diplomaLocation = location;
+        courseType = type;
+    }
+
     public Diploma() {
-    
+
     }
 
     public int getDiplomaID() {

@@ -29,7 +29,7 @@
       <Pane id="header_panel" prefHeight="100.0" prefWidth="1308.0" stylesheets="@../stylesheets/main.css" GridPane.columnSpan="3">
          <children>
             <Button fx:id="btn_returnToLogin" layoutX="1180.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#returnToLogin" prefHeight="28.0" prefWidth="106.0" text="Return To Login" />
-            <Label id="admin_header" layoutX="14.0" layoutY="23.0" prefHeight="52.0" prefWidth="537.0" stylesheets="@../stylesheets/main.css" text="Administrator Dashboard">
+            <Label id="admin_header" layoutX="14.0" layoutY="23.0" prefHeight="52.0" prefWidth="269.0" stylesheets="@../stylesheets/main.css" text="Administrator">
                <font>
                   <Font name="Arial" size="45.0" />
                </font>
@@ -98,7 +98,7 @@
                </graphic>
             </Button>
             <Label id="btn_labels" prefHeight="17.0" prefWidth="250.0" stylesheets="@../stylesheets/main.css" text="Reports" />
-            <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="250.0" stylesheets="@../stylesheets/main.css">
+            <Button mnemonicParsing="false" onMouseClicked="#btn_showSettings" prefHeight="70.0" prefWidth="250.0" stylesheets="@../stylesheets/main.css">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
