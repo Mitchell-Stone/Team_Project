@@ -222,45 +222,50 @@ public class CoursesModel extends MainModel {
                 return null;
             }
             
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.err.println(e);
             return null;
         }
     
     }
     
-    public Courses getSubjectByID(int subjectID) throws SQLException {
- 
-        String sql = "SELECT * FROM courses WHERE courseID = ?";
+    public ObservableList<Courses> getSubjectByID(int subjectID) throws SQLException{
         
-        ResultSet rs;
+        ObservableList<Courses> courseList = FXCollections.observableArrayList();
         
-        try(
-                Connection conn = DbUtil.getConn(DbType.MYSQL);
-                PreparedStatement stmt = conn.prepareStatement(sql);
-                ) {
-            
+        ResultSet rs = null;
+
+        //execute query to get all students
+        String query = "SELECT * FROM courses WHERE courseID = ?";
+
+        try{
+            java.sql.Connection conn = DbUtil.getConn(DbType.MYSQL);
+            PreparedStatement stmt = conn.prepareStatement(query);           
+              
             stmt.setInt(1, subjectID);
             
-            rs = stmt.executeQuery();
+            Courses course;
             
-            if (rs.next()) {
-                Courses course = new Courses();
-                course.setCourseID(subjectID);
-                course.setName(rs.getString("name"));
-                course.setIndustry(rs.getString("industry"));
-                course.setLocation(rs.getString("location"));
-                
-                return course;
-                
-            } else {
-                System.out.println("Error in fetching the current diploma.");
-                return null;
-            }
-            
-        } catch (Exception e) {
-            System.err.println(e);
+            rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                course = new Courses(
+                        rs.getInt("courseID"), 
+                        rs.getString("name"), 
+                        rs.getString("location"), 
+                        rs.getString("industry"), 
+                        rs.getInt("numberOfHours"), 
+                        rs.getInt("finishingDegree"));
+                courseList.add(course);
+            }            
+        } catch (SQLException e) {
+            System.out.println(e);
             return null;
-        }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+        }  
+        return courseList;
     }
 }

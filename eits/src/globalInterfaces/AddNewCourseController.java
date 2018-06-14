@@ -5,6 +5,7 @@
  */
 package globalInterfaces;
 
+import beans.Administrator;
 import beans.Courses;
 import beans.Diploma;
 import java.net.URL;
@@ -26,7 +27,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
@@ -70,14 +70,14 @@ public class AddNewCourseController implements Initializable {
     @FXML
     private Label lbl_dropSubjectsHere;
     
-    
-    private int courseID;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        createAddSubjectTable();
         
         tbl_subjects.setOnDragDetected((MouseEvent event) -> {
             Courses st = (Courses) tbl_subjects.getSelectionModel().getSelectedItem();
@@ -88,30 +88,56 @@ public class AddNewCourseController implements Initializable {
                 ClipboardContent content = new ClipboardContent();
                 content.putString(Integer.toString(st.getCourseID()));
                 
-                courseID = st.getCourseID();
+                db.setContent(content);
                 
-                System.out.println("Draggin course with ID: " + st.getCourseID());
+                System.out.println("Dragging course with ID: " + st.getCourseID());
                 
                 event.consume();
             }
         });
         
-        lbl_dropSubjectsHere.setOnDragDropped((DragEvent ev) -> {
-            System.out.println("Drag has been dropped");
+        lbl_dropSubjectsHere.setOnDragOver((DragEvent event) -> {
+            if (event.getGestureSource() != lbl_dropSubjectsHere && event.getDragboard().hasString()) {
+                event.acceptTransferModes(TransferMode.ANY);
+            }
+            event.consume();          
+        });
+        
+        lbl_dropSubjectsHere.setOnDragEntered((DragEvent event) -> {
+            if (event.getGestureSource() != lbl_dropSubjectsHere &&
+                    event.getDragboard().hasString()) {
+                lbl_dropSubjectsHere.setTextFill(Color.GREEN);
+            }
             
+            event.consume();
+        });
+        
+        lbl_dropSubjectsHere.setOnDragExited((DragEvent event) -> {
+            if (event.getGestureSource() != lbl_dropSubjectsHere &&
+                    event.getDragboard().hasString()) {
+                lbl_dropSubjectsHere.setTextFill(Color.WHITE);
+            }
+            
+            event.consume();
+        });
+        
+        lbl_dropSubjectsHere.setOnDragDropped((DragEvent event) -> {
+            Dragboard db = event.getDragboard();
             boolean success = false;
             
-            Dragboard db = ev.getDragboard();
-            try {
-                populateAddSubjectTable(Integer.parseInt(db.getString()));
-                success = true;
-            } catch (SQLException ex) {
-                Logger.getLogger(AddNewCourseController.class.getName()).log(Level.SEVERE, null, ex);
+            if (db.hasString()) {
+                lbl_dropSubjectsHere.setTextFill(Color.WHITE);
+                System.out.println("Course dropped with ID: " + db.getString());
+                try {
+                    populateAddSubjectTable(Integer.parseInt(db.getString()));
+                } catch (SQLException ex) {
+                    Logger.getLogger(AddNewCourseController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
-        
-            ev.setDropCompleted(success);
             
-            ev.consume();
+            event.setDropCompleted(success);
+            
+            event.consume();
         });   
         
         // TODO
@@ -150,27 +176,26 @@ public class AddNewCourseController implements Initializable {
         tbl_subjects.setItems(courseList); 
     }
     
-    private void populateAddSubjectTable(int subjectID) throws SQLException{
-        CoursesModel model = new CoursesModel();
-        
-        Courses course = model.getSubjectByID(subjectID);
-        
-        ObservableList<Courses> courseList = model.getAllCourses();
-        courseList.add(course);
-        
+    private void createAddSubjectTable(){
         //create the columns needed in the table
         TableColumn name = new TableColumn("Course Name");
         TableColumn industry = new TableColumn("Course Industry");
         TableColumn location = new TableColumn("Course Location");
-        tbl_subjects.getColumns().addAll(name, industry, location);
+        tbl_addSubjects.getColumns().addAll(name, industry, location);
           
         //put the data in the appropriate columns
 
         name.setCellValueFactory(new PropertyValueFactory<Courses, String>("name"));
         industry.setCellValueFactory(new PropertyValueFactory<Courses, String>("industry"));
         location.setCellValueFactory(new PropertyValueFactory<Courses, String>("location"));
+    }
+    
+    private void populateAddSubjectTable(int subjectID) throws SQLException{
+        CoursesModel model = new CoursesModel();
         
-        tbl_subjects.setItems(courseList);
+        ObservableList<Courses> courseList = model.getSubjectByID(subjectID);
+                
+        tbl_addSubjects.setItems(courseList);
     }
     
     @FXML
