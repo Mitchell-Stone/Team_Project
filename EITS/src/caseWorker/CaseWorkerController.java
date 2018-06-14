@@ -114,10 +114,17 @@ public class CaseWorkerController implements Initializable {
     private TextField textNewPassword;
     @FXML
     private Button cancelUpdate;
+    @FXML
+    private Button gradeButton;
+    @FXML
     private Label secondaryLabel;
+    @FXML
     private Label textSecondary1;
+    @FXML
     private Label textSecondary2;
+    @FXML
     private Label textSecondary3;
+    @FXML
     private Label textSecondary4;
 
     CaseWorker caseworker = new CaseWorker();
@@ -128,9 +135,6 @@ public class CaseWorkerController implements Initializable {
     ArrayList<String> currentCaseWorker;
     ArrayList<String> assessmentName;
     ArrayList<String> subjectName;
-    @FXML
-    private Button gradeButton;
-    
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -167,6 +171,7 @@ public class CaseWorkerController implements Initializable {
         secondaryVbox.setVisible(false);
         buttonAssignStudent.setDisable(false);
         buttonUnassignStudent.setDisable(true);
+        gradeButton.setVisible(false);
         // show all students in table
         TableColumn studentID = new TableColumn("ID");
         TableColumn firstName = new TableColumn("First Name");
@@ -248,6 +253,7 @@ public class CaseWorkerController implements Initializable {
         secondaryVbox.setVisible(true);
         buttonAssignStudent.setDisable(true);
         buttonUnassignStudent.setDisable(false);
+        gradeButton.setVisible(false);
 
         int employeeID = Integer.parseInt(currentCaseWorker.get(0));
 
@@ -284,6 +290,10 @@ public class CaseWorkerController implements Initializable {
     @FXML
     private void getSubmissons(ActionEvent event) throws SQLException {
         getMyStudents();
+        textCourseID.clear();
+        textCourseName.clear();
+        textLocation.clear();
+        textIndustry.clear();
         secondaryLabel.setText("Submission");
         textSecondary1.setText("Diploma:");
         textSecondary2.setText("Subject:");
@@ -294,7 +304,7 @@ public class CaseWorkerController implements Initializable {
         textIndustry.setVisible(true);
         textLocation.setVisible(true);
         addCourse.setVisible(false);
-
+        gradeButton.setVisible(true);
     }
 
     @FXML
@@ -418,6 +428,7 @@ public class CaseWorkerController implements Initializable {
         uneditable();
     }
 
+    @FXML
     private void selectSecondaryInformation(MouseEvent event) throws SQLException {
         switch (secondaryLabel.getText()) {
             case "Diploma": {
@@ -447,9 +458,8 @@ public class CaseWorkerController implements Initializable {
                 textCourseID.setText(textDiploma.getText());
                 textCourseName.setText(subjectName.get(1));
                 textIndustry.setText(assessmentName.get(2));
-                
                 uneditable();
-
+                textLocation.setEditable(true);
             }
         }
     }
@@ -577,10 +587,16 @@ public class CaseWorkerController implements Initializable {
     }
 
     @FXML
-    private void selectCourse(MouseEvent event) {
-    }
+    private void gradeAssessment(ActionEvent event) throws SQLException {
+        int grade = Integer.parseInt(textLocation.getText());
+        int studentID = Integer.parseInt(idTextField.getText());
+        if (grade < 101 || grade < -1) {
+            SubmissionsModel.updateGrade(grade, studentID);
+            populateSubmisson(studentID);
+        } else {
+            textLocation.clear();
+            textLocation.setPromptText("Invalid Grade");
+        }
 
-    @FXML
-    private void gradeAssessment(ActionEvent event) {
     }
 }

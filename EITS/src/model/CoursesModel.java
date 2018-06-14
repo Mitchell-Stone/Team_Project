@@ -191,8 +191,8 @@ public class CoursesModel extends MainModel {
             return false;
         }
     }
-    
-     public static ArrayList<String> getCourseByID(Submission submission) throws SQLException {
+
+    public static ArrayList<String> getCourseByID(Submission submission) throws SQLException {
 
         ArrayList<String> subjectName = new ArrayList<>();
         ResultSet rs;
@@ -227,5 +227,40 @@ public class CoursesModel extends MainModel {
             return null;
         }
     
+    }
+    
+    public Courses getSubjectByID(int subjectID) throws SQLException {
+ 
+        String sql = "SELECT * FROM courses WHERE courseID = ?";
+        
+        ResultSet rs;
+        
+        try(
+                Connection conn = DbUtil.getConn(DbType.MYSQL);
+                PreparedStatement stmt = conn.prepareStatement(sql);
+                ) {
+            
+            stmt.setInt(1, subjectID);
+            
+            rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                Courses course = new Courses();
+                course.setCourseID(subjectID);
+                course.setName(rs.getString("name"));
+                course.setIndustry(rs.getString("industry"));
+                course.setLocation(rs.getString("location"));
+                
+                return course;
+                
+            } else {
+                System.out.println("Error in fetching the current diploma.");
+                return null;
+            }
+            
+        } catch (Exception e) {
+            System.err.println(e);
+            return null;
+        }
     }
 }
