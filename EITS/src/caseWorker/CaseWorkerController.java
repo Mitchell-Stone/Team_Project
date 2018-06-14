@@ -143,12 +143,14 @@ public class CaseWorkerController implements Initializable {
         updateVbox.setVisible(false);
 
         try {
+            //Gets Case Worker Logged in
             currentCaseWorker = CaseWorkerModel.getCaseWorkerByID(caseworker);
         } catch (SQLException ex) {
             Logger.getLogger(CaseWorkerController.class.getName()).log(Level.SEVERE, null, ex);
         }
         showCaseWorkerName();
         try {
+            //shows my students 
             getMyStudentsTable();
         } catch (SQLException ex) {
             Logger.getLogger(CaseWorkerController.class.getName()).log(Level.SEVERE, null, ex);
@@ -156,12 +158,15 @@ public class CaseWorkerController implements Initializable {
             Logger.getLogger(CaseWorkerController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    //Shows Case Worker first and last name
     private void showCaseWorkerName() {
+        
         labelFname.setText(currentCaseWorker.get(1));
         labelLname.setText(currentCaseWorker.get(2));
     }
-
+    
+    //shows all students in table
     @FXML
     private void getAllStudents(ActionEvent event) throws SQLException {
         allStudentsTable.getColumns().clear();
@@ -201,7 +206,8 @@ public class CaseWorkerController implements Initializable {
             System.out.println("Null Pointer Exception");
         }
     }
-
+    
+    // shows diplomas in secondary table
     @FXML
     public void getMyStudentsTable() throws SQLException, NumberFormatException {
         getMyStudents();
@@ -213,14 +219,14 @@ public class CaseWorkerController implements Initializable {
         textSecondary1.setText("ID");
         textSecondary2.setText("Name");
         textSecondary3.setText("Industry");
-        textSecondary3.setText("Location");
+        textSecondary4.setText("Location");
         textSecondary3.setVisible(true);
         textSecondary4.setVisible(true);
         textIndustry.setVisible(true);
         textLocation.setVisible(true);
         addCourse.setVisible(true);
 
-        //Show Course in Secondary Table
+        //Show diplomas in Secondary Table
         secondaryLabel.setText("Diploma");
         secondaryTable.getColumns().clear();
         TableColumn diplomaID = new TableColumn("ID");
@@ -243,7 +249,8 @@ public class CaseWorkerController implements Initializable {
             System.out.println("No Pointer Exception");
         }
     }
-
+    
+    //show my students in table
     public void getMyStudents() throws SQLException, NumberFormatException {
         myStudentsTable.getColumns().clear();
         secondaryTable.getColumns().clear();
@@ -286,7 +293,8 @@ public class CaseWorkerController implements Initializable {
             System.out.println("No Pointer Exception");
         }
     }
-
+    
+    // Shows And prepares labels, textfields and buttons for submissions
     @FXML
     private void getSubmissons(ActionEvent event) throws SQLException {
         getMyStudents();
@@ -306,7 +314,8 @@ public class CaseWorkerController implements Initializable {
         addCourse.setVisible(false);
         gradeButton.setVisible(true);
     }
-
+    
+     // Shows And prepares labels, textfields and buttons for submissions
     @FXML
     private void getAttendance(ActionEvent event) throws SQLException {
         getMyStudents();
@@ -322,7 +331,8 @@ public class CaseWorkerController implements Initializable {
         addCourse.setVisible(false);
 
     }
-
+    
+    //populates Attendance in secondary table
     public void populateAttendance(int studID) throws SQLException {
         secondaryTable.getColumns().clear();
         TableColumn studentID = new TableColumn("StudentID");
@@ -341,7 +351,8 @@ public class CaseWorkerController implements Initializable {
             System.out.println("No Pointer Exception");
         }
     }
-
+    
+    //populates submissions in secondary table
     public void populateSubmisson(int studID) throws SQLException {
         secondaryTable.getColumns().clear();
         TableColumn assessmentID = new TableColumn("AssessmentID");
@@ -365,7 +376,8 @@ public class CaseWorkerController implements Initializable {
             System.out.println("No Pointer Exception");
         }
     }
-
+    
+    //select a student from allStudentTable and displays in textfields
     @FXML
     private void selectStudent(MouseEvent event) throws SQLException {
         Student st = (Student) allStudentsTable.getSelectionModel().getSelectedItem();
@@ -392,7 +404,8 @@ public class CaseWorkerController implements Initializable {
         }
         uneditable();
     }
-
+    
+    //select a student from myStudentTable and displays in textfields
     @FXML
     private void MyStudentSelect(MouseEvent event) throws SQLException {
         Student st = (Student) myStudentsTable.getSelectionModel().getSelectedItem();
@@ -427,9 +440,11 @@ public class CaseWorkerController implements Initializable {
         }
         uneditable();
     }
-
+    
+    //Allows for specific information to be displayed in textfields
     @FXML
     private void selectSecondaryInformation(MouseEvent event) throws SQLException {
+        //Selects correct information and runs case
         switch (secondaryLabel.getText()) {
             case "Diploma": {
 
@@ -465,7 +480,7 @@ public class CaseWorkerController implements Initializable {
             }
         }
     }
-
+    //allows textfields to be editable
     private void editable() {
         idTextField.setEditable(true);
         textFname.setEditable(true);
@@ -478,7 +493,8 @@ public class CaseWorkerController implements Initializable {
         textLocation.setEditable(true);
         textIndustry.setEditable(true);
     }
-
+    
+    //allows textfields to be uneditable
     private void uneditable() {
         idTextField.setEditable(false);
         textFname.setEditable(false);
@@ -491,16 +507,8 @@ public class CaseWorkerController implements Initializable {
         textLocation.setEditable(false);
         textIndustry.setEditable(false);
     }
-
-    @FXML
-    private void logOut(ActionEvent event) throws IOException {
-
-        String login = "/userAccess/userSignIn.fxml";
-        MainController main = new MainController();
-        main.openNewWindow(login, logOutButton);
-
-    }
-
+    
+    //Adds selected student to diploma/course
     @FXML
     private void addStudentToCourse(ActionEvent event) throws SQLException {
 
@@ -511,14 +519,16 @@ public class CaseWorkerController implements Initializable {
         textDiploma.setText(textCourseName.getText());
 
     }
-
+    
+    //Makes update vbox visible
     @FXML
     private void updatesVisible(ActionEvent event) {
         updateVbox.setVisible(true);
         textWorkerEmail.setText(currentCaseWorker.get(3));
 
     }
-
+    
+    //Updates Case Worker information
     @FXML
     private void confirmUpdates(ActionEvent event) throws SQLException, NoSuchAlgorithmException {
 
@@ -558,6 +568,7 @@ public class CaseWorkerController implements Initializable {
         }
     }
 
+    //Closes and resets update Vbox
     @FXML
     private void cancelUpdate(ActionEvent event) {
         updateVbox.setVisible(false);
@@ -566,7 +577,8 @@ public class CaseWorkerController implements Initializable {
         textPassword.clear();
         textNewPassword.clear();
     }
-
+    
+    // Assigns selected student to current Case Worker
     @FXML
     private void assignToCaseWorker(ActionEvent event) throws SQLException {
 
@@ -577,7 +589,8 @@ public class CaseWorkerController implements Initializable {
 
         textWorker.setText(currentCaseWorker.get(1));
     }
-
+    
+     // Unassigns selected student from current Case Worker
     @FXML
     private void unassignToCaseWorker(ActionEvent event) throws SQLException {
 
@@ -587,7 +600,8 @@ public class CaseWorkerController implements Initializable {
         CaseWorkerModel.assignCaseWorker(studentID, employeeID);
         getMyStudentsTable();
     }
-
+    
+    //Updates Grade in submissions table
     @FXML
     private void gradeAssessment(ActionEvent event) throws SQLException {
         
@@ -609,6 +623,16 @@ public class CaseWorkerController implements Initializable {
             textLocation.clear();
             textLocation.setPromptText("Invalid Grade");
         }
+
+    }
+    
+    //logs out Case Worker
+    @FXML
+    private void logOut(ActionEvent event) throws IOException {
+
+        String login = "/userAccess/userSignIn.fxml";
+        MainController main = new MainController();
+        main.openNewWindow(login, logOutButton);
 
     }
 }
