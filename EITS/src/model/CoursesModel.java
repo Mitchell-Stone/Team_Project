@@ -226,7 +226,6 @@ public class CoursesModel extends MainModel {
             System.err.println(e);
             return null;
         }
-    
     }
     
     public ObservableList<Courses> getSubjectByID(int subjectID) throws SQLException{
@@ -236,14 +235,14 @@ public class CoursesModel extends MainModel {
         ResultSet rs = null;
 
         //execute query to get all students
-        String query = "SELECT * FROM courses WHERE courseID = ?";
+        String sql = "SELECT * FROM courses WHERE courseID = ?;";
+        String query = sql.replace("?", Integer.toString(subjectID));
 
         try{
             java.sql.Connection conn = DbUtil.getConn(DbType.MYSQL);
             PreparedStatement stmt = conn.prepareStatement(query);           
-              
-            stmt.setInt(1, subjectID);
-            
+
+            System.out.println(stmt);
             Courses course;
             
             rs = stmt.executeQuery(query);
