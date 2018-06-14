@@ -24,7 +24,7 @@ import javafx.collections.ObservableList;
  * @author mitch
  */
 public class SubmissionsModel {
-     public ObservableList<Submission> getSubmissionsByStudentID( int studentID ) throws SQLException {
+     public static ObservableList<Submission> getSubmissionsByStudentID( int studentID ) throws SQLException {////////////////FOJAKE///////////////
 
         ObservableList<Submission> submissionsList = FXCollections.observableArrayList();
 
