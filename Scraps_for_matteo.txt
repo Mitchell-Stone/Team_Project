@@ -330,3 +330,44 @@ public class StudentDashboardController implements Initializable {
     }
 
 }
+
+public class FXMLDocumentController implements Initializable {
+    
+    @FXML
+    private Label label;
+    @FXML
+    private Button button;
+    @FXML
+    private VBox vbox;
+    @FXML
+    private AnchorPane basepane;
+    @FXML
+    private ImageView imgview;
+    
+    @FXML
+    private void handleButtonAction(ActionEvent event) {
+        
+        Pane gg = new Pane();
+        
+        gg.setMinHeight(200);
+        
+        gg.setStyle("-fx-border-color: black");
+        
+        ImageView container = new ImageView();
+        
+        Image img = new Image("aaa/assistant-144.png");
+        
+        container.setImage(img);
+        
+        gg.getChildren().add(container);
+        
+        vbox.getChildren().addAll(gg);
+        
+    }
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+    }    
+    
+}
