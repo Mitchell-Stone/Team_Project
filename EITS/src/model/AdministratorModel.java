@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
 import beans.Administrator;
-import beans.CaseWorker;
 import db.DbType;
 import db.DbUtil;
 import java.sql.Connection;
@@ -18,7 +12,7 @@ import javafx.collections.ObservableList;
 
 /**
  *
- * @author 0111005906
+ * @author Mitchell Stone 0111005906
  */
 public class AdministratorModel {
     
@@ -53,6 +47,7 @@ public class AdministratorModel {
         return administratorList;
     }
     
+    //Used to connect to the database, find the admin and alter their details
     public static boolean updateAdmin(Administrator bean) {
     
         String sql = "UPDATE admin SET firstName = ?, lastName = ?, email = ? WHERE adminID = ?";
@@ -77,6 +72,7 @@ public class AdministratorModel {
         }
     }
     
+    //Used to get all the search results and put them into an observable list
     public ObservableList<Administrator> searchForAdmin(String searchValue, String searchType) throws SQLException{
         
         ObservableList<Administrator> adminList = FXCollections.observableArrayList();
