@@ -5,17 +5,16 @@
  */
 package globalInterfaces;
 
-import beans.Administrator;
 import beans.Courses;
 import beans.Diploma;
 import java.net.URL;
+import java.sql.Array;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.ImageCursor;
@@ -70,7 +69,7 @@ public class AddNewCourseController implements Initializable {
     @FXML
     private Label lbl_dropSubjectsHere;
     
-
+    ObservableList<Courses> courseList = FXCollections.observableArrayList();
     
     
     /**
@@ -122,9 +121,7 @@ public class AddNewCourseController implements Initializable {
             
             event.consume();
         });
-        
-        ObservableList<Courses> list = FXCollections.observableArrayList();
-        
+          
         lbl_dropSubjectsHere.setOnDragDropped((DragEvent event) -> {
             Dragboard db = event.getDragboard();
             boolean success = false;
@@ -134,13 +131,22 @@ public class AddNewCourseController implements Initializable {
                 System.out.println("Course dropped with ID: " + db.getString());
                 try {
                     CoursesModel model = new CoursesModel();
-        
+                    
                     Courses course = model.getSubjectByID(Integer.parseInt(db.getString()));
                     
-                    list.add(course);
-                    System.out.println(list);
-                    tbl_addSubjects.setItems(list);
-                    
+                    if (courseList.isEmpty()) {
+                        courseList.add(course);
+                        tbl_addSubjects.setItems(courseList);
+                    } else {
+                        courseList.forEach((courses) -> {
+                            if (courses.getCourseID() != Integer.parseInt(db.getString())) {
+                                courseList.add(course);
+                                tbl_addSubjects.setItems(courseList);
+                            }else{
+                                System.out.println(Integer.parseInt(db.getString()) + ": id already exists");
+                            }
+                        });
+                    }   
                 } catch (SQLException ex) {
                     Logger.getLogger(AddNewCourseController.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -165,13 +171,6 @@ public class AddNewCourseController implements Initializable {
             Logger.getLogger(AddNewCourseController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }  
-    
-    private ObservableList<Courses> courseList(Courses course){
-        ObservableList<Courses> list = FXCollections.observableArrayList();
-        list.add(course);
-
-        return list;
-    } 
     
     private void populateSubjectsTable() throws SQLException{
         
