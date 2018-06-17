@@ -6,8 +6,7 @@ Date: 12/06/18
 
 Purpose: Works as the controller for the add new user window
 
-Known Bugs:
-
+Known Bugs: Error occurs when a user type is not selected and the add new user button is pressed
 */
 
 package globalInterfaces;
@@ -55,8 +54,7 @@ public class AddNewUserController implements Initializable {
             "Case Worker",
             "Administrator"
         );
-        cb_tableSelection.getItems().addAll(options);
-         
+        cb_tableSelection.getItems().addAll(options);  
     }    
 
     //Handles the Button event for adding the new user
@@ -99,6 +97,4 @@ public class AddNewUserController implements Initializable {
     private void cancel(MouseEvent event) throws IOException {
         ((Node)(event.getSource())).getScene().getWindow().hide();
     }
-
-
 }

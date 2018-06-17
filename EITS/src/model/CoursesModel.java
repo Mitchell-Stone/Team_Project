@@ -1,6 +1,8 @@
-/*Student Number: 0111005906
+/*Student Number: 0111005906, 55103355915, 7100438818
 
-Name: Mitchell Stone, Jake Smith, Matteo Baldini
+Name: Mitchell Stone = 0111005906
+      Jake Smith     = 5103355915
+      Matteo Baldini = 7100438818
 
 Date: 05/06/18
 
