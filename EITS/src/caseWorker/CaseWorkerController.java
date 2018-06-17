@@ -43,11 +43,19 @@ import model.StudentModel;
 import model.SubmissionsModel;
 import security.SecurityMethods;
 
-/**
- * FXML Controller class
- *
- * @author Jake
- */
+/*
+
+Student Number: 55103355915
+
+Name: Jake Smith
+
+Date: 10/06/18
+
+Purpose: Handles Case Worker Dashboard
+
+Known Bugs:
+
+*/
 public class CaseWorkerController implements Initializable {
 
     @FXML

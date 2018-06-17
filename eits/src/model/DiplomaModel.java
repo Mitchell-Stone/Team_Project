@@ -20,9 +20,16 @@ import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-/**
- *
- * @author mitch
+/*
+Student Number: 55103355915
+
+Name: Jake Smith, Mitch Stone, Matteo Baldini
+
+Date: 10/06/18
+
+Purpose: 
+
+Known Bugs:
  */
 public class DiplomaModel {
 
