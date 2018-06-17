@@ -1,8 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/*Student Number: 0111005906
+
+Name: Mitchell Stone
+
+Date: 12/06/18
+
+Purpose: Works as the controller for the add new user window
+
+Known Bugs:
+
+*/
+
 package globalInterfaces;
 
 import beans.User;
@@ -16,27 +23,17 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import model.MainModel;
 import security.SecurityMethods;
 
-/**
- * FXML Controller class
- *
- * @author mitch
- */
+//Main controller for adding new user to the database
 public class AddNewUserController implements Initializable {
 
     @FXML
     private ComboBox cb_tableSelection;
-    @FXML
-    private Button btn_addUser;
     @FXML
     private TextField tf_firstName;
     @FXML
@@ -46,22 +43,13 @@ public class AddNewUserController implements Initializable {
     @FXML
     private TextField tf_password;
     
-    private Button btn_returnToDashboard;
-    @FXML
-    private Button btn_cancel;
-    @FXML
-    private Pane header_panel;
-    @FXML
-    private Label lbl_windowHeader;
-    @FXML
-    private GridPane background;
-    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        //Adds the user types to the dropdown selector
         ObservableList<String> options = FXCollections.observableArrayList(
             "Student",
             "Case Worker",
@@ -71,11 +59,13 @@ public class AddNewUserController implements Initializable {
          
     }    
 
+    //Handles the Button event for adding the new user
     @FXML
     private void btn_addUser(MouseEvent event) throws SQLException, IOException, NoSuchAlgorithmException {
         
         String userType = cb_tableSelection.getSelectionModel().getSelectedItem().toString();
         if (!userType.equals(cb_tableSelection.getPromptText())) {
+            //checks for what type of user is selected to know where to put it in the database
             switch (userType) {
                 case "Student":
                     userType = "student";
@@ -90,6 +80,7 @@ public class AddNewUserController implements Initializable {
                     System.out.println("Select user type");
                     break;
             }
+            //collects the data entered and executes the database query to add new user
             User user = new User();
             user.setTable(userType);
             user.setFirstName(tf_firstName.getText());
@@ -103,6 +94,7 @@ public class AddNewUserController implements Initializable {
         }  
     }  
 
+    //Hnadles the Button event for canceling
     @FXML
     private void cancel(MouseEvent event) throws IOException {
         ((Node)(event.getSource())).getScene().getWindow().hide();

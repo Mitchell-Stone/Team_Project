@@ -1,8 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/*Student Number: 0111005906
+
+Name: Mitchell Stone, Jake Smith, Matteo Baldini
+
+Date: 05/06/18
+
+Purpose: Looks after all database queries in relation to courses/subjects
+
+Known Bugs:
+
+*/
 package model;
 
 import beans.Courses;
@@ -19,12 +25,9 @@ import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-/**
- *
- * @author 0111005906
- */
 public class CoursesModel extends MainModel {
     
+    //gets a specific diploma by its ID
     public static ArrayList<String> getDiplomaByID(User user) {
         
         ArrayList<String> currentDiploma = new ArrayList<>();
@@ -66,6 +69,7 @@ public class CoursesModel extends MainModel {
     
     }
     
+    //Connects to the database to assign a course to a student
     public static boolean assignCourse(int studentID, int diplomaID) throws SQLException {
     
         String sql = "UPDATE student SET diplomaID = ? WHERE studentID = ?";
@@ -86,8 +90,7 @@ public class CoursesModel extends MainModel {
                 return true;
             } else {
                 return false;
-            }
-        
+            }      
         } catch (SQLException e) {
             System.err.println(e);
             return false;
@@ -95,10 +98,10 @@ public class CoursesModel extends MainModel {
             if(keys != null) {
                 keys.close();
             }
-        }
-    
+        } 
     }  
     
+    //gets all the courses on the database and stores them in an observable list
     public ObservableList<Courses> getAllCourses() throws SQLException{
         
         ObservableList<Courses> studentList = FXCollections.observableArrayList();
@@ -137,13 +140,14 @@ public class CoursesModel extends MainModel {
         return studentList;
     }
         
+    //Completes and inner join to get all the course/subjects related to a specific diploma ID
     public ObservableList<Courses> getCoursesByDiplomaID(int id) throws SQLException {
         
         ObservableList<Courses> list = FXCollections.observableArrayList();
         
         ResultSet rs = null;
 
-        //execute query to get all students
+        //Table inner join query 
         String query = "SELECT diploma.diplomaID, diplomatocourses.courseID, courses.courseID, courses.name, courses.industry, courses.location, courses.numberOfHours, courses.finishingDegree "
                      + "FROM (( diploma INNER JOIN diplomatocourses ON diploma.diplomaID = diplomatocourses.diplomaID) INNER JOIN courses ON diplomatocourses.courseID = courses.courseID) WHERE diploma.diplomaID = ?";
 
@@ -173,6 +177,7 @@ public class CoursesModel extends MainModel {
         return list;
     }
     
+    //Query that deletes a course by its ID
     public static boolean deleteCourse(int courseID){
         String sql = "DELETE FROM diploma WHERE diplomaID = ?";
                
@@ -192,6 +197,7 @@ public class CoursesModel extends MainModel {
         }
     }
 
+    //Gets a course/subject by its ID relating to the submission of an assessment
     public static ArrayList<String> getCourseByID(Submission submission) throws SQLException {
 
         ArrayList<String> subjectName = new ArrayList<>();
@@ -228,11 +234,12 @@ public class CoursesModel extends MainModel {
         }
     }
     
+    //Gets a single course/subject by its ID
     public Courses getSubjectByID(int subjectID) throws SQLException{
        
         ResultSet rs = null;
 
-        //execute query to get all students
+        //execute query to get a course/subject
         String sql = "SELECT * FROM courses WHERE courseID = ?;";
         String query = sql.replace("?", Integer.toString(subjectID));
         
@@ -243,8 +250,7 @@ public class CoursesModel extends MainModel {
             PreparedStatement stmt = conn.prepareStatement(query);           
 
             System.out.println(stmt);
-            
-            
+                    
             rs = stmt.executeQuery(query);
 
             while (rs.next()) {
@@ -263,8 +269,7 @@ public class CoursesModel extends MainModel {
         } finally {
             if (rs != null) {
                 rs.close();
-            }
-            
+            } 
         }  
         return course;
     }

@@ -1,3 +1,15 @@
+/*Student Number: 0111005906
+
+Name: Mitchell Stone
+
+Date: 12/06/18
+
+Purpose: Works as the controller for the add new course window
+
+Known Bugs: course subjects double up on the add subjects table
+
+*/
+
 package globalInterfaces;
 
 import beans.Courses;
@@ -28,17 +40,7 @@ import javafx.scene.paint.Color;
 import model.CoursesModel;
 import model.DiplomaModel;
 
-/*Student Number: 0111005906
-
-Name: Mitchell Stone
-
-Date: 12/06/18
-
-Purpose: Works as the controller for the add new course window
-
-Known Bugs: course subjects double up on the add subjects table
-
-*/
+//The main controller for adding new courses to the database
 public class AddNewCourseController implements Initializable {
 
     @FXML
@@ -57,8 +59,7 @@ public class AddNewCourseController implements Initializable {
     private Label lbl_dropSubjectsHere;
     
     ObservableList<Courses> courseList = FXCollections.observableArrayList();
-    
-    
+        
     /**
      * Initializes the controller class.
      */
