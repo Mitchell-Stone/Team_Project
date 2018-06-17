@@ -13,7 +13,7 @@ import javafx.collections.ObservableList;
 
 public class StudentModel extends MainModel {
 
-    public ObservableList<Student> getAllStudents() throws SQLException {
+    public static ObservableList<Student> getAllStudents() throws SQLException {
 
         ObservableList<Student> studentList = FXCollections.observableArrayList();
 

@@ -135,6 +135,8 @@ public class CaseWorkerController implements Initializable {
     ArrayList<String> currentCaseWorker;
     ArrayList<String> assessmentName;
     ArrayList<String> subjectName;
+    
+    int asid = 0;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -470,6 +472,7 @@ public class CaseWorkerController implements Initializable {
                 Submission su = (Submission) secondaryTable.getSelectionModel().getSelectedItem();
                 assessmentName = AssessmentModel.getAssessmentByID(su);
                 subjectName = CoursesModel.getCourseByID(su);
+                asid = su.getAssessmentID();
                 editable();
                 textCourseID.setText(textDiploma.getText());
                 textCourseName.setText(subjectName.get(1));
@@ -617,7 +620,7 @@ public class CaseWorkerController implements Initializable {
         int grade = Integer.parseInt(textLocation.getText());
         int studentID = Integer.parseInt(idTextField.getText());
         if (grade < 101 || grade < -1 && !textLocation.getPromptText().equals("Invalid Grade")){
-            SubmissionsModel.updateGrade(grade, studentID);
+            SubmissionsModel.updateGrade(grade, studentID, asid);
             populateSubmisson(studentID);
         } else {
             textLocation.clear();

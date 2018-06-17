@@ -55,6 +55,37 @@ public class CaseWorkerModel {
         }
         return caseWorkerList;
     }
+    
+    public static ObservableList<CaseWorker> getAllCaseWorkersS() throws SQLException {
+        ObservableList<CaseWorker> caseWorkerList = FXCollections.observableArrayList();
+
+        ResultSet rs = null;
+
+        //execute query to get all case workers
+        String query = "SELECT * FROM caseworker";
+
+        try {
+            java.sql.Connection conn = DbUtil.getConn(DbType.MYSQL);
+            PreparedStatement stmt = conn.prepareStatement(query);
+
+            CaseWorker caseWorker;
+
+            rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                caseWorker = new CaseWorker(rs.getInt("employeeID"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("email"));
+                caseWorkerList.add(caseWorker);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+            return null;
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+        }
+        return caseWorkerList;
+    }
 
     public static boolean updateCaseWorker(CaseWorker bean) {
 

@@ -42,6 +42,7 @@ import model.CaseWorkerModel;
 import model.CoursesModel;
 import model.DiplomaModel;
 import model.MainModel;
+import model.ReportsModel;
 import model.StudentModel;
 
 /**
@@ -116,6 +117,7 @@ public class AdministratorDashboardController implements Initializable {
     private final String addNewUserURL = "/globalInterfaces/addNewUser.fxml";
     private final String addNewCourseURL = "/globalInterfaces/addNewCourse.fxml";
     private final String loginURL = "/userAccess/userSignIn.fxml";
+    private final String reportsURL = "/globalInterfaces/reports.fxml";
     
     
     /**
@@ -970,11 +972,19 @@ public class AdministratorDashboardController implements Initializable {
     }
 
     @FXML
-    private void btn_showReports(ActionEvent event) {
+    private void btn_showReports(ActionEvent event) throws SQLException {
         vb_selectionDetails.setVisible(false);
         vb_searchDetails.setVisible(false);
         tbl_data.setVisible(false);
         tbl_subjectTable.setVisible(false);
+        
+        MainController main = new MainController();
+        try{
+            main.openNewWindow(reportsURL);
+        }catch(IOException ex){
+            System.out.println(ex);
+        }
+        
     }
 
     @FXML

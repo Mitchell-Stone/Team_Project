@@ -45,7 +45,7 @@ public class AttendanceModel {
         }
     }
     
-    public ObservableList<Attendance> getAttendanceByStudentID( int studentID ) throws SQLException {
+    public static ObservableList<Attendance> getAttendanceByStudentID( int studentID ) throws SQLException {/////////FOJAKE//////////////////////////
 
         ObservableList<Attendance> attendanceList = FXCollections.observableArrayList();
 
