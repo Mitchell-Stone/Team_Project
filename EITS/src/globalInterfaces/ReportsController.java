@@ -1,8 +1,16 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
+Student Number: 7100438818
+
+Name: Matteo Baldini
+
+Date: 18/06/2018
+
+Purpose: Controller ffor the reports window
+
+Known Bugs: none
+
+*/
 package globalInterfaces;
 
 import beans.Assessment;
@@ -309,6 +317,8 @@ public class ReportsController implements Initializable {
         type = "diploma";
         selectionType.setText("Diploma");
     }
+    
+    //clears the vboxs
     
     private void clear() {
     
