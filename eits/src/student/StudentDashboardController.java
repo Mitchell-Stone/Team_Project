@@ -310,6 +310,8 @@ public class StudentDashboardController implements Initializable {
         
     }
     
+    //initialize labels and textfields for student profile
+    
     private void showStudentProfile() {
     
         resetTextAndLabels();
@@ -352,6 +354,8 @@ public class StudentDashboardController implements Initializable {
         
     }
     
+    //updates labels and texts for the update details process
+    
     private void updateUserDetails() {
     
         text1.setDisable(true);
@@ -367,6 +371,8 @@ public class StudentDashboardController implements Initializable {
         action1 = "update_user_details_confirm";
         
     }
+    
+    //used when the user confirms the details update, checks fields and outputs the updated results
     
     private void updateUserdetailsConfirm() {
         
@@ -414,6 +420,8 @@ public class StudentDashboardController implements Initializable {
     
     }
     
+    //sets UI for the update password process
+    
     private void updatePassword() {
     
         leftLabelMain.setText("Password Update");
@@ -444,6 +452,8 @@ public class StudentDashboardController implements Initializable {
         action1 = "update_password_confirm";
     
     }
+    
+    //gets called when the user confirms the password update, checks security and outputs a result
     
     private void updatePasswordConfirm() throws NoSuchAlgorithmException {
     
@@ -492,6 +502,8 @@ public class StudentDashboardController implements Initializable {
         }
     
     }
+    
+    //sets UI to display diploma information
     
     private void displayDiploma() {
         
@@ -555,6 +567,8 @@ public class StudentDashboardController implements Initializable {
         text5.setEditable(false);
     
     }
+    
+    //sets UI to display all assignments assigned to a student, sets the table as well
     
     private void displayAssignments() throws SQLException {
         
@@ -631,6 +645,8 @@ public class StudentDashboardController implements Initializable {
         
     }
     
+    //used to display assessment info
+    
     private void displayAssessmentInfo() {
         
         emptyFields();
@@ -703,6 +719,8 @@ public class StudentDashboardController implements Initializable {
     
     }
     
+    //used to create a new submission
+    
     private void submitAssessment() throws SQLException {
         
         if (dropped) {
@@ -730,6 +748,8 @@ public class StudentDashboardController implements Initializable {
         }
         
     }
+    
+    //sets ui to display all available industries
     
     public void displayIndustries() {
         
@@ -840,6 +860,8 @@ public class StudentDashboardController implements Initializable {
     
     }
     
+    //gets called when the diploma is selected
+    
     private void confirmDiplomaSelection() {
         
         DiplomaModel.assignDiplomaToStudent(Integer.parseInt(currentUser.get(0)), Integer.parseInt(text1.getText()));
@@ -857,6 +879,8 @@ public class StudentDashboardController implements Initializable {
         currentDiploma = CoursesModel.getDiplomaByID(user);
     
     }
+    
+    //displays info relative to the student's case worker
     
     private void displayCaseWorkerInfo() throws SQLException {
     
@@ -904,6 +928,8 @@ public class StudentDashboardController implements Initializable {
         }
     
     }
+    
+    //resets ui to user details
 
     private void resetToUserDetails() {
         
@@ -931,6 +957,8 @@ public class StudentDashboardController implements Initializable {
         errorLabel.setText("");
     
     }
+    
+    //resets texts and labels to a known point
     
     private void resetTextAndLabels() {
         
@@ -963,6 +991,8 @@ public class StudentDashboardController implements Initializable {
         test1.setText("");
     
     }
+    
+    //sets initial UI
     
     private void setStart() {
         
@@ -997,6 +1027,8 @@ public class StudentDashboardController implements Initializable {
     
     }
     
+    //empties all labels
+    
     private void emptyLabels() {
         
         leftLabelMain.setText("");
@@ -1013,6 +1045,8 @@ public class StudentDashboardController implements Initializable {
     
     }
     
+    //empties all textfields
+    
     private void emptyFields() {
     
         text1.setText("");
@@ -1026,6 +1060,8 @@ public class StudentDashboardController implements Initializable {
     }
 
     ////////////DRAG/DROP/////////////
+    
+    //drag and drop from external source in the submission phase
     
     @FXML
     private void dragOver(DragEvent event) {

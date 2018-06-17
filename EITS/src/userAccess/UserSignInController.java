@@ -163,7 +163,7 @@ public class UserSignInController implements Initializable {
     
     }
     
-    //
+    // confirms the user type
     
     private boolean confirmUserType(String userType) throws NoSuchAlgorithmException{
         User bean = new User();
