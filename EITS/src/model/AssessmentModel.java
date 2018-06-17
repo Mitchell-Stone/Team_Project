@@ -1,8 +1,16 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
+Student Number: 7100438818
+
+Name: Matteo Baldini
+
+Date: 18/06/2018
+
+Purpose: Assessment Model
+
+Known Bugs: none
+
+*/
 package model;
 
 import beans.Administrator;
@@ -26,6 +34,8 @@ import javafx.collections.ObservableList;
  * @author Martin
  */
 public class AssessmentModel {
+    
+    //gets assessments assigned to a single diploma
     
     public static ObservableList<Assessment> getAssessmentsByDiplomaID(int id) throws SQLException {
         
@@ -64,6 +74,8 @@ public class AssessmentModel {
     
     }
     
+    //checks the status of a single submission, return a different error code for each state
+    
     public static int checkSubmission(Assessment bean) {
         
         ResultSet rs = null;
@@ -94,6 +106,8 @@ public class AssessmentModel {
     
     }
     
+    //creates new submission with the necessary IDs
+    
     public static void submitAssessment(Assessment bean) {
     
         String sql = "INSERT INTO submissions (assessmentID, courseID, studentID) VALUES (?, ?, ?)";
@@ -113,6 +127,8 @@ public class AssessmentModel {
         }
     
     }
+    
+    //get single assessment by assessmentID
     
     public static ArrayList<String> getAssessmentByID(Submission submission) throws SQLException {
 

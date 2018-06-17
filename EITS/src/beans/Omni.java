@@ -7,9 +7,16 @@ package beans;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author Martin
+/*
+Student Number: 7100438818
+
+Name: Matteo Baldini
+
+Date: 10/06/18
+
+Purpose:
+
+Known Bugs:
  */
 public class Omni {
     

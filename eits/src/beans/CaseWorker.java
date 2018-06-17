@@ -5,9 +5,16 @@
  */
 package beans;
 
-/**
- *
- * @author mitch
+/*
+Student Number: 5103355915
+
+Name: Jake Smith
+
+Date: 10/06/18
+
+Purpose: Case Worker 
+
+Known Bugs:
  */
 public class CaseWorker extends User{
      private int employeeID;

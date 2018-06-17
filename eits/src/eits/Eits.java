@@ -1,4 +1,18 @@
 
+/*
+
+Student Number:
+
+Name:
+
+Date:
+
+Purpose:
+
+Known Bugs:
+
+*/
+
 package eits;
 
 import java.io.IOException;

@@ -1,8 +1,16 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
+Student Number: 7100438818
+
+Name: Matteo Baldini
+
+Date: 18/06/2018
+
+Purpose: Controller for the login window
+
+Known Bugs: none
+
+*/
 package userAccess;
 
 import beans.Student;
@@ -154,6 +162,8 @@ public class UserSignInController implements Initializable {
         stage.show();
     
     }
+    
+    // confirms the user type
     
     private boolean confirmUserType(String userType) throws NoSuchAlgorithmException{
         User bean = new User();

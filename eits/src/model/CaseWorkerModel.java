@@ -19,10 +19,19 @@ import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-/**
- *
- * @author mitch
+/*
+Student Number: 5103355915
+
+Name: Jake Smith
+
+Date: 10/06/18
+
+Purpose: 
+
+Known Bugs:
  */
+
+//Gets all CaseWorkers 
 public class CaseWorkerModel {
 
     public ObservableList<CaseWorker> getAllCaseWorkers() throws SQLException {
@@ -56,6 +65,7 @@ public class CaseWorkerModel {
         return caseWorkerList;
     }
     
+    //Get all Case Workers(used in reports).
     public static ObservableList<CaseWorker> getAllCaseWorkersS() throws SQLException {
         ObservableList<CaseWorker> caseWorkerList = FXCollections.observableArrayList();
 
@@ -86,7 +96,7 @@ public class CaseWorkerModel {
         }
         return caseWorkerList;
     }
-
+    //Updates Case Worker information
     public static boolean updateCaseWorker(CaseWorker bean) {
 
         String sql = "UPDATE caseworker SET firstName = ?, lastName = ?, email = ? WHERE employeeID = ?";
@@ -110,7 +120,8 @@ public class CaseWorkerModel {
         }
 
     }
-
+    
+    // Gets Case Worker by ID
     public static ArrayList<String> getCaseWorkerByID(CaseWorker caseworker) throws SQLException {
         ArrayList<String> currentCaseWorker = new ArrayList<>();
 
@@ -144,7 +155,8 @@ public class CaseWorkerModel {
             return null;
         }
     }
-
+    
+    //Search for Case Worker
     public ObservableList<CaseWorker> searchForCaseWorker(String searchValue, String searchType) throws SQLException {
 
         ObservableList<CaseWorker> employeeList = FXCollections.observableArrayList();
@@ -181,6 +193,7 @@ public class CaseWorkerModel {
         return employeeList;
     }
 
+    // Assigns a student to a Case Worker
     public static boolean assignCaseWorker(int studentID, int employeeID) throws SQLException {
 
         String sql = "UPDATE student SET employeeID = ? WHERE studentID = ?";
@@ -213,6 +226,7 @@ public class CaseWorkerModel {
 
     }
     
+    // Updates Case Worker password
     public static boolean updateCaseWorkerPassword(User bean) {
     
         String sql = "UPDATE caseworker SET password = ? WHERE employeeID = ?";
@@ -238,6 +252,7 @@ public class CaseWorkerModel {
         }
     }
     
+    //Gets Case Worker assigned to student
      public static ArrayList<String> getCaseWorkerByStudent(Student student) throws SQLException {
 
         ArrayList<String> studentCaseWorker = new ArrayList<>();

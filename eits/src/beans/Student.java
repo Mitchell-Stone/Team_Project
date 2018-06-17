@@ -1,5 +1,17 @@
 
 package beans;
+/*
+Student Number: 7100438818, 5103355915
+
+Name: Matteo Baldini, Jake Smith
+
+Date: 10/06/18
+
+Purpose:
+
+Known Bugs:
+ */
+
 
 public class Student extends User {
     

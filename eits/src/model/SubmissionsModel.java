@@ -1,8 +1,16 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
+Student Number: 7100438818
+
+Name: Matteo Baldini
+
+Date: 18/06/2018
+
+Purpose: Methods related to the submissions model 
+
+Known Bugs: none
+
+*/
 package model;
 
 import beans.Assessment;
@@ -24,6 +32,9 @@ import javafx.collections.ObservableList;
  * @author mitch
  */
 public class SubmissionsModel {
+    
+    // Gets submissions by student ID as an observable list
+    
      public static ObservableList<Submission> getSubmissionsByStudentID( int studentID ) throws SQLException {
 
         ObservableList<Submission> submissionsList = FXCollections.observableArrayList();
@@ -56,6 +67,8 @@ public class SubmissionsModel {
         }
         return submissionsList;
     }
+     
+     //updates the grade for any submission according to student ID AND assessment ID
      
       public static boolean updateGrade (int grade, int studentID, int assessmentID) throws SQLException {
 

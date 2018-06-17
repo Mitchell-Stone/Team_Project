@@ -5,9 +5,16 @@
  */
 package beans;
 
-/**
- *
- * @author 0111005906
+/*
+Student Number: 6105091917
+
+Name: Dion Bird
+
+Date: 10/06/18
+
+Purpose: 
+
+Known Bugs:
  */
 public class Courses {
 
