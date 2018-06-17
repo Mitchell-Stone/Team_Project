@@ -1,5 +1,16 @@
 
 package beans;
+/*
+Student Number: 0111005906
+
+Name: Mitch Stone
+
+Date: 10/06/18
+
+Purpose:
+
+Known Bugs:
+ */
 
 public class User {
 

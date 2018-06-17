@@ -5,9 +5,16 @@
  */
 package beans;
 
-/**
- *
- * @author Jakeman
+/*
+Student Number: 5103355915  
+
+Name: Jake Smith
+
+Date: 10/06/18
+
+Purpose:
+
+Known Bugs:
  */
 public class Submission {
     private int assessmentID;

@@ -7,9 +7,16 @@ package beans;
 
 import javafx.scene.text.Text;
 
-/**
- *
- * @author Martin
+/*
+Student Number: 7100438818
+
+Name: Matteo Baldini
+
+Date: 10/06/18
+
+Purpose: 
+
+Known Bugs:
  */
 public class Assessment extends Courses {
     

@@ -5,9 +5,16 @@
  */
 package beans;
 
-/**
- *
- * @author mitch
+/*
+Student Number: 0111005906
+
+Name: Mitch Stone
+
+Date: 10/06/18
+
+Purpose: 
+
+Known Bugs:
  */
 public class Administrator {
     public Administrator(){
