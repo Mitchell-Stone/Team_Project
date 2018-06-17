@@ -21,9 +21,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /*
-Student Number: 55103355915
+Student Number: 5103355915, 0111005906, 7100438818, 6105091917
 
-Name: Jake Smith, Mitch Stone, Matteo Baldini
+Name: Jake Smith, Mitch Stone, Matteo Baldini, Dion Bird
 
 Date: 10/06/18
 
