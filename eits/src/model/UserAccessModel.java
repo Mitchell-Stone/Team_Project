@@ -1,8 +1,16 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
+Student Number: 7100438818
+
+Name: Matteo Baldini
+
+Date: 18/06/2018
+
+Purpose: Methods related to the login screen
+
+Known Bugs: none
+
+*/
 package model;
 
 import beans.Student;
@@ -20,6 +28,9 @@ import java.sql.Statement;
  * @author mitch
  */
 public class UserAccessModel extends MainModel  {
+    
+    //Method to check email and password that returns a boolean value
+    
         public static boolean checkUserPass(User bean) {
     
         String sql = "SELECT * FROM $tablename WHERE email = ? AND password = ?";
@@ -52,6 +63,8 @@ public class UserAccessModel extends MainModel  {
             return false;
         }
     }
+        
+        //Adds a student to the database, returns boolean for succes or failure
         
         public static boolean add(Student bean) throws Exception {
     
