@@ -1,3 +1,17 @@
+/*
+
+Student Number: 7100438818
+
+Name: Matteo Baldini
+
+Date: 18/06/2018
+
+Purpose: Methods related to the student model
+
+Known Bugs: none
+
+*/
+
 package model;
 
 import beans.Student;
@@ -12,6 +26,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class StudentModel extends MainModel {
+    
+    //Method to return an observable list of students
 
     public static ObservableList<Student> getAllStudents() throws SQLException {
 
@@ -44,6 +60,8 @@ public class StudentModel extends MainModel {
         }
         return studentList;
     }
+    
+    //Gets single student by student ID, returns an object student
 
     public Student getStudent(Student bean) throws SQLException {
 
@@ -87,6 +105,8 @@ public class StudentModel extends MainModel {
         }
 
     }
+    
+    //updates a single row according to studentID
 
     public static boolean updateStudent(User bean) {
 
@@ -110,6 +130,8 @@ public class StudentModel extends MainModel {
             return false;
         }
     }
+    
+    //Updateds the password according to studentID
 
     public static boolean updateStudentPassword(User bean) {
 
@@ -135,6 +157,8 @@ public class StudentModel extends MainModel {
             return false;
         }
     }
+    
+    //Search query to look for string in student
 
     public ObservableList<Student> searchForStudents(String searchValue, String searchType) throws SQLException {
 
@@ -171,6 +195,8 @@ public class StudentModel extends MainModel {
         }
         return studentList;
     }
+    
+    //gets student by employeeID
 
     public ObservableList<Student> getStudentsByCaseWorker( int employeeID ) throws SQLException {
 
@@ -204,6 +230,8 @@ public class StudentModel extends MainModel {
         }
         return studentList;
     }
+    
+    //gets all students 
     
     public ObservableList<Student> getAllStudentsCW() throws SQLException {
 

@@ -1,8 +1,16 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
+Student Number: 7100438818
+
+Name: Matteo Baldini
+
+Date: 18/06/2018
+
+Purpose: Attendance model
+
+Known Bugs: none
+
+*/
 package model;
 
 import beans.Attendance;
@@ -22,6 +30,8 @@ import javafx.collections.ObservableList;
  * @author Martin
  */
 public class AttendanceModel {
+    
+    //Inserts new row into the attendance table with current date and ID of the student who logged in
     
     public static void logAttendance(int id) throws SQLException {
     
@@ -45,7 +55,9 @@ public class AttendanceModel {
         }
     }
     
-    public static ObservableList<Attendance> getAttendanceByStudentID( int studentID ) throws SQLException {/////////FOJAKE//////////////////////////
+    // gets an observable list containing attendance by studentID
+    
+    public static ObservableList<Attendance> getAttendanceByStudentID( int studentID ) throws SQLException {
 
         ObservableList<Attendance> attendanceList = FXCollections.observableArrayList();
 
