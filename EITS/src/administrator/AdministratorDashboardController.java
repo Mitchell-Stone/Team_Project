@@ -4,7 +4,7 @@ Name: Mitchell Stone
 
 Date: 12/06/18
 
-Purpose: Works as the controller for the add new course window
+Purpose: Works as the controller for the administrator dashboard window
 
 Known Bugs: Tables do not upadate automatically when a new user or course is added and that table is showing.
             The courses context menu can be brought back up on alternate tables where it should not be able to.
