@@ -24,7 +24,7 @@ import javafx.collections.ObservableList;
  * @author mitch
  */
 public class SubmissionsModel {
-     public static ObservableList<Submission> getSubmissionsByStudentID( int studentID ) throws SQLException {////////////////FOJAKE///////////////
+     public static ObservableList<Submission> getSubmissionsByStudentID( int studentID ) throws SQLException {
 
         ObservableList<Submission> submissionsList = FXCollections.observableArrayList();
 
@@ -57,9 +57,9 @@ public class SubmissionsModel {
         return submissionsList;
     }
      
-      public static boolean updateGrade (int grade, int studentID) throws SQLException {
+      public static boolean updateGrade (int grade, int studentID, int assessmentID) throws SQLException {
 
-        String sql = "UPDATE submissions SET grade = ? WHERE studentID = ?";
+        String sql = "UPDATE submissions SET grade = ? WHERE studentID = ? AND assessmentID = ?";
 
         ResultSet keys = null;
 
@@ -69,6 +69,7 @@ public class SubmissionsModel {
 
             stmt.setInt(1, grade);
             stmt.setInt(2, studentID);
+            stmt.setInt(3, assessmentID);
 
             int affected = stmt.executeUpdate();
 

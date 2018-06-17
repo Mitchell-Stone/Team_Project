@@ -8,6 +8,8 @@ package globalInterfaces;
 import beans.Assessment;
 import beans.Attendance;
 import beans.CaseWorker;
+import beans.Diploma;
+import beans.Omni;
 import beans.Student;
 import beans.Submission;
 import beans.User;
@@ -30,6 +32,7 @@ import model.AttendanceModel;
 import model.CaseWorkerModel;
 import model.DiplomaModel;
 import model.MainModel;
+import model.StudentModel;
 import model.SubmissionsModel;
 
 public class ReportsController implements Initializable {
@@ -185,7 +188,67 @@ public class ReportsController implements Initializable {
                 
                 selectionType.setText("Diploma");
                 
+                int did = Integer.parseInt(id.getText());
                 
+                Omni omni = new Omni();
+                
+                omni.setTable("diploma");
+                omni.setColumn("diplomaID");
+                
+                if ("".equals(id.getText())) {
+                    System.out.println("Text 3 is empty.");
+                    } else {
+                        try {
+                        int number = Integer.parseInt(id.getText());
+                        omni.setInputType(1);
+                        omni.setNumber(number);
+                    } catch (Exception e) {
+                        String word = id.getText();
+                        omni.setInputType(2);
+                        omni.setWord(word);
+                    }
+                }
+                
+                ObservableList<Omni> diploma = MainModel.Quaeres(omni);
+                
+                Text diplomainfo = new Text("Diploma Information: \n");
+
+                Text diplomaid = new Text("Diploma ID: " + diploma.get(0).getDiplomaID());
+                Text diplomaname = new Text("Name: " + diploma.get(0).getName());
+                Text diplomaindustria = new Text("Industry: " + diploma.get(0).getIndustry());
+                Text diplomalocation = new Text("Location: " + diploma.get(0).getLocation());
+                Text diplomadegree = new Text("Degree: " + diploma.get(0).getDegree());
+
+                box1.getChildren().addAll(diplomainfo, diplomaid, diplomaname, diplomaindustria, diplomalocation, diplomadegree);
+                
+                omni.setTable("student");
+                omni.setColumn("diplomaID");
+                
+                if ("".equals(id.getText())) {
+                    System.out.println("Text 3 is empty.");
+                    } else {
+                        try {
+                        int number = Integer.parseInt(id.getText());
+                        omni.setInputType(1);
+                        omni.setNumber(number);
+                    } catch (Exception e) {
+                        String word = id.getText();
+                        omni.setInputType(2);
+                        omni.setWord(word);
+                    }
+                }
+                
+                ObservableList<Omni> students = MainModel.Quaeres(omni);
+                
+                Text header = new Text("Students currently assigned:");
+                
+                for (int i = 0; i < students.size(); i++) {
+                    
+                    Text studente = new Text(" | " + Integer.toString(students.get(i).getStudentID()) + " | " + students.get(i).getFirstName() + " | " + students.get(i).getLastName());
+                    
+                    box2.getChildren().add(studente);
+                    
+                }
             
             break;
             
@@ -195,7 +258,29 @@ public class ReportsController implements Initializable {
                 
                 clear();
                 
+                Text generaltitle = new Text("\nGeneral information.\n\n");
                 
+                ObservableList<Student> allstudents = StudentModel.getAllStudents();
+                
+                Text studenti = new Text("There are currently " + allstudents.size() + " students.\n");
+                
+                ObservableList<CaseWorker> allcw = CaseWorkerModel.getAllCaseWorkersS();
+                
+                Text cases = new Text("There are currently " + allcw.size() + " employees.\n");
+                
+                ObservableList<Diploma> diplomi = DiplomaModel.getAllDiplomasS();
+                
+                Text dipnames = new Text("Currently we offer "+ diplomi.size() + " diplomas.\n");
+                
+                box1.getChildren().addAll(generaltitle, studenti, cases, dipnames);
+                
+                for (int i = 0; i < diplomi.size(); i++) {
+                    
+                    Text text = new Text(diplomi.get(i).getDiplomaName());
+                    
+                    box1.getChildren().add(text);
+                    
+                }
             
             break;
             
@@ -215,14 +300,14 @@ public class ReportsController implements Initializable {
 
     @FXML
     private void general(MouseEvent event) {
-        type = "diploma";
-        selectionType.setText("Diploma");
+        type = "general";
+        selectionType.setText("General");
     }
 
     @FXML
     private void diploma(MouseEvent event) {
-        type = "general";
-        selectionType.setText("General");
+        type = "diploma";
+        selectionType.setText("Diploma");
     }
     
     private void clear() {
