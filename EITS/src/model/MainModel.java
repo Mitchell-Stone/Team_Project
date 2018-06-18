@@ -1,5 +1,16 @@
 
 package model;
+/* 
+Student Number: 011005906, 7100438818
+
+Name: Mitch Stone,  Matteo Baldini
+
+Date: 10/06/18
+
+Purpose: Non-Specific Databse Queries 
+
+Known Bugs:
+*/
 
 import beans.Omni;
 import beans.User;

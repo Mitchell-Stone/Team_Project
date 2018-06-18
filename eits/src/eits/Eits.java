@@ -1,16 +1,14 @@
 
-/*
+/* 
+Student Number: 011005906
 
-Student Number:
+Name: Mitch Stone
 
-Name:
+Date: 10/06/18
 
-Date:
-
-Purpose:
+Purpose: Creates Main Window
 
 Known Bugs:
-
 */
 
 package eits;

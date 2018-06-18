@@ -9,10 +9,18 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- *
- * @author mitch
- */
+/* 
+Student Number: 7100438818
+
+Name: Matteo Baldini
+
+Date: 10/06/18
+
+Purpose: 
+
+Known Bugs:
+*/
+
 public class DbUtil {
     
     private static final String USERNAME = "root";
