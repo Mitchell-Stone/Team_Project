@@ -39,7 +39,15 @@ public class UserSignInController implements Initializable {
     private String studentDboardPath = "/student/studentDashboard.fxml";
     private String caseWorkerDboardPath = "/caseWorker/caseWorker.fxml";
     private String adminDboardPath = "/administrator/administratorDashboard.fxml";
+<<<<<<< HEAD
 
+=======
+    
+    @FXML
+    private Pane signin;
+    @FXML
+    private Pane signup;
+>>>>>>> 8e79b1dbd1185eb7c6f9f7ecafba93717cf17b7a
     @FXML
     private TextField firstName;
     @FXML
@@ -76,6 +84,7 @@ public class UserSignInController implements Initializable {
     }    
     
     //sets the student properties so a new student can be added
+    @FXML
     public void registerAction(ActionEvent event) throws NoSuchAlgorithmException, Exception {
                 
         Student register = new Student();
@@ -167,13 +176,14 @@ public class UserSignInController implements Initializable {
             errorOutputLog.setText("There are empty fields.");
             
         } else {
+            
             String tier = null;
             
             if (confirmUserType("student")) {              
                 tier = "student";
                 //if true open the student dashboard
                 MainController window = new MainController();
-                window.openNewWindow(studentDboardPath, btn_signIn);  
+                window.openNewWindow(studentDboardPath, btn_signIn);
             } else {
                 
                 if (confirmUserType("caseworker")) {
@@ -182,6 +192,7 @@ public class UserSignInController implements Initializable {
                     MainController window = new MainController();
                     window.openNewWindow(caseWorkerDboardPath, btn_signIn);
                 } else {
+                    
                     if(confirmUserType("admin")) {
                         tier = "admin";
                         //if true open the admin dashboard
