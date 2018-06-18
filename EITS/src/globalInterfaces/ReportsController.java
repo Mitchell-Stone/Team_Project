@@ -249,6 +249,7 @@ public class ReportsController implements Initializable {
                 ObservableList<Omni> students = MainModel.Quaeres(omni);
                 
                 Text header = new Text("Students currently assigned:");
+                box2.getChildren().add(header);
                 
                 for (int i = 0; i < students.size(); i++) {
                     
