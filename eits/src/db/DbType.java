@@ -5,10 +5,17 @@
  */
 package db;
 
-/**
- *
- * @author mitch
- */
+/* 
+Student Number: 5103355915, 6105091917, 011005906, 7100438818
+
+Name: Jake Smith, Dion Bird, Mitch Stone, Matteo Baldini
+
+Date: 10/06/18
+
+Purpose:
+
+Known Bugs:
+*/
 public enum DbType {
     
     MYSQL;

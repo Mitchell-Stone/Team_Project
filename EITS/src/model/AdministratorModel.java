@@ -10,10 +10,17 @@ import java.sql.SQLException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-/**
- *
- * @author Mitchell Stone 0111005906
- */
+/* 
+Student Number:011005906
+
+Name: Mitch Stone
+
+Date: 10/06/18
+
+Purpose: Methods for Administrator 
+
+Known Bugs:
+*/
 public class AdministratorModel {
     
     public ObservableList<Administrator> getAllAdministrators() throws SQLException{

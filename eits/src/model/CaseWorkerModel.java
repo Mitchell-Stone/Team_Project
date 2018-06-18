@@ -26,7 +26,7 @@ Name: Jake Smith
 
 Date: 10/06/18
 
-Purpose: 
+Purpose: Case Worker Model
 
 Known Bugs:
  */

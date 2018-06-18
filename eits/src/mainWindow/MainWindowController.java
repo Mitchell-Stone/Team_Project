@@ -17,11 +17,17 @@ import javafx.scene.Parent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 
-/**
- * FXML Controller class
- *
- * @author mitch
- */
+/* 
+Student Number: 011005906
+
+Name: Mitch Stone
+
+Date: 10/06/18
+
+Purpose: Controller for opening non-specific windows 
+
+Known Bugs:
+*/
 public class MainWindowController implements Initializable {
 
     public String getNextWindow() {

@@ -20,11 +20,18 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author mitch
- */
+/* 
+Student Number:011005906
+
+Name: Mitch Stone
+
+Date: 10/06/18
+
+Purpose: Main Controller for non-specific controller functions
+
+Known Bugs:
+*/
+
 public class MainController implements Initializable {
 
     @FXML

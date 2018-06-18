@@ -27,7 +27,7 @@ Name: Jake Smith, Mitch Stone, Matteo Baldini, Dion Bird
 
 Date: 10/06/18
 
-Purpose: 
+Purpose: Diploma Model
 
 Known Bugs:
  */
