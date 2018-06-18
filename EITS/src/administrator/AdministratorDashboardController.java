@@ -18,6 +18,7 @@ import beans.Courses;
 import beans.Diploma;
 import beans.Student;
 import beans.User;
+import com.sun.prism.paint.Color;
 import controllers.MainController;
 import java.io.IOException;
 import java.net.URL;
@@ -386,6 +387,8 @@ public class AdministratorDashboardController implements Initializable {
     //Runs the functions to populate a new table to show all subjects related to a selected course
     private void showCourseSubjects(int diplomaID) throws SQLException {
         //Sets the margins for the new table
+        //tbl_subjectTable
+                
         GridPane.setMargin(tbl_subjectTable, new Insets(20,20,20,0));
         
         //Adds the new table into the grid pane
@@ -449,6 +452,7 @@ public class AdministratorDashboardController implements Initializable {
     
     //Creates the context menu for the courses table
     private void tableContextMenu(){
+        contextMenu.setId("context_menu");
         //Content for the context menu
         MenuItem mi1 = new MenuItem("Edit Course");
         MenuItem mi2 = new MenuItem("Add Course");

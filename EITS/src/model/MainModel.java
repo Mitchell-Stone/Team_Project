@@ -1,5 +1,3 @@
-
-package model;
 /* 
 Student Number: 011005906, 7100438818
 
@@ -11,6 +9,7 @@ Purpose: Non-Specific Databse Queries
 
 Known Bugs:
 */
+package model;
 
 import beans.Omni;
 import beans.User;
@@ -29,6 +28,7 @@ import security.SecurityMethods;
 
 public class MainModel {
     
+    //A special database query that can perfom a flexible query and build/populate a table
     public static ObservableList<Omni> Quaeres(Omni bean) throws SQLException {
         
         ObservableList<Omni> result = FXCollections.observableArrayList();
@@ -231,6 +231,7 @@ public class MainModel {
     
     }
 
+    //flexible query that can add any type of user to the database
     public static boolean addNewUser(User bean) throws SQLException{
     
         String sql = "INSERT INTO $tablename (email, password, firstName, lastName) VALUES (?, ?, ?, ?)";
@@ -262,6 +263,7 @@ public class MainModel {
         }
     }
     
+    //felxible query that can update any user types data
     public static boolean updateUser (User bean) {
     
         String sql = "UPDATE $tablename SET firstName = ?, lastName = ?, email = ? WHERE $idType = ?";
@@ -288,6 +290,7 @@ public class MainModel {
         }
     }
     
+    //flexible query that can delete an entry for any user type
     public static boolean deleteSelection(User bean, String idType){
         String sql = "DELETE FROM $tablename WHERE $idType = ?";
         
@@ -309,6 +312,7 @@ public class MainModel {
         }
     }
     
+    //gets the id of a user for any user type
     public static ArrayList<String> getUserByID(User user) {
         
         ArrayList<String> currentUser = new ArrayList<>();
@@ -355,6 +359,7 @@ public class MainModel {
         }
     }
     
+    //database query that confirms if a password has been updated or not
     public static boolean updatePassword(User bean) {
     
         String sql = "UPDATE $tablename SET password = ? WHERE $idType = ?";

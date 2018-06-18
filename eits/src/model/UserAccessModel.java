@@ -23,10 +23,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/**
- *
- * @author mitch
- */
 public class UserAccessModel extends MainModel  {
     
     //Method to check email and password that returns a boolean value
