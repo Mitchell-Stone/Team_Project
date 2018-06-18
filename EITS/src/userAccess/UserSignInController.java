@@ -39,15 +39,7 @@ public class UserSignInController implements Initializable {
     private String studentDboardPath = "/student/studentDashboard.fxml";
     private String caseWorkerDboardPath = "/caseWorker/caseWorker.fxml";
     private String adminDboardPath = "/administrator/administratorDashboard.fxml";
-<<<<<<< HEAD
 
-=======
-    
-    @FXML
-    private Pane signin;
-    @FXML
-    private Pane signup;
->>>>>>> 8e79b1dbd1185eb7c6f9f7ecafba93717cf17b7a
     @FXML
     private TextField firstName;
     @FXML
