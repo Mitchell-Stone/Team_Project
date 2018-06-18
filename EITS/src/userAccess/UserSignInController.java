@@ -128,6 +128,7 @@ public class UserSignInController implements Initializable {
         }
     } 
     
+    //Opnes the registration window for new students
     @FXML
     public void showRegister(ActionEvent event) throws IOException {      
         Stage stage = null;
@@ -146,8 +147,7 @@ public class UserSignInController implements Initializable {
     
     }
     
-    // confirms the user type
-    
+    // confirms the user type using a db query 
     private boolean confirmUserType(String userType) throws NoSuchAlgorithmException{
         User bean = new User();
         
@@ -158,11 +158,13 @@ public class UserSignInController implements Initializable {
         return UserAccessModel.checkUserPass(bean);
     }
     
+    //Completes the sign in action figuring out what type of user has logged in
     @FXML
     private void signInAction(ActionEvent event) throws NoSuchAlgorithmException, IOException {
  
         System.out.println(userNameLog.getText() + " : " + passwordLog.getText());
         
+        //Check to make sure that all fields contain values
         if (userNameLog.getText().equals("") || passwordLog.getText().equals("")) {
             
             errorOutputLog.setText("There are empty fields.");
@@ -170,7 +172,7 @@ public class UserSignInController implements Initializable {
         } else {
             
             String tier = null;
-            
+            //Logic for figuring out what type of user has logged in and opens the relevant dashboard
             if (confirmUserType("student")) {              
                 tier = "student";
                 //if true open the student dashboard
@@ -199,6 +201,7 @@ public class UserSignInController implements Initializable {
         }
     }
     
+    //handles the cancel action returning the user back to the login window
     public void cancelRegistration(ActionEvent event) throws IOException{
         Stage stage = null;
         Parent root= null;
