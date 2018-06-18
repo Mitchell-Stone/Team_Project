@@ -53,6 +53,11 @@
                <font>
                   <Font size="16.0" />
                </font></Button>
+            <Button layoutX="10.0" layoutY="360.0" mnemonicParsing="false" onAction="#gethelp" prefHeight="70.0" prefWidth="600.0" style="-fx-text-fill: white; -fx-background-color: #404040; -fx-border-color: #1a1a1a;" text="Help">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
             <Button fx:id="logoutBtn1" mnemonicParsing="false" onAction="#logout" prefHeight="70.0" prefWidth="600.0" style="-fx-text-fill: white; -fx-background-color: #404040; -fx-border-color: #1a1a1a;" text="Logout">
                <font>
                   <Font size="16.0" />

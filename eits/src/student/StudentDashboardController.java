@@ -1085,5 +1085,13 @@ public class StudentDashboardController implements Initializable {
         displayCaseWorkerInfo();
         
     }
+
+    @FXML
+    private void gethelp(ActionEvent event) throws IOException {
+        
+        MainController window = new MainController();
+        window.openNewWindow("/student/studenthelp.fxml");
+        
+    }
     
 }
