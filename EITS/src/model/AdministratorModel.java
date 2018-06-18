@@ -1,3 +1,15 @@
+/* 
+Student Number:011005906
+
+Name: Mitch Stone
+
+Date: 10/06/18
+
+Purpose: Methods for Administrator 
+
+Known Bugs:
+*/
+
 package model;
 
 import beans.Administrator;
@@ -10,19 +22,10 @@ import java.sql.SQLException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-/* 
-Student Number:011005906
 
-Name: Mitch Stone
-
-Date: 10/06/18
-
-Purpose: Methods for Administrator 
-
-Known Bugs:
-*/
 public class AdministratorModel {
     
+    //DB query that returns all admins and puts them in an observable collection
     public ObservableList<Administrator> getAllAdministrators() throws SQLException{
         ObservableList<Administrator> administratorList = FXCollections.observableArrayList();
         
@@ -88,7 +91,7 @@ public class AdministratorModel {
         
         ResultSet rs = null;
 
-        //execute query to get all students
+        //execute query to search for all admins related to the search type and value entered
         String sql = "SELECT * FROM admin WHERE $searchType LIKE ?";
         
         String query = sql.replace("$searchType", searchType);

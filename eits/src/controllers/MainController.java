@@ -52,7 +52,7 @@ public class MainController implements Initializable {
         loadUI("/userAccess/userRegistration");
     }
     
-    
+    //loads the initial ui when starting the application
     private void loadUI(String ui){
         Parent root = null;
         
