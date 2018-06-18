@@ -36,9 +36,9 @@ import security.SecurityMethods;
 
 public class UserSignInController implements Initializable {
     
-    private String studentDboardPath = "/student/studentDashboard.fxml";
-    private String caseWorkerDboardPath = "/caseWorker/caseWorker.fxml";
-    private String adminDboardPath = "/administrator/administratorDashboard.fxml";
+    private final String studentDboardPath = "/student/studentDashboard.fxml";
+    private final String caseWorkerDboardPath = "/caseWorker/caseWorker.fxml";
+    private final String adminDboardPath = "/administrator/administratorDashboard.fxml";
 
     @FXML
     private TextField firstName;
