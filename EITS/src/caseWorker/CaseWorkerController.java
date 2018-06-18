@@ -474,7 +474,6 @@ public class CaseWorkerController implements Initializable {
                 textCourseName.setText(at.getDate());
                 textCourseID.setText(textFname.getText());
                 uneditable();
-                break;
             }
             case "Submission": {
                 Submission su = (Submission) secondaryTable.getSelectionModel().getSelectedItem();

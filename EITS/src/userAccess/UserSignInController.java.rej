@@ -1,0 +1,10 @@
+diff a/EITS/src/userAccess/UserSignInController.java b/EITS/src/userAccess/UserSignInController.java	(rejected hunks)
+@@ -163,7 +163,7 @@
+     
+     }
+     
+-    //
++    // confirms the user type
+     
+     private boolean confirmUserType(String userType) throws NoSuchAlgorithmException{
+         User bean = new User();
