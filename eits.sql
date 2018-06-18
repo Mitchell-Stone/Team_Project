@@ -1,23 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 4.7.4
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Generation Time: Jun 09, 2018 at 02:48 PM
--- Server version: 10.1.30-MariaDB
--- PHP Version: 7.2.1
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
 --
 -- Database: `eits`
 --
@@ -44,7 +24,8 @@ CREATE TABLE `admin` (
 INSERT INTO `admin` (`adminID`, `firstName`, `lastName`, `email`, `password`, `phoneNumber`) VALUES
 (1, 'Mitch', 'Stone', 'mitchStone@email.com', 'seasame', '0404040404'),
 (2, 'aa', 'aa', 'aa@aa.com', 'mDSHbc+wXLFnpcJJU+uljErImxrfV/KPL50JrxB+6PA=', '0606066060'),
-(4, 'Gaben', 'Newell', 'lordgaben@steam.money', 'mDSHbc+wXLFnpcJJU+uljErImxrfV/KPL50JrxB+6PA=', NULL);
+(4, 'Gaben', 'Newell', 'lordgaben@steam.money', 'mDSHbc+wXLFnpcJJU+uljErImxrfV/KPL50JrxB+6PA=', NULL),
+(5, 'Bill', 'Gates', 'billgates@email.com', 'mDSHbc+wXLFnpcJJU+uljErImxrfV/KPL50JrxB+6PA=', '01010101');
 
 -- --------------------------------------------------------
 
@@ -72,18 +53,18 @@ INSERT INTO `assessment` (`assessmentID`, `courseID`, `title`, `description`, `d
 (5, 2, 'CSS3', 'Style Hello World In CSS3.', '2018-06-22'),
 (6, 3, 'Java', 'Learn Java.', '2018-06-20'),
 (7, 3, 'C#', 'Learn C#.', '2018-06-15'),
-(8, 4, 'EITS Learning Management App.', 'With the help of your jolly goodfellows build the EITS learning management app according to the project manager\'s specs.', '2018-06-18'),
+(8, 4, 'EITS Learning Management App.', 'With the help of your jolly goodfellows build the EITS learning management app according to the project manager''s specs.', '2018-06-18'),
 (9, 4, 'Document EITS', 'Draft a viable project to develop a complete product.', '2018-06-14'),
 (10, 5, 'Attempt to learn Sourcetree', 'In case of failure refer to Mr. Stone.', '2018-06-29'),
 (11, 4, 'MS Projects', 'Use MS Projects to create a viable project.', '2018-06-22'),
 (12, 6, 'CPR Practice1', 'Do the CPR.', '2018-06-21'),
 (13, 6, 'CPR Practice 2', 'Do more CPR.', '2018-06-16'),
 (14, 7, 'Anatomy 1 ', 'Learn about your insides.', '2018-06-16'),
-(15, 7, 'Anatomy 2', 'Learn about your mate\'s insides.', '2018-06-22'),
-(16, 7, 'Anatomy 3 ', 'Learn about your mate\'s cat\'s insides. He will not be pleased.', '2018-06-21'),
+(15, 7, 'Anatomy 2', 'Learn about your mate''s insides.', '2018-06-22'),
+(16, 7, 'Anatomy 3 ', 'Learn about your mate''s cat''s insides. He will not be pleased.', '2018-06-21'),
 (17, 8, 'Emergency Vehicle equipment', 'Learn about the emergency vehicle equipment.', '2018-06-29'),
 (18, 8, 'Speed driving course', 'Try to save people while driving like a nutcase.', '2018-06-30'),
-(19, 9, 'hand washing', 'That\'s about it.', '2018-06-22'),
+(19, 9, 'hand washing', 'That''s about it.', '2018-06-22'),
 (20, 9, 'Surgeon Hand Washing', 'A bit more.', '2018-06-21'),
 (21, 10, 'Word and PP', 'MS Word and Power point.', '2018-06-15'),
 (22, 10, 'Excell ', 'Like MySQL but green.', '2018-06-15'),
@@ -110,75 +91,6 @@ CREATE TABLE `attendance` (
   `courseID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `attendance`
---
-
-INSERT INTO `attendance` (`date`, `studentID`, `courseID`) VALUES
-('0000-00-00', 2, 1),
-('2018-06-07', 7, 1),
-('2018-06-07', 25, 1),
-('2018-06-07', 8, 1),
-('2018-06-07', 8, 1),
-('2018-06-07', 25, 1),
-('2018-06-07', 24, 1),
-('2018-06-07', 8, 1),
-('2018-06-07', 8, 1),
-('2018-06-07', 8, 1),
-('2018-06-07', 8, 1),
-('2018-06-07', 8, 1),
-('2018-06-07', 8, 1),
-('2018-06-07', 8, 1),
-('2018-06-07', 8, 1),
-('2018-06-07', 8, 1),
-('2018-06-07', 8, 1),
-('2018-06-07', 8, 1),
-('2018-06-07', 9, 1),
-('2018-06-07', 9, 1),
-('2018-06-07', 9, 1),
-('2018-06-07', 9, 1),
-('2018-06-07', 9, 1),
-('2018-06-07', 9, 1),
-('2018-06-07', 9, 1),
-('2018-06-07', 8, 1),
-('2018-06-07', 8, 1),
-('2018-06-08', 8, 1),
-('2018-06-08', 8, 1),
-('2018-06-08', 8, 1),
-('2018-06-08', 8, 1),
-('2018-06-08', 8, 1),
-('2018-06-08', 8, 1),
-('2018-06-08', 8, 1),
-('2018-06-08', 8, 1),
-('2018-06-08', 8, 1),
-('2018-06-08', 8, 1),
-('2018-06-08', 8, 1),
-('2018-06-08', 8, 1),
-('2018-06-08', 8, 1),
-('2018-06-08', 8, 1),
-('2018-06-08', 8, 1),
-('2018-06-08', 8, 1),
-('2018-06-08', 8, 1),
-('2018-06-08', 8, 1),
-('2018-06-08', 8, 1),
-('2018-06-08', 8, 1),
-('2018-06-08', 8, 1),
-('2018-06-08', 8, 1),
-('2018-06-08', 8, 1),
-('2018-06-08', 8, 1),
-('2018-06-08', 24, 1),
-('2018-06-08', 8, 1),
-('2018-06-08', 24, 1),
-('2018-06-08', 8, 1),
-('2018-06-08', 24, 1),
-('2018-06-08', 24, 1),
-('2018-06-08', 24, 1),
-('2018-06-08', 8, 1),
-('2018-06-08', 24, 1),
-('2018-06-08', 24, 1),
-('2018-06-08', 24, 1),
-('2018-06-09', 8, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -204,7 +116,9 @@ INSERT INTO `caseworker` (`employeeID`, `firstName`, `lastName`, `email`, `passw
 (1, 'Dave', 'Hunt', 'david.hunt@hotmail.com', 'seasame', 'Stuff', '404040404', '2'),
 (2, 'j', 'j', 'j', 'GJ9AA0vnoZnx+piRZo7jq2BJ+C04xovnD1luqy4YV7c=', NULL, NULL, NULL),
 (3, 'Lamp', 'Blanket', 'lampblanket@email.com', 'mDSHbc+wXLFnpcJJU+uljErImxrfV/KPL50JrxB+6PA=', NULL, NULL, NULL),
-(4, 'Jar', 'O\'Mayo', 'jaromayo@email.mayo', 'mDSHbc+wXLFnpcJJU+uljErImxrfV/KPL50JrxB+6PA=', NULL, NULL, NULL);
+(4, 'Jar', 'O''Mayo', 'jaromayo@email.mayo', 'mDSHbc+wXLFnpcJJU+uljErImxrfV/KPL50JrxB+6PA=', NULL, NULL, NULL),
+(5, 'Neill', 'Blomkamp', 'district9@prawn.com', 'mDSHbc+wXLFnpcJJU+uljErImxrfV/KPL50JrxB+6PA=', 'IT', '909090', 'Cool guy'),
+(6, 'My', 'Smith', 'mysql@oracle.com', 'mDSHbc+wXLFnpcJJU+uljErImxrfV/KPL50JrxB+6PA=', 'IT', '23232323', 'Cool');
 
 -- --------------------------------------------------------
 
@@ -249,73 +163,6 @@ INSERT INTO `courses` (`courseID`, `name`, `industry`, `location`, `numberOfHour
 -- --------------------------------------------------------
 
 --
--- Table structure for table `diploma`
---
-
-CREATE TABLE `diploma` (
-  `diplomaID` int(11) NOT NULL,
-  `name` varchar(35) NOT NULL,
-  `industry` varchar(35) NOT NULL,
-  `location` varchar(35) NOT NULL,
-  `degree` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `diploma`
---
-
-INSERT INTO `diploma` (`diplomaID`, `name`, `industry`, `location`, `degree`) VALUES
-(1, 'Diploma of Sofware Devoplment', 'IT', 'Coomara', 'Is a good one'),
-(2, 'EMS Certificate', 'Health', 'Coomera', 'Diploma'),
-(3, 'Diploma of Building Design', 'Design', 'Coomera', 'Diploma');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `diplomatocourses`
---
-
-CREATE TABLE `diplomatocourses` (
-  `diplomaID` int(11) NOT NULL,
-  `courseID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `diplomatocourses`
---
-
-INSERT INTO `diplomatocourses` (`diplomaID`, `courseID`) VALUES
-(1, 1),
-(1, 12),
-(1, 10),
-(1, 5),
-(1, 11),
-(1, 2),
-(1, 3),
-(1, 4),
-(1, 14),
-(2, 13),
-(2, 8),
-(2, 7),
-(2, 10),
-(2, 6),
-(2, 1),
-(2, 9),
-(3, 16),
-(3, 14),
-(3, 15),
-(3, 19),
-(3, 10),
-(3, 11),
-(3, 1),
-(3, 17),
-(3, 17),
-(3, 18),
-(3, 4);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `student`
 --
 
@@ -356,22 +203,9 @@ INSERT INTO `student` (`studentID`, `diplomaID`, `employeeID`, `firstName`, `las
 (20, NULL, NULL, 'Hermione', 'Granger', 'h.g@email.com', 'mDSHbc+wXLFnpcJJU+uljErImxrfV/KPL50JrxB+6PA=', NULL, NULL, NULL, NULL),
 (21, NULL, NULL, 'Ronald', 'McDonald', 'r.mcd@email.com', 'mDSHbc+wXLFnpcJJU+uljErImxrfV/KPL50JrxB+6PA=', NULL, NULL, NULL, NULL),
 (22, NULL, NULL, 'Mudge', 'TheCat', 'mdgthc@email.com', 'mDSHbc+wXLFnpcJJU+uljErImxrfV/KPL50JrxB+6PA=', NULL, NULL, NULL, NULL),
-(23, NULL, NULL, 'Bottle', 'O\'Water', 'bottleowater@email.h2o', 'mDSHbc+wXLFnpcJJU+uljErImxrfV/KPL50JrxB+6PA=', NULL, NULL, NULL, NULL),
+(23, NULL, NULL, 'Bottle', 'O''Water', 'bottleowater@email.h2o', 'mDSHbc+wXLFnpcJJU+uljErImxrfV/KPL50JrxB+6PA=', NULL, NULL, NULL, NULL),
 (24, 2, 3, 'aaa', 'aaa', 'aaa', 'mDSHbc+wXLFnpcJJU+uljErImxrfV/KPL50JrxB+6PA=', NULL, NULL, NULL, NULL),
 (25, 3, 4, 'lll', 'lll', 'lll', 'yqIu9aEp2n8d08ROcy3cnL4UHC9FQoWQ74ot3xJWLVU=', NULL, NULL, NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `submissions`
---
-
-CREATE TABLE `submissions` (
-  `assessmentID` int(11) NOT NULL,
-  `courseID` int(11) NOT NULL,
-  `studentID` int(11) NOT NULL,
-  `grade` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Indexes for dumped tables
@@ -410,33 +244,12 @@ ALTER TABLE `courses`
   ADD PRIMARY KEY (`courseID`);
 
 --
--- Indexes for table `diploma`
---
-ALTER TABLE `diploma`
-  ADD PRIMARY KEY (`diplomaID`);
-
---
--- Indexes for table `diplomatocourses`
---
-ALTER TABLE `diplomatocourses`
-  ADD KEY `dipolmaID` (`diplomaID`),
-  ADD KEY `courseID` (`courseID`);
-
---
 -- Indexes for table `student`
 --
 ALTER TABLE `student`
   ADD PRIMARY KEY (`studentID`),
   ADD KEY `employee` (`employeeID`),
   ADD KEY `diplomaID` (`diplomaID`);
-
---
--- Indexes for table `submissions`
---
-ALTER TABLE `submissions`
-  ADD KEY `assessmentID` (`assessmentID`),
-  ADD KEY `courseID` (`courseID`),
-  ADD KEY `studentID` (`studentID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -446,38 +259,27 @@ ALTER TABLE `submissions`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `adminID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
+  MODIFY `adminID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `assessment`
 --
 ALTER TABLE `assessment`
   MODIFY `assessmentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
-
 --
 -- AUTO_INCREMENT for table `caseworker`
 --
 ALTER TABLE `caseworker`
-  MODIFY `employeeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
+  MODIFY `employeeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `courses`
 --
 ALTER TABLE `courses`
   MODIFY `courseID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
-
---
--- AUTO_INCREMENT for table `diploma`
---
-ALTER TABLE `diploma`
-  MODIFY `diplomaID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
   MODIFY `studentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
-
 --
 -- Constraints for dumped tables
 --
@@ -496,27 +298,11 @@ ALTER TABLE `attendance`
   ADD CONSTRAINT `attendance_ibfk_2` FOREIGN KEY (`courseID`) REFERENCES `courses` (`courseID`);
 
 --
--- Constraints for table `diplomatocourses`
---
-ALTER TABLE `diplomatocourses`
-  ADD CONSTRAINT `diplomatocourses_ibfk_1` FOREIGN KEY (`courseID`) REFERENCES `courses` (`courseID`),
-  ADD CONSTRAINT `diplomatocourses_ibfk_2` FOREIGN KEY (`diplomaID`) REFERENCES `diploma` (`diplomaID`);
-
---
 -- Constraints for table `student`
 --
 ALTER TABLE `student`
   ADD CONSTRAINT `student_ibfk_1` FOREIGN KEY (`employeeID`) REFERENCES `caseworker` (`employeeID`),
   ADD CONSTRAINT `student_ibfk_2` FOREIGN KEY (`diplomaID`) REFERENCES `diploma` (`diplomaID`) ON DELETE SET NULL ON UPDATE SET NULL;
-
---
--- Constraints for table `submissions`
---
-ALTER TABLE `submissions`
-  ADD CONSTRAINT `submissions_assessment` FOREIGN KEY (`assessmentID`) REFERENCES `assessment` (`assessmentID`),
-  ADD CONSTRAINT `submissions_ibfk_2` FOREIGN KEY (`courseID`) REFERENCES `courses` (`courseID`),
-  ADD CONSTRAINT `submissions_student` FOREIGN KEY (`studentID`) REFERENCES `student` (`studentID`) ON DELETE CASCADE ON UPDATE CASCADE;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
