@@ -474,6 +474,7 @@ public class CaseWorkerController implements Initializable {
                 textCourseName.setText(at.getDate());
                 textCourseID.setText(textFname.getText());
                 uneditable();
+                break;
             }
             case "Submission": {
                 Submission su = (Submission) secondaryTable.getSelectionModel().getSelectedItem();
@@ -644,5 +645,10 @@ public class CaseWorkerController implements Initializable {
         MainController main = new MainController();
         main.openNewWindow(login, logOutButton);
 
+    }
+
+    @FXML
+    private void showHelp(ActionEvent event) {
+        
     }
 }
