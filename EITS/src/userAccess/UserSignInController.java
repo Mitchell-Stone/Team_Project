@@ -20,8 +20,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -49,6 +47,7 @@ public class UserSignInController implements Initializable {
     private String caseWorkerDboardPath = "/caseWorker/caseWorker.fxml";
     private String adminDboardPath = "/administrator/administratorDashboard.fxml";
     
+    @FXML
     private Pane signin;
     @FXML
     private Pane signup;
@@ -94,6 +93,7 @@ public class UserSignInController implements Initializable {
     }    
     
     //sets the student properties so a new student can be added
+    @FXML
     public void registerAction(ActionEvent event) throws NoSuchAlgorithmException, Exception {
                 
         Student register = new Student();
@@ -185,13 +185,14 @@ public class UserSignInController implements Initializable {
             errorOutputLog.setText("There are empty fields.");
             
         } else {
+            
             String tier = null;
             
             if (confirmUserType("student")) {              
                 tier = "student";
                 //if true open the student dashboard
                 MainController window = new MainController();
-                window.openNewWindow(studentDboardPath, btn_signIn);  
+                window.openNewWindow(studentDboardPath, btn_signIn);
             } else {
                 
                 if (confirmUserType("caseworker")) {
@@ -200,6 +201,7 @@ public class UserSignInController implements Initializable {
                     MainController window = new MainController();
                     window.openNewWindow(caseWorkerDboardPath, btn_signIn);
                 } else {
+                    
                     if(confirmUserType("admin")) {
                         tier = "admin";
                         //if true open the admin dashboard
