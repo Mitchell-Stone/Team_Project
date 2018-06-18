@@ -747,6 +747,7 @@ public class AdministratorDashboardController implements Initializable {
         tbl_data.setItems(list); 
     }
     
+    //Populates the details vbox with component ids and names related to students
     private void createStudentDetails(){                 
         //Selection Details
         tf_studentID.setId("tf_studentID");
@@ -786,6 +787,7 @@ public class AdministratorDashboardController implements Initializable {
         });  
     } 
    
+    //Populates the details vbox with component ids and names related to case workers
     private void createCaseWorkerDetails(){
         //Selection details
         tf_employeeID.setId("tf_employeeID");
@@ -869,6 +871,7 @@ public class AdministratorDashboardController implements Initializable {
         });
     }
     
+    //Populates the details vbox with component ids and names related to admins
     private void createAdministratorDetails(){ 
         //Selection Details
         tf_adminID.setId("tf_adminID");
