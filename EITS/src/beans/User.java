@@ -13,8 +13,6 @@ Known Bugs:
  */
 
 public class User {
-
-
     
     private static String firstName;
     private static String lastName;
@@ -64,12 +62,12 @@ public class User {
         return userName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstName(String fName) {
+        firstName = fName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastName(String lName) {
+        lastName = lName;
     }
 
     public void setEmail(String email) {
@@ -104,8 +102,8 @@ public class User {
         return ID;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setID(int id) {
+        ID = id;
     }
     
 }

@@ -79,9 +79,7 @@ Known Bugs:
 #titlePane {
     -fx-background-color: #78c14b;
 }
-.label{
-     -fx-text-fill: #ffffff;
-}
+
 
 #greyButtons{
     -fx-background-color:   #404040;
@@ -94,26 +92,10 @@ Known Bugs:
 
 }   
 #textfieldGrey{
-    -fx-background-color:   #666564;
+    -fx-background-color: #666564;
     -fx-text-fill: white;
 }
 
-#tableGrey{
-    -fx-background-color:   #666564;
-}
-#tableGrey .column-header-background{
-    -fx-background-color: #404040;
-}
 
-#tableGrey .column-header-background .label{
-    -fx-background-color: transparent;
-    -fx-text-fill: white;
-}
 
-#tableGrey .column-header {
-    -fx-background-color: transparent;
-}
-#tableGrey  .filler {
-    -fx-background-color: #404040;
-}
 

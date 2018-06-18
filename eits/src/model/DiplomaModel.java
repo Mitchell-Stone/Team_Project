@@ -11,7 +11,6 @@ Known Bugs:
  */
 package model;
 
-import beans.Courses;
 import beans.Diploma;
 import beans.Student;
 import db.DbType;
@@ -140,6 +139,7 @@ public class DiplomaModel {
     
     }
 
+    //database query that allows an admin to add a new diploma/course
     public static boolean addNewDiploma(Diploma bean) throws SQLException {
 
         String query = "INSERT INTO diploma (name, industry, location, degree) VALUES (?, ?, ?, ?)";
@@ -169,6 +169,7 @@ public class DiplomaModel {
         }
     }
     
+    //gets all the industries related to a diploma/course
     public static ArrayList<String> getIndustries() {
         
         ArrayList<String> industries = new ArrayList();
@@ -198,6 +199,7 @@ public class DiplomaModel {
         
     }
     
+    //gets all the ids related to a diploma/course
     public static ArrayList<String> getIDs() {
         
         ArrayList<String> industries = new ArrayList();
@@ -227,6 +229,7 @@ public class DiplomaModel {
         
     }
     
+    //database query to apply the diploma id to a student by id
     public static void assignDiplomaToStudent(int studentid, int diplomaid) {
     
         String query = "UPDATE student SET diplomaID = ? WHERE studentID = ?";
