@@ -110,7 +110,7 @@ public class CoursesModel extends MainModel {
         
         ResultSet rs = null;
 
-        //execute query to get all students
+        //execute query to get all courses
         String query = "SELECT * FROM courses";
 
         try{

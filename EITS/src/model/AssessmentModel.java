@@ -27,12 +27,6 @@ import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-
-
-/**
- *
- * @author Martin
- */
 public class AssessmentModel {
     
     //gets assessments assigned to a single diploma

@@ -20,8 +20,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,26 +30,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.UserAccessModel;
 import security.SecurityMethods;
 
-/**
- * FXML Controller class
- *
- * @author 0111005906
- */
 public class UserSignInController implements Initializable {
     
     private String studentDboardPath = "/student/studentDashboard.fxml";
     private String caseWorkerDboardPath = "/caseWorker/caseWorker.fxml";
     private String adminDboardPath = "/administrator/administratorDashboard.fxml";
-    
-    private Pane signin;
-    @FXML
-    private Pane signup;
+
     @FXML
     private TextField firstName;
     @FXML
@@ -67,8 +55,6 @@ public class UserSignInController implements Initializable {
     @FXML
     private Label errorOutput2;
     @FXML
-    private Pane banner;
-    @FXML
     private TextField userNameLog;
     @FXML
     private PasswordField passwordLog;
@@ -78,10 +64,6 @@ public class UserSignInController implements Initializable {
     private Button btn_signIn;
     @FXML
     private Button btn_submit;
-    @FXML
-    private GridPane gp_login;
-    @FXML
-    private Label formLabel;
     @FXML
     private Button btn_cancel;
 

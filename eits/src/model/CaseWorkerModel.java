@@ -1,8 +1,14 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+Student Number: 5103355915
+
+Name: Jake Smith
+
+Date: 10/06/18
+
+Purpose: Case Worker Model
+
+Known Bugs:
+*/
 package model;
 
 import beans.CaseWorker;
@@ -18,18 +24,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
-/*
-Student Number: 5103355915
-
-Name: Jake Smith
-
-Date: 10/06/18
-
-Purpose: Case Worker Model
-
-Known Bugs:
- */
 
 //Gets all CaseWorkers 
 public class CaseWorkerModel {
@@ -226,7 +220,7 @@ public class CaseWorkerModel {
 
     }
     
-    // Updates Case Worker password
+    // Updates the Case Worker password
     public static boolean updateCaseWorkerPassword(User bean) {
     
         String sql = "UPDATE caseworker SET password = ? WHERE employeeID = ?";

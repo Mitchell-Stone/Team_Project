@@ -14,7 +14,6 @@ Known Bugs: none
 package model;
 
 import beans.Attendance;
-import beans.Student;
 import db.DbType;
 import db.DbUtil;
 import java.sql.Connection;
@@ -25,10 +24,6 @@ import java.util.Calendar;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-/**
- *
- * @author Martin
- */
 public class AttendanceModel {
     
     //Inserts new row into the attendance table with current date and ID of the student who logged in

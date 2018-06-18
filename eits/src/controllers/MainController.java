@@ -66,7 +66,7 @@ public class MainController implements Initializable {
         mainpane.setCenter(root);
     }
     
-    //Opens a new window while close the previous window    
+    //Opens a new window while closing the previous window    
     public void openNewWindow(String path, Button button) throws IOException{
         Stage stage = (Stage) button.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource(path));

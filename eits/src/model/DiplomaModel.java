@@ -1,14 +1,19 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+Student Number: 5103355915, 0111005906, 7100438818, 6105091917
+
+Name: Jake Smith, Mitch Stone, Matteo Baldini, Dion Bird
+
+Date: 10/06/18
+
+Purpose: Diploma Model
+
+Known Bugs:
  */
 package model;
 
 import beans.Courses;
 import beans.Diploma;
 import beans.Student;
-import beans.User;
 import db.DbType;
 import db.DbUtil;
 import java.sql.Connection;
@@ -20,26 +25,16 @@ import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-/*
-Student Number: 5103355915, 0111005906, 7100438818, 6105091917
-
-Name: Jake Smith, Mitch Stone, Matteo Baldini, Dion Bird
-
-Date: 10/06/18
-
-Purpose: Diploma Model
-
-Known Bugs:
- */
 public class DiplomaModel {
 
+    //DB query that gets all the diplomas and adds them to an observable collection
     public ObservableList<Diploma> getAllDiplomas() throws SQLException {
 
         ObservableList<Diploma> diplomaList = FXCollections.observableArrayList();
 
         ResultSet rs = null;
 
-        //execute query to get all students
+        //execute query to get all diplomas
         String query = "SELECT * FROM diploma";
 
         try {
@@ -70,13 +65,14 @@ public class DiplomaModel {
         return diplomaList;
     }
     
+    //Static db query that returns all diplomas for use in reports
     public static ObservableList<Diploma> getAllDiplomasS() throws SQLException {
 
         ObservableList<Diploma> diplomaList = FXCollections.observableArrayList();
 
         ResultSet rs = null;
 
-        //execute query to get all students
+        //execute query to get all diplomas
         String query = "SELECT * FROM diploma";
 
         try {
@@ -107,10 +103,7 @@ public class DiplomaModel {
         return diplomaList;
     }
 
-    public ObservableList<Courses> getCoursesByDiplomaID() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    //Get all diplomas related to the foreign key in the student table
     public static ArrayList<String> getDiplomaByStudent(Student student) throws SQLException {
 
         ArrayList<String> studentDiploma = new ArrayList<>();
@@ -140,7 +133,7 @@ public class DiplomaModel {
                 return null;
             }
             
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.err.println(e);
             return null;
         }
