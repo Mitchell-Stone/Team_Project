@@ -1,8 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/* 
+Student Number:011005906
+
+Name: Mitch Stone
+
+Date: 10/06/18
+
+Purpose: Main Controller for non-specific controller functions
+
+Known Bugs:
+*/
+
 package controllers;
 
 import java.io.IOException;
@@ -20,17 +27,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-/* 
-Student Number:011005906
-
-Name: Mitch Stone
-
-Date: 10/06/18
-
-Purpose: Main Controller for non-specific controller functions
-
-Known Bugs:
-*/
 
 public class MainController implements Initializable {
 
@@ -42,29 +38,20 @@ public class MainController implements Initializable {
         // TODO
     }    
     
+    //Function specific to opening the login window
     @FXML
     private void showLogin(MouseEvent event) throws IOException {
         
         loadUI("/userAccess/userSignIn");
     }
     
+    //Function specific to opening the registration window
     @FXML
     private void showRegisterNow(MouseEvent event) throws IOException {
         
         loadUI("/userAccess/userRegistration");
     }
     
-    @FXML
-    private void showWhatsNew(MouseEvent event) throws IOException {
-        
-        //loadUI("/views/register");
-    }
-    
-    @FXML
-    private void showContactUs(MouseEvent event) throws IOException {
-        
-        //loadUI("/views/register");
-    }
     
     private void loadUI(String ui){
         Parent root = null;
@@ -79,10 +66,8 @@ public class MainController implements Initializable {
         mainpane.setCenter(root);
     }
     
-    // Look at getting this working to be a global open new window function
-    
+    //Opens a new window while close the previous window    
     public void openNewWindow(String path, Button button) throws IOException{
-        //closes current window and opens new one            
         Stage stage = (Stage) button.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource(path));
 
@@ -92,11 +77,12 @@ public class MainController implements Initializable {
         stage.show();
     }
     
+    //Opens a new window withouth closing the previous window
     public void openNewWindow(String path) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource(path));
-        
+
         Scene scene = new Scene(loader.load());
-        
+
         Stage inputStage = new Stage();
         inputStage.setScene(scene);
         inputStage.showAndWait();
