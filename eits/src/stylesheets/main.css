@@ -49,6 +49,10 @@ Known Bugs:
     -fx-background-color: #333333;  
 }
 
+#background .label{
+    -fx-text-fill: #ffffff;
+}
+
 #admin_header {
     -fx-text-fill: #ffffff;
 }

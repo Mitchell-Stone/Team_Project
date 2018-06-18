@@ -173,5 +173,6 @@
             <Button id="greenButtons" fx:id="gradeButton" mnemonicParsing="false" onAction="#gradeAssessment" prefHeight="25.0" prefWidth="232.0" stylesheets="@../stylesheets/main.css" text="Grade Assessment" />
          </children>
       </VBox>
+      <Button id="greyButtons" fx:id="helpButton" mnemonicParsing="false" onAction="#showHelp" text="Help" GridPane.columnIndex="3" GridPane.rowIndex="4" />
    </children>
 </GridPane>

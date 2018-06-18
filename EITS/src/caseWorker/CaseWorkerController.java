@@ -145,6 +145,8 @@ public class CaseWorkerController implements Initializable {
     ArrayList<String> subjectName;
     
     int asid = 0;
+    @FXML
+    private Button helpButton;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -474,6 +476,7 @@ public class CaseWorkerController implements Initializable {
                 textCourseName.setText(at.getDate());
                 textCourseID.setText(textFname.getText());
                 uneditable();
+                break;
             }
             case "Submission": {
                 Submission su = (Submission) secondaryTable.getSelectionModel().getSelectedItem();
@@ -644,5 +647,15 @@ public class CaseWorkerController implements Initializable {
         MainController main = new MainController();
         main.openNewWindow(login, logOutButton);
 
+    }
+
+    @FXML
+    private void showHelp(ActionEvent event) throws IOException {
+        
+         MainController main = new MainController();
+         String helpMe = "/caseWorker/helpMe.fxml";
+          main.openNewWindow(helpMe);
+        
+        
     }
 }
