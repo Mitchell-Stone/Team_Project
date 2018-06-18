@@ -145,6 +145,8 @@ public class CaseWorkerController implements Initializable {
     ArrayList<String> subjectName;
     
     int asid = 0;
+    @FXML
+    private Button helpButton;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -648,7 +650,12 @@ public class CaseWorkerController implements Initializable {
     }
 
     @FXML
-    private void showHelp(ActionEvent event) {
+    private void showHelp(ActionEvent event) throws IOException {
+        
+         MainController main = new MainController();
+         String helpMe = "/caseWorker/helpMe.fxml";
+          main.openNewWindow(helpMe);
+        
         
     }
 }
