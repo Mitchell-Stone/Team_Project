@@ -111,6 +111,19 @@
                </graphic>
             </Button>
             <Label id="btn_labels" prefHeight="17.0" prefWidth="261.0" stylesheets="@../stylesheets/main.css" text="Settings" />
+            <Button mnemonicParsing="false" onMouseClicked="#btn_showHelp" prefHeight="70.0" prefWidth="250.0" stylesheets="@../stylesheets/main.css">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <graphic>
+                  <ImageView fitHeight="41.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/phone-144.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Label id="btn_labels" prefHeight="17.0" prefWidth="261.0" stylesheets="@../stylesheets/main.css" text="Help" />
          </children>
          <padding>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

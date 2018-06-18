@@ -18,7 +18,6 @@ import beans.Courses;
 import beans.Diploma;
 import beans.Student;
 import beans.User;
-import com.sun.prism.paint.Color;
 import controllers.MainController;
 import java.io.IOException;
 import java.net.URL;
@@ -118,6 +117,7 @@ public class AdministratorDashboardController implements Initializable {
     private final String addNewCourseURL = "/globalInterfaces/addNewCourse.fxml";
     private final String loginURL = "/userAccess/userSignIn.fxml";
     private final String reportsURL = "/globalInterfaces/reports.fxml";
+    private final String openHelp = "/globalInterfaces/administratorHelp.fxml";
     
     
     /**
@@ -499,7 +499,7 @@ public class AdministratorDashboardController implements Initializable {
         tf_search.clear();
         vb_searchDetails.getChildren().clear();
         
-        lbl_searchHeader.setText("Searh for Students");
+        lbl_searchHeader.setText("Search for Students");
         lbl_searchHeader.setStyle("-fx-font: 24 arial;");
         rbtn_id.setText("Student ID");
         rbtn_id.setSelected(true);
@@ -576,7 +576,7 @@ public class AdministratorDashboardController implements Initializable {
         //sets the search VBox for case worker details
         vb_searchDetails.getChildren().clear();
         
-        lbl_searchHeader.setText("Searh for Case Workers");
+        lbl_searchHeader.setText("Search for Case Workers");
         lbl_searchHeader.setStyle("-fx-font: 24 arial;");
         rbtn_id.setText("Case Worker ID");
         rbtn_id.setSelected(true);
@@ -655,7 +655,7 @@ public class AdministratorDashboardController implements Initializable {
         //sets the search VBox for admin details
         vb_searchDetails.getChildren().clear();
         
-        lbl_searchHeader.setText("Searh for Administrator");
+        lbl_searchHeader.setText("Search for Administrator");
         lbl_searchHeader.setStyle("-fx-font: 24 arial;");
         rbtn_id.setText("Administrator ID");
         rbtn_id.setSelected(true);
@@ -1069,5 +1069,15 @@ public class AdministratorDashboardController implements Initializable {
         vb_searchDetails.setVisible(false);
         tbl_data.setVisible(false);
         tbl_subjectTable.setVisible(false);
+    }
+
+    @FXML
+    private void btn_showHelp(MouseEvent event) {  
+        MainController main = new MainController();  
+        try{
+            main.openNewWindow(openHelp);
+        }catch(IOException ex){
+            System.out.println(ex);    
+        }
     }
 }

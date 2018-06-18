@@ -193,8 +193,8 @@ public class AddNewCourseController implements Initializable {
     private void createAddSubjectTable(){
         //create the columns needed in the table
         TableColumn name = new TableColumn("Course Name");
-        TableColumn industry = new TableColumn("Course Industry");
-        TableColumn location = new TableColumn("Course Location");
+        TableColumn industry = new TableColumn("Course Location");
+        TableColumn location = new TableColumn("Course Industry");
         tbl_addSubjects.getColumns().addAll(name, industry, location);
           
         //put the data in the appropriate columns
